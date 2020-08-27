@@ -1,0 +1,316 @@
+<div>
+    
+
+            <div class="container">
+
+                <h1>Caracterización del proceso</h1>
+
+                <form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar()">
+
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-9 col-form-label text-left">¿La acción que va a registrar pertence al POA?</label>
+                                <select class="custom-select col-2" formControlName="procesoPOA">
+                                    <option value="1">Si</option>
+                                    <option value="2">No</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-3 col-form-label text-left">Acción</label>
+                                <input nbInput status="primary" class="form-control col-8 mr-1" type="text" placeholder="Ingrese el nombre de la acción" formControlName="nombreAccion">
+                                <!--esto se debe de agregar despues del formControlName para realizar la validacion del campo [class.is-invalid]="procesoNoValido" -->
+
+                                <!-- <small *ngIf="procesoNoValido" class="form-text text-danger">
+                                    Este campo es obligatorio
+                                </small> -->
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-5 col-form-label text-left">Alcance</label>
+                                <input class="form-control col-6 mr-1" type="text" placeholder="Ingrese el alcance" formControlName="alcance">
+                                <!-- <small *ngIf="alcanceNoValido" class="form-text text-danger">
+                                    Este campo es obligatorio
+                                </small> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-3 col-form-label text-left">Objetivo</label>
+                                <input class="form-control col-8 mr-1" type="text" placeholder="Ingrese el objetivo" formControlName="objetivo">
+                                <!-- <small *ngIf="objetivoNoValido" class="form-text text-danger">
+                                    Este campo es obligatorio
+                                </small> -->
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-5 col-form-label text-left">Observaciones</label>
+                                <textarea class="form-control col-6 mr-1" rows="2" placeholder="Ingrese aquí las observaciones" formControlName="observaciones">
+                                </textarea>
+                                <!-- <small *ngIf="observacionesNoValido" class="form-text text-danger">
+                                    Este campo es obligatorio
+                                </small> -->
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-6 col-form-label text-left">¿Utiliza un sistema para este proceso?</label>
+                                <select class="custom-select col-5 mr-1" formControlName="utilizaSistema">
+                                    <option selected disabled value="">Seleccione</option>
+                                    <option (click)="mostrarNombreSistema = !mostrarNombreSistema" value="1" >Si</option>
+                                    <option value="2">No</option> 
+                                </select>
+                            </div>
+                        </div>
+                        <div *ngIf="mostrarNombreSistema" class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label text-left">Nombre del sistema</label>
+                                <select class="custom-select col-8" formControlName="nombreSistema">
+                                    <option selected disabled value="">Seleccione</option>
+                                    <option value="1">Pointer</option>
+                                    <option value="2">Sistema 2</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                    
+                        <!-- <div class="row mt-2">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="col-2 col-form-label text-left">Tarea</label>
+                                    <input class="form-control col-6 mr-1" type="text" formControlName="proceso" [class.is-invalid]="procesoNoValido">
+                                    <div class="input-group col-3">
+                                        <button type="button" class="btn btn-outline-primary">
+                                            +
+                                        </button>
+                                    </div>
+                                    <small *ngIf="procesoNoValido" class="form-text text-danger">
+                                        Este campo es obligatorio
+                                    </small>
+                                </div>
+                            </div>
+                        </div> -->
+                    <hr>
+
+                    <h1>Actividades</h1>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-5 col-form-label text-left">¿Quién realiza la actividad?</label>
+                                <select class="custom-select col-3">
+                                    <option selected value="">Puesto</option>
+                                    <option value="1">Si</option>
+                                    <option value="2">No</option>
+                                </select>
+                                <select class="custom-select col-3">
+                                    <option selected value="">Persona</option>
+                                    <option value="1">Si</option>
+                                    <option value="2">No</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-5 col-form-label text-left">¿Qué actividad realiza?</label>
+                                <input class="form-control col-6 mr-1" type="text" formControlName="nombreActividad">
+                                <!--esto se debe de agregar despues del formControlName para realizar la validacion del campo [class.is-invalid]="procesoNoValido" -->
+
+                                <!-- <small *ngIf="procesoNoValido" class="form-text text-danger">
+                                    Este campo es obligatorio
+                                </small> -->
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-5 col-form-label text-left">¿Qué necesita para realizar la actividad?</label>
+                                <input class="form-control col-6 mr-1" type="text" formControlName="necesitaActividad">
+                                <!-- <small *ngIf="alcanceNoValido" class="form-text text-danger">
+                                    Este campo es obligatorio
+                                </small> -->
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-5 col-form-label text-left">¿Quién le provee el insumo?</label>
+                                <select class="custom-select col-3">
+                                    <option selected value="">Puesto</option>
+                                    <option value="1">Si</option>
+                                    <option value="2">No</option>
+                                </select>
+                                <select class="custom-select col-3">
+                                    <option selected value="">Persona</option>
+                                    <option value="1">Si</option>
+                                    <option value="2">No</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-5 col-form-label text-left">¿Qué resultado genera?</label>
+                                <input class="form-control col-6 mr-1" type="text" formControlName="resultado">
+                                <!--esto se debe de agregar despues del formControlName para realizar la validacion del campo [class.is-invalid]="procesoNoValido" -->
+
+                                <!-- <small *ngIf="procesoNoValido" class="form-text text-danger">
+                                    Este campo es obligatorio
+                                </small> -->
+                                <!-- <label class="col-5 col-form-label text-left">¿A quién le entrega el resultado?</label>
+                                <input class="form-control col-6" type="text" formControlName="necesitaActividad"> -->
+                                <!-- <small *ngIf="alcanceNoValido" class="form-text text-danger">
+                                    Este campo es obligatorio
+                                </small> -->
+                            </div>
+                        </div>
+                    </div>    
+
+                    <div class="row mt-2">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-5 col-form-label text-left">¿Quién recibe el resultado final?</label>
+                                            <select class="custom-select col-3" formControlName="tiempoActividad">
+                                                <option selected value="">Puesto</option>
+                                                <option value="">Horas</option>
+                                                <option value="">Minutos</option>
+                                            </select>
+                                            <select class="custom-select col-3" formControlName="tiempoActividad">
+                                                <option selected value="">Persona</option>
+                                                <option value="">Horas</option>
+                                                <option value="">Minutos</option>
+                                            </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-5 col-form-label text-left">Tiempo promedio para realizar la actividad</label>
+                                <select class="custom-select col-3" formControlName="tiempoActividad">
+                                    <option selected value="">Días</option>
+                                    <option value="">Horas</option>
+                                    <option value="">Minutos</option>
+                                </select>
+                                <input class="form-control col-3" type="text" formControlName="resultado">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <label class="col-5 col-form-label text-left">Observaciones</label>
+                                <textarea class="observaciones form-control col-6 mt-1" rows="1" formControlName="alcance">
+                                </textarea>
+                                <!-- <small *ngIf="alcanceNoValido" class="form-text text-danger">
+                                    Este campo es obligatorio
+                                </small> -->
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row mt-2">
+
+                        <div class="input-group col-6">
+                            <button (click)=" mostrarTareas = !mostrarTareas" type="button" class="btn btn-primary mb-3"> <i class="fas fa-check "></i> Crear actividad
+                            </button>
+                        </div>
+                    </div>
+
+                    <div *ngIf="mostrarTareas" class="row mt-5">
+                        <div class="col-md-6">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th class="text-center">#</th>
+                                        <th class="text-center">Descripción de la actividad</th>
+                                        <th class="text-center">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody formArrayName="tareas">
+                                    <tr *ngFor="let control of tareas.controls; let i = index">
+                                        <td class="text-center">{{i + 1}}</td>
+                                        <td>
+                                            <input class="form-control" type="text" [formControlName]="i">
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn btn-outline-danger mr-3" (click)="eliminarTarea(i)"> <i class="fas fa-trash-alt"></i></button>
+                                            <button type="button" class="btn btn-outline-primary" (click)="eliminarTarea(i)"> <i class="fas fa-pen"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <button type="button" class="btn btn-primary mt-3 col mr-2" (click)="agregarTarea()">
+                                    + Agregar tarea
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- <div class="form-group row float-right">
+                        <label class="col-2 col-form-label">&nbsp;</label>
+                        <div class="input-group col-md-12">
+                            <button type="button" class="btn btn-outline-primary">
+                                Guardar <i class="fas fa-angle-right"></i> 
+                            </button>
+                        </div>
+                    </div> -->
+                    
+                    <hr class="mt-2">
+                    <h2 class="mt-4">Documentos de respaldo del proceso</h2>
+
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-5 col-form-label text-left">¿Quién realiza la actividad?</label>
+                                <select class="custom-select col-3">
+                                    <option selected value="">Puesto</option>
+                                    <option value="1">Si</option>
+                                    <option value="2">No</option>
+                                </select>
+                                <select class="custom-select col-3">
+                                    <option selected value="">Persona</option>
+                                    <option value="1">Si</option>
+                                    <option value="2">No</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+                    <div class="form-group row float-right mt-4">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-save"></i> Guardar  
+                        </button>
+                    </div>
+
+                </form>
+            </div>  
+</div>
+

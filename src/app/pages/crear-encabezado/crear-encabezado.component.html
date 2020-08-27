@@ -1,0 +1,71 @@
+<div>
+    <div class="container">
+        <div class="col-xl-12">
+            <h1>Encabezado</h1>
+            <form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar()">
+                <div class="row mt-5">
+                    <div class="col-lg-6">
+                        <div>
+                            <label>Resultado Institucional/Programa</label>
+                            <input class="form-control" type="text" formControlName="resultaoInstitucional">
+                            <!--esto se debe de agregar despues del formControlName para realizar la validacion del campo [class.is-invalid]="procesoNoValido" -->
+                            <!-- <small *ngIf="procesoNoValido" class="form-text text-danger">
+                                Este campo es obligatorio
+                            </small> -->
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div>
+                            <label>Producto/Actividad Presupuestaria</label>
+                            <select class="custom-select" formControlName="producto">
+                                <option selected disabled value="">Seleccione</option>
+                                <option value="1" >Si</option>
+                                <option value="2">No</option> 
+                            </select>
+                            <!-- <small *ngIf="alcanceNoValido" class="form-text text-danger">
+                                Este campo es obligatorio
+                            </small> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-lg-6">
+                        <div>
+                            <label>Subproducto</label>
+                            <select class="custom-select" formControlName="subproducto">
+                                <option selected disabled value="">Seleccione</option>
+                                <option value="1" >Si</option>
+                                <option value="2">No</option> 
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div>
+                            <label>Dependencia responsable</label>
+                            <select class="custom-select" formControlName="dependencia">
+                                <option selected disabled value="">Seleccione</option>
+                                <option value="1" >Si</option>
+                                <option value="2">No</option> 
+                            </select>
+                            <!-- <small *ngIf="alcanceNoValido" class="form-text text-danger">
+                                Este campo es obligatorio
+                            </small> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row card-block mt-5">
+                    <div class="col-lg-6">
+                    <input type="submit" class="btn btn-primary btn-block waves-effect" value = "Crear encabezado">
+                    </div>
+                    <div class="col-lg-6">
+                    <input type="button" class="btn btn-success btn-block waves-effect" value = "Limpiar campos" >
+                    </div>
+                </div>
+
+            </form>
+        </div>  
+    </div>
+</div>
+
