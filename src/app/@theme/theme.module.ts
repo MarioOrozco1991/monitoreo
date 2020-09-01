@@ -16,7 +16,7 @@ import {
     NbIconModule,
     NbThemeModule,
     NbTabsetModule,
-    NbInputModule
+    NbInputModule,
     
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
@@ -72,7 +72,7 @@ const NB_MODULES = [
   DataTablesModule,
   NbTabsetModule,
   RouterModule,
-  NbInputModule
+  NbInputModule,
   
 ];
 const COMPONENTS = [

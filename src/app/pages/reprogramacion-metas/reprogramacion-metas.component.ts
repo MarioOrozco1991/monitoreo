@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 @Component({
   selector: 'ngx-crear-accion',
-  templateUrl: './crear-accion.component.html',
-  styleUrls: ['./crear-accion.component.scss']
+  templateUrl: './reprogramacion-metas.component.html',
+  styleUrls: ['./reprogramacion-metas.component.scss']
 })
-export class CrearAccionComponent implements OnInit {
+export class ReprogramacionMetasComponent implements OnInit {
 
   mostrarTareas: boolean = false;
 

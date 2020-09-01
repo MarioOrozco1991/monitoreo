@@ -1,7 +1,7 @@
 //modulos
 import { NgModule } from '@angular/core';
 import { NbMenuModule } from '@nebular/theme';
-import { NbTabsetModule } from '@nebular/theme';
+import { NbTabsetModule, NbTooltipModule, NbCardModule} from '@nebular/theme';
 import { ComponentsModule } from '../@theme/components/components.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PagesRoutingModule } from './pages-routing.module';
@@ -22,9 +22,12 @@ import { SeguimientoActividadesComponent } from './seguimiento-actividades/segui
 import { CrearEncabezadoComponent } from './crear-encabezado/crear-encabezado.component';
 import { EditarEncabezadoComponent } from './editar-encabezado/editar-encabezado.component';
 import { CrearAccionComponent } from './crear-accion/crear-accion.component';
+import { ProgramacionMetasComponent } from './programacion-metas/programacion-metas.component';
+import { ReprogramacionMetasComponent } from './reprogramacion-metas/reprogramacion-metas.component';
 
 @NgModule({
   imports: [
+
 
 
     PagesRoutingModule,
@@ -32,6 +35,8 @@ import { CrearAccionComponent } from './crear-accion/crear-accion.component';
     NbMenuModule,
     DashboardModule,
     NbTabsetModule,
+    NbCardModule,
+    NbTooltipModule,
     ReactiveFormsModule,
     DataTablesModule,
     ComponentsModule,
@@ -48,6 +53,8 @@ import { CrearAccionComponent } from './crear-accion/crear-accion.component';
     CrearEncabezadoComponent,
     EditarEncabezadoComponent,
     CrearAccionComponent,
+    ProgramacionMetasComponent,
+    ReprogramacionMetasComponent
     
   ],
 })

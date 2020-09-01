@@ -1,1 +1,226 @@
-<p>crear-accion works!</p>
+
+
+<div>
+    <div class="container">
+        <div class="col-xl-12">
+            <h1>Definición de la acción</h1>
+            <form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar()">
+                <div class="row mt-5">
+                    <div class="col-lg-6">
+                        <div>
+                            <label>Eje Estrategico</label>
+                            <select class="custom-select" formControlName="ejeEstrategico">
+                                <option selected disabled value="">Seleccione</option>
+                                <option [value]>eje 1</option>
+                                <option [value]>eje 2</option> 
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div>
+                            <label>Objetivo Estratégico</label>
+                            <select class="custom-select" formControlName="objetivoEstrategico">
+                                <option selected disabled value="">Seleccione</option>
+                                <option [value] >objetivo 1</option>
+                                <option [value]>Objetivo 2</option> 
+                            </select>
+                            <!-- <small *ngIf="alcanceNoValido" class="form-text text-danger">
+                                Este campo es obligatorio
+                            </small> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-lg-6">
+                        <div>
+                            <label>Objetivo Operativo</label>
+                            <select class="custom-select" formControlName="objetivoOperativo">
+                                <option selected disabled value="">Seleccione</option>
+                                <option [value] >objetivo 1</option>
+                                <option [value]>objetivo 2</option> 
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div>
+                            <label>Responsable</label>
+                            <select class="custom-select" formControlName="responsable">
+                                <option selected disabled value="">Seleccione</option>
+                                <option [value] >puesto 1</option>
+                                <option [value]>puesto 2</option> 
+                            </select>
+                            <!-- <small *ngIf="alcanceNoValido" class="form-text text-danger">
+                                Este campo es obligatorio
+                            </small> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-lg-12">
+                        <div>
+                            <label>Acción </label> 
+                            <a style="color:blue; " nbTooltip="La acción es *********" nbTooltipPlacement="right" nbTooltipStatus="primary" nbButton status="control"> ?</a>
+                            <input class="form-control" type="text"  formControlName="accion">
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="mt-5">Detalle de la acción</h2>
+
+                <div class="row mt-5">
+                    <div class="col-lg-6">
+                        <div>
+                            <label>Actividad</label>
+                            <input class="form-control" type="text" formControlName="actividad">
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div>
+                            <label>¿Quién la realiza?</label>
+                            <select class="custom-select" formControlName="dependenciaRealiza">
+                                <option selected disabled value="">Dependencia/Depto.</option>
+                                <option [value]>dependencia 1</option>
+                            </select>
+                        </div>
+                    </div>       
+                    <div class="col-lg-3">
+                        <div style="margin-top: 3px;">
+                            <select class="custom-select mt-4" formControlName="puestoRealiza">
+                                <option selected disabled value="">Puesto</option>
+                                <option [value]>Puesto 1</option>
+                                <option [value]>puesto 2</option> 
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-lg-3">
+                        <div>
+                            <label>¿Qué necesita para realizarla?</label>
+                            <select class="custom-select" formControlName="documentoEntrada">
+                                <option selected disabled value="">Seleccione</option>
+                                <option [value]>Oficio</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div style="margin-top: 28px;">
+                            <input class="form-control mt-4" type="text" formControlName="otroDocumentoEntrada" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div>
+                            <label>¿Quién solicita?</label>
+                            <select class="custom-select" formControlName="dependenciaSolicita">
+                                <option selected disabled value="">Dependencia/Depto.</option>
+                                <option [value]>dependencia 1</option>
+                            </select>
+                        </div>
+                    </div>       
+                    <div class="col-lg-3">
+                        <div style="margin-top: 3px;">
+                            <select class="custom-select mt-4" formControlName="puestoSolicita">
+                                <option selected disabled value="">Puesto</option>
+                                <option [value]>Puesto 1</option>
+                                <option [value]>puesto 2</option> 
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mt-5">
+                    <div class="col-lg-3">
+                        <div>
+                            <label>¿Qué resultado genera?</label>
+                            <select class="custom-select" formControlName="resultadoDocumento">
+                                <option selected disabled value="">Seleccione</option>
+                                <option [value]>Oficio</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div style="margin-top: 28px;">
+                            <input class="form-control mt-4" type="text" formControlName="otroResultado" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div>
+                            <label>¿Quién recibe el resultado?</label>
+                            <select class="custom-select" formControlName="dependenciaRecibe">
+                                <option selected disabled value="">Dependencia/Depto.</option>
+                                <option [value]>dependencia 1</option>
+                            </select>
+                        </div>
+                    </div>       
+                    <div class="col-lg-3">
+                        <div style="margin-top: 3px;">
+                            <select class="custom-select mt-4" formControlName="puestoRecibe">
+                                <option selected disabled value="">Puesto</option>
+                                <option [value]>Puesto 1</option>
+                                <option [value]>puesto 2</option> 
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-lg-3">
+                        <div>
+                            <label>Tiempo promedio</label>
+                            <select class="custom-select" formControlName="unidadTiempo">
+                                <option selected disabled value="">Seleccione</option>
+                                <option [value]>Días</option>
+                                <option [value]>Horas</option>
+                                <option [value] >Minutos</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div>
+                            <label>Valor</label>
+                            <input class="form-control" type="text" formControlName="duracion">
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="text-center">
+                            <label>¿Utiliza un sistema para realizarla?</label>
+                            <div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" formControlName="utilizaSistema" [value]=true>
+                                    <label class="custom-control-label" for="customRadioInline1">SI</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input" formControlName="utilizaSistema" [value]=false >
+                                    <label class="custom-control-label" for="customRadioInline2">NO</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>      
+                    <div class="col-lg-3">
+                        <div style="margin-top: 3px;">
+                            <label>Nombre del sistema</label>
+                            <select class="custom-select" formControlName="nombreSistema">
+                                <option selected disabled value="">Seleccione</option>
+                                <option [value] >POINTER</option>
+                                <option [value] >SICABI</option>
+                                <option [value] >CIMCORR</option>
+                            </select>
+                        </div>
+                    </div> 
+                </div>
+
+                <div class="row card-block mt-5">
+                    <div class="col-lg-3">
+                    <input type="submit" class="btn btn-primary btn-block waves-effect" value = "Agregar detalle">
+                    </div>
+                </div>
+
+            </form>
+        </div>  
+    </div>
+</div>
+
+

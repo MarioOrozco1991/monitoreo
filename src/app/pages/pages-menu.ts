@@ -15,7 +15,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
               link: '/pages/crear-encabezado',
             },
             {
-              title: 'listado de encabezados  ',
+              title: 'Editar encabezado  ',
               link: '/pages/editar-encabezado',
             },
           ]
@@ -32,6 +32,19 @@ export const MENU_ITEMS: NbMenuItem[] = [
             },
           ]
         },  
+        {
+          title: 'Programación de metas',
+          children: [
+            {
+              title: 'Crear programación',
+              link: '/pages/crear-programacion',
+            },
+            {
+              title: 'Reprogramación',
+              link: '/pages/reprogramacion',
+            },
+          ]
+        },
       ], 
   },
   {

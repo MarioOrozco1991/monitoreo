@@ -28,8 +28,11 @@ import {
   NbToastrModule,
   NbWindowModule,
   NbTabsetModule,
+  NbTooltipModule,
+  NbCardModule,
   NbInputModule
 } from '@nebular/theme';
+
 
 
 
@@ -42,6 +45,8 @@ import {
     HttpClientModule,
     AppRoutingModule,
     NbTabsetModule,
+    NbCardModule,
+    NbTooltipModule,
     ComponentsModule,
     PagesModule,
     ReactiveFormsModule,

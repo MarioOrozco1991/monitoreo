@@ -1,0 +1,216 @@
+<div>
+    <div class="container">
+        <div class="col-xl-12">
+            <h1>Programación de metas</h1>
+            <form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar()">
+                <div class="row mt-5">
+                    <div class="col-lg-6">
+                        <div>
+                            <label>Tipo de programación</label>
+                            <select class="custom-select" formControlName="ejeEstrategico">
+                                <option selected disabled value="">Seleccione</option>
+                                <option [value]>Metas de acción</option>
+                                <option [value]>Metas físicas</option> 
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div>
+                            <label>Periodo</label>
+                            <select class="custom-select" formControlName="objetivoEstrategico">
+                                <option selected disabled value="">Seleccione</option>
+                                <option [value] >Año 2020</option>
+                                <option [value]>Año 2021</option> 
+                            </select>
+                            <!-- <small *ngIf="alcanceNoValido" class="form-text text-danger">
+                                Este campo es obligatorio
+                            </small> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-lg-12">
+                        <div>
+                            <label>Acción </label> 
+                            <select class="custom-select" formControlName="accion">
+                                <option selected disabled value="">Seleccione</option>
+                                <option [value] >Acción 1</option>
+                                <option [value]>Acción 2</option> 
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-lg-4">
+                        <div>
+                            <label>Unidad de medida</label>
+                            <input class="form-control" type="text" formControlName="actividad">
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div>
+                            <label>Medio de verificación</label>
+                            <select class="custom-select" formControlName="dependenciaRealiza">
+                                <option selected disabled value="">Seleccione</option>
+                                <option [value]>Oficio</option>
+                                <option [value]>Otros</option>
+                            </select>
+                        </div>
+                    </div>       
+                    <div class="col-lg-4">
+                        <div style="margin-top: 28px;">
+                            <input class="form-control" type="text" formControlName="actividad" disabled>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-lg-4">
+                        <div>
+                            <label>Indicador</label>
+                            <input class="form-control" type="text" formControlName="actividad">
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div>
+                            <label>Fórmula del indicador</label>
+                            <input class="form-control" type="text" formControlName="actividad">
+                        </div>
+                    </div>       
+                </div>
+
+                <hr class="mt-5">
+                <h2>Primer Cuatrimestre</h2>
+                <div class="row mt-5">
+                    <div class="col-lg-2">
+                        <div>
+                            <label>Enero</label>
+                            <input class="form-control" type="text" formControlName="actividad">
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div>
+                            <label>Febrero</label>
+                            <input class="form-control" type="text" formControlName="actividad">
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div>
+                            <label>Marzo</label>
+                            <input class="form-control" type="text" formControlName="actividad">
+                        </div>
+                    </div>       
+                    <div class="col-lg-2">
+                        <div>
+                            <label>Abril</label>
+                            <input class="form-control" type="text" formControlName="actividad">
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div>
+                            <label>Total Cuatrimestre</label>
+                            <input class="form-control" type="text" formControlName="actividad">
+                        </div>
+                    </div>
+                </div>
+                
+                <hr class="mt-5">
+                <h2>Segundo Cuatrimestre</h2>
+                <div class="row mt-5">
+                    <div class="col-lg-2">
+                        <div>
+                            <label>Mayo</label>
+                            <input class="form-control" type="text" formControlName="actividad">
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div>
+                            <label>Junio</label>
+                            <input class="form-control" type="text" formControlName="actividad">
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div>
+                            <label>Julio</label>
+                            <input class="form-control" type="text" formControlName="actividad">
+                        </div>
+                    </div>       
+                    <div class="col-lg-2">
+                        <div>
+                            <label>Agosto</label>
+                            <input class="form-control" type="text" formControlName="actividad">
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div>
+                            <label>Total Cuatrimestre</label>
+                            <input class="form-control" type="text" formControlName="actividad">
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="mt-5">
+                <h2>Tercer Cuatrimestre</h2>
+                <div class="row mt-5">
+                    <div class="col-lg-2">
+                        <div>
+                            <label>Septiembre</label>
+                            <input class="form-control" type="text" formControlName="actividad">
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div>
+                            <label>Octubre</label>
+                            <input class="form-control" type="text" formControlName="actividad">
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div>
+                            <label>Noviembre</label>
+                            <input class="form-control" type="text" formControlName="actividad">
+                        </div>
+                    </div>       
+                    <div class="col-lg-2">
+                        <div>
+                            <label>Diciembre</label>
+                            <input class="form-control" type="text" formControlName="actividad">
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div>
+                            <label>Total Cuatrimestre</label>
+                            <input class="form-control" type="text" formControlName="actividad">
+                        </div>
+                    </div>
+                </div>
+
+                
+                <h4 class="mt-5 text-center">Total programado</h4>
+                <div class="row mt-2" >
+                    <div class="col-lg-4" >
+                        <div >
+                            <input style="text-align:center;" class="form-control" type="text" formControlName="actividad" disabled>
+                        </div>
+                    </div>
+                </div>
+                
+
+
+
+
+                
+                
+                <div class="row card-block mt-5">
+                    <div class="col-lg-3">
+                    <input type="submit" class="btn btn-primary btn-block waves-effect" value = "Agregar detalle">
+                    </div>
+                </div>
+
+            </form>
+        </div>  
+    </div>
+</div>
+
+

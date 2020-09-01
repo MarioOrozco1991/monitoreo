@@ -1,0 +1,97 @@
+<div>
+    <div class="container">
+        <div class="col-xl-12">
+            <h1>Reprogramación de metas</h1>
+            <form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar()">
+                <div class="row mt-5">
+                    <div class="col-lg-6">
+                        <div>
+                            <label>Tipo de reprogramación</label>
+                            <select class="custom-select" formControlName="ejeEstrategico">
+                                <option selected disabled value="">Seleccione</option>
+                                <option [value]>Metas de acción</option>
+                                <option [value]>Metas físicas</option> 
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div>
+                            <label>Periodo</label>
+                            <select class="custom-select" formControlName="objetivoEstrategico">
+                                <option selected disabled value="">Seleccione</option>
+                                <option [value] >Año 2020</option>
+                                <option [value]>Año 2021</option> 
+                            </select>
+                            <!-- <small *ngIf="alcanceNoValido" class="form-text text-danger">
+                                Este campo es obligatorio
+                            </small> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-lg-6">
+                        <div>
+                            <label>Acción </label> 
+                            <select class="custom-select" formControlName="accion">
+                                <option selected disabled value="">Seleccione</option>
+                                <option [value] >Acción 1</option>
+                                <option [value]>Acción 2</option> 
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div>
+                            <label>Mes a reprogramar</label> 
+                            <select class="custom-select" formControlName="accion">
+                                <option selected disabled value="">Seleccione</option>
+                                <option [value] >Enero</option>
+                                <option [value]>Febrero</option> 
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-lg-4">
+                        <div>
+                            <label>Cantidad programada</label>
+                            <input class="form-control" type="text" formControlName="actividad" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div>
+                            <label>Programación requerida</label>
+                            <input class="form-control" type="text" formControlName="actividad">
+                        </div>
+                    </div>       
+                    <div class="col-lg-4">
+                        <div>
+                            <label>Nueva programación</label>
+                            <input class="form-control" type="text" formControlName="actividad" disabled>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-lg-12">
+                        <div>
+                            <label>Justificación</label>
+                            <textarea class="form-control" rows="2" placeholder="Ingrese aquí las observaciones" formControlName="observaciones">
+                            </textarea>
+                        </div>
+                    </div>  
+                </div>
+                
+                <div class="row card-block mt-5">
+                    <div class="col-lg-3">
+                    <input type="submit" class="btn btn-primary btn-block waves-effect" value = "Realizar reprogramación">
+                    </div>
+                </div>
+
+            </form>
+        </div>  
+    </div>
+</div>
+
+
