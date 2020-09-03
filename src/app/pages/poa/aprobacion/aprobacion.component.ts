@@ -14,6 +14,8 @@ export class AprobacionComponent implements OnDestroy, OnInit {
     
     dtTrigger = new Subject();
 
+    url = 'http://localhost:8081/api/programacion-metas';
+
     data: any;
 
     constructor(private http:HttpClient, 
@@ -26,9 +28,10 @@ export class AprobacionComponent implements OnDestroy, OnInit {
             pagingType: 'full_numbers',
             pageLength: 10
           };
-          this.http.get('http://dummy.restapiexample.com/api/v1/employees')
+          this.http.get(this.url)
           .subscribe((respuesta: any) => {
-              this.data = respuesta.data;
+              console.log('info', respuesta);
+              this.data = respuesta;
               this.dtTrigger.next();
           });
 

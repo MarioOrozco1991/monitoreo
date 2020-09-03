@@ -14,7 +14,7 @@
                             </small> -->
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-5">
                         <div>
                             <label>Producto/Actividad Presupuestaria</label>
                             <select class="custom-select" formControlName="producto">
@@ -22,15 +22,18 @@
                                 <option value="1" >Si</option>
                                 <option value="2">No</option> 
                             </select>
-                            <!-- <small *ngIf="alcanceNoValido" class="form-text text-danger">
-                                Este campo es obligatorio
-                            </small> -->
                         </div>
                     </div>
+   
+                    <div class="col-lg-1" style="margin-top: 28px;">
+                        <input type="submit" class="btn btn-primary btn-block waves-effect" value = "+">
+                    </div>                            
+                        
+                    
                 </div>
 
                 <div class="row mt-5">
-                    <div class="col-lg-6">
+                    <div class="col-lg-5">
                         <div>
                             <label>Subproducto</label>
                             <select class="custom-select" formControlName="subproducto">
@@ -40,6 +43,11 @@
                             </select>
                         </div>
                     </div>
+
+                    <div class="col-lg-1" style="margin-top: 28px;">
+                        <input type="submit" class="btn btn-primary btn-block waves-effect" value = "+">
+                    </div> 
+
                     <div class="col-lg-6">
                         <div>
                             <label>Dependencia responsable</label>

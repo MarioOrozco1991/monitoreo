@@ -3,17 +3,18 @@ import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { RevisionComponent } from './revision/revision.component';
-import { AprobacionComponent } from './aprobacion/aprobacion.component';
-import { ReportesComponent } from './reportes/reportes.component';
+import { RevisionComponent } from './poa/revision/revision.component';
+import { AprobacionComponent } from './poa/aprobacion/aprobacion.component';
+import { ReportesComponent } from './poa/reportes/reportes.component';
 import { RolComponent } from './rol/rol.component';
 import { PoaComponent } from './poa/poa.component';
 import { SeguimientoActividadesComponent } from './seguimiento-actividades/seguimiento-actividades.component';
-import { CrearEncabezadoComponent } from './crear-encabezado/crear-encabezado.component';
-import { EditarEncabezadoComponent } from './editar-encabezado/editar-encabezado.component';
-import { CrearAccionComponent } from './crear-accion/crear-accion.component';
-import { ProgramacionMetasComponent } from './programacion-metas/programacion-metas.component';
-import { ReprogramacionMetasComponent } from './reprogramacion-metas/reprogramacion-metas.component';
+import { CrearEncabezadoComponent } from './poa/crear-encabezado/crear-encabezado.component';
+import { EditarEncabezadoComponent } from './poa/editar-encabezado/editar-encabezado.component';
+import { CrearAccionComponent } from './poa/acciones/crear-accion/crear-accion.component';
+import { ProgramacionMetasComponent } from './poa/programacion-metas/programacion-metas.component';
+import { ReprogramacionMetasComponent } from './poa/reprogramacion-metas/reprogramacion-metas.component';
+import { DefinicionEjesComponent } from './poa/definicion-ejes/definicion-ejes.component';
 
 const routes: Routes = [{
   path: '',
@@ -70,6 +71,10 @@ const routes: Routes = [{
     {
         path: 'poa',
         component: PoaComponent,
+    },
+    {
+      path: 'crear-ejes',
+      component: DefinicionEjesComponent,
     },
     {
       path: '',

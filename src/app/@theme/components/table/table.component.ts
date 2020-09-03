@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+// import {AccionesService} from '../../../services/acciones.service';
 
 @Component({
   selector: 'ngx-table',
@@ -12,6 +13,8 @@ export class TableComponent implements OnDestroy, OnInit {
 
     dtOptions: DataTables.Settings = {};
     
+    url: string = 'http://localhost:8081/api/acciones';
+
     dtTrigger = new Subject();
 
     data: any;
@@ -26,10 +29,11 @@ export class TableComponent implements OnDestroy, OnInit {
             pagingType: 'full_numbers',
             pageLength: 10
           };
-          this.http.get('http://dummy.restapiexample.com/api/v1/employees')
-          .subscribe((respuesta: any) => {
-              this.data = respuesta.data;
+          this.http.get(this.url).subscribe((respuesta: any) => {
+            console.log('info', respuesta);
+              this.data = respuesta;
               this.dtTrigger.next();
+              
           });
 
         

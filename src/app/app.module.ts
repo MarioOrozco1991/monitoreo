@@ -15,7 +15,7 @@ import { ComponentsModule } from './@theme/components/components.module';
 import { PagesModule } from './pages/pages.module';
 import { AppRoutingModule } from './app-routing.module';
 import { DataTablesModule } from 'angular-datatables';
-
+// import { AccionesService } from './services/acciones.service';
 
 
 
@@ -40,6 +40,7 @@ import {
   declarations: [AppComponent,],
   
   imports: [
+
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -65,6 +66,8 @@ import {
     }),
     CoreModule.forRoot(),
   ],
+  // providers: [AccionesService],
+
   bootstrap: [AppComponent],
 })
 export class AppModule {

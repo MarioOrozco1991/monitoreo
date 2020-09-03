@@ -21,6 +21,19 @@ export const MENU_ITEMS: NbMenuItem[] = [
           ]
         },
         {
+          title: 'Ejes',
+          children: [
+            {
+              title: 'Crear Ejes',
+              link: '/pages/crear-ejes',
+            },
+            {
+              title: 'Editar Ejes  ',
+              // link: '/pages/editar-encabezado',
+            },
+          ]
+        },
+        {
           title: 'Acciones',
           children: [
             {
