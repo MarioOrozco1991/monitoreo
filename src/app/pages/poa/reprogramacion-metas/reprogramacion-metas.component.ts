@@ -7,7 +7,6 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 })
 export class ReprogramacionMetasComponent implements OnInit {
 
-  mostrarTareas: boolean = false;
 
   mostrarNombreSistema: boolean = false;
 
@@ -19,15 +18,9 @@ export class ReprogramacionMetasComponent implements OnInit {
   
   }
       
-      
-      
   ngOnInit(): void {
   }
-  
-  get tareas(){
-      return this.forma.get('tareas') as FormArray;
-  }
-
+ 
 
 
   //validaciones del formulario
@@ -54,45 +47,20 @@ export class ReprogramacionMetasComponent implements OnInit {
       //inicializando el formulario
 
       this.forma = this.fb.group({
-          ejeEstrategico:        ['', Validators.required],
-          objetivoEstrategico:   ['',],
-          objetivoOperativo:     ['',],
-          responsable:           ['',],
-          accion:                ['',],
-          departamentoRealiza:   ['',],
-          puestoRealiza:         ['',],
-          dependenciaRealiza:    ['',],
-          actividad:             ['',],
-          documentoEntrada:      ['',],
-          otroDocumentoEntrada:  ['',],
-          dependenciaSolicita:   ['',],
-          puestoSolicita:        ['',],
-          resultadoDocumento:    ['',],
-          otroResultado:         ['',],
-          dependenciaRecibe:     ['',],
-          puestoRecibe:          ['',],
-          unidadTiempo:          ['',],
-          duracion:              ['',],
-          utilizaSistema:        ['',],
-          nombreSistema:         ['',],
-          tareas: this.fb.array([])
+        tipoReprogramacion:       ['', Validators.required],
+        periodo:                  ['',],
+        accion:                   ['',],
+        mesProgramacion:          ['',],
+        cantidadProgramada:       ['',],
+        programacionRequerida:    ['',],
+        nuevaProgramacion:        ['',],
+        justificacion:            ['',],
       })
   }
 
 
-  //agregando las tareas
-  agregarTarea(){
-      this.tareas.push( this.fb.control('', Validators.required ) );
 
-  }
 
-  eliminarTarea(i: number ){
-      this.tareas.removeAt(i);
-  }
-
-  agregarActividad(){
-      
-  }
 
   //metodo cuando el usuario presione click en guardar
   guardar(){

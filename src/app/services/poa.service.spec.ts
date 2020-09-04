@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AccionesService } from './acciones.service';
+import { PoaService } from './poa.service';
 
-describe('AccionesService', () => {
-  let service: AccionesService;
+describe('PoaService', () => {
+  let service: PoaService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(AccionesService);
+    service = TestBed.inject(PoaService);
   });
 
   it('should be created', () => {

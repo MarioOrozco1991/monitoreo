@@ -1,6 +1,5 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
 import { CommonModule } from '@angular/common';
 import { MatRippleModule } from '@angular/material/core';
 import {
@@ -54,7 +53,6 @@ import { DARK_THEME } from './styles/theme.dark';
 import { MATERIAL_LIGHT_THEME } from './styles/material/theme.material-light';
 import { MATERIAL_DARK_THEME } from './styles/material/theme.material-dark';
 import { DataTablesModule } from 'angular-datatables';
-import { ListadoRevisionComponent } from './components/listado-revision/listado-revision.component';
 
 const NB_MODULES = [
   NbLayoutModule,
@@ -87,7 +85,6 @@ const COMPONENTS = [
   TableComponent,
   FormularioComponent,
   EditarProcesoComponent,
-  ListadoRevisionComponent
 ];
 const PIPES = [
   CapitalizePipe,

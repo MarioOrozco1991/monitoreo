@@ -19,8 +19,8 @@
                             <label>Producto/Actividad Presupuestaria</label>
                             <select class="custom-select" formControlName="producto">
                                 <option selected disabled value="">Seleccione</option>
-                                <option value="1" >Si</option>
-                                <option value="2">No</option> 
+                                <option [value] >Producto 1</option>
+                                <option [value] >Producto 2</option> 
                             </select>
                         </div>
                     </div>
@@ -38,8 +38,8 @@
                             <label>Subproducto</label>
                             <select class="custom-select" formControlName="subproducto">
                                 <option selected disabled value="">Seleccione</option>
-                                <option value="1" >Si</option>
-                                <option value="2">No</option> 
+                                <option [value] >Subproducto 1</option>
+                                <option [value] >Subproducto 2</option> 
                             </select>
                         </div>
                     </div>
@@ -53,8 +53,8 @@
                             <label>Dependencia responsable</label>
                             <select class="custom-select" formControlName="dependencia">
                                 <option selected disabled value="">Seleccione</option>
-                                <option value="1" >Si</option>
-                                <option value="2">No</option> 
+                                <option [value] >Informática y Estadística</option>
+                                <option [value] >RRHH</option> 
                             </select>
                             <!-- <small *ngIf="alcanceNoValido" class="form-text text-danger">
                                 Este campo es obligatorio
@@ -68,7 +68,7 @@
                     <input type="submit" class="btn btn-primary btn-block waves-effect" value = "Crear encabezado">
                     </div>
                     <div class="col-lg-6">
-                    <input type="button" class="btn btn-success btn-block waves-effect" value = "Limpiar campos" >
+                    <input type="button" class="btn btn-dark btn-block waves-effect" value = "Limpiar campos" >
                     </div>
                 </div>
 

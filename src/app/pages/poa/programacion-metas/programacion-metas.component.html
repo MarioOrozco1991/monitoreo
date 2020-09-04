@@ -7,7 +7,7 @@
                     <div class="col-lg-6">
                         <div>
                             <label>Tipo de programación</label>
-                            <select class="custom-select" formControlName="ejeEstrategico">
+                            <select class="custom-select" formControlName="tipoProgramacion">
                                 <option selected disabled value="">Seleccione</option>
                                 <option [value]>Metas de acción</option>
                                 <option [value]>Metas físicas</option> 
@@ -17,7 +17,7 @@
                     <div class="col-lg-6">
                         <div>
                             <label>Periodo</label>
-                            <select class="custom-select" formControlName="objetivoEstrategico">
+                            <select class="custom-select" formControlName="periodo">
                                 <option selected disabled value="">Seleccione</option>
                                 <option [value] >Año 2020</option>
                                 <option [value]>Año 2021</option> 
@@ -46,13 +46,13 @@
                     <div class="col-lg-4">
                         <div>
                             <label>Unidad de medida</label>
-                            <input class="form-control" type="text" formControlName="actividad">
+                            <input class="form-control" type="text" formControlName="unidadMedida">
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div>
                             <label>Medio de verificación</label>
-                            <select class="custom-select" formControlName="dependenciaRealiza">
+                            <select class="custom-select" formControlName="medioVerificacion">
                                 <option selected disabled value="">Seleccione</option>
                                 <option [value]>Oficio</option>
                                 <option [value]>Otros</option>
@@ -61,7 +61,7 @@
                     </div>       
                     <div class="col-lg-4">
                         <div style="margin-top: 28px;">
-                            <input class="form-control" type="text" formControlName="actividad" disabled>
+                            <input class="form-control" type="text" formControlName="otroMedioVerificacion" disabled>
                         </div>
                     </div>
                 </div>
@@ -70,13 +70,13 @@
                     <div class="col-lg-4">
                         <div>
                             <label>Indicador</label>
-                            <input class="form-control" type="text" formControlName="actividad">
+                            <input class="form-control" type="text" formControlName="indicador">
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div>
                             <label>Fórmula del indicador</label>
-                            <input class="form-control" type="text" formControlName="actividad">
+                            <input class="form-control" type="text" formControlName="formulaIndicador">
                         </div>
                     </div>       
                 </div>
@@ -87,31 +87,31 @@
                     <div class="col-lg-2">
                         <div>
                             <label>Enero</label>
-                            <input class="form-control" type="text" formControlName="actividad">
+                            <input class="form-control" type="text" formControlName="enero">
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div>
                             <label>Febrero</label>
-                            <input class="form-control" type="text" formControlName="actividad">
+                            <input class="form-control" type="text" formControlName="febrero">
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div>
                             <label>Marzo</label>
-                            <input class="form-control" type="text" formControlName="actividad">
+                            <input class="form-control" type="text" formControlName="marzo">
                         </div>
                     </div>       
                     <div class="col-lg-2">
                         <div>
                             <label>Abril</label>
-                            <input class="form-control" type="text" formControlName="actividad">
+                            <input class="form-control" type="text" formControlName="abril">
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div>
                             <label>Total Cuatrimestre</label>
-                            <input class="form-control" type="text" formControlName="actividad">
+                            <input class="form-control" type="text" formControlName="totalPrimerCuatrimestre">
                         </div>
                     </div>
                 </div>
@@ -122,86 +122,81 @@
                     <div class="col-lg-2">
                         <div>
                             <label>Mayo</label>
-                            <input class="form-control" type="text" formControlName="actividad">
+                            <input class="form-control" type="text" formControlName="mayo">
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div>
                             <label>Junio</label>
-                            <input class="form-control" type="text" formControlName="actividad">
+                            <input class="form-control" type="text" formControlName="junio">
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div>
                             <label>Julio</label>
-                            <input class="form-control" type="text" formControlName="actividad">
+                            <input class="form-control" type="text" formControlName="julio">
                         </div>
                     </div>       
                     <div class="col-lg-2">
                         <div>
                             <label>Agosto</label>
-                            <input class="form-control" type="text" formControlName="actividad">
+                            <input class="form-control" type="text" formControlName="agosto">
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div>
                             <label>Total Cuatrimestre</label>
-                            <input class="form-control" type="text" formControlName="actividad">
+                            <input class="form-control" type="text" formControlName="totalSegundoCuatrimestre">
                         </div>
                     </div>
                 </div>
 
                 <hr class="mt-5">
                 <h2>Tercer Cuatrimestre</h2>
+                
                 <div class="row mt-5">
                     <div class="col-lg-2">
                         <div>
                             <label>Septiembre</label>
-                            <input class="form-control" type="text" formControlName="actividad">
+                            <input class="form-control" type="text" formControlName="septiembre">
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div>
                             <label>Octubre</label>
-                            <input class="form-control" type="text" formControlName="actividad">
+                            <input class="form-control" type="text" formControlName="octubre">
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div>
                             <label>Noviembre</label>
-                            <input class="form-control" type="text" formControlName="actividad">
+                            <input class="form-control" type="text" formControlName="noviembre">
                         </div>
                     </div>       
                     <div class="col-lg-2">
                         <div>
                             <label>Diciembre</label>
-                            <input class="form-control" type="text" formControlName="actividad">
+                            <input class="form-control" type="text" formControlName="diciembre">
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div>
                             <label>Total Cuatrimestre</label>
-                            <input class="form-control" type="text" formControlName="actividad">
+                            <input class="form-control" type="text" formControlName="totalTercerCuatrimestre">
                         </div>
                     </div>
                 </div>
 
                 
-                <h4 class="mt-5 text-center">Total programado</h4>
+                <h4 class="mt-5 text-center">Total anual programado</h4>
                 <div class="row mt-2" >
                     <div class="col-lg-4" >
                         <div >
-                            <input style="text-align:center;" class="form-control" type="text" formControlName="actividad" disabled>
+                            <input style="text-align:center;" class="form-control" type="text" formControlName="totalProgramado" disabled>
                         </div>
                     </div>
                 </div>
-                
-
-
-
-
-                
-                
+      
                 <div class="row card-block mt-5">
                     <div class="col-lg-3">
                     <input type="submit" class="btn btn-primary btn-block waves-effect" value = "Agregar detalle">

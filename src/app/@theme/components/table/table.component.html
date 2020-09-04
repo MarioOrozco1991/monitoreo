@@ -5,11 +5,11 @@
                 <th><font color="white">#</font></th>
                 <th><font color="white">Nombre de la acción</font></th>
                 <th><font color="white">Actividad</font></th>
-                <th><font color="white">Acciones</font></th>
+                <th><font color="white">Opciones</font></th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let datos of data">
+            <tr *ngFor="let datos of respuesta">
                 <td class="text-center">{{datos.id}}</td>
                 <td>{{datos.nombre}}</td>
                 <td class="text-center">{{datos.actividad}}</td>

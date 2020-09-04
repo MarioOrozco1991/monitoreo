@@ -7,7 +7,7 @@
                     <div class="col-lg-6">
                         <div>
                             <label>Tipo de reprogramación</label>
-                            <select class="custom-select" formControlName="ejeEstrategico">
+                            <select class="custom-select" formControlName="tipoReprogramacion">
                                 <option selected disabled value="">Seleccione</option>
                                 <option [value]>Metas de acción</option>
                                 <option [value]>Metas físicas</option> 
@@ -17,7 +17,7 @@
                     <div class="col-lg-6">
                         <div>
                             <label>Periodo</label>
-                            <select class="custom-select" formControlName="objetivoEstrategico">
+                            <select class="custom-select" formControlName="periodo">
                                 <option selected disabled value="">Seleccione</option>
                                 <option [value] >Año 2020</option>
                                 <option [value]>Año 2021</option> 
@@ -43,7 +43,7 @@
                     <div class="col-lg-6">
                         <div>
                             <label>Mes a reprogramar</label> 
-                            <select class="custom-select" formControlName="accion">
+                            <select class="custom-select" formControlName="mesProgramacion">
                                 <option selected disabled value="">Seleccione</option>
                                 <option [value] >Enero</option>
                                 <option [value]>Febrero</option> 
@@ -56,19 +56,19 @@
                     <div class="col-lg-4">
                         <div>
                             <label>Cantidad programada</label>
-                            <input class="form-control" type="text" formControlName="actividad" disabled>
+                            <input class="form-control" type="text" formControlName="cantidadProgramada" disabled>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div>
                             <label>Programación requerida</label>
-                            <input class="form-control" type="text" formControlName="actividad">
+                            <input class="form-control" type="text" formControlName="programacionRequerida">
                         </div>
                     </div>       
                     <div class="col-lg-4">
                         <div>
                             <label>Nueva programación</label>
-                            <input class="form-control" type="text" formControlName="actividad" disabled>
+                            <input class="form-control" type="text" formControlName="nuevaProgramacion" disabled>
                         </div>
                     </div>
                 </div>
@@ -77,7 +77,7 @@
                     <div class="col-lg-12">
                         <div>
                             <label>Justificación</label>
-                            <textarea class="form-control" rows="2" placeholder="Ingrese aquí las observaciones" formControlName="observaciones">
+                            <textarea class="form-control" rows="2" placeholder="Ingrese aquí las observaciones" formControlName="justificacion">
                             </textarea>
                         </div>
                     </div>  

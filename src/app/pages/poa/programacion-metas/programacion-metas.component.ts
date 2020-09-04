@@ -16,83 +16,60 @@ export class ProgramacionMetasComponent implements OnInit {
   constructor( private fb:FormBuilder) {
   
       this.crearFormulario();
-  
+
+    //   this.forma.controls.enero.valueChanges
+    //   .subscribe(data => {
+    //     console.log('PrecioCIVA = ' + data)
+    //   })
+
+    //   //observable general
+    // this.forma.valueChanges
+    // .subscribe(data => {
+    //   console.log(data)
+    // })
   }
-      
-      
       
   ngOnInit(): void {
   }
-  
-  get tareas(){
-      return this.forma.get('tareas') as FormArray;
-  }
-
-
-
-  //validaciones del formulario
-  
-  // get procesoNoValido(){
-  //     return this.forma.get('proceso').invalid && this.forma.get('procesoPOA').touched
-  // }
- 
-  // get alcanceNoValido(){
-  //     return this.forma.get('alcance').invalid && this.forma.get('alcance').touched
-  // }
-
-  // get objetivoNoValido(){
-  //     return this.forma.get('objetivo').invalid && this.forma.get('objetivo').touched
-  // }
-
-  // get observacionesNoValido(){
-  //     return this.forma.get('observaciones').invalid && this.forma.get('observaciones').touched
-  
-  // }
   
   
   crearFormulario(){
       //inicializando el formulario
 
       this.forma = this.fb.group({
-          ejeEstrategico:        ['', Validators.required],
-          objetivoEstrategico:   ['',],
-          objetivoOperativo:     ['',],
-          responsable:           ['',],
-          accion:                ['',],
-          departamentoRealiza:   ['',],
-          puestoRealiza:         ['',],
-          dependenciaRealiza:    ['',],
-          actividad:             ['',],
-          documentoEntrada:      ['',],
-          otroDocumentoEntrada:  ['',],
-          dependenciaSolicita:   ['',],
-          puestoSolicita:        ['',],
-          resultadoDocumento:    ['',],
-          otroResultado:         ['',],
-          dependenciaRecibe:     ['',],
-          puestoRecibe:          ['',],
-          unidadTiempo:          ['',],
-          duracion:              ['',],
-          utilizaSistema:        ['',],
-          nombreSistema:         ['',],
+        tipoProgramacion:        ['', Validators.required],
+        periodo:                     ['',],
+        accion:                      ['',],
+        unidadMedida:                ['',],
+        medioVerificacion:           ['',],
+        otroMedioVerificacion:       ['',],
+        indicador:                   ['',],
+        formulaIndicador:            ['',],
+        enero:                       ['',],
+        febrero:                     ['',],
+        marzo:                       ['',],
+        abril:                       ['',],
+        totalPrimerCuatrimestre:     ['',],
+        mayo:                        ['',],
+        junio:                       ['',],
+        julio:                       ['',],
+        agosto:                      ['',],
+        totalSegundoCuatrimestre:    ['',],
+        septiembre:                  ['',],
+        octubre:                     ['',],
+        noviembre:                   ['',],
+        diciembre:                   ['',],
+        totalTercerCuatrimestre:     ['',],
+        totalProgramado:             ['',],
           tareas: this.fb.array([])
       })
   }
 
-
-  //agregando las tareas
-  agregarTarea(){
-      this.tareas.push( this.fb.control('', Validators.required ) );
-
-  }
-
-  eliminarTarea(i: number ){
-      this.tareas.removeAt(i);
-  }
-
-  agregarActividad(){
-      
-  }
+//   calcularProgramado() {
+//     //return ((this.forma.value.enero + (this.forma.value.febrero) + (this.forma.value.marzo) + (this.forma.value.abril)))
+//     return (this.forma.value.enero )
+//    }
+ 
 
   //metodo cuando el usuario presione click en guardar
   guardar(){
@@ -107,5 +84,11 @@ export class ProgramacionMetasComponent implements OnInit {
       return false; //para cancelar la recarga de la pantalla ya que no se esta enviando al servidor
 
   }
+
+//   totalProgramado(){
+//     console.log('cambio');
+//     this.forma.get('totalPrimerCuatrimestre')
+//       .setValue(this.calcularProgramado());
+//   }
 }
 

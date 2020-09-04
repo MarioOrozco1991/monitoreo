@@ -56,6 +56,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
               title: 'Reprogramación',
               link: '/pages/reprogramacion',
             },
+            {
+              title: 'Ver programaciones',
+              link: '/pages/listado-programaciones',
+            },
           ]
         },
       ], 

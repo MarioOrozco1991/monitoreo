@@ -25,8 +25,7 @@ import { CrearAccionComponent } from './poa/acciones/crear-accion/crear-accion.c
 import { ProgramacionMetasComponent } from './poa/programacion-metas/programacion-metas.component';
 import { ReprogramacionMetasComponent } from './poa/reprogramacion-metas/reprogramacion-metas.component';
 import { DefinicionEjesComponent } from './poa/definicion-ejes/definicion-ejes.component';
-
-
+import { ListadoProgramacionesComponent } from './poa/programacion-metas/listado-programaciones/listado-programaciones.component';
 
 
 @NgModule({
@@ -56,7 +55,8 @@ import { DefinicionEjesComponent } from './poa/definicion-ejes/definicion-ejes.c
     CrearAccionComponent,
     ProgramacionMetasComponent,
     ReprogramacionMetasComponent,
-    DefinicionEjesComponent
+    DefinicionEjesComponent,
+    ListadoProgramacionesComponent
     
   ],
 })

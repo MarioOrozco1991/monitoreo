@@ -57,10 +57,10 @@ export class CrearEncabezadoComponent implements OnInit {
       //inicializando el formulario
 
       this.forma = this.fb.group({
-          resultadoInstitucional:        ['',],
-          producto:           ['',],
-          subproducto:         ['',],
-          dependencia:              ['', Validators.required],
+          resultaoInstitucional: ['',],
+          producto:               ['',],
+          subproducto:            ['',],
+          dependencia:            ['', Validators.required],
       
           tareas: this.fb.array([])
       })
@@ -90,7 +90,7 @@ export class CrearEncabezadoComponent implements OnInit {
           
       // }
       console.log('agregando');
-      console.log(this.forma);
+      console.log(this.forma.value);
       return false; //para cancelar la recarga de la pantalla ya que no se esta enviando al servidor
 
   }

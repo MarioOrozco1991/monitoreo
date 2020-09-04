@@ -7,7 +7,7 @@
                     <div class="col-lg-6">
                         <div>
                             <label>¿Qué desea crear?</label>
-                            <select class="custom-select" formControlName="ejeEstrategico">
+                            <select class="custom-select" formControlName="tipoCreacion">
                                 <option selected disabled value="">Seleccione</option>
                                 <option [value]>Eje estratégico</option>
                                 <option [value]>Objetivo estratégico</option> 
@@ -21,7 +21,7 @@
                     <div class="col-lg-12">
                         <div>
                             <label>Eje estratégico a vincular</label>
-                            <select class="custom-select" formControlName="objetivoOperativo">
+                            <select class="custom-select" formControlName="ejeEstrategico">
                                 <option selected disabled value="">Seleccione</option>
                                 <option [value] >eje 1</option>
                                 <option [value]>eje 2</option> 
@@ -34,7 +34,7 @@
                     <div class="col-lg-12">
                         <div>
                             <label>Objetivo estratégico a vincular</label>
-                            <select class="custom-select" formControlName="objetivoOperativo">
+                            <select class="custom-select" formControlName="objetivoEstrategico">
                                 <option selected disabled value="">Seleccione</option>
                                 <option [value] >objetivo 1</option>
                                 <option [value]>objetivo 2</option> 
@@ -47,11 +47,7 @@
                     <div class="col-lg-11">
                         <div>
                             <label>Nombre del objetivo operativo</label>
-                            <select class="custom-select" formControlName="objetivoOperativo">
-                                <option selected disabled value="">Seleccione</option>
-                                <option [value] >objetivo 1</option>
-                                <option [value]>objetivo 2</option> 
-                            </select>
+                            <input class="form-control" type="text" formControlName="objetivoOperativo">
                         </div>
                     </div>
                     <div class="col-lg-1" style="margin-top: 28px;">

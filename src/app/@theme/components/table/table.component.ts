@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { PoaService } from './../../../services/poa.service';
+
 // import {AccionesService} from '../../../services/acciones.service';
 
 @Component({
@@ -13,36 +15,33 @@ export class TableComponent implements OnDestroy, OnInit {
 
     dtOptions: DataTables.Settings = {};
     
-    url: string = 'http://localhost:8081/api/acciones';
+    respuesta: any;
 
     dtTrigger = new Subject();
 
-    data: any;
-
-    constructor(private http:HttpClient, 
+    constructor(public poaService:PoaService,
+                private http:HttpClient, 
                 private router:Router){
-
     }
     
-    ngOnInit(): void {
-        this.dtOptions = {
-            pagingType: 'full_numbers',
-            pageLength: 10
-          };
-          this.http.get(this.url).subscribe((respuesta: any) => {
-            console.log('info', respuesta);
-              this.data = respuesta;
-              this.dtTrigger.next();
-              
-          });
-
-        
+    ngOnInit() {
+      this.dtOptions = {
+        pagingType: 'full_numbers',
+        pageLength: 10
+      };
+  
+      this.poaService.listadoAcciones().subscribe((data: any) => {
+        console.log('listado de acciones', data);
+         this.respuesta = data
+        this.dtTrigger.next();
+      });
+  
     }
-
+  
     ngOnDestroy(): void {
         this.dtTrigger.unsubscribe();
     }
-
+  
     editarProceso(){
         this.router.navigate(["editar"]);
     }

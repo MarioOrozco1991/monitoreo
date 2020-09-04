@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import {PoaService} from '../../../../services/poa.service';
 @Component({
   selector: 'ngx-crear-accion',
   templateUrl: './crear-accion.component.html',
@@ -13,7 +14,8 @@ export class CrearAccionComponent implements OnInit {
 
   forma: FormGroup;
 
-  constructor( private fb:FormBuilder) {
+  constructor(private poaService: PoaService, 
+              private fb:FormBuilder) {
   
       this.crearFormulario();
   
@@ -27,27 +29,6 @@ export class CrearAccionComponent implements OnInit {
   get tareas(){
       return this.forma.get('tareas') as FormArray;
   }
-
-
-
-  //validaciones del formulario
-  
-  // get procesoNoValido(){
-  //     return this.forma.get('proceso').invalid && this.forma.get('procesoPOA').touched
-  // }
- 
-  // get alcanceNoValido(){
-  //     return this.forma.get('alcance').invalid && this.forma.get('alcance').touched
-  // }
-
-  // get objetivoNoValido(){
-  //     return this.forma.get('objetivo').invalid && this.forma.get('objetivo').touched
-  // }
-
-  // get observacionesNoValido(){
-  //     return this.forma.get('observaciones').invalid && this.forma.get('observaciones').touched
-  
-  // }
   
   
   crearFormulario(){
@@ -75,6 +56,7 @@ export class CrearAccionComponent implements OnInit {
           duracion:              ['',],
           utilizaSistema:        ['',],
           nombreSistema:         ['',],
+          observaciones:         ['',],
           tareas: this.fb.array([])
       })
   }

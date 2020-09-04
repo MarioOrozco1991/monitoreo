@@ -55,27 +55,10 @@ export class DefinicionEjesComponent implements OnInit {
       //inicializando el formulario
 
       this.forma = this.fb.group({
-          ejeEstrategico:        ['', Validators.required],
-          objetivoEstrategico:   ['',],
-          objetivoOperativo:     ['',],
-          responsable:           ['',],
-          accion:                ['',],
-          departamentoRealiza:   ['',],
-          puestoRealiza:         ['',],
-          dependenciaRealiza:    ['',],
-          actividad:             ['',],
-          documentoEntrada:      ['',],
-          otroDocumentoEntrada:  ['',],
-          dependenciaSolicita:   ['',],
-          puestoSolicita:        ['',],
-          resultadoDocumento:    ['',],
-          otroResultado:         ['',],
-          dependenciaRecibe:     ['',],
-          puestoRecibe:          ['',],
-          unidadTiempo:          ['',],
-          duracion:              ['',],
-          utilizaSistema:        ['',],
-          nombreSistema:         ['',],
+          tipoCreacion:        ['', Validators.required],
+          ejeEstrategico:   ['',],
+          objetivoEstrategico:     ['',],
+          objetivoOperativo:           ['',],
           tareas: this.fb.array([])
       })
   }
