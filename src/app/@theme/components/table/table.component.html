@@ -8,12 +8,12 @@
                 <th><font color="white">Opciones</font></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody> 
             <tr *ngFor="let datos of respuesta">
                 <td class="text-center">{{datos.id}}</td>
                 <td>{{datos.nombre}}</td>
                 <td class="text-center">{{datos.actividad}}</td>
-                <td class="text-center" >
+                <td class="text-center" style="width: 150px;">
                     <button (click)="editarProceso()" type="button" class="btn btn-sm btn-primary mr-2"> <nb-icon icon="eye-outline"></nb-icon></button>
                     <button [routerLink]="['/editar']" type="button" class="btn btn-sm btn-success mr-2"> <nb-icon icon="edit-2-outline"></nb-icon> </button>
                     <button type="button" class="btn btn-sm btn-danger"> <nb-icon icon="trash-2-outline"></nb-icon></button>

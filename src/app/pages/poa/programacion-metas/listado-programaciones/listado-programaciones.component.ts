@@ -39,6 +39,16 @@ export class ListadoProgramacionesComponent implements OnInit {
 
   }
 
+  public eliminar(): void {
+
+    console.log('click eliminar');
+  
+   this.poaService.eliminarProgramacion(this.respuesta.id).subscribe((data) => {
+     console.log('registro eliminado', this.respuesta)
+   }
+   )
+}
+  
   ngOnDestroy(): void {
       this.dtTrigger.unsubscribe();
   }

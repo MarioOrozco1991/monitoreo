@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { PoaService } from './../../../services/poa.service';
 @Component({
   selector: 'ngx-crear-accion',
   templateUrl: './programacion-metas.component.html',
@@ -13,7 +14,10 @@ export class ProgramacionMetasComponent implements OnInit {
 
   forma: FormGroup;
 
-  constructor( private fb:FormBuilder) {
+  respuesta: any
+
+  constructor(public poaService:PoaService, 
+              private fb:FormBuilder) {
   
       this.crearFormulario();
 
@@ -37,7 +41,7 @@ export class ProgramacionMetasComponent implements OnInit {
       //inicializando el formulario
 
       this.forma = this.fb.group({
-        tipoProgramacion:        ['', Validators.required],
+        tipoProgramacion:            ['',],
         periodo:                     ['',],
         accion:                      ['',],
         unidadMedida:                ['',],
@@ -61,7 +65,6 @@ export class ProgramacionMetasComponent implements OnInit {
         diciembre:                   ['',],
         totalTercerCuatrimestre:     ['',],
         totalProgramado:             ['',],
-          tareas: this.fb.array([])
       })
   }
 
@@ -70,25 +73,20 @@ export class ProgramacionMetasComponent implements OnInit {
 //     return (this.forma.value.enero )
 //    }
  
-
-  //metodo cuando el usuario presione click en guardar
-  guardar(){
-      //validacion si el usuario presiona guardar y tiene campos sin llenar
-      // if(this.forma.invalid){
-          
-      //     return this.forma.markAllAsTouched();
-          
-      // }
-      console.log('agregando');
-      console.log(this.forma.value);
-      return false; //para cancelar la recarga de la pantalla ya que no se esta enviando al servidor
-
-  }
-
 //   totalProgramado(){
 //     console.log('cambio');
 //     this.forma.get('totalPrimerCuatrimestre')
 //       .setValue(this.calcularProgramado());
 //   }
+  public crear() {
+    // JSON.parse(JSON.stringify(this.forma));
+    console.log('agregando', this.forma.value);  
+    this.poaService.crearProgramacionMetas(this.forma).subscribe((data) => {
+    console.log('datos listado', data);
+    this.respuesta = data;
+  }
+)}
+
+
 }
 

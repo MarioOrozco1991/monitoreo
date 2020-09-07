@@ -1,31 +1,48 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PoaService {
 
-  apiURLProgramaciones:string = 'http://localhost:8081/api/programacion-metas';
+  url:string = 'http://localhost:8081/api/';
 
-  apiURLListadoAcciones:string = 'http://localhost:8081/api/acciones';
-
-
-
-  constructor(private http: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
   
   listadoProgramaciones() {
     let headersRequest = new HttpHeaders({ 'Content-Type': 'application/json'});
     headersRequest = headersRequest.append('Accept', 'application/json');
-    return this.http.get<any>(this.apiURLProgramaciones);
+    return this.httpClient.get<any>(this.url + 'programacion-metas');
   }
 
   listadoAcciones() {
     let headersRequest = new HttpHeaders({ 'Content-Type': 'application/json'});
     headersRequest = headersRequest.append('Accept', 'application/json');
-    return this.http.get<any>(this.apiURLListadoAcciones);
+    return this.httpClient.get<any>(this.url + 'acciones');
   }
 
+  crearProgramacionMetas(forma: any){
+    let headersRequest = new HttpHeaders({ 'Content-Type': 'application/json'});
+    headersRequest = headersRequest.append('Accept', 'application/json');
+    return this.httpClient.post(this.url + 'programacion-metas', forma.json, {headers: headersRequest});
+  }
+
+  eliminarProgramacion(id: any){
+    let headersRequest = new HttpHeaders({ 'Content-Type': 'application/json'});
+    headersRequest = headersRequest.append('Accept', 'application/json');
+    return this.httpClient.delete(this.url + 'programacion-metas/' + id, {headers: headersRequest});
+  }
+
+  actualizarProgramacion(id: any){
+    let headersRequest = new HttpHeaders({ 'Content-Type': 'application/json'});
+    headersRequest = headersRequest.append('Accept', 'application/json');
+    return this.httpClient.put(this.url + 'programacion-metas/' + id, {headers: headersRequest});
+  }
+
+
+  
   
 
 }

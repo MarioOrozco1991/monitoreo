@@ -16,6 +16,7 @@ import { ProgramacionMetasComponent } from './poa/programacion-metas/programacio
 import { ReprogramacionMetasComponent } from './poa/reprogramacion-metas/reprogramacion-metas.component';
 import { ListadoProgramacionesComponent} from './poa/programacion-metas/listado-programaciones/listado-programaciones.component'
 import { DefinicionEjesComponent } from './poa/definicion-ejes/definicion-ejes.component';
+import { EditarProgramacionComponent } from './poa/programacion-metas/editar-programacion/editar-programacion.component'
 
 const routes: Routes = [{
   path: '',
@@ -44,6 +45,10 @@ const routes: Routes = [{
     {
         path: 'crear-programacion',
         component: ProgramacionMetasComponent,
+    },
+    {
+      path: 'listado-programaciones/editar-programacion',
+      component: EditarProgramacionComponent,
     },
     {
       path: 'reprogramacion',
