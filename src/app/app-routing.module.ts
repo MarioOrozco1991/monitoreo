@@ -1,5 +1,6 @@
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
-import { EditarProcesoComponent } from './@theme/components/editar-proceso/editar-proceso.component';
+import { EditarAccionComponent} from '../app/pages/poa/acciones/editar-accion/editar-accion.component';
+import { EditarProgramacionComponent } from '../app/pages/poa/programacion-metas/editar-programacion/editar-programacion.component'
 import { NgModule } from '@angular/core';
 import {
     NbAuthComponent,
@@ -45,8 +46,12 @@ export const routes: Routes = [
         component: NbResetPasswordComponent,
       },
       {
-        path: 'editar',
-        component: EditarProcesoComponent,
+        path: 'editar-accion',
+        component: EditarAccionComponent,
+      },
+      {
+        path: 'editar-programacion',
+        component: EditarProgramacionComponent,
       },
     ],
   },

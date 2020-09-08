@@ -2,9 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { PoaService } from './../../../services/poa.service';
-
-// import {AccionesService} from '../../../services/acciones.service';
+import { AccionesService } from './../../../services/acciones.service';
 
 @Component({
   selector: 'ngx-table',
@@ -19,7 +17,7 @@ export class TableComponent implements OnDestroy, OnInit {
 
     dtTrigger = new Subject();
 
-    constructor(public poaService:PoaService,
+    constructor(public accionesService:AccionesService,
                 private http:HttpClient, 
                 private router:Router){
     }
@@ -30,8 +28,7 @@ export class TableComponent implements OnDestroy, OnInit {
         pageLength: 10
       };
   
-      this.poaService.listadoAcciones().subscribe((data: any) => {
-        console.log('listado de acciones', data);
+      this.accionesService.listadoAcciones().subscribe((data: any) => {
          this.respuesta = data
         this.dtTrigger.next();
       });

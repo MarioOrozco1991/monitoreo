@@ -2,7 +2,7 @@
     <div class="container">
         <div class="col-xl-12">
             <h1>Programación de metas</h1>
-            <form autocomplete="off" [formGroup]="forma" (ngSubmit)="crear()">
+            <form autocomplete="off" [formGroup]="forma" (ngSubmit)="crearProgramacion(forma)">
                 <div class="row mt-5">
                     <div class="col-lg-6">
                         <div>
@@ -61,7 +61,7 @@
                     </div>       
                     <div class="col-lg-4">
                         <div style="margin-top: 28px;">
-                            <input class="form-control" type="text" formControlName="otroMedioVerificacion" disabled>
+                            <input class="form-control" type="text" formControlName="medioVerificacion" disabled>
                         </div>
                     </div>
                 </div>
@@ -199,7 +199,7 @@
       
                 <div class="row card-block mt-5">
                     <div class="col-lg-3">
-                    <input type="submit" class="btn btn-primary btn-block waves-effect" value = "Agregar detalle">
+                    <input type="submit" class="btn btn-primary btn-block waves-effect" value = "Crear Programación">
                     </div>
                 </div>
 

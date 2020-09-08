@@ -221,9 +221,48 @@
                     </div>
                 </div>
 
+                <div class="row mt-2">
+
+                    <div class="input-group col-6">
+                        <button (click)=" mostrarTareas = !mostrarTareas" type="button" class="btn btn-dark mb-3"> <i class="fas fa-check "></i> Agregar detalle
+                        </button>
+                    </div>
+                </div>
+
+                <div *ngIf="mostrarTareas" class="row mt-5">
+                    <div class="col-md-6">
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th class="text-center">Descripción de la actividad</th>
+                                    <th class="text-center">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody formArrayName="tareas">
+                                <tr *ngFor="let control of tareas.controls; let i = index">
+                                    <td class="text-center">{{i + 1}}</td>
+                                    <td>
+                                        <input class="form-control" type="text" [formControlName]="i">
+                                    </td>
+                                    <td class="text-center">
+                                        <button type="button" class="btn btn-outline-danger mr-3" (click)="eliminarTarea(i)"> <i class="fas fa-trash-alt"></i></button>
+                                        <button type="button" class="btn btn-outline-primary" (click)="eliminarTarea(i)"> <i class="fas fa-pen"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <button type="button" class="btn btn-primary mt-3 col mr-2" (click)="agregarTarea()">
+                                + Agregar tarea
+                        </button>
+                    </div>
+                </div>
+
+
                 <div class="row card-block mt-5">
                     <div class="col-lg-3">
-                    <input type="submit" class="btn btn-primary btn-block waves-effect" value = "Agregar detalle">
+                    <input type="submit" class="btn btn-primary btn-block waves-effect" value = "Crear acción">
                     </div>
                 </div>
 

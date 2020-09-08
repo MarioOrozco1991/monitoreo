@@ -63,7 +63,7 @@ import { EditarAccionComponent } from './poa/acciones/editar-accion/editar-accio
     DefinicionEjesComponent,
     ListadoProgramacionesComponent,
     EditarProgramacionComponent,
-    EditarAccionComponent
+    EditarAccionComponent,
     
   ],
 })

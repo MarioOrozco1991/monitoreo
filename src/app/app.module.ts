@@ -15,7 +15,8 @@ import { ComponentsModule } from './@theme/components/components.module';
 import { PagesModule } from './pages/pages.module';
 import { AppRoutingModule } from './app-routing.module';
 import { DataTablesModule } from 'angular-datatables';
-import { PoaService } from './services/poa.service';
+import { ProgramacionesService } from './services/programaciones.service';
+import { AccionesService} from './services/acciones.service'
 
 
 
@@ -66,7 +67,7 @@ import {
     }),
     CoreModule.forRoot(),
   ],
-  providers: [PoaService],
+  providers: [ProgramacionesService, AccionesService],
 
   bootstrap: [AppComponent],
 })

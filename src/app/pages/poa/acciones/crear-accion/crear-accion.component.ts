@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import {PoaService} from '../../../../services/poa.service';
+import {ProgramacionesService} from '../../../../services/programaciones.service';
 @Component({
   selector: 'ngx-crear-accion',
   templateUrl: './crear-accion.component.html',
@@ -14,7 +14,7 @@ export class CrearAccionComponent implements OnInit {
 
   forma: FormGroup;
 
-  constructor(private poaService: PoaService, 
+  constructor(private poaService: ProgramacionesService, 
               private fb:FormBuilder) {
   
       this.crearFormulario();

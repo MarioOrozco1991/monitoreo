@@ -2,7 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { PoaService } from '../../../../services/poa.service'
+import { ProgramacionesService } from '../../../../services/programaciones.service';
+import Swal from 'sweetalert2'; 
 
 @Component({
   selector: 'ngx-listado-programaciones',
@@ -21,7 +22,7 @@ export class ListadoProgramacionesComponent implements OnInit {
 
   constructor(private http:HttpClient, 
               private router:Router,
-              public poaService:PoaService){
+              public programacionesService:ProgramacionesService){
 
   }
 
@@ -31,7 +32,7 @@ export class ListadoProgramacionesComponent implements OnInit {
       pageLength: 10
     };
 
-    this.poaService.listadoProgramaciones().subscribe((data: any) => {
+    this.programacionesService.listadoProgramaciones().subscribe((data: any) => {
       console.log('datos listado', data);
        this.respuesta = data
       this.dtTrigger.next();
@@ -39,14 +40,39 @@ export class ListadoProgramacionesComponent implements OnInit {
 
   }
 
-  public eliminar(): void {
+  public eliminarProgramacion(datos: any, i: any) {
 
-    console.log('click eliminar');
+    Swal.fire({
+      title: '¿Está seguro?',
+      text: 'Esta seguro que desea eliminarla',
+      icon: 'question',
+      confirmButtonText: `Sí`,
+      showCancelButton: true,
+      cancelButtonText: `Cancelar`,
+    }).then( resp => {
+      
+      if (resp.value) {
+        console.log('click eliminar');
+        this.respuesta.splice(i, 1)
   
-   this.poaService.eliminarProgramacion(this.respuesta.id).subscribe((data) => {
-     console.log('registro eliminado', this.respuesta)
-   }
-   )
+        this.programacionesService.eliminarProgramacion(datos.id).subscribe();
+
+        Swal.fire({
+          //position: 'top-end',
+          icon: 'success',
+          title: 'Programación eliminada correctamente',
+          showConfirmButton: false,
+          timer: 2000
+        })
+        
+   
+      }
+    })
+
+
+
+    
+  
 }
   
   ngOnDestroy(): void {

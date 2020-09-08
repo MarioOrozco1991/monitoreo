@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { PoaService } from './../../../services/poa.service';
+import { ProgramacionesService } from '../../../services/programaciones.service';
 @Component({
   selector: 'ngx-crear-accion',
   templateUrl: './programacion-metas.component.html',
@@ -16,7 +16,7 @@ export class ProgramacionMetasComponent implements OnInit {
 
   respuesta: any
 
-  constructor(public poaService:PoaService, 
+  constructor(public programacionesService:ProgramacionesService, 
               private fb:FormBuilder) {
   
       this.crearFormulario();
@@ -46,23 +46,23 @@ export class ProgramacionMetasComponent implements OnInit {
         accion:                      ['',],
         unidadMedida:                ['',],
         medioVerificacion:           ['',],
-        otroMedioVerificacion:       ['',],
+        // otroMedioVerificacion:       ['',],
         indicador:                   ['',],
         formulaIndicador:            ['',],
         enero:                       ['',],
         febrero:                     ['',],
         marzo:                       ['',],
         abril:                       ['',],
-        totalPrimerCuatrimestre:     ['',],
         mayo:                        ['',],
         junio:                       ['',],
         julio:                       ['',],
         agosto:                      ['',],
-        totalSegundoCuatrimestre:    ['',],
         septiembre:                  ['',],
         octubre:                     ['',],
         noviembre:                   ['',],
         diciembre:                   ['',],
+        totalPrimerCuatrimestre:     ['',],
+        totalSegundoCuatrimestre:    ['',],
         totalTercerCuatrimestre:     ['',],
         totalProgramado:             ['',],
       })
@@ -78,14 +78,23 @@ export class ProgramacionMetasComponent implements OnInit {
 //     this.forma.get('totalPrimerCuatrimestre')
 //       .setValue(this.calcularProgramado());
 //   }
-  public crear() {
-    // JSON.parse(JSON.stringify(this.forma));
-    console.log('agregando', this.forma.value);  
-    this.poaService.crearProgramacionMetas(this.forma).subscribe((data) => {
+  public crearProgramacion(forma: any) {
+    // JSON.parse(JSON.stringify(forma));
+    console.log('agregando', forma.value);  
+    this.programacionesService.crearProgramacionMetas(forma.value).subscribe((data) => {
     console.log('datos listado', data);
     this.respuesta = data;
-  }
-)}
+    }
+  )}
+
+  public actualizarProgramacion(forma: any) {
+    // JSON.parse(JSON.stringify(forma));
+    console.log('agregando', forma.value);  
+    this.programacionesService.crearProgramacionMetas(forma).subscribe((data) => {
+    console.log('datos listado', data);
+    this.respuesta = data;
+    }
+  )}
 
 
 }
