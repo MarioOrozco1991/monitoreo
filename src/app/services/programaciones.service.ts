@@ -18,9 +18,15 @@ export class ProgramacionesService {
   }
 
 
-  crearProgramacionMetas(forma: any){
-    return this.httpClient.post(this.url + 'programacion-metas', forma.json, {headers: this.httpHeaders});
+  crearProgramacionMetas(datos: any){
+    return this.httpClient.post(this.url + 'programacion-metas', JSON.stringify(datos), {headers: this.httpHeaders});
   }
+
+  getProgramacion(id: any){
+    return this.httpClient.get(this.url + 'programacion-metas/' + id);
+  }
+
+
 
 
   eliminarProgramacion(id: any){
@@ -28,10 +34,8 @@ export class ProgramacionesService {
   }
   
 
-  actualizarProgramacion(id: any){
-    let headersRequest = new HttpHeaders({ 'Content-Type': 'application/json'});
-    headersRequest = headersRequest.append('Accept', 'application/json');
-    return this.httpClient.put(this.url + 'programacion-metas/' + id, {headers: headersRequest});
+  actualizarProgramacion(datos: any){
+    return this.httpClient.put(this.url + 'programacion-metas/' + datos.id, JSON.stringify(datos), {headers: this.httpHeaders});
   }
 
 }

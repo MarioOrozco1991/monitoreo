@@ -27,7 +27,6 @@ import { ProgramacionMetasComponent } from './poa/programacion-metas/programacio
 import { ReprogramacionMetasComponent } from './poa/reprogramacion-metas/reprogramacion-metas.component';
 import { DefinicionEjesComponent } from './poa/definicion-ejes/definicion-ejes.component';
 import { ListadoProgramacionesComponent } from './poa/programacion-metas/listado-programaciones/listado-programaciones.component';
-import { EditarProgramacionComponent } from './poa/programacion-metas/editar-programacion/editar-programacion.component';
 import { EditarAccionComponent } from './poa/acciones/editar-accion/editar-accion.component';
 
 
@@ -62,7 +61,6 @@ import { EditarAccionComponent } from './poa/acciones/editar-accion/editar-accio
     ReprogramacionMetasComponent,
     DefinicionEjesComponent,
     ListadoProgramacionesComponent,
-    EditarProgramacionComponent,
     EditarAccionComponent,
     
   ],

@@ -2,7 +2,7 @@
     <div class="container">
         <div class="col-xl-12">
             <h1>Programación de metas</h1>
-            <form autocomplete="off" [formGroup]="forma" (ngSubmit)="crearProgramacion(forma)">
+            <form autocomplete="off" [formGroup]="forma" (ngSubmit)="enviarFormulario(forma)">
                 <div class="row mt-5">
                     <div class="col-lg-6">
                         <div>
@@ -32,7 +32,7 @@
                 <div class="row mt-5">
                     <div class="col-lg-12">
                         <div>
-                            <label>Acción </label> 
+                            <label>Acción </label>
                             <select class="custom-select" formControlName="accion">
                                 <option selected disabled value="">Seleccione</option>
                                 <option [value] >Acción 1</option>
@@ -58,7 +58,7 @@
                                 <option [value]>Otros</option>
                             </select>
                         </div>
-                    </div>       
+                    </div>
                     <div class="col-lg-4">
                         <div style="margin-top: 28px;">
                             <input class="form-control" type="text" formControlName="medioVerificacion" disabled>
@@ -78,7 +78,7 @@
                             <label>Fórmula del indicador</label>
                             <input class="form-control" type="text" formControlName="formulaIndicador">
                         </div>
-                    </div>       
+                    </div>
                 </div>
 
                 <hr class="mt-5">
@@ -101,7 +101,7 @@
                             <label>Marzo</label>
                             <input class="form-control" type="text" formControlName="marzo">
                         </div>
-                    </div>       
+                    </div>
                     <div class="col-lg-2">
                         <div>
                             <label>Abril</label>
@@ -115,7 +115,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <hr class="mt-5">
                 <h2>Segundo Cuatrimestre</h2>
                 <div class="row mt-5">
@@ -136,7 +136,7 @@
                             <label>Julio</label>
                             <input class="form-control" type="text" formControlName="julio">
                         </div>
-                    </div>       
+                    </div>
                     <div class="col-lg-2">
                         <div>
                             <label>Agosto</label>
@@ -153,7 +153,7 @@
 
                 <hr class="mt-5">
                 <h2>Tercer Cuatrimestre</h2>
-                
+
                 <div class="row mt-5">
                     <div class="col-lg-2">
                         <div>
@@ -172,7 +172,7 @@
                             <label>Noviembre</label>
                             <input class="form-control" type="text" formControlName="noviembre">
                         </div>
-                    </div>       
+                    </div>
                     <div class="col-lg-2">
                         <div>
                             <label>Diciembre</label>
@@ -187,25 +187,23 @@
                     </div>
                 </div>
 
-                
+
                 <h4 class="mt-5 text-center">Total anual programado</h4>
-                <div class="row mt-2" >
-                    <div class="col-lg-4" >
-                        <div >
+                <div class="row mt-2">
+                    <div class="col-lg-4">
+                        <div>
                             <input style="text-align:center;" class="form-control" type="text" formControlName="totalProgramado" disabled>
                         </div>
                     </div>
                 </div>
-      
+
                 <div class="row card-block mt-5">
                     <div class="col-lg-3">
-                    <input type="submit" class="btn btn-primary btn-block waves-effect" value = "Crear Programación">
+                        <input type="submit" class="btn btn-primary btn-block waves-effect" value="Crear Programación">
                     </div>
                 </div>
 
             </form>
-        </div>  
+        </div>
     </div>
 </div>
-
-

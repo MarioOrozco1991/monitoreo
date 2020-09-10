@@ -50,7 +50,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
           children: [
             {
               title: 'Crear programación',
-              link: '/pages/crear-programacion',
+              link: '/pages/programaciones/crear',
             },
             {
               title: 'Reprogramación',
@@ -58,7 +58,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
             },
             {
               title: 'Ver programaciones',
-              link: '/pages/listado-programaciones',
+              link: '/pages/programaciones',
             },
           ]
         },

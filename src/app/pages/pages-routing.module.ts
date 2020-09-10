@@ -17,7 +17,6 @@ import { ReprogramacionMetasComponent } from './poa/reprogramacion-metas/reprogr
 import { ListadoProgramacionesComponent} from './poa/programacion-metas/listado-programaciones/listado-programaciones.component'
 import { DefinicionEjesComponent } from './poa/definicion-ejes/definicion-ejes.component';
 import { EditarAccionComponent } from './poa/acciones/editar-accion/editar-accion.component';
-import { EditarProgramacionComponent } from './poa/programacion-metas/editar-programacion/editar-programacion.component'
 
 const routes: Routes = [{
   path: '',
@@ -34,7 +33,7 @@ const routes: Routes = [{
     {
       path: 'editar-encabezado',
       component: EditarEncabezadoComponent,
-  },
+    },
     {
       path: 'crear-accion',
       component: CrearAccionComponent,
@@ -44,20 +43,20 @@ const routes: Routes = [{
       component: EditarAccionComponent,
     },
     {
-        path: 'crear-programacion',
-        component: ProgramacionMetasComponent,
+      path: 'programaciones',
+      component: ListadoProgramacionesComponent,
     },
     {
-      path: 'listado-programaciones/editar-programacion',
-      component: EditarProgramacionComponent,
+      path: 'programaciones/crear',
+      component: ProgramacionMetasComponent,
+    },
+    {
+      path: 'programaciones/:id',
+      component: ProgramacionMetasComponent,
     },
     {
       path: 'reprogramacion',
       component: ReprogramacionMetasComponent,
-    },
-    {
-      path: 'listado-programaciones',
-      component: ListadoProgramacionesComponent,
     },
     {
       path: 'revision',
