@@ -2,14 +2,14 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { AccionesService } from './../../services/acciones.service';
+import { AccionesService } from '../../services/acciones.service';
 import Swal from 'sweetalert2'; 
 
 @Component({
-  selector: 'ngx-dashboard',
-  templateUrl: './dashboard.component.html',
+  selector: 'ngx-acciones',
+  templateUrl: './acciones.component.html',
 })
-export class DashboardComponent implements OnDestroy, OnInit{
+export class AccionesComponent implements OnDestroy, OnInit{
 
   dtOptions: DataTables.Settings = {};
     
@@ -28,7 +28,7 @@ export class DashboardComponent implements OnDestroy, OnInit{
       pageLength: 10
     };
 
-    this.accionesService.listadoAcciones().subscribe((data: any) => {
+    this.accionesService.listado().subscribe((data: any) => {
        this.respuesta = data
       this.dtTrigger.next();
     });
@@ -58,7 +58,7 @@ export class DashboardComponent implements OnDestroy, OnInit{
       if (resp.value) {
         this.respuesta.splice(i, 1)
   
-        this.accionesService.eliminarAccion(datos.id).subscribe();
+        this.accionesService.eliminar(datos.id).subscribe();
         
         Swal.fire({
           //position: 'top-end',

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProgramacionMetasComponent } from './programacion-metas.component';
+import { ReprogramacionComponent } from './reprogramacion.component';
 
-describe('CrearAccionComponent', () => {
-  let component: ProgramacionMetasComponent;
-  let fixture: ComponentFixture<ProgramacionMetasComponent>;
+describe('AccionComponent', () => {
+  let component: ReprogramacionComponent;
+  let fixture: ComponentFixture<ReprogramacionComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProgramacionMetasComponent ]
+      declarations: [ ReprogramacionComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProgramacionMetasComponent);
+    fixture = TestBed.createComponent(ReprogramacionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 @Component({
   selector: 'ngx-crear-accion',
-  templateUrl: './reprogramacion-metas.component.html',
-  styleUrls: ['./reprogramacion-metas.component.scss']
+  templateUrl: './reprogramacion.component.html',
+  styleUrls: ['./reprogramacion.component.scss']
 })
-export class ReprogramacionMetasComponent implements OnInit {
+export class ReprogramacionComponent implements OnInit {
 
 
   mostrarNombreSistema: boolean = false;

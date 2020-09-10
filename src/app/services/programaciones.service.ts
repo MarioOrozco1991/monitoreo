@@ -13,30 +13,24 @@ export class ProgramacionesService {
 
   constructor(private httpClient: HttpClient) {}
   
-  listadoProgramaciones() {
+  listado() {
     return this.httpClient.get<any>(this.url + 'programacion-metas');
   }
 
-
-  crearProgramacionMetas(datos: any){
+  crear(datos: any) {
     return this.httpClient.post(this.url + 'programacion-metas', JSON.stringify(datos), {headers: this.httpHeaders});
   }
 
-  getProgramacion(id: any){
+  get(id: any){
     return this.httpClient.get(this.url + 'programacion-metas/' + id);
   }
 
-
-
-
-  eliminarProgramacion(id: any){
+  eliminar(id: any) {
     return this.httpClient.delete(this.url + 'programacion-metas/' + id);
   }
   
-
-  actualizarProgramacion(datos: any){
+  actualizar(datos: any) {
     return this.httpClient.put(this.url + 'programacion-metas/' + datos.id, JSON.stringify(datos), {headers: this.httpHeaders});
   }
-
 }
   

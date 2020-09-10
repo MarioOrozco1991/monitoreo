@@ -28,7 +28,7 @@ export class TableComponent implements OnDestroy, OnInit {
         pageLength: 10
       };
   
-      this.accionesService.listadoAcciones().subscribe((data: any) => {
+      this.accionesService.listado().subscribe((data: any) => {
          this.respuesta = data
         this.dtTrigger.next();
       });

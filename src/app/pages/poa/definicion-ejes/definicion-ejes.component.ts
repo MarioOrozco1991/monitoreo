@@ -12,7 +12,7 @@ export class DefinicionEjesComponent implements OnInit {
 
   mostrarNombreSistema: boolean = false;
 
-  forma: FormGroup;
+  form: FormGroup;
 
   constructor( private fb:FormBuilder) {
   
@@ -26,7 +26,7 @@ export class DefinicionEjesComponent implements OnInit {
   }
   
   get tareas(){
-      return this.forma.get('tareas') as FormArray;
+      return this.form.get('tareas') as FormArray;
   }
 
 
@@ -54,8 +54,8 @@ export class DefinicionEjesComponent implements OnInit {
   crearFormulario(){
       //inicializando el formulario
 
-      this.forma = this.fb.group({
-          tipoCreacion:        ['', Validators.required],
+      this.form = this.fb.group({
+          tipoCreacion:        ['',],
           ejeEstrategico:   ['',],
           objetivoEstrategico:     ['',],
           objetivoOperativo:           ['',],
@@ -87,7 +87,7 @@ export class DefinicionEjesComponent implements OnInit {
           
       // }
       console.log('agregando');
-      console.log(this.forma.value);
+      console.log(this.form.value);
       return false; //para cancelar la recarga de la pantalla ya que no se esta enviando al servidor
 
   }

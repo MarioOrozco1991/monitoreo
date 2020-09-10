@@ -1,20 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { ProgramacionesService } from '../../../services/programaciones.service';
+import { ProgramacionesService } from '../../../../services/programaciones.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2'; 
 
 @Component({
-  selector: 'ngx-crear-accion',
-  templateUrl: './programacion-metas.component.html',
-  styleUrls: ['./programacion-metas.component.scss']
+  selector: 'ngx-programacion',
+  templateUrl: './programacion.component.html',
+  styleUrls: ['./programacion.component.scss']
 })
-export class ProgramacionMetasComponent implements OnInit {
+export class ProgramacionComponent implements OnInit {
 
   mostrarTareas: boolean = false;
 
   mostrarNombreSistema: boolean = false;
 
-  public forma: FormGroup;
+  public form: FormGroup;
 
   respuesta: any;
   
@@ -39,7 +40,6 @@ export class ProgramacionMetasComponent implements OnInit {
   }
       
   ngOnInit(): void {
-    console.log('init');
     this.cargarProgramacion();
   }
   
@@ -47,7 +47,7 @@ export class ProgramacionMetasComponent implements OnInit {
   crearFormulario(){
     //inicializando el formulario
   
-    this.forma = this.fb.group({
+    this.form = this.fb.group({
       id:                          [null,],
       tipoProgramacion:            ['',],
       periodo:                     ['',],
@@ -89,53 +89,50 @@ export class ProgramacionMetasComponent implements OnInit {
   
 
   cargarProgramacion(): void {
-    
-    // console.log('agregando', forma.value);  
-    
-    //const id= this.activatedRoute.snapshot.paramMap.get('id');
-    console.log('cargarProgramacion');
     this.activatedRoute.params.subscribe(params => {
 
       if(params.id){
-        this.programacionesService.getProgramacion(params.id).subscribe((respuesta) => {
-          console.log('respuesta', respuesta);
-          this.forma.patchValue(respuesta);
+        this.programacionesService.get(params.id).subscribe((respuesta) => {
+          this.form.patchValue(respuesta);
         });
       }       
     });
   }
 
-  public crear(forma: any) {
-    console.log('agregando', forma.value);  
-    this.programacionesService.crearProgramacionMetas(forma.value).subscribe((data) => {
+  public crear(form: any) {
+    this.programacionesService.crear(form.value).subscribe((data) => {
       console.log('datos listado', data);
+      Swal.fire({
+        //position: 'top-end',
+        icon: 'success',
+        title: 'Programación creada exitosamente',
+        showConfirmButton: false,
+        timer: 3000
+      })
+
     });
   }
 
-  public actualizar(forma: any) {
-    console.log('actualizar', forma.value);  
-    this.programacionesService.actualizarProgramacion(forma.value).subscribe((data) => {
-      console.log('datos listado', data);
+  public actualizar(form: any) {
+    this.programacionesService.actualizar(form.value).subscribe((data) => {
+      Swal.fire({
+        //position: 'top-end',
+        icon: 'success',
+        title: 'Programación modificada exitosamente',
+        showConfirmButton: false,
+        timer: 3000
+      })
+      this.router.navigate(['..']);
     });
   }
 
-  enviarFormulario(forma: any) {
-    if (!this.forma.value.id) {
-      this.crear(forma);
+  enviarFormulario(form: any) {
+    if (!this.form.value.id) {
+      this.crear(form);
     } else {
-      this.actualizar(forma);
+      this.actualizar(form);
     }
   }
   
-    
-//   public cargarProgramacion(): void {
-    
-//     // console.log('agregando', forma.value);  
-//     this.programacionesService.getProgramacion(forma).subscribe((data) => {
-//         console.log('datos listado', data);
-//         this.respuesta = data;
-//     }
-//   )}
-
 }
 

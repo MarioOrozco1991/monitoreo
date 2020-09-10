@@ -1,5 +1,4 @@
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
-import { EditarAccionComponent} from '../app/pages/poa/acciones/editar-accion/editar-accion.component';
 import { NgModule } from '@angular/core';
 import {
     NbAuthComponent,

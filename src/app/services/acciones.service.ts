@@ -6,22 +6,30 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 })
 export class AccionesService {
 
+  private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json'});
+
   url:string = 'http://localhost:8081/api/';
 
   constructor(private httpClient: HttpClient) {}
   
-
-  listadoAcciones() {
-    let headersRequest = new HttpHeaders({ 'Content-Type': 'application/json'});
-    headersRequest = headersRequest.append('Accept', 'application/json');
+  listado() {
     return this.httpClient.get<any>(this.url + 'acciones');
   }
 
-  eliminarAccion(id: any){
+  crear(datos: any) {
+    return this.httpClient.post(this.url + 'acciones', JSON.stringify(datos), {headers: this.httpHeaders});
+  }
+
+  cargar(id: any){
+    return this.httpClient.get(this.url + 'acciones/' + id);
+  }
+
+  eliminar(id: any){
     return this.httpClient.delete(this.url + 'acciones/' + id);
   }
 
- 
-
+  actualizar(datos: any) {
+    return this.httpClient.put(this.url + 'acciones/' + datos.id, JSON.stringify(datos), {headers: this.httpHeaders});
+  }
 
 }

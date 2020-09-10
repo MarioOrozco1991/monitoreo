@@ -2,7 +2,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { AccionesComponent } from './acciones/acciones.component';
 import { RevisionComponent } from './poa/revision/revision.component';
 import { AprobacionComponent } from './poa/aprobacion/aprobacion.component';
 import { ReportesComponent } from './poa/reportes/reportes.component';
@@ -11,20 +11,27 @@ import { PoaComponent } from './poa/poa.component';
 import { SeguimientoActividadesComponent } from './seguimiento-actividades/seguimiento-actividades.component';
 import { CrearEncabezadoComponent } from './poa/crear-encabezado/crear-encabezado.component';
 import { EditarEncabezadoComponent } from './poa/editar-encabezado/editar-encabezado.component';
-import { CrearAccionComponent } from './poa/acciones/crear-accion/crear-accion.component';
-import { ProgramacionMetasComponent } from './poa/programacion-metas/programacion-metas.component';
-import { ReprogramacionMetasComponent } from './poa/reprogramacion-metas/reprogramacion-metas.component';
-import { ListadoProgramacionesComponent} from './poa/programacion-metas/listado-programaciones/listado-programaciones.component'
+import { AccionComponent } from './acciones/accion/accion.component';
+import { ProgramacionComponent } from './poa/programaciones/programacion/programacion.component';
+import { ReprogramacionComponent } from './poa/reprogramaciones/reprogramacion/reprogramacion.component';
+import { ProgramacionesComponent} from './poa/programaciones/programaciones.component'
 import { DefinicionEjesComponent } from './poa/definicion-ejes/definicion-ejes.component';
-import { EditarAccionComponent } from './poa/acciones/editar-accion/editar-accion.component';
 
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [
     {
-      path: 'dashboard',
-      component: DashboardComponent,
+      path: 'acciones',
+      component: AccionesComponent,
+    },
+    {
+      path: 'acciones/crear',
+      component: AccionComponent,
+    },
+    {
+      path: 'acciones/:id',
+      component: AccionComponent,
     },
     {
         path: 'crear-encabezado',
@@ -35,28 +42,20 @@ const routes: Routes = [{
       component: EditarEncabezadoComponent,
     },
     {
-      path: 'crear-accion',
-      component: CrearAccionComponent,
-    },
-    {
-      path: 'dashboard/editar-accion',
-      component: EditarAccionComponent,
-    },
-    {
       path: 'programaciones',
-      component: ListadoProgramacionesComponent,
+      component: ProgramacionesComponent,
     },
     {
       path: 'programaciones/crear',
-      component: ProgramacionMetasComponent,
+      component: ProgramacionComponent,
     },
     {
       path: 'programaciones/:id',
-      component: ProgramacionMetasComponent,
+      component: ProgramacionComponent,
     },
     {
       path: 'reprogramacion',
-      component: ReprogramacionMetasComponent,
+      component: ReprogramacionComponent,
     },
     {
       path: 'revision',
@@ -88,7 +87,7 @@ const routes: Routes = [{
     },
     {
       path: '',
-      redirectTo: 'dashboard',
+      redirectTo: 'acciones',
       pathMatch: 'full',
     },
   ],

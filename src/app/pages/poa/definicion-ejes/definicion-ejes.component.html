@@ -2,22 +2,31 @@
     <div class="container">
         <div class="col-xl-12">
             <h1>Definición de ejes y objetivos</h1>
-            <form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar()">
+            <form autocomplete="off" [formGroup]="form" (ngSubmit)="guardar()">
                 <div class="row mt-5">
                     <div class="col-lg-6">
                         <div>
                             <label>¿Qué desea crear?</label>
                             <select class="custom-select" formControlName="tipoCreacion">
                                 <option selected disabled value="">Seleccione</option>
-                                <option [value]>Eje estratégico</option>
-                                <option [value]>Objetivo estratégico</option> 
-                                <option [value]>Objetivo operativo</option> 
+                                <option value="eje-estrategico">Eje estratégico</option>
+                                <option value="objetivo-estrategico">Objetivo estratégico</option> 
+                                <option value="objetivo-operativo">Objetivo operativo</option> 
                             </select>
                         </div>
                     </div>
                 </div>
 
-                <div class="row mt-5">
+                <div class="row mt-5" *ngIf="form.get('tipoCreacion').value=== 'eje-estrategico'">
+                    <div class="col-lg-12">
+                        <div>
+                            <label>Nombre del Eje Estratégico</label>
+                            <input class="form-control" type="text" formControlName="objetivoOperativo">
+                        </div>
+                    </div>   
+                </div>
+
+                <div class="row mt-5" *ngIf="form.get('tipoCreacion').value=== '!eje-estrategico'">
                     <div class="col-lg-12">
                         <div>
                             <label>Eje estratégico a vincular</label>
@@ -30,7 +39,7 @@
                     </div>
                 </div>
 
-                <div class="row mt-5">
+                <div class="row mt-5" *ngIf="form.get('tipoCreacion').value=== '!eje-estrategico'">
                     <div class="col-lg-12">
                         <div>
                             <label>Objetivo estratégico a vincular</label>
@@ -43,7 +52,7 @@
                     </div>
                 </div>
 
-                <div class="row mt-5">
+                <div class="row mt-5" *ngIf="form.get('tipoCreacion').value=== '!eje-estrategico'">
                     <div class="col-lg-11">
                         <div>
                             <label>Nombre del objetivo operativo</label>

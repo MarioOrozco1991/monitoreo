@@ -38,7 +38,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
           children: [
             {
               title: 'Crear acción',
-              link: '/pages/crear-accion',
+              link: '/pages/acciones/crear',
             },
             {
               title: 'Editar acción',
