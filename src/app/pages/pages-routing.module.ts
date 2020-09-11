@@ -9,18 +9,35 @@ import { ReportesComponent } from './poa/reportes/reportes.component';
 import { RolComponent } from './rol/rol.component';
 import { PoaComponent } from './poa/poa.component';
 import { SeguimientoActividadesComponent } from './seguimiento-actividades/seguimiento-actividades.component';
-import { CrearEncabezadoComponent } from './poa/crear-encabezado/crear-encabezado.component';
+import { EncabezadoComponent } from './poa/encabezado/encabezado.component';
 import { EditarEncabezadoComponent } from './poa/editar-encabezado/editar-encabezado.component';
 import { AccionComponent } from './acciones/accion/accion.component';
 import { ProgramacionComponent } from './poa/programaciones/programacion/programacion.component';
 import { ReprogramacionComponent } from './poa/reprogramaciones/reprogramacion/reprogramacion.component';
 import { ProgramacionesComponent} from './poa/programaciones/programaciones.component'
-import { DefinicionEjesComponent } from './poa/definicion-ejes/definicion-ejes.component';
+import { DefinicionEjesComponent } from './poa/ejes/definicion-ejes/definicion-ejes.component';
+import { EjesComponent } from './poa/ejes/ejes.component';
 
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [
+    {
+      path: 'encabezado',
+      component: EncabezadoComponent,
+    },
+    {
+    path: 'editar-encabezado',
+    component: EditarEncabezadoComponent,
+    },
+    {
+      path: 'ejes',
+      component: EjesComponent,
+    },
+    {
+      path: 'ejes/crear',
+      component: DefinicionEjesComponent,
+    },
     {
       path: 'acciones',
       component: AccionesComponent,
@@ -34,14 +51,6 @@ const routes: Routes = [{
       component: AccionComponent,
     },
     {
-        path: 'crear-encabezado',
-        component: CrearEncabezadoComponent,
-    },
-    {
-      path: 'editar-encabezado',
-      component: EditarEncabezadoComponent,
-    },
-    {
       path: 'programaciones',
       component: ProgramacionesComponent,
     },
@@ -53,8 +62,16 @@ const routes: Routes = [{
       path: 'programaciones/:id',
       component: ProgramacionComponent,
     },
+    // {
+    //   path: 'reprogramaciones',
+    //   // component: ReprogramacionComponent,
+    // },
     {
-      path: 'reprogramacion',
+      path: 'reprogramaciones/crear',
+      component: ReprogramacionComponent,
+    },
+    {
+      path: 'reprogramaciones/id',
       component: ReprogramacionComponent,
     },
     {
@@ -80,10 +97,6 @@ const routes: Routes = [{
     {
         path: 'poa',
         component: PoaComponent,
-    },
-    {
-      path: 'crear-ejes',
-      component: DefinicionEjesComponent,
     },
     {
       path: '',

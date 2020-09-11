@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CrearEncabezadoComponent } from './crear-encabezado.component';
+import { EjesComponent } from './ejes.component';
 
-describe('CrearEncabezadoComponent', () => {
-  let component: CrearEncabezadoComponent;
-  let fixture: ComponentFixture<CrearEncabezadoComponent>;
+describe('EjesComponent', () => {
+  let component: EjesComponent;
+  let fixture: ComponentFixture<EjesComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CrearEncabezadoComponent ]
+      declarations: [ EjesComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CrearEncabezadoComponent);
+    fixture = TestBed.createComponent(EjesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

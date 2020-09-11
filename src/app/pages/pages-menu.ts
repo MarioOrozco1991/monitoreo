@@ -12,7 +12,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
           children: [
             {
               title: 'Crear encabezado',
-              link: '/pages/crear-encabezado',
+              link: '/pages/encabezado',
             },
             {
               title: 'Editar encabezado  ',
@@ -24,12 +24,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
           title: 'Ejes',
           children: [
             {
-              title: 'Crear Ejes',
-              link: '/pages/crear-ejes',
+              title: 'Crear Eje',
+              link: '/pages/ejes/crear',
             },
             {
-              title: 'Editar Ejes  ',
-              // link: '/pages/editar-encabezado',
+              title: 'Ver Ejes',
+              link: '/pages/ejes',
             },
           ]
         },
@@ -54,7 +54,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
             },
             {
               title: 'Reprogramación',
-              link: '/pages/reprogramacion',
+              link: '/pages/reprogramaciones/crear',
             },
             {
               title: 'Ver programaciones',

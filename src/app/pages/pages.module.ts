@@ -19,14 +19,15 @@ import { RolComponent } from './rol/rol.component';
 import { ReportesComponent } from './poa/reportes/reportes.component';
 import { PoaComponent } from './poa/poa.component';
 import { SeguimientoActividadesComponent } from './seguimiento-actividades/seguimiento-actividades.component';
-import { CrearEncabezadoComponent } from './poa/crear-encabezado/crear-encabezado.component';
+import { EncabezadoComponent } from './poa/encabezado/encabezado.component';
 import { EditarEncabezadoComponent } from './poa/editar-encabezado/editar-encabezado.component';
 import { AccionesComponent } from './acciones/acciones.component';
 import { AccionComponent } from './acciones/accion/accion.component';
 import { ProgramacionComponent } from './poa/programaciones/programacion/programacion.component';
 import { ReprogramacionComponent } from './poa/reprogramaciones/reprogramacion/reprogramacion.component';
-import { DefinicionEjesComponent } from './poa/definicion-ejes/definicion-ejes.component';
+import { DefinicionEjesComponent } from './poa/ejes/definicion-ejes/definicion-ejes.component';
 import { ProgramacionesComponent } from './poa/programaciones/programaciones.component';
+import { EjesComponent } from './poa/ejes/ejes.component';
 
 
 @NgModule({
@@ -53,13 +54,14 @@ import { ProgramacionesComponent } from './poa/programaciones/programaciones.com
     RolComponent,
     PoaComponent,
     SeguimientoActividadesComponent,
-    CrearEncabezadoComponent,
+    EncabezadoComponent,
     EditarEncabezadoComponent,
     AccionComponent,
     ProgramacionComponent,
     ReprogramacionComponent,
     DefinicionEjesComponent,
     ProgramacionesComponent,
+    EjesComponent,
   ],
 })
 export class PagesModule {
