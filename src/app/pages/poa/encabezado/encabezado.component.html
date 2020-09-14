@@ -16,20 +16,38 @@
                     </div>         
                     <div class="col-lg-6">
                         <div>
-                            <label>Resultado Institucional</label>
-                            <input class="form-control" type="text" formControlName="resultaoInstitucional" disabled>
+                            <label>Subprograma</label>
+                            <input class="form-control" type="text" formControlName="subprograma" disabled>
                             <!--esto se debe de agregar despues del formControlName para realizar la validacion del campo [class.is-invalid]="procesoNoValido" -->
                             <!-- <small *ngIf="procesoNoValido" class="form-text text-danger">
                                 Este campo es obligatorio
                             </small> -->
                         </div>
                     </div>
-                                 
-                    
                 </div>
 
                 <div class="row mt-5">
-                    <div class="col-lg-5">
+                    <div class="col-lg-6">
+                        <div>
+                            <label>Resultado Institucional</label>
+                            <input class="form-control" type="text" formControlName="resultaoInstitucional" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div>
+                            <label>Dependencia responsable</label>
+                            <select class="custom-select" formControlName="dependenciaResponsable" disabled>
+                                <option selected disabled value="">Seleccione</option>
+                                <option [value] >Informática y Estadística</option>
+                                <option [value] >RRHH</option> 
+                            </select>
+                        </div>
+                    </div>                        
+                </div>
+
+
+                <div class="row mt-5">
+                    <div class="col-lg-4">
                         <div>
                             <label>Actividad Presupuestaria</label>
                             <select class="custom-select" formControlName="actividadPresupuestaria">
@@ -39,60 +57,22 @@
                             </select>
                         </div>
                     </div>
-
-                    <div class="col-lg-1" style="margin-top: 28px;">
-                        <input type="submit" class="btn btn-primary btn-block waves-effect" value = "+">
-                    </div> 
-
-                    <div class="col-lg-5">
+                    <div class="col-lg-4">
                         <div>
                             <label>Producto</label>
-                            <select class="custom-select" formControlName="producto">
-                                <option selected disabled value="">Seleccione</option>
-                                <option [value] >producto 1</option>
-                                <option [value] >producto 2</option> 
-                            </select>
+                            <input class="form-control" type="text" formControlName="producto" disabled>
                         </div>
                     </div>
-
-                    <div class="col-lg-1" style="margin-top: 28px;">
-                        <input type="submit" class="btn btn-primary btn-block waves-effect" value = "+">
-                    </div> 
-
-                        
-                </div>
-
-                <div class="row mt-5">
-                    <div class="col-lg-5">
+                    <div class="col-lg-3">
                         <div>
                             <label>Subproducto</label>
-                            <select class="custom-select" formControlName="subproducto">
-                                <option selected disabled value="">Seleccione</option>
-                                <option [value] >Subproducto 1</option>
-                                <option [value] >Subproducto 2</option> 
-                            </select>
+                            <input class="form-control" type="text" formControlName="subproducto" disabled>
                         </div>
                     </div>
-
                     <div class="col-lg-1" style="margin-top: 28px;">
                         <input type="submit" class="btn btn-primary btn-block waves-effect" value = "+">
-                    </div> 
-
-                    <div class="col-lg-6">
-                        <div>
-                            <label>Dependencia responsable</label>
-                            <select class="custom-select" formControlName="dependenciaResponsable">
-                                <option selected disabled value="">Seleccione</option>
-                                <option [value] >Informática y Estadística</option>
-                                <option [value] >RRHH</option> 
-                            </select>
-                            <!-- <small *ngIf="alcanceNoValido" class="form-text text-danger">
-                                Este campo es obligatorio
-                            </small> -->
-                        </div>
-                    </div>
+                    </div>                
                 </div>
-
 
                 <div class="row card-block mt-5">
                     <div class="col-lg-4">

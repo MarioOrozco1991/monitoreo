@@ -8,6 +8,8 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 })
 export class DefinicionEjesComponent implements OnInit {
 
+  mostrarActividad: boolean = false;
+
   mostrarNombreSistema: boolean = false;
 
   form: FormGroup;
@@ -19,8 +21,8 @@ export class DefinicionEjesComponent implements OnInit {
   ngOnInit(): void {
   }
   
-  get tareas(){
-    return this.form.get('tareas') as FormArray;
+  get actividades(){
+    return this.form.get('actividades') as FormArray;
   }
   
   crearFormulario(){
@@ -29,12 +31,20 @@ export class DefinicionEjesComponent implements OnInit {
       ejeEstrategico:      ['',],
       objetivoEstrategico: ['',],
       objetivoOperativo:   ['',],
+      actividades: this.fb.array([])
     })
   }
-
+  
+   //agregando las tareas
   agregarActividad(){
-    
+    this.actividades.push( this.fb.control('', Validators.required ) );
   }
+
+  eliminarActividad(i: number ){
+    this.actividades.removeAt(i);
+  }
+
+  
 
   //metodo cuando el usuario presione click en guardar
   guardar(){

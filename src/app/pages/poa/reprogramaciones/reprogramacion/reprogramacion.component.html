@@ -6,21 +6,21 @@
                 <div class="row mt-5">
                     <div class="col-lg-6">
                         <div>
-                            <label>Tipo de reprogramación</label>
-                            <select class="custom-select" formControlName="tipoReprogramacion">
+                            <label>Producto</label>
+                            <select class="custom-select" formControlName="producto">
                                 <option selected disabled value="">Seleccione</option>
-                                <option [value]>Metas de acción</option>
-                                <option [value]>Metas físicas</option> 
+                                <option [value]>Producto 1</option>
+                                <option [value]>Producto 2</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div>
-                            <label>Periodo</label>
-                            <select class="custom-select" formControlName="periodo">
+                            <label>Subproducto</label>
+                            <select class="custom-select" formControlName="subproducto">
                                 <option selected disabled value="">Seleccione</option>
-                                <option [value] >Año 2020</option>
-                                <option [value]>Año 2021</option> 
+                                <option [value] >Subproducto 1</option>
+                                <option [value] >Subproducto 2</option> 
                             </select>
                             <!-- <small *ngIf="alcanceNoValido" class="form-text text-danger">
                                 Este campo es obligatorio
@@ -28,15 +28,14 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="row mt-5">
                     <div class="col-lg-6">
                         <div>
-                            <label>Acción </label> 
-                            <select class="custom-select" formControlName="accion">
+                            <label>Periodo</label>
+                            <select class="custom-select" formControlName="periodo">
                                 <option selected disabled value="">Seleccione</option>
-                                <option [value] >Acción 1</option>
-                                <option [value]>Acción 2</option> 
+                                <option [value] >Año 2020</option>
+                                <option [value]>Año 2021</option> 
                             </select>
                         </div>
                     </div>
@@ -50,6 +49,7 @@
                             </select>
                         </div>
                     </div>
+
                 </div>
 
                 <div class="row mt-5">

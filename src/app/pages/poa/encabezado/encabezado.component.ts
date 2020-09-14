@@ -24,11 +24,13 @@ export class EncabezadoComponent implements OnInit {
     
     this.form = this.fb.group({
       programaPresupuestario:   ['',],
+      subprograma:              ['',],
       resultaoInstitucional:    ['',],
+      unidadMedida:             ['',],
+      dependenciaResponsable:   ['',],
       actividadPresupuestaria:  ['',],
       producto:                 ['',],
       subproducto:              ['',],
-      dependenciaResponsable:   ['',],
     })
   }
 

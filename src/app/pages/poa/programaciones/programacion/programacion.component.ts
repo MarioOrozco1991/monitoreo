@@ -11,8 +11,6 @@ import Swal from 'sweetalert2';
 })
 export class ProgramacionComponent implements OnInit {
 
-  mostrarTareas: boolean = false;
-
   mostrarNombreSistema: boolean = false;
 
   public form: FormGroup;

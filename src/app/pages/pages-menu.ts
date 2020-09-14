@@ -41,7 +41,8 @@ export const MENU_ITEMS: NbMenuItem[] = [
               link: '/pages/acciones/crear',
             },
             {
-              title: 'Editar acción',
+              title: 'Modificación Acciones',
+              link: '/pages/acciones',
             },
           ]
         },  
