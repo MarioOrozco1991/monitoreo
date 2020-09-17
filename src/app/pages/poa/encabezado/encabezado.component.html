@@ -2,22 +2,24 @@
     <div class="container">
         <div class="col-xl-12">
             <h1>Encabezado</h1>
-            <form autocomplete="off" [formGroup]="form" (ngSubmit)="guardar()">
+            <form autocomplete="off" [formGroup]="form">
                 <div class="row mt-5">
                     <div class="col-lg-6">
                         <div>
                             <label>Programa Presupuestario</label>
                             <select class="custom-select" formControlName="programaPresupuestario">
                                 <option selected disabled value="">Seleccione</option>
-                                <option [value] >programa 1</option>
-                                <option [value] >programa 2</option> 
+                                <option [value]="programa.id" *ngFor="let programa of programas">{{programa.numeroPrograma}} - {{programa.descripcion}}</option>
                             </select>
                         </div>
                     </div>         
                     <div class="col-lg-6">
                         <div>
                             <label>Subprograma</label>
-                            <input class="form-control" type="text" formControlName="subprograma" disabled>
+                            <select class="custom-select" formControlName="subprograma">
+                                <option selected disabled value="">Seleccione</option>
+                                <option [value]="subprograma.id" *ngFor="let subprograma of subprogramas">{{subprograma.numeroSubprograma}} - {{subprograma.descripcion}}</option>
+                            </select>
                             <!--esto se debe de agregar despues del formControlName para realizar la validacion del campo [class.is-invalid]="procesoNoValido" -->
                             <!-- <small *ngIf="procesoNoValido" class="form-text text-danger">
                                 Este campo es obligatorio
@@ -30,7 +32,10 @@
                     <div class="col-lg-6">
                         <div>
                             <label>Resultado Institucional</label>
-                            <input class="form-control" type="text" formControlName="resultaoInstitucional" disabled>
+                            <select class="custom-select" formControlName="resultaoInstitucional">
+                                <option selected disabled value="">Seleccione</option>
+                                <option [value]="resultado.id" *ngFor="let resultado of resultadoInstitucional">{{resultado.numeroResultado}} - {{resultado.descripcion}}</option>
+                            </select>
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -45,28 +50,32 @@
                     </div>                        
                 </div>
 
-
                 <div class="row mt-5">
                     <div class="col-lg-4">
                         <div>
                             <label>Actividad Presupuestaria</label>
                             <select class="custom-select" formControlName="actividadPresupuestaria">
                                 <option selected disabled value="">Seleccione</option>
-                                <option [value] >actividad 1</option>
-                                <option [value] >actividad 2</option> 
+                                <option [value]="actividad.id" *ngFor="let actividad of actividades">{{actividad.numeroActividad}} - {{actividad.descripcion}}</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div>
                             <label>Producto</label>
-                            <input class="form-control" type="text" formControlName="producto" disabled>
+                            <select class="custom-select" formControlName="producto">
+                                <option selected disabled value="">Seleccione</option>
+                                <option [value]="producto.id" *ngFor="let producto of productos">{{producto.descripcion}}</option>
+                            </select>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div>
                             <label>Subproducto</label>
-                            <input class="form-control" type="text" formControlName="subproducto" disabled>
+                            <select class="custom-select" formControlName="subproducto">
+                                <option selected disabled value="">Seleccione</option>
+                                <option [value]="subproducto.id" *ngFor="let subproducto of subproductos">{{subproducto.descripcion}}</option>
+                            </select>
                         </div>
                     </div>
                     <div class="col-lg-1" style="margin-top: 28px;">
@@ -76,7 +85,7 @@
 
                 <div class="row card-block mt-5">
                     <div class="col-lg-4">
-                    <input type="submit" class="btn btn-primary btn-block waves-effect" value = "Crear encabezado">
+                    <input type="submit" class="btn btn-primary btn-block waves-effect" (click)='enviarFormulario(form)' value = "Crear encabezado">
                     </div>
                     <div class="col-lg-4">
                     <input type="button" class="btn btn-dark btn-block waves-effect" value = "Limpiar campos" >
@@ -85,7 +94,6 @@
                         <input [routerLink]="['acciones']" type="button" class="btn btn-danger btn-block waves-effect" value="Cancelar">
                     </div>
                 </div>
-
             </form>
         </div>  
     </div>

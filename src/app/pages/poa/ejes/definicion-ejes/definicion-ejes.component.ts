@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { EjesService } from '../../../../services/ejes.service';
+import { Router, ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'ngx-definicion-ejes',
@@ -8,21 +11,30 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 })
 export class DefinicionEjesComponent implements OnInit {
 
-  mostrarActividad: boolean = false;
+  mostrarNombreObjetivoEstrategico: boolean = false;
 
   mostrarNombreSistema: boolean = false;
 
+  ejesEstrategicos: any[];
+
+  objetivosEstrategicos: any[];
+
   form: FormGroup;
 
-  constructor( private fb:FormBuilder) {
+  constructor( private fb:FormBuilder,
+               public ejesService:EjesService,
+               private router: Router,
+               private activatedRoute: ActivatedRoute,) {
     this.crearFormulario();
   }    
       
   ngOnInit(): void {
+    this.cargarEjeEstrategico();
+    this.cargarObjetivoEstrategico();
   }
   
-  get actividades(){
-    return this.form.get('actividades') as FormArray;
+  get nombreObjetivoEstrategico(){
+    return this.form.get('nombreObjetivoEstrategico') as FormArray;
   }
   
   crearFormulario(){
@@ -31,32 +43,39 @@ export class DefinicionEjesComponent implements OnInit {
       ejeEstrategico:      ['',],
       objetivoEstrategico: ['',],
       objetivoOperativo:   ['',],
-      actividades: this.fb.array([])
+      nombreObjetivoEstrategico: this.fb.array([])
     })
   }
   
-   //agregando las tareas
-  agregarActividad(){
-    this.actividades.push( this.fb.control('', Validators.required ) );
+   //agregando los objetivos estrategicos al arreglo
+  agregarObjetivoEstrategico(){
+    this.nombreObjetivoEstrategico.push( this.fb.control('', Validators.required ) );
   }
 
-  eliminarActividad(i: number ){
-    this.actividades.removeAt(i);
+  eliminarObjetivoEstrategico(i: number ){
+    this.nombreObjetivoEstrategico.removeAt(i);
   }
 
   
 
   //metodo cuando el usuario presione click en guardar
   guardar(){
-    //validacion si el usuario presiona guardar y tiene campos sin llenar
-    // if(this.forma.invalid){
-        
-    //     return this.forma.markAllAsTouched();
-        
-    // }
     console.log('agregando');
     console.log(this.form.value);
     return false; //para cancelar la recarga de la pantalla ya que no se esta enviando al servidor
   }
+
+  //consumiendo servicios
+  cargarEjeEstrategico(): void {
+    this.ejesService.listadoEjeEstrategico().subscribe((respuesta) => {
+      this.ejesEstrategicos = respuesta;
+    });
+  }     
+  
+  cargarObjetivoEstrategico(): void {
+    this.ejesService.listadoObjetivoEstrategico().subscribe((respuesta) => {
+      this.objetivosEstrategicos = respuesta;
+    });
+  }   
 
 }

@@ -23,12 +23,12 @@ const routes: Routes = [{
   component: PagesComponent,
   children: [
     {
-      path: 'encabezado',
+      path: 'encabezado/crear',
       component: EncabezadoComponent,
     },
     {
-    path: 'editar-encabezado',
-    component: EditarEncabezadoComponent,
+      path: 'encabezado/:id',
+      component: EncabezadoComponent,
     },
     {
       path: 'ejes',

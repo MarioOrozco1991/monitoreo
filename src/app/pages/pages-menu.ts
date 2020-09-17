@@ -12,7 +12,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
           children: [
             {
               title: 'Crear encabezado',
-              link: '/pages/encabezado',
+              link: '/pages/encabezado/crear',
             },
             {
               title: 'Editar encabezado  ',
@@ -41,7 +41,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
               link: '/pages/acciones/crear',
             },
             {
-              title: 'Modificación Acciones',
+              title: 'Modificación de Acciones',
               link: '/pages/acciones',
             },
           ]

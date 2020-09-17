@@ -10,7 +10,7 @@ export class ReprogramacionComponent implements OnInit {
 
   mostrarNombreSistema: boolean = false;
 
-  forma: FormGroup;
+  form: FormGroup;
 
   constructor( private fb:FormBuilder) {
   
@@ -46,7 +46,7 @@ export class ReprogramacionComponent implements OnInit {
   crearFormulario(){
       //inicializando el formulario
 
-      this.forma = this.fb.group({
+      this.form = this.fb.group({
         tipoReprogramacion:       ['', Validators.required],
         periodo:                  ['',],
         accion:                   ['',],
@@ -71,7 +71,7 @@ export class ReprogramacionComponent implements OnInit {
           
       // }
       console.log('agregando');
-      console.log(this.forma.value);
+      console.log(this.form.value);
       return false; //para cancelar la recarga de la pantalla ya que no se esta enviando al servidor
 
   }
