@@ -2,33 +2,18 @@
     <div class="container">
         <div class="col-xl-12">
             <h1>Reprogramación de metas</h1>
-            <form autocomplete="off" [formGroup]="form" (ngSubmit)="guardar()">
+            <form autocomplete="off" [formGroup]="form">
                 <div class="row mt-5">
                     <div class="col-lg-6">
                         <div>
-                            <label>Producto</label>
-                            <select class="custom-select" formControlName="producto">
+                            <label>Tipo de reprogramación</label>
+                            <select class="custom-select" formControlName="tipoReprogramacion">
                                 <option selected disabled value="">Seleccione</option>
-                                <option [value]>Producto 1</option>
-                                <option [value]>Producto 2</option>
+                                <option value="producto">Producto</option>
+                                <option value="subproducto">Subproducto</option>
                             </select>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div>
-                            <label>Subproducto</label>
-                            <select class="custom-select" formControlName="subproducto">
-                                <option selected disabled value="">Seleccione</option>
-                                <option [value] >Subproducto 1</option>
-                                <option [value] >Subproducto 2</option> 
-                            </select>
-                            <!-- <small *ngIf="alcanceNoValido" class="form-text text-danger">
-                                Este campo es obligatorio
-                            </small> -->
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-5">
                     <div class="col-lg-6">
                         <div>
                             <label>Periodo</label>
@@ -39,17 +24,48 @@
                             </select>
                         </div>
                     </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-lg-6" *ngIf="form.get('tipoReprogramacion').value=== 'producto'">
+                        <div>
+                            <label>Nombre del Producto</label>
+                            <select class="custom-select" formControlName="producto">
+                                <option selected disabled value="">Seleccione</option>
+                                <option [value]="producto.id" *ngFor="let producto of productos">{{producto.descripcion}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" *ngIf="form.get('tipoReprogramacion').value=== 'subproducto'">
+                        <div>
+                            <label>Nombre del Subproducto</label>
+                            <select class="custom-select" formControlName="producto">
+                                <option selected disabled value="">Seleccione</option>
+                                <option [value]="subproducto.id" *ngFor="let subproducto of subproductos">{{subproducto.descripcion}}</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="col-lg-6">
                         <div>
                             <label>Mes a reprogramar</label> 
                             <select class="custom-select" formControlName="mesProgramacion">
                                 <option selected disabled value="">Seleccione</option>
-                                <option [value] >Enero</option>
-                                <option [value]>Febrero</option> 
+                                <option [value]="1">Enero</option>
+                                <option [value]="2">Febrero</option>
+                                <option [value]="3">Marzo</option>
+                                <option [value]="4">Abril</option>
+                                <option [value]="5">Mayo</option>
+                                <option [value]="6">Junio</option>
+                                <option [value]="7">Julio</option>
+                                <option [value]="8">Agosto</option>
+                                <option [value]="9">Septiembre</option>
+                                <option [value]="10">Octubre</option>
+                                <option [value]="11">Noviembre</option>
+                                <option [value]="12">Diciembre</option>
+                                
                             </select>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="row mt-5">
@@ -85,7 +101,7 @@
                 
                 <div class="row card-block mt-5">
                     <div class="col-lg-6">
-                      <input type="submit" class="btn btn-primary btn-block waves-effect" value="Crear Programación">
+                      <input type="submit" class="btn btn-primary btn-block waves-effect" (click)='enviarFormulario(form)' value="Crear Reprogramación">
                       <ng-template #botonActualizar>
                         <input type="submit" class="btn btn-primary btn-block waves-effect" value="Modificar Programación">
                       </ng-template>

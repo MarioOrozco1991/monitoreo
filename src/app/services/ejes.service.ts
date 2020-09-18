@@ -13,11 +13,15 @@ export class EjesService {
   constructor(private httpClient: HttpClient) {}
   
   listadoEjeEstrategico() {
-    return this.httpClient.get<any>(this.url + 'ejesEstrategicos');
+    return this.httpClient.get<any>(this.url + 'eje-estrategico');
   }
 
   listadoObjetivoEstrategico() {
-    return this.httpClient.get<any>(this.url + 'objetivos-estrategicos');
+    return this.httpClient.get<any>(this.url + 'objetivo-estrategico');
+  }
+
+  listadoObjetivoOperativo() {
+    return this.httpClient.get<any>(this.url + 'objetivo-operativo');
   }
 
 }

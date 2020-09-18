@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { EncabezadoService } from './../../../../services/encabezado.service';
+import Swal from 'sweetalert2'; 
 @Component({
   selector: 'ngx-crear-accion',
   templateUrl: './reprogramacion.component.html',
@@ -9,43 +12,25 @@ export class ReprogramacionComponent implements OnInit {
 
 
   mostrarNombreSistema: boolean = false;
+  productos: any[];
+  subproductos: any[];
 
   form: FormGroup;
 
-  constructor( private fb:FormBuilder) {
-  
-      this.crearFormulario();
-  
+  constructor( private fb:FormBuilder,
+               private router: Router,
+               private activatedRoute: ActivatedRoute,
+               private encabezadoService: EncabezadoService
+             ) {
+                  this.crearFormulario();
   }
       
   ngOnInit(): void {
+    this.cargarProducto();
+    this.cargarSubproducto();
   }
- 
-
-
-  //validaciones del formulario
-  
-  // get procesoNoValido(){
-  //     return this.forma.get('proceso').invalid && this.forma.get('procesoPOA').touched
-  // }
- 
-  // get alcanceNoValido(){
-  //     return this.forma.get('alcance').invalid && this.forma.get('alcance').touched
-  // }
-
-  // get objetivoNoValido(){
-  //     return this.forma.get('objetivo').invalid && this.forma.get('objetivo').touched
-  // }
-
-  // get observacionesNoValido(){
-  //     return this.forma.get('observaciones').invalid && this.forma.get('observaciones').touched
-  
-  // }
-  
-  
+   
   crearFormulario(){
-      //inicializando el formulario
-
       this.form = this.fb.group({
         tipoReprogramacion:       ['', Validators.required],
         periodo:                  ['',],
@@ -58,22 +43,49 @@ export class ReprogramacionComponent implements OnInit {
       })
   }
 
+  enviarFormulario(form: any) {
+    console.log('resultado', form.value);
+    if (!this.form.value.id) {
+      this.crear(form);
+    } else {
+      this.actualizar(form);
+    }
+  }
 
-
-
-
-  //metodo cuando el usuario presione click en guardar
-  guardar(){
-      //validacion si el usuario presiona guardar y tiene campos sin llenar
-      // if(this.forma.invalid){
-          
-      //     return this.forma.markAllAsTouched();
-          
-      // }
-      console.log('agregando');
-      console.log(this.form.value);
-      return false; //para cancelar la recarga de la pantalla ya que no se esta enviando al servidor
+  public crear(form: any) {
+    this.encabezadoService.crear(form.value).subscribe((data) => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Reprogramacion creada exitosamente',
+        showConfirmButton: false,
+        timer: 3000
+      })
+    });
 
   }
+
+  public actualizar(form: any) {
+    this.encabezadoService.actualizar(form.value).subscribe((data) => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Reprogramacion modificada exitosamente',
+        showConfirmButton: false,
+        timer: 3000
+      })
+      this.router.navigate(['..']);
+    });
+  } 
+
+  cargarProducto(): void {
+    this.encabezadoService.listadoProductos().subscribe((respuesta) => {
+      this.productos = respuesta;
+    });
+  } 
+
+  cargarSubproducto(): void {
+    this.encabezadoService.listadoSubproductos().subscribe((respuesta) => {
+      this.subproductos = respuesta;
+    });
+  } 
 }
 

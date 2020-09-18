@@ -13,6 +13,7 @@ export class EncabezadoService {
   constructor(private httpClient: HttpClient) {}
   
   crear(datos: any) {
+    console.log('desde el servicio', datos);
     return this.httpClient.post(this.url + 'encabezado', JSON.stringify(datos), {headers: this.httpHeaders});
   }
   

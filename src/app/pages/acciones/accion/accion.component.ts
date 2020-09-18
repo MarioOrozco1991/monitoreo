@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AccionesService } from '../../../services/acciones.service';
+import { EjesService} from '../../../services/ejes.service';
 import Swal from 'sweetalert2'; 
 
 @Component({
@@ -12,30 +13,33 @@ import Swal from 'sweetalert2';
 export class AccionComponent implements OnInit {
 
   mostrarTareas: boolean = false;
-
+  ejesEstrategicos: any[];
+  objetivosEstrategicos: any[];
+  objetivosOperativos: any[];
   mostrarNombreSistema: boolean = false;
-
   form: FormGroup;
 
   constructor(private fb:FormBuilder,
               private router: Router,
               private activatedRoute: ActivatedRoute,
-              private accionesService: AccionesService  
+              private accionesService: AccionesService,
+              private ejesService: EjesService  
   ) {
   
     this.crearFormulario();
   
   }
-      
 
   ngOnInit(): void {
     this.cargarAccion();
+    this.cargarEjeEstrategico();
+    this.cargarObjetivoEstrategico();
+    this.cargarObjetivoOperativo();
   }
   
   get tareas(){
     return this.form.get('tareas') as FormArray;
   }
-  
   
   crearFormulario(){
     //inicializando el formulario
@@ -77,44 +81,13 @@ export class AccionComponent implements OnInit {
     this.tareas.removeAt(i);
   }
 
-  //metodo cuando el usuario presione click en guardar
   cargarAccion(): void {
     this.activatedRoute.params.subscribe(params => {
-
       if(params.id){
         this.accionesService.cargar(params.id).subscribe((respuesta) => {
           this.form.patchValue(respuesta);
         });
       }       
-    });
-  }
-
-  public crear(form: any) {
-    // console.log('agregando', form.value);  
-    this.accionesService.crear(form.value).subscribe((data) => {
-      // console.log('datos listado', data);
-      Swal.fire({
-        //position: 'top-end',
-        icon: 'success',
-        title: 'Acción creada exitosamente',
-        showConfirmButton: false,
-        timer: 3000
-      })
-    });
-  }
-
-  public actualizar(form: any) {
-    // console.log('actualizar', form.value);  
-    this.accionesService.actualizar(form.value).subscribe((data) => {
-      // console.log('datos listado', data);
-      Swal.fire({
-        //position: 'top-end',
-        icon: 'success',
-        title: 'Acción modificada exitosamente',
-        showConfirmButton: false,
-        timer: 3000
-      })
-      this.router.navigate(['..']);
     });
   }
 
@@ -125,6 +98,49 @@ export class AccionComponent implements OnInit {
       this.actualizar(form);
     }
   }
+
+  public crear(form: any) {
+    this.accionesService.crear(form.value).subscribe((data) => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Acción creada exitosamente',
+        showConfirmButton: false,
+        timer: 3000
+      })
+    });
+  }
+
+  public actualizar(form: any) {
+    this.accionesService.actualizar(form.value).subscribe((data) => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Acción modificada exitosamente',
+        showConfirmButton: false,
+        timer: 3000
+      })
+      this.router.navigate(['..']);
+    });
+  }
+
+  public cargarEjeEstrategico(): void {
+    this.ejesService.listadoEjeEstrategico().subscribe((respuesta) => {
+      this.ejesEstrategicos = respuesta;
+    });   
+  }
+
+  public cargarObjetivoEstrategico(): void {
+    this.ejesService.listadoObjetivoEstrategico().subscribe((respuesta) => {
+      this.objetivosEstrategicos = respuesta;
+    });   
+  }
+
+  public cargarObjetivoOperativo(): void {
+    this.ejesService.listadoObjetivoOperativo().subscribe((respuesta) => {
+      this.objetivosOperativos = respuesta;
+    });   
+  }
+
+  
 
 }
 

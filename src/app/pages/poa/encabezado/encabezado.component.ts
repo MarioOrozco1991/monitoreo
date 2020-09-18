@@ -96,20 +96,27 @@ export class EncabezadoComponent implements OnInit {
     });
   } 
 
+  enviarFormulario(form: any) {
+    console.log('resultado', form.value);
+    if (!this.form.value.id) {
+      this.crear(form);
+    } else {
+      this.actualizar(form);
+    }
+  }
+
   public crear(form: any) {
     // console.log('agregando', form.value);  
     this.encabezadoService.crear(form.value).subscribe((data) => {
-      // console.log('datos listado', data);
+      // console.log('resultado desde crear', data);
       Swal.fire({
-        //position: 'top-end',
         icon: 'success',
-        title: 'Acción creada exitosamente',
+        title: 'Encabezado creado exitosamente',
         showConfirmButton: false,
         timer: 3000
       })
     });
 
-    console.log('resultado desde el servicio', form.value);
   }
 
   public actualizar(form: any) {
@@ -125,14 +132,5 @@ export class EncabezadoComponent implements OnInit {
       })
       this.router.navigate(['..']);
     });
-  }
-
-  enviarFormulario(form: any) {
-    console.log('resultado', form.value);
-    if (!this.form.value.id) {
-      this.crear(form);
-    } else {
-      this.actualizar(form);
-    }
-  }
+  } 
 }
