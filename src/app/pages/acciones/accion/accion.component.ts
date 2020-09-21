@@ -108,6 +108,7 @@ export class AccionComponent implements OnInit {
         timer: 3000
       })
     });
+    this.router.navigate(['..']);
   }
 
   public actualizar(form: any) {

@@ -87,6 +87,7 @@ export class ProgramacionComponent implements OnInit {
   
 
   cargarProgramacion(): void {
+    console.log('desde cargrar programacion');
     this.activatedRoute.params.subscribe(params => {
 
       if(params.id){
@@ -120,7 +121,6 @@ export class ProgramacionComponent implements OnInit {
         showConfirmButton: false,
         timer: 3000
       })
-      this.router.navigate(['..']);
     });
   }
 

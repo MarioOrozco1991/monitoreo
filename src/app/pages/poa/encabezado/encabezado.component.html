@@ -7,7 +7,7 @@
                     <div class="col-lg-6">
                         <div>
                             <label>Programa Presupuestario</label>
-                            <select class="custom-select" formControlName="programaPresupuestario">
+                            <select class="custom-select" formControlName="idProgramaPresupuestario">
                                 <option selected disabled value="">Seleccione</option>
                                 <option [value]="programa.id" *ngFor="let programa of programas">{{programa.numeroPrograma}} - {{programa.descripcion}}</option>
                             </select>
@@ -16,7 +16,7 @@
                     <div class="col-lg-6">
                         <div>
                             <label>Subprograma</label>
-                            <select class="custom-select" formControlName="subprograma">
+                            <select class="custom-select" formControlName="idSubprograma">
                                 <option selected disabled value="">Seleccione</option>
                                 <option [value]="subprograma.id" *ngFor="let subprograma of subprogramas">{{subprograma.numeroSubprograma}} - {{subprograma.descripcion}}</option>
                             </select>
@@ -32,7 +32,7 @@
                     <div class="col-lg-6">
                         <div>
                             <label>Resultado Institucional</label>
-                            <select class="custom-select" formControlName="resultaoInstitucional">
+                            <select class="custom-select" formControlName="idResultadoInstitucional">
                                 <option selected disabled value="">Seleccione</option>
                                 <option [value]="resultado.id" *ngFor="let resultado of resultadoInstitucional">{{resultado.numeroResultado}} - {{resultado.descripcion}}</option>
                             </select>
@@ -41,7 +41,7 @@
                     <div class="col-lg-6">
                         <div>
                             <label>Dependencia responsable</label>
-                            <select class="custom-select" formControlName="dependenciaResponsable" disabled>
+                            <select class="custom-select" formControlName="idDependenciaResponsable" disabled>
                                 <option selected disabled value="">Seleccione</option>
                                 <option [value] >Informática y Estadística</option>
                                 <option [value] >RRHH</option> 
@@ -54,7 +54,7 @@
                     <div class="col-lg-4">
                         <div>
                             <label>Actividad Presupuestaria</label>
-                            <select class="custom-select" formControlName="actividadPresupuestaria">
+                            <select class="custom-select" formControlName="idActividadPresupuestaria">
                                 <option selected disabled value="">Seleccione</option>
                                 <option [value]="actividad.id" *ngFor="let actividad of actividades">{{actividad.numeroActividad}} - {{actividad.descripcion}}</option>
                             </select>
@@ -63,7 +63,7 @@
                     <div class="col-lg-4">
                         <div>
                             <label>Producto</label>
-                            <select class="custom-select" formControlName="producto">
+                            <select class="custom-select" formControlName="idProducto">
                                 <option selected disabled value="">Seleccione</option>
                                 <option [value]="producto.id" *ngFor="let producto of productos">{{producto.descripcion}}</option>
                             </select>
@@ -72,7 +72,7 @@
                     <div class="col-lg-3">
                         <div>
                             <label>Subproducto</label>
-                            <select class="custom-select" formControlName="subproducto">
+                            <select class="custom-select" formControlName="idSubproducto">
                                 <option selected disabled value="">Seleccione</option>
                                 <option [value]="subproducto.id" *ngFor="let subproducto of subproductos">{{subproducto.descripcion}}</option>
                             </select>
@@ -88,7 +88,7 @@
                     <input type="submit" class="btn btn-primary btn-block waves-effect" (click)='enviarFormulario(form)' value = "Crear encabezado">
                     </div>
                     <div class="col-lg-4">
-                    <input type="button" class="btn btn-dark btn-block waves-effect" value = "Limpiar campos" >
+                    <input type="button" class="btn btn-dark btn-block waves-effect" (click)='form.reset()' value = "Limpiar campos" >
                     </div>
                     <div class="col-lg-4">
                         <input [routerLink]="['acciones']" type="button" class="btn btn-danger btn-block waves-effect" value="Cancelar">

@@ -17,6 +17,8 @@ import { ReprogramacionComponent } from './poa/reprogramaciones/reprogramacion/r
 import { ProgramacionesComponent} from './poa/programaciones/programaciones.component'
 import { DefinicionEjesComponent } from './poa/ejes/definicion-ejes/definicion-ejes.component';
 import { EjesComponent } from './poa/ejes/ejes.component';
+import { ObjetivosOperativosComponent } from './poa/objetivos-operativos/objetivos-operativos.component';
+import { ObjetivoOperativoComponent } from './poa/objetivos-operativos/objetivo-operativo.component';
 
 const routes: Routes = [{
   path: '',
@@ -37,6 +39,18 @@ const routes: Routes = [{
     {
       path: 'ejes/crear',
       component: DefinicionEjesComponent,
+    },
+    {
+      path: 'objetivos-operativos',
+      component: ObjetivosOperativosComponent,
+    },
+    {
+      path: 'objetivos-operativos/crear',
+      component: ObjetivoOperativoComponent,
+    },
+    {
+      path: 'objetivos-operativos/:id',
+      component: ObjetivoOperativoComponent,
     },
     {
       path: 'acciones',

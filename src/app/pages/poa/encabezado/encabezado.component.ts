@@ -44,15 +44,17 @@ export class EncabezadoComponent implements OnInit {
     
     this.form = this.fb.group({
       id:                       [null,],
-      programaPresupuestario:   ['',],
-      subprograma:              ['',],
-      resultaoInstitucional:    ['',],
-      dependenciaResponsable:   ['',],
-      actividadPresupuestaria:  ['',],
-      producto:                 ['',],
-      subproducto:              ['',],
+      idProgramaPresupuestario:   ['',],
+      idSubprograma:              ['',],
+      idResultadoInstitucional:    ['',],
+      idDependenciaResponsable:   ['',],
+      idActividadPresupuestaria:  ['',],
+      idProducto:                 ['',],
+      idSubproducto:              ['',],
     })
   }
+
+    
 
   agregarActividad(){
       
@@ -116,7 +118,7 @@ export class EncabezadoComponent implements OnInit {
         timer: 3000
       })
     });
-
+    this.form.reset();
   }
 
   public actualizar(form: any) {

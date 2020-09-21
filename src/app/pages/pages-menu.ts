@@ -21,7 +21,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
           ]
         },
         {
-          title: 'Ejes',
+          title: 'Ejes y objetivos',
           children: [
             {
               title: 'Crear Eje',
@@ -30,6 +30,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
             {
               title: 'Ver Ejes',
               link: '/pages/ejes',
+            },
+            {
+              title: 'Ver Objetivos',
+              link: '/pages/objetivos-operativos',
             },
           ]
         },
