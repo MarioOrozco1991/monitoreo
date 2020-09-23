@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DefinicionEjesComponent } from './definicion-ejes.component';
+import { ReprogramacionesComponent } from './reprogramaciones.component';
 
-describe('DefinicionEjesComponent', () => {
-  let component: DefinicionEjesComponent;
-  let fixture: ComponentFixture<DefinicionEjesComponent>;
+describe('ReprogramacionesComponent', () => {
+  let component: ReprogramacionesComponent;
+  let fixture: ComponentFixture<ReprogramacionesComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DefinicionEjesComponent ]
+      declarations: [ ReprogramacionesComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DefinicionEjesComponent);
+    fixture = TestBed.createComponent(ReprogramacionesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

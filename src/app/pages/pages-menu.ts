@@ -24,15 +24,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
           title: 'Ejes y objetivos',
           children: [
             {
-              title: 'Crear Eje',
-              link: '/pages/ejes/crear',
-            },
-            {
-              title: 'Ver Ejes',
+              title: 'Ejes',
               link: '/pages/ejes',
             },
             {
-              title: 'Ver Objetivos',
+              title: 'Objetivos Estratégicos',
+              link: '/pages/objetivos-estrategicos',
+            },
+            {
+              title: 'Objetivos Operativos',
               link: '/pages/objetivos-operativos',
             },
           ]
@@ -54,15 +54,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
           title: 'Programación de metas',
           children: [
             {
-              title: 'Crear programación',
-              link: '/pages/programaciones/crear',
+              title: 'Reprogramaciones',
+              link: '/pages/reprogramaciones',
             },
             {
-              title: 'Reprogramación',
-              link: '/pages/reprogramaciones/crear',
-            },
-            {
-              title: 'Ver programaciones',
+              title: 'Programaciones',
               link: '/pages/programaciones',
             },
           ]
@@ -99,12 +95,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'edit-2-outline',
     link: '/pages/seguimiento-actividades',
   },
-  {
-    title: 'POA',
-    icon: 'bar-chart-2-outline',
-    link: '/pages/poa',
-  },
-
 //   {
 //     title: 'Auth',
 //     icon: 'lock-outline',

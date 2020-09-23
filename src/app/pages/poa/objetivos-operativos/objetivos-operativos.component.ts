@@ -14,9 +14,7 @@ import Swal from 'sweetalert2';
 export class ObjetivosOperativosComponent implements OnInit {
 
   dtOptions: DataTables.Settings = {};
-    
   respuesta: any;
-
   dtTrigger = new Subject();
 
   constructor(public objetivosOperativosService:ObjetivosOperativosService,

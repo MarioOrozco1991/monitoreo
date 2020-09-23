@@ -1,119 +1,113 @@
 <div>
-    <div class="container">
-        <div class="col-xl-12">
-            <h1>Reprogramación de metas</h1>
-            <form autocomplete="off" [formGroup]="form">
-                <div class="row mt-5">
-                    <div class="col-lg-6">
-                        <div>
-                            <label>Tipo de reprogramación</label>
-                            <select class="custom-select" formControlName="tipoReprogramacion">
-                                <option selected disabled value="">Seleccione</option>
-                                <option value="producto">Producto</option>
-                                <option value="subproducto">Subproducto</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div>
-                            <label>Periodo</label>
-                            <select class="custom-select" formControlName="periodo">
-                                <option selected disabled value="">Seleccione</option>
-                                <option [value] >Año 2020</option>
-                                <option [value]>Año 2021</option> 
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row mt-5">
-                    <div class="col-lg-6" *ngIf="form.get('tipoReprogramacion').value=== 'producto'">
-                        <div>
-                            <label>Nombre del Producto</label>
-                            <select class="custom-select" formControlName="producto">
-                                <option selected disabled value="">Seleccione</option>
-                                <option [value]="producto.id" *ngFor="let producto of productos">{{producto.descripcion}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-lg-6" *ngIf="form.get('tipoReprogramacion').value=== 'subproducto'">
-                        <div>
-                            <label>Nombre del Subproducto</label>
-                            <select class="custom-select" formControlName="producto">
-                                <option selected disabled value="">Seleccione</option>
-                                <option [value]="subproducto.id" *ngFor="let subproducto of subproductos">{{subproducto.descripcion}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div>
-                            <label>Mes a reprogramar</label> 
-                            <select class="custom-select" formControlName="mesProgramacion">
-                                <option selected disabled value="">Seleccione</option>
-                                <option [value]="1">Enero</option>
-                                <option [value]="2">Febrero</option>
-                                <option [value]="3">Marzo</option>
-                                <option [value]="4">Abril</option>
-                                <option [value]="5">Mayo</option>
-                                <option [value]="6">Junio</option>
-                                <option [value]="7">Julio</option>
-                                <option [value]="8">Agosto</option>
-                                <option [value]="9">Septiembre</option>
-                                <option [value]="10">Octubre</option>
-                                <option [value]="11">Noviembre</option>
-                                <option [value]="12">Diciembre</option>
-                                
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row mt-5">
-                    <div class="col-lg-4">
-                        <div>
-                            <label>Cantidad programada</label>
-                            <input class="form-control" type="text" formControlName="cantidadProgramada" disabled>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div>
-                            <label>Programación requerida</label>
-                            <input class="form-control" type="text" formControlName="programacionRequerida">
-                        </div>
-                    </div>       
-                    <div class="col-lg-4">
-                        <div>
-                            <label>Nueva programación</label>
-                            <input class="form-control" type="text" formControlName="nuevaProgramacion" disabled>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row mt-5">
-                    <div class="col-lg-12">
-                        <div>
-                            <label>Justificación</label>
-                            <textarea class="form-control" rows="2" placeholder="Ingrese aquí la justificación" formControlName="justificacion">
-                            </textarea>
-                        </div>
-                    </div>  
-                </div>
-                
-                <div class="row card-block mt-5">
-                    <div class="col-lg-6">
-                      <input type="submit" class="btn btn-primary btn-block waves-effect" (click)='enviarFormulario(form)' value="Crear Reprogramación">
-                      <ng-template #botonActualizar>
-                        <input type="submit" class="btn btn-primary btn-block waves-effect" value="Modificar Programación">
-                      </ng-template>
-                    </div>
-                    <div class="col-lg-6">
-                      <input [routerLink]="['..']" type="button" class="btn btn-danger btn-block waves-effect" value="Cancelar">
-                    </div>
-                  </div>
-
-            </form>
-        </div>  
-    </div>
+  <div class="container">
+    <div class="col-xl-12">
+      <h1>Reprogramación de metas</h1>
+      <form autocomplete="off" [formGroup]="form">
+        <div class="row mt-5">
+          <div class="col-lg-6">
+            <div>
+              <label>Tipo de reprogramación</label>
+              <select class="custom-select" formControlName="tipoReprogramacion">
+                <option selected disabled value="">Seleccione</option>
+                <option value="producto">Producto</option>
+                <option value="subproducto">Subproducto</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div>
+              <label>Periodo</label>
+              <select class="custom-select" formControlName="periodo">
+                <option selected disabled value="">Seleccione</option>
+                <option [value] >Año 2020</option>
+                <option [value]>Año 2021</option> 
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <div class="col-lg-6" *ngIf="form.get('tipoReprogramacion').value=== 'producto'">
+            <div>
+              <label>Nombre del Producto</label>
+              <select class="custom-select" formControlName="idProducto">
+                <option selected disabled value="">Seleccione</option>
+                <option [value]="producto.id" *ngFor="let producto of productos">{{producto.descripcion}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-6" *ngIf="form.get('tipoReprogramacion').value=== 'subproducto'">
+            <div>
+              <label>Nombre del Subproducto</label>
+              <select class="custom-select" formControlName="idSubproducto">
+                <option selected disabled value="">Seleccione</option>
+                <option [value]="subproducto.id" *ngFor="let subproducto of subproductos">{{subproducto.descripcion}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div>
+              <label>Mes a reprogramar</label> 
+              <select class="custom-select" formControlName="mesReprogramar">
+                <option selected disabled value="">Seleccione</option>
+                <option [value]="1">Enero</option>
+                <option [value]="2">Febrero</option>
+                <option [value]="3">Marzo</option>
+                <option [value]="4">Abril</option>
+                <option [value]="5">Mayo</option>
+                <option [value]="6">Junio</option>
+                <option [value]="7">Julio</option>
+                <option [value]="8">Agosto</option>
+                <option [value]="9">Septiembre</option>
+                <option [value]="10">Octubre</option>
+                <option [value]="11">Noviembre</option>
+                <option [value]="12">Diciembre</option>  
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <div class="col-lg-4">
+            <div>
+              <label>Cantidad programada</label>
+              <input class="form-control" type="text" formControlName="cantidadProgramada" disabled>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div>
+              <label>Programación requerida</label>
+              <input class="form-control" type="text" formControlName="programacionRequerida">
+            </div>
+          </div>       
+          <div class="col-lg-4">
+            <div>
+              <label>Nueva programación</label>
+              <input class="form-control" type="text" formControlName="nuevaProgramacion" disabled>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <div class="col-lg-12">
+            <div>
+              <label>Justificación</label>
+              <textarea class="form-control" rows="2" placeholder="Ingrese aquí la justificación" formControlName="justificacion">
+              </textarea>
+            </div>
+          </div>  
+        </div>
+        <div class="row card-block mt-5">
+          <div class="col-lg-6">
+            <input [routerLink]="['..']" type="submit" class="btn btn-primary btn-block waves-effect" (click)='enviarFormulario(form)' value="Crear Reprogramación">
+            <ng-template #botonActualizar>
+              <input [routerLink]="['..']" type="submit" class="btn btn-primary btn-block waves-effect" (click)="enviarFormulario(form)" value="Modificar Reprogramación">
+            </ng-template>
+          </div>
+          <div class="col-lg-6">
+            <input [routerLink]="['..']" type="button" class="btn btn-danger btn-block waves-effect" value="Cancelar">
+          </div>
+        </div>
+      </form>
+    </div>  
+  </div>
 </div>
 
 

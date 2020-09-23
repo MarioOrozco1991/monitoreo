@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ProgramacionesService } from '../../../../services/programaciones.service';
+
 import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2'; 
 
@@ -108,7 +109,6 @@ export class ProgramacionComponent implements OnInit {
         showConfirmButton: false,
         timer: 3000
       })
-
     });
   }
 

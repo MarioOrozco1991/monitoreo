@@ -7,18 +7,20 @@ import { RevisionComponent } from './poa/revision/revision.component';
 import { AprobacionComponent } from './poa/aprobacion/aprobacion.component';
 import { ReportesComponent } from './poa/reportes/reportes.component';
 import { RolComponent } from './rol/rol.component';
-import { PoaComponent } from './poa/poa.component';
 import { SeguimientoActividadesComponent } from './seguimiento-actividades/seguimiento-actividades.component';
 import { EncabezadoComponent } from './poa/encabezado/encabezado.component';
 import { EditarEncabezadoComponent } from './poa/editar-encabezado/editar-encabezado.component';
 import { AccionComponent } from './acciones/accion/accion.component';
 import { ProgramacionComponent } from './poa/programaciones/programacion/programacion.component';
-import { ReprogramacionComponent } from './poa/reprogramaciones/reprogramacion/reprogramacion.component';
 import { ProgramacionesComponent} from './poa/programaciones/programaciones.component'
-import { DefinicionEjesComponent } from './poa/ejes/definicion-ejes/definicion-ejes.component';
+import { ReprogramacionComponent } from './poa/reprogramaciones/reprogramacion/reprogramacion.component';
+import { ReprogramacionesComponent } from './poa/reprogramaciones/reprogramaciones.component';
+import { EjeComponent } from './poa/ejes/eje/eje.component';
 import { EjesComponent } from './poa/ejes/ejes.component';
 import { ObjetivosOperativosComponent } from './poa/objetivos-operativos/objetivos-operativos.component';
-import { ObjetivoOperativoComponent } from './poa/objetivos-operativos/objetivo-operativo.component';
+import { ObjetivoOperativoComponent } from './poa/objetivos-operativos/objetivo-operativo/objetivo-operativo.component';
+import { ObjetivosEstrategicosComponent } from './poa/objetivos-estrategicos/objetivos-estrategicos.component';
+import { ObjetivoEstrategicoComponent } from './poa/objetivos-estrategicos/objetivo-estrategico/objetivo-estrategico.component';
 
 const routes: Routes = [{
   path: '',
@@ -38,7 +40,11 @@ const routes: Routes = [{
     },
     {
       path: 'ejes/crear',
-      component: DefinicionEjesComponent,
+      component: EjeComponent,
+    },
+    {
+      path: 'ejes/:id',
+      component: EjeComponent,
     },
     {
       path: 'objetivos-operativos',
@@ -51,6 +57,18 @@ const routes: Routes = [{
     {
       path: 'objetivos-operativos/:id',
       component: ObjetivoOperativoComponent,
+    },
+    {
+      path: 'objetivos-estrategicos',
+      component: ObjetivosEstrategicosComponent,
+    },
+    {
+      path: 'objetivos-estrategicos/crear',
+      component: ObjetivoEstrategicoComponent,
+    },
+    {
+      path: 'objetivos-estrategicos/:id',
+      component: ObjetivoEstrategicoComponent,
     },
     {
       path: 'acciones',
@@ -76,16 +94,16 @@ const routes: Routes = [{
       path: 'programaciones/:id',
       component: ProgramacionComponent,
     },
-    // {
-    //   path: 'reprogramaciones',
-    //   // component: ReprogramacionComponent,
-    // },
+    {
+      path: 'reprogramaciones',
+      component: ReprogramacionesComponent,
+    },
     {
       path: 'reprogramaciones/crear',
       component: ReprogramacionComponent,
     },
     {
-      path: 'reprogramaciones/id',
+      path: 'reprogramaciones/:id',
       component: ReprogramacionComponent,
     },
     {
@@ -107,10 +125,6 @@ const routes: Routes = [{
     {
       path: 'seguimiento-actividades',
       component: SeguimientoActividadesComponent,
-    },
-    {
-        path: 'poa',
-        component: PoaComponent,
     },
     {
       path: '',

@@ -3,6 +3,8 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AccionesService } from '../../../services/acciones.service';
 import { EjesService} from '../../../services/ejes.service';
+import { ObjetivosEstrategicosService } from './../../../services/objetivos-estrategicos.service';
+import { ObjetivosOperativosService } from './../../../services/objetivos-operativos.service';
 import Swal from 'sweetalert2'; 
 
 @Component({
@@ -23,7 +25,9 @@ export class AccionComponent implements OnInit {
               private router: Router,
               private activatedRoute: ActivatedRoute,
               private accionesService: AccionesService,
-              private ejesService: EjesService  
+              private ejesService: EjesService,
+              private bjetivosEstrategicosService: ObjetivosEstrategicosService,  
+              private objetivosOperativosService: ObjetivosOperativosService
   ) {
   
     this.crearFormulario();
@@ -124,19 +128,19 @@ export class AccionComponent implements OnInit {
   }
 
   public cargarEjeEstrategico(): void {
-    this.ejesService.listadoEjeEstrategico().subscribe((respuesta) => {
+    this.ejesService.listado().subscribe((respuesta) => {
       this.ejesEstrategicos = respuesta;
     });   
   }
 
   public cargarObjetivoEstrategico(): void {
-    this.ejesService.listadoObjetivoEstrategico().subscribe((respuesta) => {
+    this.bjetivosEstrategicosService.listado().subscribe((respuesta) => {
       this.objetivosEstrategicos = respuesta;
     });   
   }
 
   public cargarObjetivoOperativo(): void {
-    this.ejesService.listadoObjetivoOperativo().subscribe((respuesta) => {
+    this.objetivosOperativosService.listado().subscribe((respuesta) => {
       this.objetivosOperativos = respuesta;
     });   
   }

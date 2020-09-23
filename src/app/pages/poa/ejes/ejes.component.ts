@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { AccionesService } from '../../../services/acciones.service';
+import { EjesService } from './../../../services/ejes.service';
 import Swal from 'sweetalert2'; 
 
 @Component({
@@ -18,7 +18,7 @@ export class EjesComponent implements OnInit {
 
   dtTrigger = new Subject();
 
-  constructor(public accionesService:AccionesService,
+  constructor(public ejesService:EjesService,
               private http:HttpClient, 
               private router:Router){
   }
@@ -29,7 +29,7 @@ export class EjesComponent implements OnInit {
       pageLength: 10
     };
 
-    this.accionesService.listado().subscribe((data: any) => {
+    this.ejesService.listado().subscribe((data: any) => {
        this.respuesta = data
       this.dtTrigger.next();
     });
@@ -54,13 +54,10 @@ export class EjesComponent implements OnInit {
       confirmButtonText: `Sí`,
       showCancelButton: true,
       cancelButtonText: `Cancelar`,
-    }).then( resp => {
-      
+    }).then( resp => { 
       if (resp.value) {
         this.respuesta.splice(i, 1)
-  
-        this.accionesService.eliminar(datos.id).subscribe();
-        
+        this.ejesService.eliminar(datos.id).subscribe();
         Swal.fire({
           //position: 'top-end',
           icon: 'success',

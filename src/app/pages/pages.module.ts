@@ -17,7 +17,6 @@ import { AprobacionComponent } from './poa/aprobacion/aprobacion.component';
 import { CrearComponent } from './crear/crear.component';
 import { RolComponent } from './rol/rol.component';
 import { ReportesComponent } from './poa/reportes/reportes.component';
-import { PoaComponent } from './poa/poa.component';
 import { SeguimientoActividadesComponent } from './seguimiento-actividades/seguimiento-actividades.component';
 import { EncabezadoComponent } from './poa/encabezado/encabezado.component';
 import { EditarEncabezadoComponent } from './poa/editar-encabezado/editar-encabezado.component';
@@ -25,12 +24,14 @@ import { AccionesComponent } from './acciones/acciones.component';
 import { AccionComponent } from './acciones/accion/accion.component';
 import { ProgramacionComponent } from './poa/programaciones/programacion/programacion.component';
 import { ReprogramacionComponent } from './poa/reprogramaciones/reprogramacion/reprogramacion.component';
-import { DefinicionEjesComponent } from './poa/ejes/definicion-ejes/definicion-ejes.component';
+import { EjeComponent } from './poa/ejes/eje/eje.component';
 import { ProgramacionesComponent } from './poa/programaciones/programaciones.component';
 import { EjesComponent } from './poa/ejes/ejes.component';
 import { ObjetivosOperativosComponent } from './poa/objetivos-operativos/objetivos-operativos.component';
 import { ObjetivosEstrategicosComponent } from './poa/objetivos-estrategicos/objetivos-estrategicos.component';
-import { ObjetivoOperativoComponent } from './poa/objetivos-operativos/objetivo-operativo.component';
+import { ObjetivoOperativoComponent } from './poa/objetivos-operativos/objetivo-operativo/objetivo-operativo.component';
+import { ObjetivoEstrategicoComponent } from './poa/objetivos-estrategicos/objetivo-estrategico/objetivo-estrategico.component';
+import { ReprogramacionesComponent } from './poa/reprogramaciones/reprogramaciones.component';
 
 
 @NgModule({
@@ -55,19 +56,20 @@ import { ObjetivoOperativoComponent } from './poa/objetivos-operativos/objetivo-
     ReportesComponent,
     CrearComponent,
     RolComponent,
-    PoaComponent,
     SeguimientoActividadesComponent,
     EncabezadoComponent,
     EditarEncabezadoComponent,
     AccionComponent,
     ProgramacionComponent,
     ReprogramacionComponent,
-    DefinicionEjesComponent,
+    EjeComponent,
     ProgramacionesComponent,
     EjesComponent,
     ObjetivosOperativosComponent,
     ObjetivosEstrategicosComponent,
     ObjetivoOperativoComponent,
+    ObjetivoEstrategicoComponent,
+    ReprogramacionesComponent,
   ],
 })
 export class PagesModule {

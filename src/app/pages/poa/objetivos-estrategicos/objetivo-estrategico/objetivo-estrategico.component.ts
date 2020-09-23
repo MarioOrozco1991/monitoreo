@@ -1,23 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ObjetivosOperativosService } from './../../../services/objetivos-operativos.service';
-import { ObjetivosEstrategicosService } from './../../../services/objetivos-estrategicos.service';
+import { EjesService } from './../../../../services/ejes.service';
 import Swal from 'sweetalert2'; 
+import { ObjetivosEstrategicosService } from './../../../../services/objetivos-estrategicos.service';
+
 
 @Component({
-  selector: 'ngx-objetivo-operativo',
-  templateUrl: './objetivo-operativo.component.html',
-  styleUrls: ['./objetivo-operativo.component.scss']
+  selector: 'ngx-objetivo-estrategico',
+  templateUrl: './objetivo-estrategico.component.html',
+  styleUrls: ['./objetivo-estrategico.component.scss']
 })
-export class ObjetivoOperativoComponent implements OnInit {
+export class ObjetivoEstrategicoComponent implements OnInit {
 
-  objetivosEstrategicos: any[];
+  ejes: any[];
   respuesta: any;
   form: FormGroup;
 
   constructor( private fb:FormBuilder,
-               public objetivosOperativosService:ObjetivosOperativosService,
+               public EjesService:EjesService,
                public objetivosEstrategicosService:ObjetivosEstrategicosService,
                private router: Router,
                private activatedRoute: ActivatedRoute,) {
@@ -32,8 +33,8 @@ export class ObjetivoOperativoComponent implements OnInit {
   crearFormulario(){
     this.form = this.fb.group({
       id:                     [null,],
-      descripcion:            ['',],
-      idObjetivoEstrategico:  ['',],
+      nombre:            ['',],
+      idEjeEstrategico:  ['',],
     })
   }
   
@@ -46,7 +47,7 @@ export class ObjetivoOperativoComponent implements OnInit {
   }
 
   public crear(form: any) {
-    this.objetivosOperativosService.crear(form.value).subscribe((data) => {
+    this.objetivosEstrategicosService.crear(form.value).subscribe((data) => {
       Swal.fire({
         icon: 'success',
         title: 'Objetivo creado exitosamente',
@@ -54,19 +55,16 @@ export class ObjetivoOperativoComponent implements OnInit {
         timer: 3000
       })
     });
-    this.router.navigate(['..']);
   }
 
   public actualizar(form: any) {
-    console.log('desde actualizar');
-    this.objetivosOperativosService.actualizar(form.value).subscribe((data) => {
+    this.objetivosEstrategicosService.actualizar(form.value).subscribe((data) => {
       Swal.fire({
         icon: 'success',
-        title: 'Acción modificada exitosamente',
+        title: 'Objetivo modificado exitosamente',
         showConfirmButton: false,
         timer: 3000
       })
-      this.router.navigate(['..']);
     });
   }
   
@@ -74,7 +72,7 @@ export class ObjetivoOperativoComponent implements OnInit {
   mostrarObjetivo(): void {
     this.activatedRoute.params.subscribe(params => {
       if(params.id){
-        this.objetivosOperativosService.get(params.id).subscribe((respuesta) => {
+        this.objetivosEstrategicosService.get(params.id).subscribe((respuesta) => {
           this.form.patchValue(respuesta);
         });
       }       
@@ -82,9 +80,9 @@ export class ObjetivoOperativoComponent implements OnInit {
   }
   //muestra el nombre del ohjetivo estratégico cuando deseen crear o editar un objetivo operativo
   cargarObjetivoEstrategico(): void {
-    this.objetivosEstrategicosService.listado().subscribe((respuesta) => {
-      this.objetivosEstrategicos = respuesta;
+    this.EjesService.listado().subscribe((respuesta) => {
+      this.ejes = respuesta;
     });
-  }      
+  }
 
 }
