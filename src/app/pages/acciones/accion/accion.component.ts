@@ -41,8 +41,8 @@ export class AccionComponent implements OnInit {
     this.cargarObjetivoOperativo();
   }
   
-  get tareas(){
-    return this.form.get('tareas') as FormArray;
+  get items(){
+    return this.form.get('items') as FormArray;
   }
   
   crearFormulario(){
@@ -55,6 +55,12 @@ export class AccionComponent implements OnInit {
       objetivoOperativo:     ['',],
       responsable:           ['',],
       accion:                ['',],
+      items: this.fb.array([ this.crearItem() ]),
+    })
+  }
+
+  crearItem(): FormGroup {
+    return this.fb.group({
       actividad:             ['',],
       dependenciaRealiza:    ['',],
       puestoRealiza:         ['',],
@@ -71,18 +77,17 @@ export class AccionComponent implements OnInit {
       utilizaSistema:        ['',],
       nombreSistema:         ['',],
       observaciones:         ['',],
-      // tareas: this.fb.array([])
     })
   }
 
-  //agregando las tareas
-  agregarTarea(){
-    this.tareas.push( this.fb.control('', Validators.required ) );
-
+  // agregar item
+  agregarItem(){
+    // this.items.push( this.fb.control('', Validators.required ) );
+    this.items.push(this.crearItem());
   }
 
-  eliminarTarea(i: number ){
-    this.tareas.removeAt(i);
+  eliminarItem(i: number ){
+    this.items.removeAt(i);
   }
 
   cargarAccion(): void {
