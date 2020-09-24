@@ -14,7 +14,6 @@ import Swal from 'sweetalert2';
 })
 export class AccionComponent implements OnInit {
 
-  mostrarTareas: boolean = false;
   ejesEstrategicos: any[];
   objetivosEstrategicos: any[];
   objetivosOperativos: any[];
@@ -41,7 +40,7 @@ export class AccionComponent implements OnInit {
     this.cargarObjetivoOperativo();
   }
   
-  get items(){
+  get items(): FormArray {
     return this.form.get('items') as FormArray;
   }
   

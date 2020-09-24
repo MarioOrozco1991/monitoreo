@@ -50,20 +50,25 @@ export const MENU_ITEMS: NbMenuItem[] = [
             },
           ]
         },  
-        {
-          title: 'Programación de metas',
-          children: [
-            {
-              title: 'Reprogramaciones',
-              link: '/pages/reprogramaciones',
-            },
-            {
-              title: 'Programaciones',
-              link: '/pages/programaciones',
-            },
-          ]
-        },
       ], 
+  },
+  {
+    title: 'Metas Físicas',
+    children: [
+      {
+        title: 'Programaciones',
+        link: '/pages/programaciones',
+      },
+      {
+        title: 'Reprogramaciones',
+        link: '/pages/reprogramaciones',
+      },
+    ]
+  },
+  {
+    title: 'POM',
+    icon: 'fas fa-poll',
+    link: '/pages/revision',
   },
   {
     title: 'Revisión',
