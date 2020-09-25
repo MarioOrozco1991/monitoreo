@@ -45,30 +45,51 @@ export const MENU_ITEMS: NbMenuItem[] = [
               link: '/pages/acciones/crear',
             },
             {
-              title: 'Modificación de Acciones',
+              title: 'Listado de Acciones',
               link: '/pages/acciones',
+            },
+            {
+              title: 'Programaciones',
+              link: '/pages/programacion-acciones-poa',
+            },
+          ]
+        },
+        {
+          title: 'Metas Físicas',
+          children: [
+            {
+              title: 'Programaciones',
+              link: '/pages/programaciones-metas-poa',
             },
           ]
         },  
-      ], 
-  },
-  {
-    title: 'Metas Físicas',
-    children: [
-      {
-        title: 'Programaciones',
-        link: '/pages/programaciones',
-      },
-      {
-        title: 'Reprogramaciones',
-        link: '/pages/reprogramaciones',
-      },
-    ]
+    ], 
   },
   {
     title: 'POM',
-    icon: 'fas fa-poll',
-    link: '/pages/revision',
+    icon: 'bar-chart-2-outline',
+    link: '/pages/dashboard',
+    home: true,
+    children: [
+        {
+          title: 'Acciones',
+          children: [
+            {
+              title: 'Programaciones',
+              link: '/pages/programacion-acciones-poa',
+            },
+          ]
+        },
+        {
+          title: 'Metas Físicas',
+          children: [
+            {
+              title: 'Programaciones',
+              link: '/pages/programaciones-metas-poa',
+            },
+          ]
+        },  
+    ], 
   },
   {
     title: 'Revisión',
@@ -94,11 +115,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
           link: '/pages/rol',
         },
       ],
-  },
-  {
-    title: 'Actividades',
-    icon: 'edit-2-outline',
-    link: '/pages/seguimiento-actividades',
   },
 //   {
 //     title: 'Auth',

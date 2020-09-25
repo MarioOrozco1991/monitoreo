@@ -2,25 +2,24 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
-import { AccionesComponent } from './acciones/acciones.component';
+import { AccionesComponent } from './poa/acciones/acciones.component';
 import { RevisionComponent } from './poa/revision/revision.component';
 import { AprobacionComponent } from './poa/aprobacion/aprobacion.component';
 import { ReportesComponent } from './poa/reportes/reportes.component';
 import { RolComponent } from './rol/rol.component';
-import { SeguimientoActividadesComponent } from './seguimiento-actividades/seguimiento-actividades.component';
 import { EncabezadoComponent } from './poa/encabezado/encabezado.component';
 import { EditarEncabezadoComponent } from './poa/editar-encabezado/editar-encabezado.component';
-import { AccionComponent } from './acciones/accion/accion.component';
-import { ProgramacionComponent } from './poa/programaciones/programacion/programacion.component';
-import { ProgramacionesComponent} from './poa/programaciones/programaciones.component'
-import { ReprogramacionComponent } from './poa/reprogramaciones/reprogramacion/reprogramacion.component';
-import { ReprogramacionesComponent } from './poa/reprogramaciones/reprogramaciones.component';
+import { AccionComponent } from './poa/acciones/accion/accion.component';
+import { ProgramacionMetasPoaComponent } from './poa/metas-fisicas/programaciones/programacion/programacion-metas-poa.component';
+import { ProgramacionesMetasPoaComponent} from './poa/metas-fisicas/programaciones/programaciones-metas-poa.component';
 import { EjeComponent } from './poa/ejes/eje/eje.component';
 import { EjesComponent } from './poa/ejes/ejes.component';
 import { ObjetivosOperativosComponent } from './poa/objetivos-operativos/objetivos-operativos.component';
 import { ObjetivoOperativoComponent } from './poa/objetivos-operativos/objetivo-operativo/objetivo-operativo.component';
 import { ObjetivosEstrategicosComponent } from './poa/objetivos-estrategicos/objetivos-estrategicos.component';
 import { ObjetivoEstrategicoComponent } from './poa/objetivos-estrategicos/objetivo-estrategico/objetivo-estrategico.component';
+import { ProgramacionesAccionesPoaComponent } from './poa/acciones/programaciones/programaciones-acciones-poa.component';
+import { ProgramacionAccionPoaComponent } from './poa/acciones/programaciones/programacion-accion/programacion-accion-poa.component';
 
 const routes: Routes = [{
   path: '',
@@ -83,28 +82,28 @@ const routes: Routes = [{
       component: AccionComponent,
     },
     {
-      path: 'programaciones',
-      component: ProgramacionesComponent,
+      path: 'programaciones-metas-poa',
+      component: ProgramacionesMetasPoaComponent,
     },
     {
-      path: 'programaciones/crear',
-      component: ProgramacionComponent,
+      path: 'programaciones-metas-poa/crear',
+      component: ProgramacionMetasPoaComponent,
     },
     {
-      path: 'programaciones/:id',
-      component: ProgramacionComponent,
+      path: 'programaciones-metas-poa/:id',
+      component: ProgramacionMetasPoaComponent,
     },
     {
-      path: 'reprogramaciones',
-      component: ReprogramacionesComponent,
+      path: 'programacion-acciones-poa',
+      component: ProgramacionesAccionesPoaComponent,
     },
     {
-      path: 'reprogramaciones/crear',
-      component: ReprogramacionComponent,
+      path: 'programacion-acciones-poa/crear',
+      component: ProgramacionAccionPoaComponent,
     },
     {
-      path: 'reprogramaciones/:id',
-      component: ReprogramacionComponent,
+      path: 'programacion-acciones-poa/:id',
+      component: ProgramacionAccionPoaComponent,
     },
     {
       path: 'revision',
@@ -121,10 +120,6 @@ const routes: Routes = [{
     {
         path: 'rol',
         component: RolComponent,
-    },
-    {
-      path: 'seguimiento-actividades',
-      component: SeguimientoActividadesComponent,
     },
     {
       path: '',
