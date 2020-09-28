@@ -19,6 +19,7 @@ export class AccionComponent implements OnInit {
   objetivosOperativos: any[];
   mostrarNombreSistema: boolean = false;
   form: FormGroup;
+  formDetalle: FormGroup;
 
   constructor(private fb:FormBuilder,
               private router: Router,
@@ -54,12 +55,10 @@ export class AccionComponent implements OnInit {
       objetivoOperativo:     ['',],
       responsable:           ['',],
       accion:                ['',],
-      items: this.fb.array([ this.crearItem() ]),
-    })
-  }
+      items: this.fb.array([]),
+    });
 
-  crearItem(): FormGroup {
-    return this.fb.group({
+    this.formDetalle = this.fb.group({
       actividad:             ['',],
       dependenciaRealiza:    ['',],
       puestoRealiza:         ['',],
@@ -76,17 +75,28 @@ export class AccionComponent implements OnInit {
       utilizaSistema:        ['',],
       nombreSistema:         ['',],
       observaciones:         ['',],
-    })
+    });
   }
 
   // agregar item
   agregarItem(){
     // this.items.push( this.fb.control('', Validators.required ) );
-    this.items.push(this.crearItem());
+    console.log('this.formDetalle', this.formDetalle.getRawValue());
+    this.items.push(
+      this.fb.group(this.formDetalle.getRawValue())
+    );
+  }
+
+  editarItem(i: any){
+    console.log('i', i, this.items);
+    const item = this.items.at(i) as FormGroup
+    this.formDetalle.patchValue(item.getRawValue())
   }
 
   eliminarItem(i: number ){
+    console.log('i', i);
     this.items.removeAt(i);
+    this.formDetalle.reset();
   }
 
   cargarAccion(): void {

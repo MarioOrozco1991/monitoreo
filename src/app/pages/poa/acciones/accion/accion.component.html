@@ -59,157 +59,159 @@
 						</div>
 					</div>
 				</div>
-				<h2 class="mt-5">Detalle de la acción</h2>
-				<div class="row mt-5">
-					<div class="col-lg-6">
-						<div>
-							<label>Tarea</label>
-							<input class="form-control" type="text" formControlName="items[0].actividad">
-						</div>
-					</div>
-					<div class="col-lg-3">
-						<div>
-							<label>¿Quién la realiza?</label>
-							<select class="custom-select" formControlName="dependenciaRealiza">
-								<option selected disabled value="">Dependencia/Depto.</option>
-								<option [value]>dependencia 1</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-lg-3">
-						<div style="margin-top: 3px;">
-							<select class="custom-select mt-4" formControlName="puestoRealiza">
-								<option selected disabled value="">Puesto</option>
-								<option [value]>Puesto 1</option>
-								<option [value]>puesto 2</option> 
-							</select>
-						</div>
-					</div>
-				</div>
-				<div class="row mt-5">
-					<div class="col-lg-3">
-						<div>
-							<label>¿Qué necesita para realizarla?</label>
-							<select class="custom-select" formControlName="documentoEntrada">
-								<option selected disabled value="">Seleccione</option>
-								<option [value]>Oficio</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-lg-3">
-						<div style="margin-top: 28px;">
-							<input class="form-control mt-4" type="text" formControlName="otroDocumentoEntrada" disabled>
-						</div>
-					</div>
-					<div class="col-lg-3">
-						<div>
-							<label>¿Quién solicita?</label>
-							<select class="custom-select" formControlName="dependenciaSolicita">
-								<option selected disabled value="">Dependencia/Depto.</option>
-								<option [value]>dependencia 1</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-lg-3">
-						<div style="margin-top: 3px;">
-							<select class="custom-select mt-4" formControlName="puestoSolicita">
-								<option selected disabled value="">Puesto</option>
-								<option [value]>Puesto 1</option>
-								<option [value]>puesto 2</option> 
-							</select>
-						</div>
-					</div>
-				</div>
-				<div class="row mt-5">
-					<div class="col-lg-3">
-						<div>
-							<label>¿Qué resultado genera?</label>
-							<select class="custom-select" formControlName="resultadoDocumento">
-								<option selected disabled value="">Seleccione</option>
-								<option [value]>Oficio</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-lg-3">
-						<div style="margin-top: 28px;">
-							<input class="form-control mt-4" type="text" formControlName="otroResultado" disabled>
-						</div>
-					</div>
-					<div class="col-lg-3">
-						<div>
-							<label>¿Quién recibe el resultado?</label>
-							<select class="custom-select" formControlName="dependenciaRecibe">
-								<option selected disabled value="">Dependencia/Depto.</option>
-								<option [value]>dependencia 1</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-lg-3">
-						<div style="margin-top: 3px;">
-							<select class="custom-select mt-4" formControlName="puestoRecibe">
-								<option selected disabled value="">Puesto</option>
-								<option [value]>Puesto 1</option>
-								<option [value]>puesto 2</option> 
-							</select>
-						</div>
-					</div>
-				</div>
-				<div class="row mt-5">
-					<div class="col-lg-3">
-						<div>
-							<label>Tiempo promedio para realizarla</label>
-							<select class="custom-select" formControlName="unidadTiempo">
-								<option selected disabled value="">Seleccione</option>
-								<option [value]>Días</option>
-								<option [value]>Horas</option>
-								<option [value] >Minutos</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-lg-3">
-						<div>
-							<label>Duración</label>
-							<input class="form-control" type="text" formControlName="duracion">
-						</div>
-					</div>
-					<div class="col-lg-3">
-						<div class="text-center">
-							<label>¿Utiliza un sistema para realizarla?</label>
+				<div [formGroup]="formDetalle">
+					<h2 class="mt-5">Detalle de la acción</h2>
+					<div class="row mt-5">
+						<div class="col-lg-6">
 							<div>
-								<div class="custom-control custom-radio custom-control-inline">
-									<input type="radio" id="customRadioInline1" name="utilizaSistema" class="custom-control-input" formControlName="utilizaSistema" [value]=true>
-									<label class="custom-control-label" for="customRadioInline1">SI</label>
-								</div>
-								<div class="custom-control custom-radio custom-control-inline">
-									<input type="radio" id="customRadioInline2" name="utilizaSistema" class="custom-control-input" formControlName="utilizaSistema" [value]=false>
-									<label class="custom-control-label" for="customRadioInline2">NO</label>
-								</div>
+								<label>Tarea</label>
+								<input class="form-control" type="text" formControlName="actividad">
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div>
+								<label>¿Quién la realiza?</label>
+								<select class="custom-select" formControlName="dependenciaRealiza">
+									<option selected disabled value="">Dependencia/Depto.</option>
+									<option [value]>dependencia 1</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div style="margin-top: 3px;">
+								<select class="custom-select mt-4" formControlName="puestoRealiza">
+									<option selected disabled value="">Puesto</option>
+									<option [value]>Puesto 1</option>
+									<option [value]>puesto 2</option> 
+								</select>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-3">
-						<div style="margin-top: 3px;">
-							<label>Nombre del sistema</label>
-							<select class="custom-select" formControlName="nombreSistema">
-								<option selected disabled value="">Seleccione</option>
-								<option [value] >POINTER</option>
-								<option [value] >SICABI</option>
-								<option [value] >CIMCORR</option>
-							</select>
+					<div class="row mt-5">
+						<div class="col-lg-3">
+							<div>
+								<label>¿Qué necesita para realizarla?</label>
+								<select class="custom-select" formControlName="documentoEntrada">
+									<option selected disabled value="">Seleccione</option>
+									<option [value]>Oficio</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div style="margin-top: 28px;">
+								<input class="form-control mt-4" type="text" formControlName="otroDocumentoEntrada" disabled>
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div>
+								<label>¿Quién solicita?</label>
+								<select class="custom-select" formControlName="dependenciaSolicita">
+									<option selected disabled value="">Dependencia/Depto.</option>
+									<option [value]>dependencia 1</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div style="margin-top: 3px;">
+								<select class="custom-select mt-4" formControlName="puestoSolicita">
+									<option selected disabled value="">Puesto</option>
+									<option [value]>Puesto 1</option>
+									<option [value]>puesto 2</option> 
+								</select>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="row mt-5">
-					<div class="col-lg-12">
-						<div>
-							<label>Observaciones</label>
-							<input class="form-control" type="text" formControlName="observaciones">
+					<div class="row mt-5">
+						<div class="col-lg-3">
+							<div>
+								<label>¿Qué resultado genera?</label>
+								<select class="custom-select" formControlName="resultadoDocumento">
+									<option selected disabled value="">Seleccione</option>
+									<option [value]>Oficio</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div style="margin-top: 28px;">
+								<input class="form-control mt-4" type="text" formControlName="otroResultado" disabled>
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div>
+								<label>¿Quién recibe el resultado?</label>
+								<select class="custom-select" formControlName="dependenciaRecibe">
+									<option selected disabled value="">Dependencia/Depto.</option>
+									<option [value]>dependencia 1</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div style="margin-top: 3px;">
+								<select class="custom-select mt-4" formControlName="puestoRecibe">
+									<option selected disabled value="">Puesto</option>
+									<option [value]>Puesto 1</option>
+									<option [value]>puesto 2</option> 
+								</select>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="row mt-4">
-					<div class="input-group col-6">
-						<button (click)="agregarItem()" type="button" class="btn btn-dark mb-3"> <i class="fas fa-check "></i> Agregar detalle</button>
+					<div class="row mt-5">
+						<div class="col-lg-3">
+							<div>
+								<label>Tiempo promedio para realizarla</label>
+								<select class="custom-select" formControlName="unidadTiempo">
+									<option selected disabled value="">Seleccione</option>
+									<option [value]>Días</option>
+									<option [value]>Horas</option>
+									<option [value] >Minutos</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div>
+								<label>Duración</label>
+								<input class="form-control" type="text" formControlName="duracion">
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div class="text-center">
+								<label>¿Utiliza un sistema para realizarla?</label>
+								<div>
+									<div class="custom-control custom-radio custom-control-inline">
+										<input type="radio" id="customRadioInline1" name="utilizaSistema" class="custom-control-input" formControlName="utilizaSistema" [value]=true>
+										<label class="custom-control-label" for="customRadioInline1">SI</label>
+									</div>
+									<div class="custom-control custom-radio custom-control-inline">
+										<input type="radio" id="customRadioInline2" name="utilizaSistema" class="custom-control-input" formControlName="utilizaSistema" [value]=false>
+										<label class="custom-control-label" for="customRadioInline2">NO</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div style="margin-top: 3px;">
+								<label>Nombre del sistema</label>
+								<select class="custom-select" formControlName="nombreSistema">
+									<option selected disabled value="">Seleccione</option>
+									<option [value] >POINTER</option>
+									<option [value] >SICABI</option>
+									<option [value] >CIMCORR</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row mt-5">
+						<div class="col-lg-12">
+							<div>
+								<label>Observaciones</label>
+								<input class="form-control" type="text" formControlName="observaciones">
+							</div>
+						</div>
+					</div>
+					<div class="row mt-4">
+						<div class="input-group col-6">
+							<button (click)="agregarItem()" type="button" class="btn btn-dark mb-3"> <i class="fas fa-check "></i> Agregar detalle</button>
+						</div>
 					</div>
 				</div>
 				<div class="row mt-5">
@@ -224,16 +226,14 @@
 							</thead>
 							<tbody formArrayName="items">
 								<tr *ngFor="let item of items.controls; let i = index">
-									<div [formGroupName]="i">
-										<td class="text-center">{{i + 1}}</td>
-										<td>
-											<input class="form-control" type="text" [formControlName]="actividad">
-										</td>
-										<td class="text-center">
-											<button type="button" class="btn btn-outline-danger mr-3" (click)="eliminarItem(i)"> <i class="fas fa-trash-alt"></i></button>
-											<button type="button" class="btn btn-outline-primary" (click)="eliminarItem(i)"> <i class="fas fa-pen"></i></button>
-										</td>
-									</div>
+									<td class="text-center">{{i + 1}}</td>
+									<td>
+										{{item.get('actividad').value}}
+									</td>
+									<td class="text-center">
+										<button type="button" class="btn btn-outline-primary" (click)="editarItem(i)"> <i class="fas fa-pen"></i></button>
+										<button type="button" class="btn btn-outline-danger mr-3" (click)="eliminarItem(i)"> <i class="fas fa-trash-alt"></i></button>
+									</td>
 								</tr>
 							</tbody>
 						</table>

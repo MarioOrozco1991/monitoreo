@@ -13,8 +13,6 @@ import Swal from 'sweetalert2';
 })
 export class ProgramacionMetasPoaComponent implements OnInit {
 
-  mostrarNombreSistema: boolean = false;
-
   public form: FormGroup;
 
   respuesta: any;

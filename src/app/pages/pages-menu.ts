@@ -76,7 +76,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
           children: [
             {
               title: 'Programaciones',
-              link: '/pages/programacion-acciones-poa',
+              link: '/pages/programacion-acciones-pom',
             },
           ]
         },
@@ -85,7 +85,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
           children: [
             {
               title: 'Programaciones',
-              link: '/pages/programaciones-metas-poa',
+              link: '/pages/programaciones-metas-pom',
             },
           ]
         },  

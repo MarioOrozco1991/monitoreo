@@ -1,1 +1,60 @@
-<p>programaciones-metas-pom works!</p>
+<div class="container">
+    <h1>Programaciones Metas Físicas (POM)</h1>
+</div>
+
+<div class="container mt-5">
+    <button [routerLink]="['crear']" type="button" class="btn btn-primary mr-3"><nb-icon icon="edit-2-outline"></nb-icon> Crear Nueva Programación </button>
+</div>
+
+<div class="container mt-5">
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-striped table-bordered row-border hover responsive">
+        <thead class="table table-dark">
+            <tr class="text-center">
+                <th>
+                    <font color="white">Id</font>
+                </th>
+                <th>
+                    <font color="white">Tipo Programación</font>
+                </th>
+                <th>
+                    <font color="white">Periodo</font>
+                </th>
+                <th>
+                    <font color="white">Unidad de Medida</font>
+                </th>
+                <th>
+                    <font color="white">Medio de verificación</font>
+                </th>
+                <th>
+                    <font color="white">Indicador</font>
+                </th>
+                <th>
+                    <font color="white">Formula de Indicador</font>
+                </th>
+                <th>
+                    <font color="white">Creado en</font>
+                </th>
+                <th>
+                    <font color="white">Acciones</font>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let datos of respuesta; let i=index">
+                <td class="text-center">{{datos.id}}</td>
+                <td>{{datos.tipoProgramacion}}</td>
+                <td class="text-center">{{datos.periodo}}</td>
+                <td class="text-center">{{datos.unidadMedida}}</td>
+                <td class="text-center">{{datos.medioVerificacion}}</td>
+                <td class="text-center">{{datos.indicador}}</td>
+                <td class="text-center">{{datos.formulaIndicador}}</td>
+                <td class="text-center" style="width: 100px;">{{datos.createAt | date: 'dd-MM-yyyy'}}</td>
+                <td class="text-center" style="width: 150px;">
+                    <button type="button" class="btn btn-sm btn-primary mr-2"> <nb-icon icon="eye-outline"></nb-icon></button>
+                    <button [routerLink]="[datos.id]" type="button" class="btn btn-sm btn-success mr-2"> <nb-icon icon="edit-2-outline"></nb-icon> </button>
+                    <button (click)="eliminar(datos, i)" type="button" class="btn btn-sm btn-danger"> <nb-icon icon="trash-2-outline"></nb-icon></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

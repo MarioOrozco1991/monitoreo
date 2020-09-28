@@ -20,6 +20,10 @@ import { ObjetivosEstrategicosComponent } from './poa/objetivos-estrategicos/obj
 import { ObjetivoEstrategicoComponent } from './poa/objetivos-estrategicos/objetivo-estrategico/objetivo-estrategico.component';
 import { ProgramacionesAccionesPoaComponent } from './poa/acciones/programaciones/programaciones-acciones-poa.component';
 import { ProgramacionAccionPoaComponent } from './poa/acciones/programaciones/programacion-accion/programacion-accion-poa.component';
+import { ProgramacionesAccionesPomComponent } from './pom/acciones/programaciones/programaciones-acciones-pom.component';
+import { ProgramacionAccionPomComponent } from './pom/acciones/programaciones/programacion/programacion-accion-pom.component';
+import { ProgramacionesMetasPomComponent } from './pom/metas-fisicas/programaciones/programaciones-metas-pom.component';
+import { ProgramacionMetasPomComponent } from './pom/metas-fisicas/programaciones/programacion/programacion-metas-pom.component';
 
 const routes: Routes = [{
   path: '',
@@ -82,6 +86,18 @@ const routes: Routes = [{
       component: AccionComponent,
     },
     {
+      path: 'programacion-acciones-poa',
+      component: ProgramacionesAccionesPoaComponent,
+    },
+    {
+      path: 'programacion-acciones-poa/crear',
+      component: ProgramacionAccionPoaComponent,
+    },
+    {
+      path: 'programacion-acciones-poa/:id',
+      component: ProgramacionAccionPoaComponent,
+    },
+    {
       path: 'programaciones-metas-poa',
       component: ProgramacionesMetasPoaComponent,
     },
@@ -94,17 +110,30 @@ const routes: Routes = [{
       component: ProgramacionMetasPoaComponent,
     },
     {
-      path: 'programacion-acciones-poa',
-      component: ProgramacionesAccionesPoaComponent,
+      path: 'programacion-acciones-pom',
+      component: ProgramacionesAccionesPomComponent,
     },
     {
-      path: 'programacion-acciones-poa/crear',
-      component: ProgramacionAccionPoaComponent,
+      path: 'programacion-acciones-pom/crear',
+      component: ProgramacionAccionPomComponent,
     },
     {
-      path: 'programacion-acciones-poa/:id',
-      component: ProgramacionAccionPoaComponent,
+      path: 'programacion-acciones-pom/:id',
+      component: ProgramacionAccionPomComponent,
     },
+    {
+      path: 'programaciones-metas-pom',
+      component: ProgramacionesMetasPomComponent,
+    },
+    {
+      path: 'programaciones-metas-pom/crear',
+      component: ProgramacionMetasPomComponent,
+    },
+    {
+      path: 'programaciones-metas-pom/:id',
+      component: ProgramacionMetasPomComponent,
+    },
+    
     {
       path: 'revision',
       component: RevisionComponent,
