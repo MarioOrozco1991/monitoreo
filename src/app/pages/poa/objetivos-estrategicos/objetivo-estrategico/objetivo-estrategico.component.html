@@ -14,17 +14,42 @@
             </div>
           </div>
         </div>
-        <div class="row mt-5">
-          <div class="col-lg-11">
-            <div>
-              <label>Nombre del objetivo estratégico</label>
-              <input class="form-control" type="text" formControlName="nombre">
+        <div [formGroup]="formDetalle">
+          <div class="row mt-5">
+            <div class="col-lg-11">
+              <div>
+                <label>Nombre del objetivo estratégico</label>
+                <input class="form-control" type="text" formControlName="nombre">
+              </div>
             </div>
+            <div class="col-lg-1" style="margin-top: 28px;">
+              <button (click)="agregarItem()" nbTooltip="Agregar" nbTooltipPlacement="top" nbButton status="control" type="button" class="btn btn-primary btn-block waves-effect">+</button>
+            </div>     
           </div>
-          <div class="col-lg-1" style="margin-top: 28px;">
-            <input type="button" class="btn btn-primary btn-block waves-effect" value = "+">
-          </div>     
         </div>
+        <div class="container mt-5">
+					<table class="table table-striped table-bordered row-border hover responsive" style="margin: 0 auto;">
+						<thead class="thead-dark">
+							<tr>
+								<th class="text-center">#</th>
+                <th class="text-center">Nombre del objetivo</th>		
+								<th class="text-center">Opciones</th>
+							</tr>
+						</thead>
+						<tbody formArrayName="items">
+							<tr *ngFor="let item of items.controls; let i = index">
+								<td class="text-center" style="width: 20px;">{{i + 1}}</td>
+								<td style="width: 500px;">
+									{{item.get('nombre').value}}
+                </td>
+								<td class="text-center" style="width: 200px;">
+									<button nbTooltip="Editar" nbTooltipPlacement="bottom" nbButton status="control" type="button" class="btn btn-sm btn-success mr-2" (click)="editarItem(i)"> <nb-icon icon="edit-2-outline"></nb-icon></button>
+									<button nbTooltip="Eliminar" nbTooltipPlacement="bottom" nbButton status="control" type="button" class="btn btn-sm btn-danger" (click)="eliminarItem(i)"> <nb-icon icon="trash-2-outline"></nb-icon></button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
         <div class="row card-block mt-5">
           <div class="col-lg-6">
             <input [routerLink]="['..']" type="submit" class="btn btn-primary btn-block waves-effect" (click)='enviarFormulario(form)' *ngIf="!form.value.id else botonActualizar" value = "Crear">

@@ -12,9 +12,8 @@ import Swal from 'sweetalert2';
 export class ProgramacionAccionPomComponent implements OnInit {
 
   mostrarNombreSistema: boolean = false;
-
-  public form: FormGroup;
-
+  form: FormGroup;
+  formDetalle: FormGroup;
   respuesta: any;
   
     
@@ -41,6 +40,9 @@ export class ProgramacionAccionPomComponent implements OnInit {
     this.cargarProgramacion();
   }
   
+  get items(): FormArray {
+    return this.form.get('items') as FormArray;
+  }
   
   crearFormulario(){
     //inicializando el formulario
@@ -70,20 +72,35 @@ export class ProgramacionAccionPomComponent implements OnInit {
       totalSegundoCuatrimestre:    ['',],
       totalTercerCuatrimestre:     ['',],
       totalProgramado:             ['',],
+      items: this.fb.array([]),
+    });
+    this.formDetalle = this.fb.group({
+      año:             ['',],
+      cantidadProgramada:  ['',]
+
     });
   }
+  // agregar item
+  agregarItem(){
+    // this.items.push( this.fb.control('', Validators.required ) );
+    console.log('this.formDetalle', this.formDetalle.getRawValue());
+    this.items.push(
+      this.fb.group(this.formDetalle.getRawValue())
+    );
+    this.formDetalle.reset();
+  }
 
-//   calcularProgramado() {
-//     //return ((this.forma.value.enero + (this.forma.value.febrero) + (this.forma.value.marzo) + (this.forma.value.abril)))
-//     return (this.forma.value.enero )
-//    }
- 
-//   totalProgramado(){
-//     console.log('cambio');
-//     this.forma.get('totalPrimerCuatrimestre')
-//       .setValue(this.calcularProgramado());
-//   }
-  
+  editarItem(i: any){
+    console.log('i', i, this.items);
+    const item = this.items.at(i) as FormGroup
+    this.formDetalle.patchValue(item.getRawValue())
+  }
+
+  eliminarItem(i: number ){
+    console.log('i', i);
+    this.items.removeAt(i);
+    this.formDetalle.reset();
+  }
 
   cargarProgramacion(): void {
     console.log('desde cargrar programacion');

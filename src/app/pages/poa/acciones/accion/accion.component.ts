@@ -26,7 +26,7 @@ export class AccionComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private accionesService: AccionesService,
               private ejesService: EjesService,
-              private bjetivosEstrategicosService: ObjetivosEstrategicosService,  
+              private objetivosEstrategicosService: ObjetivosEstrategicosService,  
               private objetivosOperativosService: ObjetivosOperativosService
   ) {
   
@@ -59,15 +59,13 @@ export class AccionComponent implements OnInit {
     });
 
     this.formDetalle = this.fb.group({
-      actividad:             ['',],
+      tarea:                 ['',],
       dependenciaRealiza:    ['',],
       puestoRealiza:         ['',],
       documentoEntrada:      ['',],
-      otroDocumentoEntrada:  ['',],
       dependenciaSolicita:   ['',],
       puestoSolicita:        ['',],
       resultadoDocumento:    ['',],
-      otroResultado:         ['',],
       dependenciaRecibe:     ['',],
       puestoRecibe:          ['',],
       unidadTiempo:          ['',],
@@ -85,6 +83,7 @@ export class AccionComponent implements OnInit {
     this.items.push(
       this.fb.group(this.formDetalle.getRawValue())
     );
+    this.formDetalle.reset();
   }
 
   editarItem(i: any){
@@ -126,7 +125,8 @@ export class AccionComponent implements OnInit {
         timer: 3000
       })
     });
-    this.router.navigate(['..']);
+    this.form.reset();
+    this.items.clear();
   }
 
   public actualizar(form: any) {
@@ -148,7 +148,7 @@ export class AccionComponent implements OnInit {
   }
 
   public cargarObjetivoEstrategico(): void {
-    this.bjetivosEstrategicosService.listado().subscribe((respuesta) => {
+    this.objetivosEstrategicosService.listado().subscribe((respuesta) => {
       this.objetivosEstrategicos = respuesta;
     });   
   }

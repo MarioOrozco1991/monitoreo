@@ -32,7 +32,7 @@
 							<label>Objetivo Operativo</label>
 							<select class="custom-select" formControlName="objetivoOperativo">
 								<option selected disabled value="">Seleccione</option>
-								<option [value]="objetivoOperativo.id" *ngFor="let objetivoOperativo of objetivosOperativos">{{objetivoOperativo.descripcion}}</option>
+								<option [value]="objetivoOperativo.id" *ngFor="let objetivoOperativo of objetivosOperativos">{{objetivoOperativo.nombre}}</option>
 							</select>
 						</div>
 					</div>
@@ -65,7 +65,7 @@
 						<div class="col-lg-6">
 							<div>
 								<label>Tarea</label>
-								<input class="form-control" type="text" formControlName="actividad">
+								<input class="form-control" type="text" formControlName="tarea">
 							</div>
 						</div>
 						<div class="col-lg-3">
@@ -88,18 +88,13 @@
 						</div>
 					</div>
 					<div class="row mt-5">
-						<div class="col-lg-3">
+						<div class="col-lg-6">
 							<div>
 								<label>¿Qué necesita para realizarla?</label>
 								<select class="custom-select" formControlName="documentoEntrada">
 									<option selected disabled value="">Seleccione</option>
 									<option [value]>Oficio</option>
 								</select>
-							</div>
-						</div>
-						<div class="col-lg-3">
-							<div style="margin-top: 28px;">
-								<input class="form-control mt-4" type="text" formControlName="otroDocumentoEntrada" disabled>
 							</div>
 						</div>
 						<div class="col-lg-3">
@@ -122,18 +117,13 @@
 						</div>
 					</div>
 					<div class="row mt-5">
-						<div class="col-lg-3">
+						<div class="col-lg-6">
 							<div>
 								<label>¿Qué resultado genera?</label>
 								<select class="custom-select" formControlName="resultadoDocumento">
 									<option selected disabled value="">Seleccione</option>
 									<option [value]>Oficio</option>
 								</select>
-							</div>
-						</div>
-						<div class="col-lg-3">
-							<div style="margin-top: 28px;">
-								<input class="form-control mt-4" type="text" formControlName="otroResultado" disabled>
 							</div>
 						</div>
 						<div class="col-lg-3">
@@ -208,36 +198,34 @@
 							</div>
 						</div>
 					</div>
-					<div class="row mt-4">
+					<div class="row mt-5">
 						<div class="input-group col-6">
-							<button (click)="agregarItem()" type="button" class="btn btn-dark mb-3"> <i class="fas fa-check "></i> Agregar detalle</button>
+							<button (click)="agregarItem()" type="button" class="btn btn-primary mb-3"> <i class="fas fa-check "></i> Agregar detalle</button>
 						</div>
 					</div>
 				</div>
-				<div class="row mt-5">
-					<div class="col-md-6">
-						<table class="table">
-							<thead class="thead-dark">
-								<tr>
-									<th class="text-center">#</th>
-									<th class="text-center">Descripción de la actividad</th>	
-									<th class="text-center">Acciones</th>
-								</tr>
-							</thead>
-							<tbody formArrayName="items">
-								<tr *ngFor="let item of items.controls; let i = index">
-									<td class="text-center">{{i + 1}}</td>
-									<td>
-										{{item.get('actividad').value}}
-									</td>
-									<td class="text-center">
-										<button type="button" class="btn btn-outline-primary" (click)="editarItem(i)"> <i class="fas fa-pen"></i></button>
-										<button type="button" class="btn btn-outline-danger mr-3" (click)="eliminarItem(i)"> <i class="fas fa-trash-alt"></i></button>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+				<div class="container mt-5">
+					<table class="table table-striped table-bordered row-border hover responsive" style="margin: 0 auto;">
+						<thead class="thead-dark">
+							<tr>
+								<th class="text-center">#</th>
+								<th class="text-center">Nombre de la tarea</th>	
+								<th class="text-center">Opciones</th>
+							</tr>
+						</thead>
+						<tbody formArrayName="items">
+							<tr *ngFor="let item of items.controls; let i = index">
+								<td class="text-center" style="width: 20px;">{{i + 1}}</td>
+								<td style="width: 500px;">
+									{{item.get('tarea').value}}
+								</td>
+								<td class="text-center" style="width: 200px;">
+									<button type="button" class="btn btn-sm btn-success mr-2" (click)="editarItem(i)"> <nb-icon icon="edit-2-outline"></nb-icon></button>
+									<button type="button" class="btn btn-sm btn-danger" (click)="eliminarItem(i)"> <nb-icon icon="trash-2-outline"></nb-icon></button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 				<div class="row card-block mt-5">
 					<div class="col-lg-6">

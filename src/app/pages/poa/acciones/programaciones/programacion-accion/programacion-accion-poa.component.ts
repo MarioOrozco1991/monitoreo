@@ -108,6 +108,7 @@ export class ProgramacionAccionPoaComponent implements OnInit {
         timer: 3000
       })
     });
+    this.form.reset();
   }
 
   public actualizar(form: any) {

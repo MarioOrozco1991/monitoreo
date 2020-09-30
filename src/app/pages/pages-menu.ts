@@ -8,6 +8,14 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true,
     children: [
         {
+          title: 'Centros de costo',
+          link: '/pages/centros-de-costo',
+        },
+        {
+          title: 'Resultados Institucionales',
+          link: '/pages/resultados-institucionales',
+        },
+        {
           title: 'Encabezado',
           children: [
             {

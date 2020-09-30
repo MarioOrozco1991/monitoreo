@@ -1,0 +1,41 @@
+<div>
+  <div class="container">
+    <div class="col-xl-12">
+      <h1>Definición de Centros de costo</h1>
+      <form autocomplete="off" [formGroup]="form"> 
+        <div class="row mt-5">
+          <div class="col-lg-12">
+            <div>
+              <label>Dependencia Responsable</label>
+              <select class="custom-select" formControlName="dependenciaResponsable">
+                <option selected disabled value="">Seleccione</option>
+                <option>Informatica y estadistica</option>
+              </select>
+            </div>
+          </div>   
+        </div>
+        <div class="row mt-5">
+          <div class="col-lg-11">
+            <div>
+              <label>Nombre del Centro de Costo</label>
+              <input class="form-control" type="text" formControlName="nombre">
+            </div>
+          </div>  
+        </div>
+        <div class="row card-block mt-5">
+          <div class="col-lg-6">
+            <input [routerLink]="['..']" type="submit" class="btn btn-primary btn-block waves-effect" (click)="enviarFormulario(form)" *ngIf="!form.value.id else botonActualizar" value="Crear">
+            <ng-template #botonActualizar>
+              <input [routerLink]="['..']" type="submit" class="btn btn-primary btn-block waves-effect" (click)="enviarFormulario(form)" value="Modificar">
+            </ng-template>
+          </div>
+          <div class="col-lg-6">
+            <input [routerLink]="['..']" type="button" class="btn btn-danger btn-block waves-effect" value="Cancelar">
+          </div>
+        </div>
+      </form>
+    </div>  
+  </div>
+</div>
+
+

@@ -2,15 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2'; 
-import { EjesService } from './../../../../services/ejes.service';
-
+import { CentrosDeCostoService } from './../../../../services/centros-de-costo.service';
 
 @Component({
-  selector: 'ngx-eje',
-  templateUrl: './eje.component.html',
-  styleUrls: ['./eje.component.scss']
+  selector: 'ngx-centro-de-costo',
+  templateUrl: './centro-de-costo.component.html',
+  styleUrls: ['./centro-de-costo.component.scss']
 })
-export class EjeComponent implements OnInit {
+export class CentroDeCostoComponent implements OnInit {
 
   respuesta: any;
   form: FormGroup;
@@ -18,20 +17,20 @@ export class EjeComponent implements OnInit {
   constructor( private fb:FormBuilder,
                private router: Router,
                private activatedRoute: ActivatedRoute,
-               private ejesService: EjesService,) {
+               private centrosDeCostoService: CentrosDeCostoService,) {
     this.crearFormulario();
   }    
       
   ngOnInit(): void {
-    this.mostrarEje();
+    this.mostrar();
   }
   
   crearFormulario(){
     this.form = this.fb.group({
-      id:           [null,],
-      nombre:       ['',],
-      descripcion:  ['',],
-    })
+      id:                     [null,],
+      dependenciaResponsable: ['',],
+      nombre:                 ['',],
+    });
   }
   
   enviarFormulario(form: any) {
@@ -43,10 +42,10 @@ export class EjeComponent implements OnInit {
   }
 
   public crear(form: any) {
-    this.ejesService.crear(form.value).subscribe((data) => {
+    this.centrosDeCostoService.crear(form.value).subscribe((data) => {
       Swal.fire({
         icon: 'success',
-        title: 'Eje creado exitosamente',
+        title: 'Centro de Costo creado exitosamente',
         showConfirmButton: false,
         timer: 3000
       })
@@ -54,10 +53,10 @@ export class EjeComponent implements OnInit {
   }
 
   public actualizar(form: any) {
-    this.ejesService.actualizar(form.value).subscribe((data) => {
+    this.centrosDeCostoService.actualizar(form.value).subscribe((data) => {
       Swal.fire({
         icon: 'success',
-        title: 'Objetivo modificado exitosamente',
+        title: 'Centro de Costo modificado exitosamente',
         showConfirmButton: false,
         timer: 3000
       })
@@ -65,10 +64,10 @@ export class EjeComponent implements OnInit {
   }
   
   //metodo que carga la información del objetivo a modificar
-  mostrarEje(): void {
+  mostrar(): void {
     this.activatedRoute.params.subscribe(params => {
       if(params.id){
-        this.ejesService.get(params.id).subscribe((respuesta) => {
+        this.centrosDeCostoService.get(params.id).subscribe((respuesta) => {
           this.form.patchValue(respuesta);
         });
       }       

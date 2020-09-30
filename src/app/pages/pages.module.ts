@@ -35,6 +35,10 @@ import { ProgramacionAccionPomComponent } from './pom/acciones/programaciones/pr
 import { ProgramacionesAccionesPoaComponent } from './poa/acciones/programaciones/programaciones-acciones-poa.component';
 import { ProgramacionMetasPomComponent } from './pom/metas-fisicas/programaciones/programacion/programacion-metas-pom.component';
 import { ProgramacionesMetasPomComponent } from './pom/metas-fisicas/programaciones/programaciones-metas-pom.component';
+import { CentrosDeCostoComponent } from './poa/centros-de-costo/centros-de-costo.component';
+import { CentroDeCostoComponent } from './poa/centros-de-costo/centro-de-costo/centro-de-costo.component';
+import { ResultadosInstitucionalesComponent } from './poa/resultados-institucionales/resultados-institucionales.component';
+import { ResultadoInstitucionalComponent } from './poa/resultados-institucionales/resultado-institucional/resultado-institucional.component';
 
 
 @NgModule({
@@ -76,6 +80,10 @@ import { ProgramacionesMetasPomComponent } from './pom/metas-fisicas/programacio
     ProgramacionesAccionesPoaComponent,
     ProgramacionMetasPomComponent,
     ProgramacionesMetasPomComponent,
+    CentrosDeCostoComponent,
+    CentroDeCostoComponent,
+    ResultadosInstitucionalesComponent,
+    ResultadoInstitucionalComponent,
   ],
 })
 export class PagesModule {

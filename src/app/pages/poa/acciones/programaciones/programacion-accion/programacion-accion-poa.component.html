@@ -103,7 +103,7 @@
             </div>
             <div class="col-lg-2">
               <div>
-                <label>Total Cuatrimestre</label>
+                <label><b>Total Cuatrimestre</b></label>
                 <input class="form-control" type="text" formControlName="totalPrimerCuatrimestre">
               </div>
             </div>
@@ -138,7 +138,7 @@
             </div>
             <div class="col-lg-2">
               <div>
-                <label>Total Cuatrimestre</label>
+                <label><b>Total Cuatrimestre</b></label>
                 <input class="form-control" type="text" formControlName="totalSegundoCuatrimestre">
               </div>
             </div>
@@ -173,25 +173,24 @@
             </div>
             <div class="col-lg-2">
               <div>
-                <label>Total Cuatrimestre</label>
+                <label><b>Total Cuatrimestre</b></label>
                 <input class="form-control" type="text" formControlName="totalTercerCuatrimestre">
               </div>
             </div>
           </div>
 
-
           <h4 class="mt-5 text-center">Total anual programado</h4>
           <div class="row mt-2">
             <div class="col-lg-4 text-center">
               <div>
-                <input class="form-control" type="text" formControlName="totalProgramado" disabled>
+                <input class="form-control" type="text" formControlName="totalProgramado">
               </div>
             </div>
           </div>
 
           <div class="row card-block mt-5">
             <div class="col-lg-6">
-              <input [routerLink]="['..']" type="submit" class="btn btn-primary btn-block waves-effect" (click)="enviarFormulario(form)" *ngIf="!form.value.id else botonActualizar" value="Crear Programación">
+              <input type="submit" class="btn btn-primary btn-block waves-effect" (click)="enviarFormulario(form)" *ngIf="!form.value.id else botonActualizar" value="Crear Programación">
               <ng-template #botonActualizar>
                 <input [routerLink]="['..']" type="submit" class="btn btn-primary btn-block waves-effect" (click)="enviarFormulario(form)" value="Modificar Programación">
               </ng-template>

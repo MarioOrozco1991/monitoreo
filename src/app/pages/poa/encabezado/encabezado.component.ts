@@ -20,6 +20,7 @@ export class EncabezadoComponent implements OnInit {
   productos: any[]; 
   subproductos: any[];
   resultadoInstitucional: any[];
+  formDetalle: FormGroup;
 
   form: FormGroup;
 
@@ -40,24 +41,47 @@ export class EncabezadoComponent implements OnInit {
     this.cargarResultadoInstitucional();
   }
     
+  get items(): FormArray {
+    return this.form.get('items') as FormArray;
+  }
+
   crearFormulario(){
     
     this.form = this.fb.group({
-      id:                       [null,],
+      id:                         [null,],
       idProgramaPresupuestario:   ['',],
       idSubprograma:              ['',],
-      idResultadoInstitucional:    ['',],
+      idResultadoInstitucional:   ['',],
       idDependenciaResponsable:   ['',],
+      items: this.fb.array([]),
+    });
+    this.formDetalle = this.fb.group({
       idActividadPresupuestaria:  ['',],
       idProducto:                 ['',],
       idSubproducto:              ['',],
-    })
+    });
   }
 
-    
+  // agregar item
+  agregarItem(){
+    // this.items.push( this.fb.control('', Validators.required ) );
+    console.log('this.formDetalle', this.formDetalle.getRawValue());
+    this.items.push(
+      this.fb.group(this.formDetalle.getRawValue())
+    );
+    this.formDetalle.reset();
+  }
 
-  agregarActividad(){
-      
+  editarItem(i: any){
+    console.log('i', i, this.items);
+    const item = this.items.at(i) as FormGroup
+    this.formDetalle.patchValue(item.getRawValue())
+  }
+
+  eliminarItem(i: number ){
+    console.log('i', i);
+    this.items.removeAt(i);
+    this.formDetalle.reset();
   }
 
   //metodo cuando el usuario presione click en guardar
@@ -110,7 +134,7 @@ export class EncabezadoComponent implements OnInit {
   public crear(form: any) {
     // console.log('agregando', form.value);  
     this.encabezadoService.crear(form.value).subscribe((data) => {
-      // console.log('resultado desde crear', data);
+      console.log('encabezado completo', form.value);
       Swal.fire({
         icon: 'success',
         title: 'Encabezado creado exitosamente',
@@ -119,6 +143,8 @@ export class EncabezadoComponent implements OnInit {
       })
     });
     this.form.reset();
+    this.formDetalle.reset();
+    this.items.clear();
   }
 
   public actualizar(form: any) {
@@ -128,11 +154,15 @@ export class EncabezadoComponent implements OnInit {
       Swal.fire({
         //position: 'top-end',
         icon: 'success',
-        title: 'Acción modificada exitosamente',
+        title:     'Acción modificada exitosamente',
         showConfirmButton: false,
         timer: 3000
       })
       this.router.navigate(['..']);
     });
   } 
+
+  limpiarTabla(){
+    this.items.clear();
+  }
 }

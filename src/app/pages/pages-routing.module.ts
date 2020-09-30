@@ -24,11 +24,30 @@ import { ProgramacionesAccionesPomComponent } from './pom/acciones/programacione
 import { ProgramacionAccionPomComponent } from './pom/acciones/programaciones/programacion/programacion-accion-pom.component';
 import { ProgramacionesMetasPomComponent } from './pom/metas-fisicas/programaciones/programaciones-metas-pom.component';
 import { ProgramacionMetasPomComponent } from './pom/metas-fisicas/programaciones/programacion/programacion-metas-pom.component';
+import { CentrosDeCostoComponent } from './poa/centros-de-costo/centros-de-costo.component';
+import { CentroDeCostoComponent } from './poa/centros-de-costo/centro-de-costo/centro-de-costo.component';
+import { ResultadosInstitucionalesComponent } from './poa/resultados-institucionales/resultados-institucionales.component';
 
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [
+    {
+      path: 'centros-de-costo',
+      component: CentrosDeCostoComponent,
+    },
+    {
+      path: 'centros-de-costo/crear',
+      component: CentroDeCostoComponent,
+    },
+    {
+      path: 'centros-de-costo/:id',
+      component: CentroDeCostoComponent,
+    },
+    {
+      path: 'resultados-institucionales',
+      component: ResultadosInstitucionalesComponent,
+    },
     {
       path: 'encabezado/crear',
       component: EncabezadoComponent,
