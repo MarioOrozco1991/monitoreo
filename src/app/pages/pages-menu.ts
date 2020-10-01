@@ -16,6 +16,19 @@ export const MENU_ITEMS: NbMenuItem[] = [
           link: '/pages/resultados-institucionales',
         },
         {
+          title: 'Productos y Subproductos',
+          children: [
+            {
+              title: 'Productos',
+              link: '/pages/productos',
+            },
+            {
+              title: 'Subproductos',
+              link: '/pages/subproductos',
+            },
+          ]
+        },
+        {
           title: 'Encabezado',
           children: [
             {

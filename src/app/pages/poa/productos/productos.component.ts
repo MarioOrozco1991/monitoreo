@@ -3,20 +3,20 @@ import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2'; 
-import { ResultadosInstitucionalesService } from './../../../services/resultados-institucionales.service';
+import { ProductosService } from './../../../services/productos.service';
 
 @Component({
-  selector: 'ngx-resultados-institucionales',
-  templateUrl: './resultados-institucionales.component.html',
-  styleUrls: ['./resultados-institucionales.component.scss']
+  selector: 'ngx-productos',
+  templateUrl: './productos.component.html',
+  styleUrls: ['./productos.component.scss']
 })
-export class ResultadosInstitucionalesComponent implements OnInit {
+export class ProductosComponent implements OnInit {
 
   dtOptions: DataTables.Settings = {};
   respuesta: any;
   dtTrigger = new Subject();
 
-  constructor(public resultadosInstitucionalesService:ResultadosInstitucionalesService,
+  constructor(public productosService:ProductosService,
               private http:HttpClient, 
               private router:Router){
   }
@@ -25,12 +25,13 @@ export class ResultadosInstitucionalesComponent implements OnInit {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10
-    }
-    //obtener el listado de resultados institucionales
-    this.resultadosInstitucionalesService.listado().subscribe((data: any) => {
+    };
+
+    this.productosService.listado().subscribe((data: any) => {
        this.respuesta = data
       this.dtTrigger.next();
     });
+
   }
 
   ngOnDestroy(): void {
@@ -54,17 +55,16 @@ export class ResultadosInstitucionalesComponent implements OnInit {
       
       if (resp.value) {
         this.respuesta.splice(i, 1)
-        this.resultadosInstitucionalesService.eliminar(datos.id).subscribe();
+        this.productosService.eliminar(datos.id).subscribe();
         Swal.fire({
           //position: 'top-end',
           icon: 'success',
-          title: 'Resultado Institucional eliminado correctamente',
+          title: 'Producto eliminado correctamente',
           showConfirmButton: false,
           timer: 2000
         })
         this.router.navigate['centros-de-costo']
       }
     })
-
   }
 }

@@ -64,7 +64,7 @@
                 <label>Producto</label>
                 <select class="custom-select" formControlName="idProducto">
                   <option selected disabled value="">Seleccione</option>
-                  <option [value]="producto.id" *ngFor="let producto of productos">{{producto.descripcion}}</option>
+                  <option [value]="producto.id" *ngFor="let producto of productos">{{producto.nombre}}</option>
                 </select>
               </div>
             </div>
@@ -73,7 +73,7 @@
                 <label>Subproducto</label>
                 <select class="custom-select" formControlName="idSubproducto">
                   <option selected disabled value="">Seleccione</option>
-                  <option [value]="subproducto.id" *ngFor="let subproducto of subproductos">{{subproducto.descripcion}}</option>
+                  <option [value]="subproducto.id" *ngFor="let subproducto of subproductos">{{subproducto.nombre}}</option>
                 </select>
               </div>
             </div>

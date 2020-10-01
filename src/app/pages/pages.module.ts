@@ -39,6 +39,12 @@ import { CentrosDeCostoComponent } from './poa/centros-de-costo/centros-de-costo
 import { CentroDeCostoComponent } from './poa/centros-de-costo/centro-de-costo/centro-de-costo.component';
 import { ResultadosInstitucionalesComponent } from './poa/resultados-institucionales/resultados-institucionales.component';
 import { ResultadoInstitucionalComponent } from './poa/resultados-institucionales/resultado-institucional/resultado-institucional.component';
+import { ProductosComponent } from './poa/productos/productos.component';
+import { ProductoComponent } from './poa/productos/producto/producto.component';
+import { SubproductosComponent } from './poa/subproductos/subproductos.component';
+import { SubproductoComponent } from './poa/subproductos/subproducto/subproducto.component';
+import { PoliticasGobiernoComponent } from './poa/politicas-gobierno/politicas-gobierno.component';
+import { PoliticaGobiernoComponent } from './poa/politicas-gobierno/politica-gobierno/politica-gobierno.component';
 
 
 @NgModule({
@@ -84,6 +90,12 @@ import { ResultadoInstitucionalComponent } from './poa/resultados-institucionale
     CentroDeCostoComponent,
     ResultadosInstitucionalesComponent,
     ResultadoInstitucionalComponent,
+    ProductosComponent,
+    ProductoComponent,
+    SubproductosComponent,
+    SubproductoComponent,
+    PoliticasGobiernoComponent,
+    PoliticaGobiernoComponent,
   ],
 })
 export class PagesModule {

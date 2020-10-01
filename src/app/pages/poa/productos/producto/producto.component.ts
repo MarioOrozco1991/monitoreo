@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ProductosService } from './../../../../services/productos.service';
 import Swal from 'sweetalert2'; 
-import { CentrosDeCostoService } from './../../../../services/centros-de-costo.service';
 
 @Component({
-  selector: 'ngx-centro-de-costo',
-  templateUrl: './centro-de-costo.component.html',
-  styleUrls: ['./centro-de-costo.component.scss']
+  selector: 'ngx-producto',
+  templateUrl: './producto.component.html',
+  styleUrls: ['./producto.component.scss']
 })
-export class CentroDeCostoComponent implements OnInit {
+export class ProductoComponent implements OnInit {
 
   respuesta: any;
   form: FormGroup;
@@ -17,7 +17,7 @@ export class CentroDeCostoComponent implements OnInit {
   constructor( private fb:FormBuilder,
                private router: Router,
                private activatedRoute: ActivatedRoute,
-               private centrosDeCostoService: CentrosDeCostoService,) {
+               private productosService: ProductosService,) {
     this.crearFormulario();
   }    
       
@@ -28,8 +28,9 @@ export class CentroDeCostoComponent implements OnInit {
   crearFormulario(){
     this.form = this.fb.group({
       id:                         [null,],
-      idDependenciaResponsable:   ['',],
+      idResultadoInstitucional:   ['',],
       nombre:                     ['',],
+      idUnidadMedida:             ['',],
     });
   }
   
@@ -42,10 +43,10 @@ export class CentroDeCostoComponent implements OnInit {
   }
 
   public crear(form: any) {
-    this.centrosDeCostoService.crear(form.value).subscribe((data) => {
+    this.productosService.crear(form.value).subscribe((data) => {
       Swal.fire({
         icon: 'success',
-        title: 'Centro de Costo creado exitosamente',
+        title: 'Producto creado exitosamente',
         showConfirmButton: false,
         timer: 3000
       })
@@ -53,10 +54,10 @@ export class CentroDeCostoComponent implements OnInit {
   }
 
   public actualizar(form: any) {
-    this.centrosDeCostoService.actualizar(form.value).subscribe((data) => {
+    this.productosService.actualizar(form.value).subscribe((data) => {
       Swal.fire({
         icon: 'success',
-        title: 'Centro de Costo modificado exitosamente',
+        title: 'Producto modificado exitosamente',
         showConfirmButton: false,
         timer: 3000
       })
@@ -67,7 +68,7 @@ export class CentroDeCostoComponent implements OnInit {
   mostrar(): void {
     this.activatedRoute.params.subscribe(params => {
       if(params.id){
-        this.centrosDeCostoService.get(params.id).subscribe((respuesta) => {
+        this.productosService.get(params.id).subscribe((respuesta) => {
           this.form.patchValue(respuesta);
         });
       }       

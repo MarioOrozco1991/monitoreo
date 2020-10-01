@@ -67,7 +67,6 @@ import {
     }),
     CoreModule.forRoot(),
   ],
-  providers: [ProgramacionesService, AccionesService],
 
   bootstrap: [AppComponent],
 })

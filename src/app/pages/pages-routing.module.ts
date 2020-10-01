@@ -27,6 +27,11 @@ import { ProgramacionMetasPomComponent } from './pom/metas-fisicas/programacione
 import { CentrosDeCostoComponent } from './poa/centros-de-costo/centros-de-costo.component';
 import { CentroDeCostoComponent } from './poa/centros-de-costo/centro-de-costo/centro-de-costo.component';
 import { ResultadosInstitucionalesComponent } from './poa/resultados-institucionales/resultados-institucionales.component';
+import { ResultadoInstitucionalComponent } from './poa/resultados-institucionales/resultado-institucional/resultado-institucional.component';
+import { ProductosComponent } from './poa/productos/productos.component';
+import { ProductoComponent } from './poa/productos/producto/producto.component';
+import { SubproductosComponent } from './poa/subproductos/subproductos.component';
+import { SubproductoComponent } from './poa/subproductos/subproducto/subproducto.component';
 
 const routes: Routes = [{
   path: '',
@@ -47,6 +52,38 @@ const routes: Routes = [{
     {
       path: 'resultados-institucionales',
       component: ResultadosInstitucionalesComponent,
+    },
+    {
+      path: 'resultados-institucionales/crear',
+      component: ResultadoInstitucionalComponent,
+    },
+    {
+      path: 'resultados-institucionales/:id',
+      component: ResultadoInstitucionalComponent,
+    },
+    {
+      path: 'productos',
+      component: ProductosComponent,
+    },
+    {
+      path: 'productos/crear',
+      component: ProductoComponent,
+    },
+    {
+      path: 'productos/:id',
+      component: ProductoComponent,
+    },
+    {
+      path: 'subproductos',
+      component: SubproductosComponent,
+    },
+    {
+      path: 'subproductos/crear',
+      component: SubproductoComponent,
+    },
+    {
+      path: 'subproductos/:id',
+      component: SubproductoComponent,
     },
     {
       path: 'encabezado/crear',
