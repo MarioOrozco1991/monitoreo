@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { PoliticasGobiernoService } from './../../../../services/politicas-gobierno.service';
+import { PoliticaAsociadaService } from './../../../../services/politica-asociada.service';
 import Swal from 'sweetalert2'; 
 
 @Component({
-  selector: 'ngx-politica-gobierno',
-  templateUrl: './politica-gobierno.component.html',
-  styleUrls: ['./politica-gobierno.component.scss']
+  selector: 'ngx-politica-asociada',
+  templateUrl: './politica-asociada.component.html',
+  styleUrls: ['./politica-asociada.component.scss']
 })
-export class PoliticaGobiernoComponent implements OnInit {
+export class PoliticaAsociadaComponent implements OnInit {
 
   respuesta: any;
   form: FormGroup;
@@ -17,7 +17,7 @@ export class PoliticaGobiernoComponent implements OnInit {
   constructor( private fb:FormBuilder,
                private router: Router,
                private activatedRoute: ActivatedRoute,
-               private politicasGobiernoService: PoliticasGobiernoService,) {
+               private politicaAsociadaService: PoliticaAsociadaService,) {
     this.crearFormulario();
   }    
       
@@ -42,7 +42,7 @@ export class PoliticaGobiernoComponent implements OnInit {
   }
 
   public crear(form: any) {
-    this.politicasGobiernoService.crear(form.value).subscribe((data) => {
+    this.politicaAsociadaService.crear(form.value).subscribe((data) => {
       Swal.fire({
         icon: 'success',
         title: 'Política creada exitosamente',
@@ -53,7 +53,7 @@ export class PoliticaGobiernoComponent implements OnInit {
   }
 
   public actualizar(form: any) {
-    this.politicasGobiernoService.actualizar(form.value).subscribe((data) => {
+    this.politicaAsociadaService.actualizar(form.value).subscribe((data) => {
       Swal.fire({
         icon: 'success',
         title: 'Política modificada exitosamente',
@@ -67,10 +67,11 @@ export class PoliticaGobiernoComponent implements OnInit {
   mostrar(): void {
     this.activatedRoute.params.subscribe(params => {
       if(params.id){
-        this.politicasGobiernoService.get(params.id).subscribe((respuesta) => {
+        this.politicaAsociadaService.get(params.id).subscribe((respuesta) => {
           this.form.patchValue(respuesta);
         });
       }       
     });
   }
+
 }

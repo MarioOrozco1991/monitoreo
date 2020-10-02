@@ -16,6 +16,19 @@ export const MENU_ITEMS: NbMenuItem[] = [
           link: '/pages/resultados-institucionales',
         },
         {
+          title: 'Políticas',
+          children: [
+            {
+              title: 'Politica General de Gobierno',
+              link: '/pages/politicas-gobierno',
+            },
+            {
+              title: 'Políticas Públicas Asociadas',
+              link: '/pages/politica-publica-asociada',
+            },
+          ]
+        },
+        {
           title: 'Productos y Subproductos',
           children: [
             {

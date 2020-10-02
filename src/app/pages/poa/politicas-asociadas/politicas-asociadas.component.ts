@@ -2,21 +2,21 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { PoliticaAsociadaService } from './../../../services/politica-asociada.service';
 import Swal from 'sweetalert2'; 
-import { PoliticasGobiernoService } from './../../../services/politicas-gobierno.service';
 
 @Component({
-  selector: 'ngx-politicas-gobierno',
-  templateUrl: './politicas-gobierno.component.html',
-  styleUrls: ['./politicas-gobierno.component.scss']
+  selector: 'ngx-politicas-asociadas',
+  templateUrl: './politicas-asociadas.component.html',
+  styleUrls: ['./politicas-asociadas.component.scss']
 })
-export class PoliticasGobiernoComponent implements OnInit {
+export class PoliticasAsociadasComponent implements OnInit {
 
   dtOptions: DataTables.Settings = {};
   respuesta: any;
   dtTrigger = new Subject();
 
-  constructor(public politicasGobiernoService:PoliticasGobiernoService,
+  constructor(public politicaAsociadaService:PoliticaAsociadaService,
               private http:HttpClient, 
               private router:Router){
   }
@@ -27,7 +27,7 @@ export class PoliticasGobiernoComponent implements OnInit {
       pageLength: 10
     };
 
-    this.politicasGobiernoService.listado().subscribe((data: any) => {
+    this.politicaAsociadaService.listado().subscribe((data: any) => {
        this.respuesta = data
       this.dtTrigger.next();
     });
@@ -56,7 +56,7 @@ export class PoliticasGobiernoComponent implements OnInit {
       if (resp.value) {
         this.respuesta.splice(i, 1)
   
-        this.politicasGobiernoService.eliminar(datos.id).subscribe();
+        this.politicaAsociadaService.eliminar(datos.id).subscribe();
         
         Swal.fire({
           //position: 'top-end',

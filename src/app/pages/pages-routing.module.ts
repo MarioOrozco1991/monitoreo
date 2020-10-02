@@ -32,6 +32,10 @@ import { ProductosComponent } from './poa/productos/productos.component';
 import { ProductoComponent } from './poa/productos/producto/producto.component';
 import { SubproductosComponent } from './poa/subproductos/subproductos.component';
 import { SubproductoComponent } from './poa/subproductos/subproducto/subproducto.component';
+import { PoliticasAsociadasComponent } from './poa/politicas-asociadas/politicas-asociadas.component';
+import { PoliticaAsociadaComponent } from './poa/politicas-asociadas/politica-asociada/politica-asociada.component';
+import { PoliticasGobiernoComponent } from './poa/politicas-gobierno/politicas-gobierno.component';
+import { PoliticaGobiernoComponent } from './poa/politicas-gobierno/politica-gobierno/politica-gobierno.component';
 
 const routes: Routes = [{
   path: '',
@@ -60,6 +64,30 @@ const routes: Routes = [{
     {
       path: 'resultados-institucionales/:id',
       component: ResultadoInstitucionalComponent,
+    },
+    {
+      path: 'politica-publica-asociada',
+      component: PoliticasAsociadasComponent,
+    },
+    {
+      path: 'politica-publica-asociada/crear',
+      component: PoliticaAsociadaComponent,
+    },
+    {
+      path: 'politica-publica-asociada/:id',
+      component: PoliticaAsociadaComponent,
+    },
+    {
+      path: 'politicas-gobierno',
+      component: PoliticasGobiernoComponent,
+    },
+    {
+      path: 'politicas-gobierno/crear',
+      component: PoliticaGobiernoComponent,
+    },
+    {
+      path: 'politicas-gobierno/:id',
+      component: PoliticaGobiernoComponent,
     },
     {
       path: 'productos',

@@ -45,6 +45,8 @@ import { SubproductosComponent } from './poa/subproductos/subproductos.component
 import { SubproductoComponent } from './poa/subproductos/subproducto/subproducto.component';
 import { PoliticasGobiernoComponent } from './poa/politicas-gobierno/politicas-gobierno.component';
 import { PoliticaGobiernoComponent } from './poa/politicas-gobierno/politica-gobierno/politica-gobierno.component';
+import { PoliticasAsociadasComponent } from './poa/politicas-asociadas/politicas-asociadas.component';
+import { PoliticaAsociadaComponent } from './poa/politicas-asociadas/politica-asociada/politica-asociada.component';
 
 
 @NgModule({
@@ -96,6 +98,8 @@ import { PoliticaGobiernoComponent } from './poa/politicas-gobierno/politica-gob
     SubproductoComponent,
     PoliticasGobiernoComponent,
     PoliticaGobiernoComponent,
+    PoliticasAsociadasComponent,
+    PoliticaAsociadaComponent,
   ],
 })
 export class PagesModule {
