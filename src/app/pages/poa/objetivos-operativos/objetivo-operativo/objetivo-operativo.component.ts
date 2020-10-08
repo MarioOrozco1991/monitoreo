@@ -15,7 +15,6 @@ export class ObjetivoOperativoComponent implements OnInit {
   objetivosEstrategicos: any[];
   respuesta: any;
   form: FormGroup;
-  formDetalle: FormGroup;
 
   constructor( private fb:FormBuilder,
                public objetivosOperativosService:ObjetivosOperativosService,
@@ -29,42 +28,15 @@ export class ObjetivoOperativoComponent implements OnInit {
     this.cargarObjetivoEstrategico();
     this.mostrarObjetivo();
   }
-  
-  get items(): FormArray {
-    return this.form.get('items') as FormArray;
-  }
+
 
   crearFormulario(){
     this.form = this.fb.group({
       id:                     [null,],
       idObjetivoEstrategico:  ['',],
-      items: this.fb.array([]),
-    });
-    this.formDetalle = this.fb.group({
-      nombre:                 ['',]
-    });
-  }
-  
-  // agregar item
-  agregarItem(){
-    // this.items.push( this.fb.control('', Validators.required ) );
-    console.log('this.formDetalle', this.formDetalle.getRawValue());
-    this.items.push(
-      this.fb.group(this.formDetalle.getRawValue())
-    );
-    this.formDetalle.reset();
-  }
+      nombre:                 ['',],
 
-  editarItem(i: any){
-    console.log('i', i, this.items);
-    const item = this.items.at(i) as FormGroup
-    this.formDetalle.patchValue(item.getRawValue())
-  }
-
-  eliminarItem(i: number ){
-    console.log('i', i);
-    this.items.removeAt(i);
-    this.formDetalle.reset();
+    });
   }
 
   enviarFormulario(form: any) {
@@ -86,8 +58,6 @@ export class ObjetivoOperativoComponent implements OnInit {
       })
     });
     this.form.reset();
-    this.formDetalle.reset();
-    this.items.clear();
   }
 
   public actualizar(form: any) {

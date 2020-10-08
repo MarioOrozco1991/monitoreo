@@ -49,12 +49,16 @@ export class AccionComponent implements OnInit {
     //inicializando el formulario
 
     this.form = this.fb.group({
-      id:                    [null,],
-      ejeEstrategico:        ['', Validators.required],
-      objetivoEstrategico:   ['',],
-      objetivoOperativo:     ['',],
-      responsable:           ['',],
-      accion:                ['',],
+      id:                       [null,],
+      ejeEstrategico:           ['', Validators.required],
+      objetivoEstrategico:      ['',],
+      objetivoOperativo:        ['',],
+      responsable:              ['',],
+      descripcionIndicador:     ['',],
+      interpretacion:           ['',],
+      formulaCalculo:           ['',],
+      procedenciaDatos:         ['',],
+      metodologiaRecopilacion:  ['',],      
       items: this.fb.array([]),
     });
 

@@ -44,11 +44,11 @@ export class EjesComponent implements OnInit {
       this.router.navigate(["editar"]);
   }
 
-  public eliminarAccion(datos: any, i: any) {
+  public eliminar(datos: any, i: any) {
 
     Swal.fire({
       title: 'Está seguro?',
-      text: 'Esta seguro que desea eliminarla',
+      text: 'Esta seguro que desea eliminarlo',
       icon: 'question',
       // showConfirmButton: true,
       confirmButtonText: `Sí`,
@@ -61,7 +61,7 @@ export class EjesComponent implements OnInit {
         Swal.fire({
           //position: 'top-end',
           icon: 'success',
-          title: 'Acción eliminada correctamente',
+          title: 'Eje eliminado correctamente',
           showConfirmButton: false,
           timer: 2000
         })

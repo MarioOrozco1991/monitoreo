@@ -57,7 +57,7 @@ export class EjeComponent implements OnInit {
     this.ejesService.actualizar(form.value).subscribe((data) => {
       Swal.fire({
         icon: 'success',
-        title: 'Objetivo modificado exitosamente',
+        title: 'Eje modificado exitosamente',
         showConfirmButton: false,
         timer: 3000
       })
