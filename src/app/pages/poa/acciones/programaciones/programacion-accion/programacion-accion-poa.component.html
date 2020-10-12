@@ -6,11 +6,11 @@
           <div class="row mt-5">
             <div class="col-lg-4">
               <div>
-                <label>Periodo</label>
+                <label>Ejercicio Fiscal</label>
                 <select class="custom-select" formControlName="periodo">
                   <option selected disabled value="">Seleccione</option>
-                  <option [value] >Año 2020</option>
-                  <option [value]>Año 2021</option> 
+                  <option [value]=2020 >Año 2020</option>
+                  <option [value]=2021>Año 2021</option> 
                 </select>
                   <!-- <small *ngIf="alcanceNoValido" class="form-text text-danger">
                       Este campo es obligatorio
@@ -24,52 +24,8 @@
                 <label>Acción </label>
                 <select class="custom-select" formControlName="accion">
                   <option selected disabled value="">Seleccione</option>
-                  <option [value] >Acción 1</option>
-                  <option [value]>Acción 2</option> 
+                  <option [value]="accion.id" *ngFor="let accion of acciones">{{accion.nombreAccion}}</option>
                 </select>
-              </div>
-            </div>
-          </div>
-
-          <div class="row mt-5">
-            <div class="col-lg-4">
-              <div>
-                <label>Unidad de medida</label>
-                <select class="custom-select" formControlName="unidadMedida">
-                  <option selected disabled value="">Seleccione</option>
-                  <option [value] >Oficio</option>
-                  <option [value]>Acuerdo</option> 
-                </select>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div>
-                <label>Medio de verificación</label>
-                <select class="custom-select" formControlName="medioVerificacion">
-                  <option selected disabled value="">Seleccione</option>
-                  <option [value]>Oficio</option>
-                  <option [value]>Otros</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div style="margin-top: 28px;">
-                <input class="form-control" type="text" formControlName="medioVerificacion" disabled>
-              </div>
-            </div>
-          </div>
-
-          <div class="row mt-5">
-            <div class="col-lg-4">
-              <div>
-                  <label>Indicador</label>
-                  <input class="form-control" type="text" formControlName="indicador">
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div>
-                <label>Fórmula del indicador</label>
-                <input class="form-control" type="text" formControlName="formulaIndicador">
               </div>
             </div>
           </div>
@@ -77,34 +33,28 @@
           <hr class="mt-5">
           <h2>Primer Cuatrimestre</h2>
           <div class="row mt-5">
-            <div class="col-lg-2">
+            <div class="col-lg-3">
               <div>
                 <label>Enero</label>
                 <input class="form-control" type="text" formControlName="enero">
               </div>
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-3">
               <div>
                 <label>Febrero</label>
                 <input class="form-control" type="text" formControlName="febrero">
               </div>
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-3">
               <div>
                 <label>Marzo</label>
                 <input class="form-control" type="text" formControlName="marzo">
               </div>
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-3">
               <div>
                 <label>Abril</label>
                 <input class="form-control" type="text" formControlName="abril">
-              </div>
-            </div>
-            <div class="col-lg-2">
-              <div>
-                <label><b>Total Cuatrimestre</b></label>
-                <input class="form-control" type="text" formControlName="totalPrimerCuatrimestre">
               </div>
             </div>
           </div>
@@ -112,34 +62,28 @@
           <hr class="mt-5">
           <h2>Segundo Cuatrimestre</h2>
           <div class="row mt-5">
-            <div class="col-lg-2">
+            <div class="col-lg-3">
               <div>
                 <label>Mayo</label>
                 <input class="form-control" type="text" formControlName="mayo">
               </div>
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-3">
               <div>
                 <label>Junio</label>
                 <input class="form-control" type="text" formControlName="junio">
               </div>
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-3">
               <div>
                 <label>Julio</label>
                 <input class="form-control" type="text" formControlName="julio">
               </div>
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-3">
               <div>
                 <label>Agosto</label>
                 <input class="form-control" type="text" formControlName="agosto">
-              </div>
-            </div>
-            <div class="col-lg-2">
-              <div>
-                <label><b>Total Cuatrimestre</b></label>
-                <input class="form-control" type="text" formControlName="totalSegundoCuatrimestre">
               </div>
             </div>
           </div>
@@ -147,44 +91,36 @@
           <hr class="mt-5">
           <h2>Tercer Cuatrimestre</h2>
           <div class="row mt-5">
-            <div class="col-lg-2">
+            <div class="col-lg-3">
               <div>
                 <label>Septiembre</label>
                 <input class="form-control" type="text" formControlName="septiembre">
               </div>
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-3">
               <div>
                 <label>Octubre</label>
                 <input class="form-control" type="text" formControlName="octubre">
               </div>
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-3">
               <div>
                 <label>Noviembre</label>
                 <input class="form-control" type="text" formControlName="noviembre">
               </div>
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-3">
               <div>
                 <label>Diciembre</label>
                 <input class="form-control" type="text" formControlName="diciembre">
               </div>
             </div>
-            <div class="col-lg-2">
-              <div>
-                <label><b>Total Cuatrimestre</b></label>
-                <input class="form-control" type="text" formControlName="totalTercerCuatrimestre">
-              </div>
-            </div>
           </div>
 
           <h4 class="mt-5 text-center">Total anual programado</h4>
-          <div class="row mt-2">
-            <div class="col-lg-4 text-center">
-              <div>
-                <input class="form-control" type="text" formControlName="totalProgramado">
-              </div>
+          <div class="row mt-2 justify-content-center">
+            <div class="col-lg-4">
+              <input [value]="calcularProgramado()" class="form-control text-center" type="text" formControlName="totalProgramado" disabled>
             </div>
           </div>
 

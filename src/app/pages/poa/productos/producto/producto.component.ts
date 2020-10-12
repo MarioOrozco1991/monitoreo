@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProductosService } from './../../../../services/productos.service';
+import { ResultadosInstitucionalesService } from './../../../../services/resultados-institucionales.service';
 import Swal from 'sweetalert2'; 
 
 @Component({
@@ -12,17 +13,20 @@ import Swal from 'sweetalert2';
 export class ProductoComponent implements OnInit {
 
   respuesta: any;
+  listadoResultados: any[];
   form: FormGroup;
 
   constructor( private fb:FormBuilder,
                private router: Router,
                private activatedRoute: ActivatedRoute,
-               private productosService: ProductosService,) {
+               private productosService: ProductosService,
+               private resultadosInstitucionalesService: ResultadosInstitucionalesService) {
     this.crearFormulario();
   }    
       
   ngOnInit(): void {
     this.mostrar();
+    this.cargarResultadoInstitucional();
   }
   
   crearFormulario(){
@@ -73,6 +77,12 @@ export class ProductoComponent implements OnInit {
         });
       }       
     });
+  }
+
+  public cargarResultadoInstitucional(): void {
+    this.resultadosInstitucionalesService.listado().subscribe((respuesta) => {
+      this.listadoResultados = respuesta;  
+    });   
   }
 
 }

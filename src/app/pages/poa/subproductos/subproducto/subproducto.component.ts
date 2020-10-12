@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import Swal from 'sweetalert2'; 
 import { SubproductosService } from './../../../../services/subproductos.service';
+import { ProductosService } from './../../../../services/productos.service';
+import Swal from 'sweetalert2'; 
 
 @Component({
   selector: 'ngx-subproducto',
@@ -12,17 +13,20 @@ import { SubproductosService } from './../../../../services/subproductos.service
 export class SubproductoComponent implements OnInit {
 
   respuesta: any;
+  listadoProductos: any[];
   form: FormGroup;
 
   constructor( private fb:FormBuilder,
                private router: Router,
                private activatedRoute: ActivatedRoute,
-               private subproductosService: SubproductosService,) {
+               private subproductosService: SubproductosService,
+               private productosService: ProductosService) {
     this.crearFormulario();
   }    
       
   ngOnInit(): void {
     this.mostrar();
+    this.cargarProducto();
   }
   
   crearFormulario(){
@@ -73,6 +77,12 @@ export class SubproductoComponent implements OnInit {
         });
       }       
     });
+  }
+
+  public cargarProducto(): void {
+    this.productosService.listado().subscribe((respuesta) => {
+      this.listadoProductos = respuesta;  
+    });   
   }
 
 }

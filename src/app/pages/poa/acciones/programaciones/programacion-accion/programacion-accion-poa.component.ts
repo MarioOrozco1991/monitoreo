@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AccionesService} from './../../../../../services/acciones.service'
 import { ProgramacionesService } from './../../../../../services/programaciones.service';
 import Swal from 'sweetalert2'; 
 
@@ -12,6 +13,7 @@ import Swal from 'sweetalert2';
 export class ProgramacionAccionPoaComponent implements OnInit {
 
   mostrarNombreSistema: boolean = false;
+  acciones: any[];
 
   public form: FormGroup;
 
@@ -20,7 +22,8 @@ export class ProgramacionAccionPoaComponent implements OnInit {
     
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
-              public programacionesService:ProgramacionesService, 
+              private programacionesService: ProgramacionesService, 
+              private accionesService: AccionesService,
               private fb:FormBuilder) {
   
     this.crearFormulario();
@@ -39,6 +42,7 @@ export class ProgramacionAccionPoaComponent implements OnInit {
       
   ngOnInit(): void {
     this.cargarProgramacion();
+    this.cargarAccion();
   }
   
   
@@ -49,11 +53,6 @@ export class ProgramacionAccionPoaComponent implements OnInit {
       id:                          [null,],
       periodo:                     ['',],
       accion:                      ['',],
-      unidadMedida:                ['',],
-      medioVerificacion:           ['',],
-      // otroMedioVerificacion:       ['',],
-      indicador:                   ['',],
-      formulaIndicador:            ['',],
       enero:                       ['',],
       febrero:                     ['',],
       marzo:                       ['',],
@@ -66,25 +65,19 @@ export class ProgramacionAccionPoaComponent implements OnInit {
       octubre:                     ['',],
       noviembre:                   ['',],
       diciembre:                   ['',],
-      totalPrimerCuatrimestre:     ['',],
-      totalSegundoCuatrimestre:    ['',],
-      totalTercerCuatrimestre:     ['',],
       totalProgramado:             ['',],
     });
   }
 
-//   calcularProgramado() {
-//     //return ((this.forma.value.enero + (this.forma.value.febrero) + (this.forma.value.marzo) + (this.forma.value.abril)))
-//     return (this.forma.value.enero )
-//    }
+  calcularProgramado() {
+    return (parseInt(this.form.value.enero) + (parseInt(this.form.value.febrero)) + 
+           (parseInt(this.form.value.marzo)) + (parseInt(this.form.value.abril)) +
+           (parseInt(this.form.value.mayo)) + (parseInt(this.form.value.junio)) +
+           (parseInt(this.form.value.julio)) + (parseInt(this.form.value.agosto)) +
+           (parseInt(this.form.value.septiembre)) + (parseInt(this.form.value.octubre)) +
+           (parseInt(this.form.value.noviembre)) + (parseInt(this.form.value.diciembre)))
+  }
  
-//   totalProgramado(){
-//     console.log('cambio');
-//     this.forma.get('totalPrimerCuatrimestre')
-//       .setValue(this.calcularProgramado());
-//   }
-  
-
   cargarProgramacion(): void {
     console.log('desde cargrar programacion');
     this.activatedRoute.params.subscribe(params => {
@@ -129,6 +122,12 @@ export class ProgramacionAccionPoaComponent implements OnInit {
     } else {
       this.actualizar(form);
     }
+  }
+
+  public cargarAccion(): void {
+    this.accionesService.listado().subscribe((respuesta) => {
+      this.acciones= respuesta;
+    });   
   }
 
 }

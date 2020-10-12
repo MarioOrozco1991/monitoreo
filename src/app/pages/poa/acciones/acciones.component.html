@@ -16,7 +16,7 @@
     <tbody> 
       <tr *ngFor="let datos of respuesta; let i=index">
         <td class="text-center" style="width: 40px;">{{datos.id}}</td>
-        <td>{{datos.accion}}</td>
+        <td>{{datos.nombreAccion}}</td>
         <td class="text-center" style="width: 150px;">
           <button (click)="editarProceso()" type="button" class="btn btn-sm btn-primary mr-2"> <nb-icon icon="eye-outline"></nb-icon></button>
           <button [routerLink]="[datos.id]" type="button" class="btn btn-sm btn-success mr-2"> <nb-icon icon="edit-2-outline"></nb-icon> </button>

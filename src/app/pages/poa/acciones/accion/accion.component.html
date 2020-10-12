@@ -6,8 +6,23 @@
 				<div class="row mt-5">
 					<div class="col-lg-6">
 						<div>
+							<label>Ejercicio fiscal</label>
+							<select class="custom-select" formControlName="ejercicioFiscal">
+								<option selected disabled value="">Seleccione</option>
+								<option [value]=2020>2020</option>
+								<option [value]=2021>2021</option>
+								<option [value]=2022>2022</option>
+								<option [value]=2023>2023</option>
+								<option [value]=2024>2024</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="row mt-5">
+					<div class="col-lg-6">
+						<div>
 							<label>Eje Estrategico</label>
-							<select class="custom-select" formControlName="ejeEstrategico">
+							<select class="custom-select" formControlName="idEjeEstrategico">
 								<option selected disabled value="">Seleccione</option>
 								<option [value]="ejeEstrategico.id" *ngFor="let ejeEstrategico of ejesEstrategicos">{{ejeEstrategico.numero}} {{ejeEstrategico.nombre}}</option>
 							</select>
@@ -16,7 +31,7 @@
 					<div class="col-lg-6">
 						<div>
 							<label>Objetivo Estratégico</label>
-							<select class="custom-select" formControlName="objetivoEstrategico">
+							<select class="custom-select" formControlName="idObjetivoEstrategico">
 								<option selected disabled value="">Seleccione</option>
 								<option [value]="objetivoEstrategico.id" *ngFor="let objetivoEstrategico of objetivosEstrategicos">{{objetivoEstrategico.idEjeEstrategico}}.{{objetivoEstrategico.numero}} {{objetivoEstrategico.nombre}}</option>
 							</select>
@@ -30,7 +45,7 @@
 					<div class="col-lg-6">
 						<div>
 							<label>Objetivo Operativo</label>
-							<select class="custom-select" formControlName="objetivoOperativo">
+							<select class="custom-select" formControlName="idObjetivoOperativo">
 								<option selected disabled value="">Seleccione</option>
 								<option [value]="objetivoOperativo.id" *ngFor="let objetivoOperativo of objetivosOperativos">{{objetivoOperativo.nombre}}</option>
 							</select>
@@ -39,10 +54,9 @@
 					<div class="col-lg-6">
 						<div>
 							<label>Responsable</label>
-							<select class="custom-select" formControlName="responsable">
+							<select class="custom-select" formControlName="idPuestoResponsable">
 								<option selected disabled value="">Seleccione</option>
-								<option [value] >puesto 1</option>
-								<option [value]>puesto 2</option> 
+								<option [value]=1 >Subdirector</option>
 							</select>
 								<!-- <small *ngIf="alcanceNoValido" class="form-text text-danger">
 								Este campo es obligatorio
@@ -55,39 +69,48 @@
 						<div>
 							<label>Acción </label>
 							<a style="color:blue; " nbTooltip="La acción es *********" nbTooltipPlacement="right" nbTooltipStatus="primary" nbButton status="control"> ?</a>
-							<input class="form-control" type="text" formControlName="accion">
+							<input class="form-control" type="text" formControlName="nombreAccion">
 						</div>
 					</div>
 				</div>
 				<div class="row mt-5">
 					<div class="col-lg-6">
 						<div>
-							<label>Descripcion del indicador</label>
-							<input class="form-control" type="text" formControlName="descripcionIndicador">
+							<label>Unidad de medida</label>
+							<select class="custom-select" formControlName="idUnidadMedida">
+								<option selected disabled value="">Seleccione</option>
+								<option [value]="UnidadMedida.id" *ngFor="let UnidadMedida of listadoUnidadMedida">{{UnidadMedida.nombreUnidadMedida}}</option>
+							</select>
 						</div>
 					</div>
+					<div class="col-lg-6">
+						<div>
+							<label>Descripcion del indicador</label>
+							<input class="form-control" type="text" formControlName="nombreIndicador">
+						</div>
+					</div>
+				</div>
+				<div class="row mt-5">
 					<div class="col-lg-6">
 						<div>
 							<label>Interpretacion</label>
 							<input class="form-control" type="text" formControlName="interpretacion">
 						</div>
 					</div>
-				</div>
-				<div class="row mt-5">
 					<div class="col-lg-6">
 						<div>
 							<label>Fórmula de cálculo</label>
 							<input class="form-control" type="text" formControlName="formulaCalculo">
 						</div>
 					</div>
+				</div>
+				<div class="row mt-5">
 					<div class="col-lg-6">
 						<div>
 							<label>Procedencia de los datos</label>
 							<input class="form-control" type="text" formControlName="procedenciaDatos">
 						</div>
 					</div>
-				</div>
-				<div class="row mt-5">
 					<div class="col-lg-6">
 						<div>
 							<label>Metodología de recopilación</label>
@@ -95,8 +118,6 @@
 						</div>
 					</div>
 				</div>
-
-
 				<div [formGroup]="formDetalle">
 					<h2 class="mt-5">Detalle de la acción</h2>
 					<div class="row mt-5">
@@ -109,18 +130,17 @@
 						<div class="col-lg-3">
 							<div>
 								<label>¿Quién la realiza?</label>
-								<select class="custom-select" formControlName="dependenciaRealiza">
+								<select class="custom-select" formControlName="idDependenciaRealiza">
 									<option selected disabled value="">Dependencia/Depto.</option>
-									<option [value]>dependencia 1</option>
+									<option [value]=1>Direccion de Informatica y Estadistica</option>
 								</select>
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div style="margin-top: 3px;">
-								<select class="custom-select mt-4" formControlName="puestoRealiza">
+								<select class="custom-select mt-4" formControlName="idPuestoRealiza">
 									<option selected disabled value="">Puesto</option>
-									<option [value]>Puesto 1</option>
-									<option [value]>puesto 2</option> 
+									<option [value]=1>Subdirector</option>
 								</select>
 							</div>
 						</div>
@@ -129,7 +149,7 @@
 						<div class="col-lg-6">
 							<div>
 								<label>¿Qué necesita para realizarla?</label>
-								<select class="custom-select" formControlName="documentoEntrada">
+								<select class="custom-select" formControlName="entrada">
 									<option selected disabled value="">Seleccione</option>
 									<option [value]>Oficio</option>
 								</select>
@@ -138,18 +158,18 @@
 						<div class="col-lg-3">
 							<div>
 								<label>¿Quién solicita?</label>
-								<select class="custom-select" formControlName="dependenciaSolicita">
+								<select class="custom-select" formControlName="idDependenciaSolicita">
 									<option selected disabled value="">Dependencia/Depto.</option>
-									<option [value]>dependencia 1</option>
+									<option [value]=2>dependencia 1</option>
 								</select>
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div style="margin-top: 3px;">
-								<select class="custom-select mt-4" formControlName="puestoSolicita">
+								<select class="custom-select mt-4" formControlName="idPuestoSolicita">
 									<option selected disabled value="">Puesto</option>
-									<option [value]>Puesto 1</option>
-									<option [value]>puesto 2</option> 
+									<option [value]=1>Desarrollador de Sistemas I</option>
+									<option [value]=2>Desarrollador de Sistemas II</option> 
 								</select>
 							</div>
 						</div>
@@ -160,25 +180,25 @@
 								<label>¿Qué resultado genera?</label>
 								<select class="custom-select" formControlName="resultadoDocumento">
 									<option selected disabled value="">Seleccione</option>
-									<option [value]>Oficio</option>
+									<option [value]=1>Oficio</option>
 								</select>
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div>
 								<label>¿Quién recibe el resultado?</label>
-								<select class="custom-select" formControlName="dependenciaRecibe">
+								<select class="custom-select" formControlName="idDependenciaResultado">
 									<option selected disabled value="">Dependencia/Depto.</option>
-									<option [value]>dependencia 1</option>
+									<option [value]=1>RRHH</option>
 								</select>
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div style="margin-top: 3px;">
-								<select class="custom-select mt-4" formControlName="puestoRecibe">
+								<select class="custom-select mt-4" formControlName="idPuestoResultado">
 									<option selected disabled value="">Puesto</option>
-									<option [value]>Puesto 1</option>
-									<option [value]>puesto 2</option> 
+									<option [value]=1>Puesto 1</option>
+									<option [value]=2>puesto 2</option> 
 								</select>
 							</div>
 						</div>
@@ -187,11 +207,11 @@
 						<div class="col-lg-3">
 							<div>
 								<label>Tiempo promedio para realizarla</label>
-								<select class="custom-select" formControlName="unidadTiempo">
+								<select class="custom-select" formControlName="idUnidadTiempo">
 									<option selected disabled value="">Seleccione</option>
-									<option [value]>Días</option>
-									<option [value]>Horas</option>
-									<option [value] >Minutos</option>
+									<option [value]=1>Días</option>
+									<option [value]=2>Horas</option>
+									<option [value]=3>Minutos</option>
 								</select>
 							</div>
 						</div>
@@ -206,11 +226,11 @@
 								<label>¿Utiliza un sistema para realizarla?</label>
 								<div>
 									<div class="custom-control custom-radio custom-control-inline">
-										<input type="radio" id="customRadioInline1" name="utilizaSistema" class="custom-control-input" formControlName="utilizaSistema" [value]=true>
+										<input type="radio" id="customRadioInline1" name="utilizaSistema" class="custom-control-input" formControlName="utilizaSistema" [value]=1>
 										<label class="custom-control-label" for="customRadioInline1">SI</label>
 									</div>
 									<div class="custom-control custom-radio custom-control-inline">
-										<input type="radio" id="customRadioInline2" name="utilizaSistema" class="custom-control-input" formControlName="utilizaSistema" [value]=false>
+										<input type="radio" id="customRadioInline2" name="utilizaSistema" class="custom-control-input" formControlName="utilizaSistema" [value]=2>
 										<label class="custom-control-label" for="customRadioInline2">NO</label>
 									</div>
 								</div>
@@ -219,11 +239,11 @@
 						<div class="col-lg-3">
 							<div style="margin-top: 3px;">
 								<label>Nombre del sistema</label>
-								<select class="custom-select" formControlName="nombreSistema">
+								<select class="custom-select" formControlName="idSistema">
 									<option selected disabled value="">Seleccione</option>
-									<option [value] >POINTER</option>
-									<option [value] >SICABI</option>
-									<option [value] >CIMCORR</option>
+									<option [value]=1>POINTER</option>
+									<option [value]=2>SICABI</option>
+									<option [value]=3>CIMCORR</option>
 								</select>
 							</div>
 						</div>
@@ -238,7 +258,7 @@
 					</div>
 					<div class="row mt-5">
 						<div class="input-group col-6">
-							<button (click)="agregarItem()" type="button" class="btn btn-primary mb-3"> <i class="fas fa-check "></i> Agregar detalle</button>
+							<button (click)="agregarEditarItem()" type="button" class="btn btn-primary mb-3"> <i class="fas fa-check "></i>{{editarDetalleIndice === -1 ? 'Agregar' : 'Editar'}}</button>
 						</div>
 					</div>
 				</div>

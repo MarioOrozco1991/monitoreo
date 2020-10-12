@@ -5,6 +5,7 @@ import { EjesService } from './../../../../services/ejes.service';
 import { AccionesService } from './../../../../services/acciones.service';
 import { ObjetivosEstrategicosService } from './../../../../services/objetivos-estrategicos.service';
 import { ObjetivosOperativosService } from './../../../../services/objetivos-operativos.service';
+import { UnidadMedidaService } from './../../../../services/unidad-medida.service';
 import Swal from 'sweetalert2'; 
 
 @Component({
@@ -18,8 +19,10 @@ export class AccionComponent implements OnInit {
   objetivosEstrategicos: any[];
   objetivosOperativos: any[];
   mostrarNombreSistema: boolean = false;
+  listadoUnidadMedida: any[];
   form: FormGroup;
   formDetalle: FormGroup;
+  editarDetalleIndice: number = -1;
 
   constructor(private fb:FormBuilder,
               private router: Router,
@@ -27,7 +30,8 @@ export class AccionComponent implements OnInit {
               private accionesService: AccionesService,
               private ejesService: EjesService,
               private objetivosEstrategicosService: ObjetivosEstrategicosService,  
-              private objetivosOperativosService: ObjetivosOperativosService
+              private objetivosOperativosService: ObjetivosOperativosService,
+              private unidadMedidaService: UnidadMedidaService
   ) {
   
     this.crearFormulario();
@@ -39,6 +43,7 @@ export class AccionComponent implements OnInit {
     this.cargarEjeEstrategico();
     this.cargarObjetivoEstrategico();
     this.cargarObjetivoOperativo();
+    this.cargarUnidadMedida();
   }
   
   get items(): FormArray {
@@ -50,11 +55,15 @@ export class AccionComponent implements OnInit {
 
     this.form = this.fb.group({
       id:                       [null,],
-      ejeEstrategico:           ['', Validators.required],
-      objetivoEstrategico:      ['',],
-      objetivoOperativo:        ['',],
-      responsable:              ['',],
-      descripcionIndicador:     ['',],
+      ejercicioFiscal:          ['',],
+      nombreAccion:             ['',],
+      idDependencia:            ['',],
+      idPuestoResponsable:      ['',],
+      idEjeEstrategico:         ['',],
+      idObjetivoEstrategico:    ['',],
+      idObjetivoOperativo:      ['',],
+      idUnidadMedida:           ['',],
+      nombreIndicador:          ['',],
       interpretacion:           ['',],
       formulaCalculo:           ['',],
       procedenciaDatos:         ['',],
@@ -63,35 +72,45 @@ export class AccionComponent implements OnInit {
     });
 
     this.formDetalle = this.fb.group({
-      tarea:                 ['',],
-      dependenciaRealiza:    ['',],
-      puestoRealiza:         ['',],
-      documentoEntrada:      ['',],
-      dependenciaSolicita:   ['',],
-      puestoSolicita:        ['',],
-      resultadoDocumento:    ['',],
-      dependenciaRecibe:     ['',],
-      puestoRecibe:          ['',],
-      unidadTiempo:          ['',],
-      duracion:              ['',],
-      utilizaSistema:        ['',],
-      nombreSistema:         ['',],
-      observaciones:         ['',],
+      tarea:                   ['',],
+      idDependenciaRealiza:    ['',],
+      idPuestoRealiza:         ['',],
+      entrada:                 ['',],
+      idDependenciaSolicita:   ['',],
+      idPuestoSolicita:        ['',],
+      resultadoDocumento:      ['',],
+      idDependenciaResultado:  ['',],
+      idPuestoResultado:       ['',],
+      externoResultado:        ['',],
+      idUnidadTiempo:          ['',],
+      duracion:                ['',],
+      utilizaSistema:          ['',],
+      idSistema:               ['',],
+      observaciones:           ['',],
     });
   }
 
-  // agregar item
-  agregarItem(){
+  // agregar o editar item
+  agregarEditarItem(){
     // this.items.push( this.fb.control('', Validators.required ) );
     console.log('this.formDetalle', this.formDetalle.getRawValue());
-    this.items.push(
-      this.fb.group(this.formDetalle.getRawValue())
-    );
+    if (this.editarDetalleIndice === -1) { // crear
+      this.items.push(
+        this.fb.group(this.formDetalle.getRawValue())
+      );
+    } else { // editar
+      this.items.setControl(
+        this.editarDetalleIndice,
+        this.fb.group(this.formDetalle.getRawValue())
+      );
+      this.editarDetalleIndice = -1;
+    }
     this.formDetalle.reset();
   }
 
   editarItem(i: any){
     console.log('i', i, this.items);
+    this.editarDetalleIndice = i;
     const item = this.items.at(i) as FormGroup
     this.formDetalle.patchValue(item.getRawValue())
   }
@@ -127,7 +146,7 @@ export class AccionComponent implements OnInit {
         title: 'Acción creada exitosamente',
         showConfirmButton: false,
         timer: 3000
-      })
+      }) 
     });
     this.form.reset();
     this.items.clear();
@@ -162,8 +181,12 @@ export class AccionComponent implements OnInit {
       this.objetivosOperativos = respuesta;
     });   
   }
-
   
+  public cargarUnidadMedida(): void {
+    this.unidadMedidaService.listado().subscribe((respuesta) => {
+      this.listadoUnidadMedida = respuesta;  
+    });   
+  }
 
 }
 

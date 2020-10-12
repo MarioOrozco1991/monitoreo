@@ -1,7 +1,7 @@
 <div>
   <div class="container">
     <div class="col-xl-12">
-      <h1>Definición de Centros de costo</h1>
+      <h1>Definición de Subproductos</h1>
       <form autocomplete="off" [formGroup]="form"> 
         <div class="row mt-5">
           <div class="col-lg-12">
@@ -9,7 +9,7 @@
               <label>Producto a vincular</label>
               <select class="custom-select" formControlName="idProducto">
                 <option selected disabled value="">Seleccione</option>
-                <option [value]=1>Producto 1</option>
+                <option [value]="productos.id" *ngFor="let productos of listadoProductos">{{productos.nombre}}</option>
               </select>
             </div>
           </div>   
