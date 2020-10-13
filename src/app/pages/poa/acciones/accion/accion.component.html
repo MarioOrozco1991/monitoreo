@@ -17,8 +17,6 @@
 							</select>
 						</div>
 					</div>
-				</div>
-				<div class="row mt-5">
 					<div class="col-lg-6">
 						<div>
 							<label>Eje Estrategico</label>
@@ -28,6 +26,8 @@
 							</select>
 						</div>
 					</div>
+				</div>
+				<div class="row mt-5">
 					<div class="col-lg-6">
 						<div>
 							<label>Objetivo Estratégico</label>
@@ -40,8 +40,6 @@
 								</small> -->
 						</div>
 					</div>
-				</div>
-				<div class="row mt-5">
 					<div class="col-lg-6">
 						<div>
 							<label>Objetivo Operativo</label>
@@ -51,12 +49,46 @@
 							</select>
 						</div>
 					</div>
+				</div>
+				<div class="row mt-5">
+					<div class="col-lg-6">
+						<div>
+							<label>Nombre de la dependencia</label>
+							<select class="custom-select" formControlName="idDependencia">
+								<option selected disabled value="">Seleccione</option>
+								<option [value]=2>Direccion de Informática y Estadística</option>
+							</select>
+						</div>
+					</div>
 					<div class="col-lg-6">
 						<div>
 							<label>Responsable</label>
 							<select class="custom-select" formControlName="idPuestoResponsable">
 								<option selected disabled value="">Seleccione</option>
 								<option [value]=1 >Subdirector</option>
+							</select>
+								<!-- <small *ngIf="alcanceNoValido" class="form-text text-danger">
+								Este campo es obligatorio
+								</small> -->
+						</div>
+					</div>
+				</div>
+				<div class="row mt-5">
+					<div class="col-lg-6">
+						<div>
+							<label>Meta de la Política General de Gobierno asociada</label>
+							<select class="custom-select" formControlName="idPoliticaGobierno">
+								<option selected disabled value="">Seleccione</option>
+								<option [value]="politicaGobierno.id" *ngFor="let politicaGobierno of listadoPoliticasGobierno">{{politicaGobierno.nombre}}</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<div>
+							<label>Política pública asociada</label>
+							<select class="custom-select" formControlName="idPoliticaPublica">
+								<option selected disabled value="">Seleccione</option>
+								<option [value]="politicaPublica.id" *ngFor="let politicaPublica of listadoPoliticasPublicas">{{politicaPublica.nombre}}</option>
 							</select>
 								<!-- <small *ngIf="alcanceNoValido" class="form-text text-danger">
 								Este campo es obligatorio

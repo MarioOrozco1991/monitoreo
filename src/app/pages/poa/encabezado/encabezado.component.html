@@ -33,7 +33,7 @@
               <label>Resultado Institucional</label>
               <select class="custom-select" formControlName="idResultadoInstitucional">
                 <option selected disabled value="">Seleccione</option>
-                <option [value]="resultado.id" *ngFor="let resultado of resultadoInstitucional">{{resultado.numeroResultado}} - {{resultado.descripcion}}</option>
+                <option [value]="resultado.id" *ngFor="let resultado of resultadoInstitucional">{{resultado.nombre}}</option>
               </select>
             </div>
           </div>

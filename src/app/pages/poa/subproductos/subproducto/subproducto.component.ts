@@ -32,7 +32,7 @@ export class SubproductoComponent implements OnInit {
   crearFormulario(){
     this.form = this.fb.group({
       id:                         [null,],
-      idResultadoInstitucional:   ['',],
+      idProducto:                 ['',],
       nombre:                     ['',],
       idUnidadMedida:             ['',],
     });

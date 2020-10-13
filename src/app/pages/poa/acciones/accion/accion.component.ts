@@ -6,6 +6,8 @@ import { AccionesService } from './../../../../services/acciones.service';
 import { ObjetivosEstrategicosService } from './../../../../services/objetivos-estrategicos.service';
 import { ObjetivosOperativosService } from './../../../../services/objetivos-operativos.service';
 import { UnidadMedidaService } from './../../../../services/unidad-medida.service';
+import { PoliticasGobiernoService } from './../../../../services/politicas-gobierno.service';
+import { PoliticasPublicasService } from './../../../../services/politicas-publicas.service';
 import Swal from 'sweetalert2'; 
 
 @Component({
@@ -19,6 +21,8 @@ export class AccionComponent implements OnInit {
   objetivosEstrategicos: any[];
   objetivosOperativos: any[];
   mostrarNombreSistema: boolean = false;
+  listadoPoliticasGobierno: any[];
+  listadoPoliticasPublicas: any[];
   listadoUnidadMedida: any[];
   form: FormGroup;
   formDetalle: FormGroup;
@@ -31,7 +35,9 @@ export class AccionComponent implements OnInit {
               private ejesService: EjesService,
               private objetivosEstrategicosService: ObjetivosEstrategicosService,  
               private objetivosOperativosService: ObjetivosOperativosService,
-              private unidadMedidaService: UnidadMedidaService
+              private unidadMedidaService: UnidadMedidaService,
+              private politicasGobiernoService: PoliticasGobiernoService,
+              private politicasPublicasService: PoliticasPublicasService
   ) {
   
     this.crearFormulario();
@@ -43,6 +49,8 @@ export class AccionComponent implements OnInit {
     this.cargarEjeEstrategico();
     this.cargarObjetivoEstrategico();
     this.cargarObjetivoOperativo();
+    this.cargarPoliticaGobierno();
+    this.cargarPoliticaPublica();
     this.cargarUnidadMedida();
   }
   
@@ -62,6 +70,8 @@ export class AccionComponent implements OnInit {
       idEjeEstrategico:         ['',],
       idObjetivoEstrategico:    ['',],
       idObjetivoOperativo:      ['',],
+      idPoliticaGobierno:       ['',],
+      idPoliticaPublica:        ['',],
       idUnidadMedida:           ['',],
       nombreIndicador:          ['',],
       interpretacion:           ['',],
@@ -181,7 +191,19 @@ export class AccionComponent implements OnInit {
       this.objetivosOperativos = respuesta;
     });   
   }
-  
+
+  public cargarPoliticaGobierno(): void {
+    this.politicasGobiernoService.listado().subscribe((respuesta) => {
+      this.listadoPoliticasGobierno = respuesta;  
+    });   
+  }
+
+  public cargarPoliticaPublica(): void {
+    this.politicasPublicasService.listado().subscribe((respuesta) => {
+      this.listadoPoliticasPublicas = respuesta;  
+    });   
+  }
+
   public cargarUnidadMedida(): void {
     this.unidadMedidaService.listado().subscribe((respuesta) => {
       this.listadoUnidadMedida = respuesta;  

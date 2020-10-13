@@ -24,7 +24,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
             },
             {
               title: 'Políticas Públicas Asociadas',
-              link: '/pages/politica-publica-asociada',
+              link: '/pages/politicas-publicas',
             },
           ]
         },
