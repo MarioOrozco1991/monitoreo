@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, PipeTransform } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EjesService } from './../../../../services/ejes.service';
 import { ObjetivosEstrategicosService } from './../../../../services/objetivos-estrategicos.service';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { esLocale } from 'ngx-bootstrap/locale';
 import Swal from 'sweetalert2'; 
 
 
@@ -20,13 +22,15 @@ export class ObjetivoEstrategicoComponent implements OnInit {
   form: FormGroup;
 
   constructor( private fb:FormBuilder,
-    private router: Router,
-               public EjesService:EjesService,
+               private router: Router,
+               private bsLocaleService: BsLocaleService,
+               private EjesService:EjesService,
                private activatedRoute: ActivatedRoute,
                private localeService: BsLocaleService,
-               public objetivosEstrategicosService:ObjetivosEstrategicosService,
-             ) {
-    this.crearFormulario();
+               private objetivosEstrategicosService:ObjetivosEstrategicosService,
+             ) {              
+                 this.bsLocaleService.use('es');//fecha en español, datepicker  
+                 this.crearFormulario();
   }    
       
   ngOnInit(): void {
@@ -43,15 +47,13 @@ export class ObjetivoEstrategicoComponent implements OnInit {
       id:                 [null,],
       idEjeEstrategico:   ['',],
       nombre:             ['',],
-      fechaInicio:        [','],
-      fechaFin:           [''],
+      fechaInicio:        ['',],
+      fechaFin:           ['',],
     });
   }
 
-  applyLocale() {
-    this.localeService.use(this.locale);
-  }
   
+
   enviarFormulario(form: any) {
     if (!this.form.value.id) {
       this.crear(form);
@@ -61,7 +63,6 @@ export class ObjetivoEstrategicoComponent implements OnInit {
   }
 
   public crear(form: any) {
-    console.log('antes de llegar al servicio', form.value);
     this.objetivosEstrategicosService.crear(form.value).subscribe((data) => {
       console.log('respuesta del servicio', data);
       Swal.fire({
@@ -90,7 +91,9 @@ export class ObjetivoEstrategicoComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       if(params.id){
         this.objetivosEstrategicosService.get(params.id).subscribe((respuesta) => {
+          //console.log('respuesta', respuesta);
           this.form.patchValue(respuesta);
+          this.respuesta.fechaInicio
         });
       }       
     });

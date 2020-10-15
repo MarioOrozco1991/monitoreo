@@ -4,6 +4,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ObjetivosOperativosService } from './../../../../services/objetivos-operativos.service';
 import { ObjetivosEstrategicosService } from './../../../../services/objetivos-estrategicos.service';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { esLocale } from 'ngx-bootstrap/locale';
+defineLocale('es', esLocale);
 import Swal from 'sweetalert2'; 
 
 @Component({
@@ -19,18 +22,15 @@ export class ObjetivoOperativoComponent implements OnInit {
   form: FormGroup;
 
   constructor( private fb:FormBuilder,
-               private localeService: BsLocaleService,
+               private bsLocaleService: BsLocaleService,
                private router: Router,
                private activatedRoute: ActivatedRoute,
                private objetivosOperativosService:ObjetivosOperativosService,
                private objetivosEstrategicosService:ObjetivosEstrategicosService,
              ) {
-    this.crearFormulario();
+                 this.bsLocaleService.use('es');//fecha en español, datepicker    
+                 this.crearFormulario();
   }    
-      
-  applyLocale() {
-    this.localeService.use(this.locale);
-  }
 
   ngOnInit(): void {
     this.cargarObjetivoEstrategico();
