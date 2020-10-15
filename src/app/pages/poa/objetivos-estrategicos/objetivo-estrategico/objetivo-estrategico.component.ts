@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EjesService } from './../../../../services/ejes.service';
-import Swal from 'sweetalert2'; 
 import { ObjetivosEstrategicosService } from './../../../../services/objetivos-estrategicos.service';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import Swal from 'sweetalert2'; 
 
 
 @Component({
@@ -13,15 +14,18 @@ import { ObjetivosEstrategicosService } from './../../../../services/objetivos-e
 })
 export class ObjetivoEstrategicoComponent implements OnInit {
 
+  locale = 'es';
   ejes: any[];
   respuesta: any;
   form: FormGroup;
 
   constructor( private fb:FormBuilder,
+    private router: Router,
                public EjesService:EjesService,
+               private activatedRoute: ActivatedRoute,
+               private localeService: BsLocaleService,
                public objetivosEstrategicosService:ObjetivosEstrategicosService,
-               private router: Router,
-               private activatedRoute: ActivatedRoute,) {
+             ) {
     this.crearFormulario();
   }    
       
@@ -38,8 +42,14 @@ export class ObjetivoEstrategicoComponent implements OnInit {
     this.form = this.fb.group({
       id:                 [null,],
       idEjeEstrategico:   ['',],
-      nombre:             ['',]
+      nombre:             ['',],
+      fechaInicio:        [','],
+      fechaFin:           [''],
     });
+  }
+
+  applyLocale() {
+    this.localeService.use(this.locale);
   }
   
   enviarFormulario(form: any) {

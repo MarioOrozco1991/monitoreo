@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import Swal from 'sweetalert2'; 
 import { EjesService } from './../../../../services/ejes.service';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { esLocale } from 'ngx-bootstrap/locale';
+defineLocale('es', esLocale);
+import Swal from 'sweetalert2'; 
 
 
 @Component({
@@ -12,14 +16,19 @@ import { EjesService } from './../../../../services/ejes.service';
 })
 export class EjeComponent implements OnInit {
 
+  locale = 'es';
   respuesta: any;
   form: FormGroup;
+  
 
   constructor( private fb:FormBuilder,
                private router: Router,
+               private bsLocaleService: BsLocaleService,
                private activatedRoute: ActivatedRoute,
-               private ejesService: EjesService,) {
-    this.crearFormulario();
+               private ejesService: EjesService
+             ) {
+                  this.bsLocaleService.use('es');//fecha en español, datepicker          
+                  this.crearFormulario();
   }    
       
   ngOnInit(): void {
@@ -31,9 +40,12 @@ export class EjeComponent implements OnInit {
       id:           [null,],
       nombre:       ['',],
       descripcion:  ['',],
+      fechaInicio:  ['',],
+      fechaFin:     ['',],
+      fechaPrueba:  [','],
     })
   }
-  
+
   enviarFormulario(form: any) {
     if (!this.form.value.id) {
       this.crear(form);
@@ -43,6 +55,7 @@ export class EjeComponent implements OnInit {
   }
 
   public crear(form: any) {
+    console.log('formulario', form);  
     this.ejesService.crear(form.value).subscribe((data) => {
       Swal.fire({
         icon: 'success',

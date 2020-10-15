@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ObjetivosOperativosService } from './../../../../services/objetivos-operativos.service';
 import { ObjetivosEstrategicosService } from './../../../../services/objetivos-estrategicos.service';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import Swal from 'sweetalert2'; 
 
 @Component({
@@ -12,18 +13,25 @@ import Swal from 'sweetalert2';
 })
 export class ObjetivoOperativoComponent implements OnInit {
 
+  locale = 'es';
   objetivosEstrategicos: any[];
   respuesta: any;
   form: FormGroup;
 
   constructor( private fb:FormBuilder,
-               public objetivosOperativosService:ObjetivosOperativosService,
-               public objetivosEstrategicosService:ObjetivosEstrategicosService,
+               private localeService: BsLocaleService,
                private router: Router,
-               private activatedRoute: ActivatedRoute,) {
+               private activatedRoute: ActivatedRoute,
+               private objetivosOperativosService:ObjetivosOperativosService,
+               private objetivosEstrategicosService:ObjetivosEstrategicosService,
+             ) {
     this.crearFormulario();
   }    
       
+  applyLocale() {
+    this.localeService.use(this.locale);
+  }
+
   ngOnInit(): void {
     this.cargarObjetivoEstrategico();
     this.mostrarObjetivo();
@@ -35,7 +43,8 @@ export class ObjetivoOperativoComponent implements OnInit {
       id:                     [null,],
       idObjetivoEstrategico:  ['',],
       nombre:                 ['',],
-
+      fechaInicio:            ['',],
+      fechaFin:               ['',]
     });
   }
 

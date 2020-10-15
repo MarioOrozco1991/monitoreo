@@ -15,8 +15,8 @@ import { ComponentsModule } from './@theme/components/components.module';
 import { PagesModule } from './pages/pages.module';
 import { AppRoutingModule } from './app-routing.module';
 import { DataTablesModule } from 'angular-datatables';
-import { ProgramacionesService } from './services/programaciones.service';
-import { AccionesService} from './services/acciones.service'
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
 
 
 
@@ -54,6 +54,7 @@ import {
     ReactiveFormsModule,
     DataTablesModule,
     NbInputModule,
+    
 
     ThemeModule.forRoot(),
     NbSidebarModule.forRoot(),
@@ -62,6 +63,7 @@ import {
     NbDialogModule.forRoot(),
     NbWindowModule.forRoot(),
     NbToastrModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     NbChatModule.forRoot({
       messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
     }),

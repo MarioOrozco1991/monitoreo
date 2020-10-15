@@ -14,14 +14,34 @@
             </div>
           </div>
         </div>
-          <div class="row mt-5">
-            <div class="col-lg-11">
-              <div>
-                <label>Nombre del objetivo operativo</label>
-                <input class="form-control" type="text" formControlName="nombre">
-              </div>
-            </div>     
+        <div class="row mt-5">
+          <div class="col-lg-11">
+            <div>
+              <label>Nombre del objetivo operativo</label>
+              <input class="form-control" type="text" formControlName="nombre">
+            </div>
+          </div>     
+        </div>
+        <div class="row mt-5">
+          <div class="col-lg-6">
+            <label>Fecha inicio (vigencia)</label>
+            <input type="text"
+                   placeholder="Ingrese la fecha"
+                   class="form-control"
+                   formControlName="fechaInicio"
+                   bsDatepicker
+                   [bsConfig]="{ adaptivePosition: true, dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-dark-blue' }">
           </div>
+          <div class="col-lg-6">
+            <label>Fecha final (vigencia)</label>
+            <input type="text"
+                   placeholder="Ingrese la fecha"
+                   class="form-control"
+                   formControlName="fechaFin"
+                   bsDatepicker
+                   [bsConfig]="{ adaptivePosition: true, dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-dark-blue' }">
+          </div>
+        </div>
         <div class="row card-block mt-5">
           <div class="col-lg-6">
             <input [routerLink]="['..']" type="submit" class="btn btn-primary btn-block waves-effect" (click)='enviarFormulario(form)' *ngIf="!form.value.id else botonActualizar" value = "Crear">

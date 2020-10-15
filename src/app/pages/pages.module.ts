@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PagesRoutingModule } from './pages-routing.module';
 import { DataTablesModule } from 'angular-datatables';
 import { RouterModule } from '@angular/router';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
 //componentes
@@ -62,6 +63,9 @@ import { PoliticaPublicaComponent } from './poa/politicas-publicas/politica-publ
     DataTablesModule,
     ComponentsModule,
     RouterModule,
+    BsDatepickerModule.forRoot(),
+    
+
   ],
   declarations: [
     PagesComponent,
