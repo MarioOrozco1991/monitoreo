@@ -16,7 +16,6 @@ export class ProgramacionAccionPomComponent implements OnInit {
   formDetalle: FormGroup;
   respuesta: any;
   
-    
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
               public programacionesService:ProgramacionesService, 
@@ -24,16 +23,6 @@ export class ProgramacionAccionPomComponent implements OnInit {
   
     this.crearFormulario();
 
-    //   this.forma.controls.enero.valueChanges
-    //   .subscribe(data => {
-    //     console.log('PrecioCIVA = ' + data)
-    //   })
-
-    //   //observable general
-    // this.forma.valueChanges
-    // .subscribe(data => {
-    //   console.log(data)
-    // })
   }
       
   ngOnInit(): void {
@@ -49,35 +38,13 @@ export class ProgramacionAccionPomComponent implements OnInit {
   
     this.form = this.fb.group({
       id:                          [null,],
-      periodo:                     ['',],
       accion:                      ['',],
-      unidadMedida:                ['',],
-      medioVerificacion:           ['',],
-      // otroMedioVerificacion:       ['',],
-      indicador:                   ['',],
-      formulaIndicador:            ['',],
-      enero:                       ['',],
-      febrero:                     ['',],
-      marzo:                       ['',],
-      abril:                       ['',],
-      mayo:                        ['',],
-      junio:                       ['',],
-      julio:                       ['',],
-      agosto:                      ['',],
-      septiembre:                  ['',],
-      octubre:                     ['',],
-      noviembre:                   ['',],
-      diciembre:                   ['',],
-      totalPrimerCuatrimestre:     ['',],
-      totalSegundoCuatrimestre:    ['',],
-      totalTercerCuatrimestre:     ['',],
-      totalProgramado:             ['',],
+      periodo:                     ['',],
       items: this.fb.array([]),
     });
     this.formDetalle = this.fb.group({
-      año:             ['',],
+      año:                 ['',],
       cantidadProgramada:  ['',]
-
     });
   }
   // agregar item
@@ -115,6 +82,8 @@ export class ProgramacionAccionPomComponent implements OnInit {
   }
 
   public crear(form: any) {
+    console.log('formulario',form.value);
+    return;
     this.programacionesService.crear(form.value).subscribe((data) => {
       console.log('datos listado', data);
       Swal.fire({

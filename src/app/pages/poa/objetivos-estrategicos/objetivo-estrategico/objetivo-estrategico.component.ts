@@ -90,10 +90,11 @@ export class ObjetivoEstrategicoComponent implements OnInit {
   mostrarObjetivo(): void {
     this.activatedRoute.params.subscribe(params => {
       if(params.id){
-        this.objetivosEstrategicosService.get(params.id).subscribe((respuesta) => {
-          //console.log('respuesta', respuesta);
+        this.objetivosEstrategicosService.get(params.id).subscribe((respuesta: any) => {
+          console.log('respuesta', respuesta);
+          respuesta.fechaInicio = respuesta.fechaInicio ? new Date(respuesta.fechaInicio.substr(0,10).replaceAll("-", "/")) : '';
+          respuesta.fechaFin = respuesta.fechaFin ? new Date(respuesta.fechaFin.substr(0,10).replaceAll("-", "/")) : '';        
           this.form.patchValue(respuesta);
-          this.respuesta.fechaInicio
         });
       }       
     });

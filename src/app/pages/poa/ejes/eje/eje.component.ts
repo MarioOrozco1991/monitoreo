@@ -42,7 +42,6 @@ export class EjeComponent implements OnInit {
       descripcion:  ['',],
       fechaInicio:  ['',],
       fechaFin:     ['',],
-      fechaPrueba:  [','],
     })
   }
 
@@ -55,7 +54,7 @@ export class EjeComponent implements OnInit {
   }
 
   public crear(form: any) {
-    console.log('formulario', form);  
+    console.log('formulario', form.value);  
     this.ejesService.crear(form.value).subscribe((data) => {
       Swal.fire({
         icon: 'success',
@@ -81,8 +80,12 @@ export class EjeComponent implements OnInit {
   mostrarEje(): void {
     this.activatedRoute.params.subscribe(params => {
       if(params.id){
-        this.ejesService.get(params.id).subscribe((respuesta) => {
+        this.ejesService.get(params.id).subscribe((respuesta: any) => {
+          console.log('respuesta', respuesta);
+          respuesta.fechaInicio = respuesta.fechaInicio ? new Date(respuesta.fechaInicio.substr(0,10).replaceAll("-", "/")) : '';
+          respuesta.fechaFin = respuesta.fechaFin ? new Date(respuesta.fechaFin.substr(0,10).replaceAll("-", "/")) : '';          
           this.form.patchValue(respuesta);
+          
         });
       }       
     });

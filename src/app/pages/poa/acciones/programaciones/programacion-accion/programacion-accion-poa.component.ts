@@ -3,7 +3,12 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AccionesService} from './../../../../../services/acciones.service'
 import { ProgramacionesService } from './../../../../../services/programaciones.service';
+import { BsDatepickerConfig, BsDatepickerViewMode, BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { esLocale } from 'ngx-bootstrap/locale';
+defineLocale('es', esLocale);
 import Swal from 'sweetalert2'; 
+
 
 @Component({
   selector: 'ngx-programacion-acciones',
@@ -12,76 +17,76 @@ import Swal from 'sweetalert2';
 })
 export class ProgramacionAccionPoaComponent implements OnInit {
 
-  mostrarNombreSistema: boolean = false;
   acciones: any[];
-
-  public form: FormGroup;
-
+  form: FormGroup;
+  formDetalle: FormGroup;
   respuesta: any;
+  year = new Date().getFullYear();
   
-    
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
-              private programacionesService: ProgramacionesService, 
               private accionesService: AccionesService,
+              public programacionesService:ProgramacionesService, 
               private fb:FormBuilder) {
   
+
     this.crearFormulario();
-
-    //   this.forma.controls.enero.valueChanges
-    //   .subscribe(data => {
-    //     console.log('PrecioCIVA = ' + data)
-    //   })
-
-    //   //observable general
-    // this.forma.valueChanges
-    // .subscribe(data => {
-    //   console.log(data)
-    // })
   }
-      
+
   ngOnInit(): void {
     this.cargarProgramacion();
     this.cargarAccion();
   }
   
+  get items(): FormArray {
+    return this.form.get('items') as FormArray;
+  }
   
   crearFormulario(){
     //inicializando el formulario
-  
     this.form = this.fb.group({
-      id:                          [null,],
-      periodo:                     ['',],
-      accion:                      ['',],
-      enero:                       ['',],
-      febrero:                     ['',],
-      marzo:                       ['',],
-      abril:                       ['',],
-      mayo:                        ['',],
-      junio:                       ['',],
-      julio:                       ['',],
-      agosto:                      ['',],
-      septiembre:                  ['',],
-      octubre:                     ['',],
-      noviembre:                   ['',],
-      diciembre:                   ['',],
-      totalProgramado:             ['',],
+      id:                 [null,],
+      ejercicioFiscal:    [null,],
+      accion:             ['',],
+      items: this.fb.array([]),
+    });
+    this.formDetalle = this.fb.group({
+      periodo:            [this.year,],
+      mes:                ['',],
+      valorProgramacion:  ['',]
     });
   }
-
-  calcularProgramado() {
-    return (parseInt(this.form.value.enero) + (parseInt(this.form.value.febrero)) + 
-           (parseInt(this.form.value.marzo)) + (parseInt(this.form.value.abril)) +
-           (parseInt(this.form.value.mayo)) + (parseInt(this.form.value.junio)) +
-           (parseInt(this.form.value.julio)) + (parseInt(this.form.value.agosto)) +
-           (parseInt(this.form.value.septiembre)) + (parseInt(this.form.value.octubre)) +
-           (parseInt(this.form.value.noviembre)) + (parseInt(this.form.value.diciembre)))
+  // agregar item
+  agregarItem(){
+    // this.items.push( this.fb.control('', Validators.required ) );
+    console.log('this.formDetalle', this.formDetalle.getRawValue());
+    this.items.push(
+      this.fb.group(this.formDetalle.getRawValue())
+    );
+    this.formDetalle.reset();
   }
- 
+
+  editarItem(i: any){
+    console.log('i', i, this.items);
+    const item = this.items.at(i) as FormGroup
+    this.formDetalle.patchValue(item.getRawValue())
+  }
+
+  eliminarItem(i: number ){
+    console.log('i', i);
+    this.items.removeAt(i);
+    this.formDetalle.reset();
+  }
+
+  public cargarAccion(): void {
+    this.accionesService.listado().subscribe((respuesta) => {
+      this.acciones= respuesta;
+    });   
+  }
+
   cargarProgramacion(): void {
     console.log('desde cargrar programacion');
     this.activatedRoute.params.subscribe(params => {
-
       if(params.id){
         this.programacionesService.get(params.id).subscribe((respuesta) => {
           this.form.patchValue(respuesta);
@@ -91,6 +96,8 @@ export class ProgramacionAccionPoaComponent implements OnInit {
   }
 
   public crear(form: any) {
+    console.log(form.value);
+    return;
     this.programacionesService.crear(form.value).subscribe((data) => {
       console.log('datos listado', data);
       Swal.fire({
@@ -101,7 +108,6 @@ export class ProgramacionAccionPoaComponent implements OnInit {
         timer: 3000
       })
     });
-    this.form.reset();
   }
 
   public actualizar(form: any) {
@@ -123,11 +129,4 @@ export class ProgramacionAccionPoaComponent implements OnInit {
       this.actualizar(form);
     }
   }
-
-  public cargarAccion(): void {
-    this.accionesService.listado().subscribe((respuesta) => {
-      this.acciones= respuesta;
-    });   
-  }
-
 }

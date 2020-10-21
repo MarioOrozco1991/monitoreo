@@ -27,7 +27,8 @@ export class AccionComponent implements OnInit {
   form: FormGroup;
   formDetalle: FormGroup;
   editarDetalleIndice: number = -1;
-
+  year = new Date().getFullYear();
+  
   constructor(private fb:FormBuilder,
               private router: Router,
               private activatedRoute: ActivatedRoute,

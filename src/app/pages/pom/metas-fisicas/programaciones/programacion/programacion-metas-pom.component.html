@@ -48,52 +48,11 @@
 						</div>
 					</div>
 				</div>
-				<div class="row mt-5">
-					<div class="col-lg-4">
-						<div>
-							<label>Unidad de medida</label>
-							<select class="custom-select" formControlName="unidadMedida">
-								<option selected disabled value="">Seleccione</option>
-								<option [value] >Oficio</option>
-								<option [value]>Acuerdo</option> 
-							</select>
-						</div>
-					</div>
-					<div class="col-lg-4">
-						<div>
-							<label>Medio de verificación</label>
-							<select class="custom-select" formControlName="medioVerificacion">
-								<option selected disabled value="">Seleccione</option>
-								<option [value]>Oficio</option>
-								<option [value]>Otros</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-lg-4">
-						<div style="margin-top: 28px;">
-							<input class="form-control" type="text" formControlName="medioVerificacion" disabled>
-						</div>
-					</div>
-				</div>
-				<div class="row mt-5">
-					<div class="col-lg-4">
-						<div>
-							<label>Indicador</label>
-							<input class="form-control" type="text" formControlName="indicador">
-						</div>
-					</div>
-					<div class="col-lg-4">
-						<div>
-							<label>Fórmula del indicador</label>
-							<input class="form-control" type="text" formControlName="formulaIndicador">
-						</div>
-					</div>
-				</div>
 				<hr class="mt-5">
 				<h2>Programación</h2>
 			<div [formGroup]="formDetalle">
 				<div class="row mt-5">
-					<div class="col-lg-4">
+					<div class="col-lg-5">
 						<div>
 							<label>Seleccione el año</label>
 							<select class="custom-select" formControlName="año">
@@ -106,13 +65,13 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-lg-4">
+					<div class="col-lg-5">
 						<div>
 							<label>Cantidad a programar</label>
 							<input class="form-control" type="text" formControlName="cantidadProgramada">
 						</div>
 					</div>
-					<div class="col-lg-1" style="margin-top: 28px;">
+					<div class="col-lg-2" style="margin-top: 28px;">
 						<button (click)="agregarItem()" nbTooltip="Agregar" nbTooltipPlacement="top" nbButton status="control" type="button" class="btn btn-primary btn-block waves-effect">+</button>
 					</div>   
 				</div>

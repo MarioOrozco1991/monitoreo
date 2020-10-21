@@ -4,14 +4,14 @@
       <h1>Programación de acciones - POM </h1>
       <form autocomplete="off" [formGroup]="form">
         <div class="row mt-5">
-          <div class="col-lg-4">
+          <div class="col-lg-5">
             <div>
-              <label>Periodo</label>
+              <label>Seleccione el periodo multi-anual a programar</label>
               <select class="custom-select" formControlName="periodo">
                 <option selected disabled value="">Seleccione</option>
-                <option [value]=2021-2025>2021-2025</option>
-                <option [value]=2026-2030>2026-2030</option>
-                <option [value]=2031-2035>2031-2035</option> 
+                <option [value]=1>2021-2025</option>
+                <option [value]=2>2026-2030</option>
+                <option [value]=3>2031-2035</option> 
               </select>
             </div>
           </div>
@@ -28,55 +28,14 @@
             </div>
           </div>
         </div>
-        <div class="row mt-5">
-          <div class="col-lg-4">
-            <div>
-              <label>Unidad de medida</label>
-              <select class="custom-select" formControlName="unidadMedida">
-                <option selected disabled value="">Seleccione</option>
-                <option [value] >Oficio</option>
-                <option [value]>Acuerdo</option> 
-              </select>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div>
-              <label>Medio de verificación</label>
-              <select class="custom-select" formControlName="medioVerificacion">
-                <option selected disabled value="">Seleccione</option>
-                <option [value]>Oficio</option>
-                <option [value]>Otros</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div style="margin-top: 28px;">
-              <input class="form-control" type="text" formControlName="medioVerificacion" disabled>
-            </div>
-          </div>
-        </div>
-        <div class="row mt-5">
-          <div class="col-lg-4">
-            <div>
-              <label>Indicador</label>
-              <input class="form-control" type="text" formControlName="indicador">
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div>
-              <label>Fórmula del indicador</label>
-              <input class="form-control" type="text" formControlName="formulaIndicador">
-            </div>
-          </div>
-        </div>
         <hr class="mt-5">
         <h2>Programación</h2>
       <div [formGroup]="formDetalle">
         <div class="row mt-5">
-          <div class="col-lg-4">
+          <div class="col-lg-5">
             <div>
               <label>Seleccione el año</label>
-              <select class="custom-select" formControlName="año">
+              <select *ngIf="form.get('periodo').value=== '1'" class="custom-select" formControlName="año">
                 <option selected disabled value="">Seleccione</option>
                 <option [value]>2021</option>
                 <option [value]>2022</option>
@@ -84,15 +43,31 @@
                 <option [value]>2024</option>
                 <option [value]>2025</option>
               </select>
-            </div>
+              <select *ngIf="form.get('periodo').value=== '2'" class="custom-select" formControlName="año">
+                <option selected disabled value="">Seleccione</option>
+                <option [value]>2026</option>
+                <option [value]>2027</option>
+                <option [value]>2028</option> 
+                <option [value]>2029</option>
+                <option [value]>2030</option>
+              </select>
+              <select *ngIf="form.get('periodo').value=== '3'" class="custom-select" formControlName="año">
+                <option selected disabled value="">Seleccione</option>
+                <option [value]>2031</option>
+                <option [value]>2032</option>
+                <option [value]>2033</option> 
+                <option [value]>2034</option>
+                <option [value]>2035</option>
+              </select>
+            </div>            
           </div>
-          <div class="col-lg-4">
+          <div class="col-lg-5">
             <div>
               <label>Cantidad a programar</label>
               <input class="form-control" type="text" formControlName="cantidadProgramada">
             </div>
           </div>
-          <div class="col-lg-1" style="margin-top: 28px;">
+          <div class="col-lg-2" style="margin-top: 28px;">
             <button (click)="agregarItem()" nbTooltip="Agregar" nbTooltipPlacement="top" nbButton status="control" type="button" class="btn btn-primary btn-block waves-effect">+</button>
           </div>   
         </div>

@@ -84,7 +84,9 @@ export class ObjetivoOperativoComponent implements OnInit {
   mostrarObjetivo(): void {
     this.activatedRoute.params.subscribe(params => {
       if(params.id){
-        this.objetivosOperativosService.get(params.id).subscribe((respuesta) => {
+        this.objetivosOperativosService.get(params.id).subscribe((respuesta: any) => {
+          respuesta.fechaInicio = respuesta.fechaInicio ? new Date(respuesta.fechaInicio.substr(0,10).replaceAll("-", "/")) : '';
+          respuesta.fechaFin = respuesta.fechaFin ? new Date(respuesta.fechaFin.substr(0,10).replaceAll("-", "/")) : '';
           this.form.patchValue(respuesta);
         });
       }       
