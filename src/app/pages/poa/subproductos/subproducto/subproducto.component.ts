@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SubproductosService } from './../../../../services/subproductos.service';
 import { ProductosService } from './../../../../services/productos.service';
+import { UnidadMedidaService } from './../../../../services/unidad-medida.service';
 import Swal from 'sweetalert2'; 
 
 @Component({
@@ -14,12 +15,14 @@ export class SubproductoComponent implements OnInit {
 
   respuesta: any;
   listadoProductos: any[];
+  listadoUnidadMedida: any[];
   form: FormGroup;
 
   constructor( private fb:FormBuilder,
                private router: Router,
                private activatedRoute: ActivatedRoute,
                private subproductosService: SubproductosService,
+               private unidadMedidaService: UnidadMedidaService,
                private productosService: ProductosService) {
     this.crearFormulario();
   }    
@@ -27,6 +30,7 @@ export class SubproductoComponent implements OnInit {
   ngOnInit(): void {
     this.mostrar();
     this.cargarProducto();
+    this.cargarUnidadMedida();
   }
   
   crearFormulario(){
@@ -82,6 +86,13 @@ export class SubproductoComponent implements OnInit {
   public cargarProducto(): void {
     this.productosService.listado().subscribe((respuesta) => {
       this.listadoProductos = respuesta;  
+    });   
+  }
+
+
+  public cargarUnidadMedida(): void {
+    this.unidadMedidaService.listado().subscribe((respuesta) => {
+      this.listadoUnidadMedida = respuesta;  
     });   
   }
 

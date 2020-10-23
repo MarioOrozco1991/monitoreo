@@ -68,11 +68,11 @@
             </div>
           </div>
           <div class="col-lg-2" style="margin-top: 28px;">
-            <button (click)="agregarItem()" nbTooltip="Agregar" nbTooltipPlacement="top" nbButton status="control" type="button" class="btn btn-primary btn-block waves-effect">+</button>
+            <button (click)="agregarEditarItem()" type="button" class="btn btn-primary btn-block waves-effect"><i class="fas fa-check  "></i>{{editarDetalleIndice === -1 ? ' Agregar' : ' Editar'}}</button>
           </div>   
         </div>
       </div>
-        <div class="container mt-5">
+        <div class="mt-5">
           <table class="table table-striped table-bordered row-border hover responsive text-center" style="margin: 0 auto;">
             <thead class="thead-dark">
               <tr>

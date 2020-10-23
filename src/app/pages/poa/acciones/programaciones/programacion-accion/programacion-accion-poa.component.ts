@@ -21,6 +21,7 @@ export class ProgramacionAccionPoaComponent implements OnInit {
   form: FormGroup;
   formDetalle: FormGroup;
   respuesta: any;
+  editarDetalleIndice: number = -1;
   year = new Date().getFullYear();
   
   constructor(private router: Router,
@@ -46,28 +47,37 @@ export class ProgramacionAccionPoaComponent implements OnInit {
     //inicializando el formulario
     this.form = this.fb.group({
       id:                 [null,],
-      ejercicioFiscal:    [null,],
-      accion:             ['',],
+      periodo:            ['',],
+      idAccion:           ['',],
       items: this.fb.array([]),
     });
     this.formDetalle = this.fb.group({
-      periodo:            [this.year,],
-      mes:                ['',],
-      valorProgramacion:  ['',]
+      idMes:              ['',],
+      valorProgramado:    ['',]
     });
   }
-  // agregar item
-  agregarItem(){
+
+  // agregar o editar item
+  agregarEditarItem(){
     // this.items.push( this.fb.control('', Validators.required ) );
     console.log('this.formDetalle', this.formDetalle.getRawValue());
-    this.items.push(
-      this.fb.group(this.formDetalle.getRawValue())
-    );
+    if (this.editarDetalleIndice === -1) { // crear
+      this.items.push(
+        this.fb.group(this.formDetalle.getRawValue())
+      );
+    } else { // editar
+      this.items.setControl(
+        this.editarDetalleIndice,
+        this.fb.group(this.formDetalle.getRawValue())
+      );
+      this.editarDetalleIndice = -1;
+    }
     this.formDetalle.reset();
   }
-
+  
   editarItem(i: any){
     console.log('i', i, this.items);
+    this.editarDetalleIndice = i;
     const item = this.items.at(i) as FormGroup
     this.formDetalle.patchValue(item.getRawValue())
   }
@@ -96,8 +106,7 @@ export class ProgramacionAccionPoaComponent implements OnInit {
   }
 
   public crear(form: any) {
-    console.log(form.value);
-    return;
+    console.log('formulario',form.value);
     this.programacionesService.crear(form.value).subscribe((data) => {
       console.log('datos listado', data);
       Swal.fire({

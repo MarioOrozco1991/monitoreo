@@ -15,6 +15,7 @@ export class ProgramacionAccionPomComponent implements OnInit {
   form: FormGroup;
   formDetalle: FormGroup;
   respuesta: any;
+  editarDetalleIndice: number = -1;
   
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
@@ -47,18 +48,28 @@ export class ProgramacionAccionPomComponent implements OnInit {
       cantidadProgramada:  ['',]
     });
   }
-  // agregar item
-  agregarItem(){
+
+   // agregar o editar item
+   agregarEditarItem(){
     // this.items.push( this.fb.control('', Validators.required ) );
     console.log('this.formDetalle', this.formDetalle.getRawValue());
-    this.items.push(
-      this.fb.group(this.formDetalle.getRawValue())
-    );
+    if (this.editarDetalleIndice === -1) { // crear
+      this.items.push(
+        this.fb.group(this.formDetalle.getRawValue())
+      );
+    } else { // editar
+      this.items.setControl(
+        this.editarDetalleIndice,
+        this.fb.group(this.formDetalle.getRawValue())
+      );
+      this.editarDetalleIndice = -1;
+    }
     this.formDetalle.reset();
   }
-
+  
   editarItem(i: any){
     console.log('i', i, this.items);
+    this.editarDetalleIndice = i;
     const item = this.items.at(i) as FormGroup
     this.formDetalle.patchValue(item.getRawValue())
   }

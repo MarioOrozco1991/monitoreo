@@ -28,7 +28,7 @@
               <label>Unidad de medida</label>
               <select class="custom-select" formControlName="idUnidadMedida">
                 <option selected disabled value="">Seleccione</option>
-                <option [value]=1>Oficio</option>
+                <option [value]="unidadMedida.id" *ngFor="let unidadMedida of listadoUnidadMedida">{{unidadMedida.nombreUnidadMedida}}</option>
               </select>
             </div>
           </div>

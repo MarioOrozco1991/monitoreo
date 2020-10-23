@@ -15,17 +15,5 @@ export class UnidadMedidaService {
   listado() {
     return this.httpClient.get<any>(this.url + 'unidad-medida');
   }
-  
-  crear(datos: any) {
-    return this.httpClient.post(this.url + 'unidad-medida', JSON.stringify(datos), {headers: this.httpHeaders});
-  }
-
-  get(id: any){
-    return this.httpClient.get(this.url + 'unidad-medida/' + id);
-  }
-
-  actualizar(datos: any) {
-    return this.httpClient.put(this.url + 'unidad-medida/' + datos.id, JSON.stringify(datos), {headers: this.httpHeaders});
-  }
 
 }
