@@ -7,18 +7,20 @@
           <div class="col-lg-12">
             <div>
               <label>Eje estratégico a vincular</label>
-              <select class="custom-select" formControlName="idEjeEstrategico">
+              <select class="custom-select" formControlName="idEjeEstrategico" [class.is-invalid]="ejeEstrategicoInvalido">
                 <option selected disabled value="">Seleccione</option>
                 <option [value]="eje.id" *ngFor="let eje of ejes">{{eje.nombre}}</option>
               </select>
+              <small *ngIf="ejeEstrategicoInvalido" class="text-danger">El Eje Estratégico es requerido</small>
             </div>
           </div>
         </div>
         <div class="row mt-5">
-          <div class="col-lg-11">
+          <div class="col-lg-12">
             <div>
               <label>Nombre del objetivo estratégico</label>
-              <input class="form-control" type="text" formControlName="nombre">
+              <input class="form-control" type="text" formControlName="nombre" [class.is-invalid]="nombreInvalido">
+              <small *ngIf="nombreInvalido" class="text-danger">El nombre es requerido</small>
             </div>
           </div>
         </div>
@@ -26,25 +28,27 @@
           <div class="col-lg-6">
             <label>Fecha inicio (vigencia)</label>
             <input type="text"
-                   placeholder="día-mes-año"
+                   placeholder="dd/mm/aaaa"
                    class="form-control" 
                    formControlName="fechaInicio"
                    bsDatepicker
                    [bsConfig]="{ adaptivePosition: true, containerClass: 'theme-dark-blue' }">
+            <small *ngIf="fechaInicioInvalida" class="text-danger">El formato de la fecha es incorrecto</small>
           </div>
           <div class="col-lg-6">
             <label>Fecha final (vigencia)</label>
             <input type="text"
-                   placeholder="día-mes-año"
+                   placeholder="dd/mm/aaaa"
                    class="form-control"
                    formControlName="fechaFin"
                    bsDatepicker
                    [bsConfig]="{ adaptivePosition: true, containerClass: 'theme-dark-blue' }">
+            <small *ngIf="fechaFinInvalida" class="text-danger">El formato de la fecha es incorrecto</small>
           </div>
         </div>
         <div class="row card-block mt-5">
           <div class="col-lg-6">
-            <input [routerLink]="['..']" type="submit" class="btn btn-primary btn-block waves-effect" (click)='enviarFormulario(form)' *ngIf="!form.value.id else botonActualizar" value = "Crear">
+            <input type="submit" class="btn btn-primary btn-block waves-effect" (click)='enviarFormulario(form)' *ngIf="!form.value.id else botonActualizar" value = "Crear">
             <ng-template #botonActualizar>
             <input [routerLink]="['..']" type="submit" class="btn btn-primary btn-block waves-effect" (click)="enviarFormulario(form)" value="Modificar Objetivo">
             </ng-template>

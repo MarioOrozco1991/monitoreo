@@ -38,21 +38,33 @@ export class ObjetivoEstrategicoComponent implements OnInit {
     this.mostrarObjetivo();
   }
   
-  get items(): FormArray {
-    return this.form.get('items') as FormArray;
+  //validaciones del formulario
+  get ejeEstrategicoInvalido(){
+    return this.form.get('idEjeEstrategico').invalid && this.form.get('idEjeEstrategico').touched
   }
 
+  get nombreInvalido(){
+    return this.form.get('nombre').invalid && this.form.get('nombre').touched
+  }
+
+  get fechaInicioInvalida(){
+    return this.form.get('fechaInicio').invalid
+  }
+
+  get fechaFinInvalida(){
+    return this.form.get('fechaFin').invalid
+  }
+
+  //definicion del formulario reactivo
   crearFormulario(){
     this.form = this.fb.group({
       id:                 [null,],
-      idEjeEstrategico:   ['',],
-      nombre:             ['',],
+      idEjeEstrategico:   ['', Validators.required],
+      nombre:             ['', Validators.required],
       fechaInicio:        ['',],
       fechaFin:           ['',],
     });
   }
-
-  
 
   enviarFormulario(form: any) {
     if (!this.form.value.id) {
@@ -63,16 +75,24 @@ export class ObjetivoEstrategicoComponent implements OnInit {
   }
 
   public crear(form: any) {
-    this.objetivosEstrategicosService.crear(form.value).subscribe((data) => {
-      console.log('respuesta del servicio', data);
+    if(this.form.status ==='VALID'){
+      this.objetivosEstrategicosService.crear(form.value).subscribe((data) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Objetivo creado exitosamente',
+          showConfirmButton: false,
+          timer: 3000
+        })
+      });
+      this.form.reset();
+    }
+    else {
       Swal.fire({
-        icon: 'success',
-        title: 'Objetivo creado exitosamente',
-        showConfirmButton: false,
-        timer: 3000
-      })
-    });
-    this.form.reset();
+        icon: 'error',
+        title: 'Error',
+        text: 'Favor revisar que la información esté ingresada correctamente',
+      })  
+    }
   }
 
   public actualizar(form: any) {

@@ -35,11 +35,25 @@ export class EjeComponent implements OnInit {
     this.mostrarEje();
   }
   
+  //validaciones del formulario
+  get nombreInvalido(){
+        return this.form.get('nombre').invalid && this.form.get('nombre').touched
+    }
+
+  get fechaInicioInvalida(){
+    return this.form.get('fechaInicio').invalid
+  }
+
+  get fechaFinInvalida(){
+    return this.form.get('fechaFin').invalid
+  }
+
+  //definicion del formulario
   crearFormulario(){
     this.form = this.fb.group({
       id:           [null,],
-      nombre:       ['',],
-      descripcion:  ['',],
+      nombre:       ['', Validators.required],
+      descripcion:  ['', ],
       fechaInicio:  ['',],
       fechaFin:     ['',],
     })
@@ -54,15 +68,24 @@ export class EjeComponent implements OnInit {
   }
 
   public crear(form: any) {
-    console.log('formulario', form.value);  
-    this.ejesService.crear(form.value).subscribe((data) => {
+    if(this.form.status ==='VALID'){
+      this.ejesService.crear(form.value).subscribe((data) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Eje creado exitosamente',
+          showConfirmButton: false,
+          timer: 3000
+        })
+      });
+      this.form.reset();
+    }
+    else {
       Swal.fire({
-        icon: 'success',
-        title: 'Eje creado exitosamente',
-        showConfirmButton: false,
-        timer: 3000
-      })
-    });
+        icon: 'error',
+        title: 'Error',
+        text: 'Favor revisar que la información esté ingresada correctamente',
+      })  
+    }
   }
 
   public actualizar(form: any) {
@@ -90,5 +113,4 @@ export class EjeComponent implements OnInit {
       }       
     });
   }
-
 }

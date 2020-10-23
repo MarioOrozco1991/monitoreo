@@ -36,13 +36,30 @@ export class ObjetivoOperativoComponent implements OnInit {
     this.cargarObjetivoEstrategico();
     this.mostrarObjetivo();
   }
+  
+   //validaciones del formulario
+   get objetivoEstrategicoInvalido(){
+    return this.form.get('idObjetivoEstrategico').invalid && this.form.get('idObjetivoEstrategico').touched
+  }
+
+  get nombreInvalido(){
+    return this.form.get('nombre').invalid && this.form.get('nombre').touched
+  }
+
+  get fechaInicioInvalida(){
+    return this.form.get('fechaInicio').invalid
+  }
+
+  get fechaFinInvalida(){
+    return this.form.get('fechaFin').invalid
+  }
 
 
   crearFormulario(){
     this.form = this.fb.group({
       id:                     [null,],
-      idObjetivoEstrategico:  ['',],
-      nombre:                 ['',],
+      idObjetivoEstrategico:  ['', Validators.required],
+      nombre:                 ['', Validators.required],
       fechaInicio:            ['',],
       fechaFin:               ['',]
     });
@@ -57,16 +74,25 @@ export class ObjetivoOperativoComponent implements OnInit {
   }
 
   public crear(form: any) {
-    this.objetivosOperativosService.crear(form.value).subscribe((data) => {
-      // console.log(form.value);
+    if(this.form.status ==='VALID'){
+      this.objetivosOperativosService.crear(form.value).subscribe((data) => {
+        // console.log(form.value);
+        Swal.fire({
+          icon: 'success',
+          title: 'Objetivo creado exitosamente',
+          showConfirmButton: false,
+          timer: 3000
+        })
+      });
+      this.form.reset();
+    }
+    else {
       Swal.fire({
-        icon: 'success',
-        title: 'Objetivo creado exitosamente',
-        showConfirmButton: false,
-        timer: 3000
-      })
-    });
-    this.form.reset();
+        icon: 'error',
+        title: 'Error',
+        text: 'Favor revisar que la información esté ingresada correctamente',
+      })  
+    }
   }
 
   public actualizar(form: any) {
