@@ -36,11 +36,16 @@ import { PoliticasGobiernoComponent } from './poa/politicas-gobierno/politicas-g
 import { PoliticaGobiernoComponent } from './poa/politicas-gobierno/politica-gobierno/politica-gobierno.component';
 import { PoliticasPublicasComponent } from './poa/politicas-publicas/politicas-publicas.component';
 import { PoliticaPublicaComponent } from './poa/politicas-publicas/politica-publica/politica-publica.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [
+    {
+      path: 'login',
+      component: LoginComponent
+    },
     {
       path: 'centros-de-costo',
       component: CentrosDeCostoComponent,
@@ -240,7 +245,12 @@ const routes: Routes = [{
       pathMatch: 'full',
     },
   ],
-}];
+},
+{
+  path: 'login',
+  component: LoginComponent
+},
+];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],

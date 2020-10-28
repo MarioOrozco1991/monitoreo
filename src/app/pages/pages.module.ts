@@ -48,6 +48,7 @@ import { PoliticasGobiernoComponent } from './poa/politicas-gobierno/politicas-g
 import { PoliticaGobiernoComponent } from './poa/politicas-gobierno/politica-gobierno/politica-gobierno.component';
 import { PoliticasPublicasComponent } from './poa/politicas-publicas/politicas-publicas.component';
 import { PoliticaPublicaComponent } from './poa/politicas-publicas/politica-publica/politica-publica.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -104,6 +105,7 @@ import { PoliticaPublicaComponent } from './poa/politicas-publicas/politica-publ
     PoliticaGobiernoComponent,
     PoliticasPublicasComponent,
     PoliticaPublicaComponent,
+    LoginComponent,
   ],
 })
 export class PagesModule {
