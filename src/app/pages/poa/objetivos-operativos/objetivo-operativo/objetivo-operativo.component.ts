@@ -47,11 +47,11 @@ export class ObjetivoOperativoComponent implements OnInit {
   }
 
   get fechaInicioInvalida(){
-    return this.form.get('fechaInicio').invalid
+    return this.form.get('fechaInicio').invalid && this.form.get('fechaInicio').touched
   }
 
   get fechaFinInvalida(){
-    return this.form.get('fechaFin').invalid
+    return this.form.get('fechaFin').invalid && this.form.get('fechaFin').touched
   }
 
 
@@ -60,8 +60,8 @@ export class ObjetivoOperativoComponent implements OnInit {
       id:                     [null,],
       idObjetivoEstrategico:  ['', Validators.required],
       nombre:                 ['', Validators.required],
-      fechaInicio:            ['',],
-      fechaFin:               ['',]
+      fechaInicio:            ['', Validators.required],
+      fechaFin:               ['', Validators.required]
     });
   }
 
@@ -96,14 +96,24 @@ export class ObjetivoOperativoComponent implements OnInit {
   }
 
   public actualizar(form: any) {
-    this.objetivosOperativosService.actualizar(form.value).subscribe((data) => {
+    if(this.form.status ==='VALID'){
+      this.router.navigate(['/pages/objetivos-operativos'])
+      this.objetivosOperativosService.actualizar(form.value).subscribe((data) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Objetivo modificado exitosamente',
+          showConfirmButton: false,
+          timer: 3000
+        })
+      });
+    }
+    else {
       Swal.fire({
-        icon: 'success',
-        title: 'Objetivo modificado exitosamente',
-        showConfirmButton: false,
-        timer: 3000
-      })
-    });
+        icon: 'error',
+        title: 'Error',
+        text: 'Favor revisar que la información esté ingresada correctamente',
+      })  
+    }
   }
   
   //metodo que carga la información del objetivo a modificar

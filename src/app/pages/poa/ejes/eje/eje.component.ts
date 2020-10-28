@@ -41,11 +41,11 @@ export class EjeComponent implements OnInit {
     }
 
   get fechaInicioInvalida(){
-    return this.form.get('fechaInicio').invalid
+    return this.form.get('fechaInicio').invalid && this.form.get('fechaInicio').touched
   }
 
   get fechaFinInvalida(){
-    return this.form.get('fechaFin').invalid
+    return this.form.get('fechaFin').invalid && this.form.get('fechaFin').touched
   }
 
   //definicion del formulario
@@ -54,8 +54,8 @@ export class EjeComponent implements OnInit {
       id:           [null,],
       nombre:       ['', Validators.required],
       descripcion:  ['', ],
-      fechaInicio:  ['',],
-      fechaFin:     ['',],
+      fechaInicio:  ['', Validators.required],
+      fechaFin:     ['', Validators.required],
     })
   }
 
@@ -89,14 +89,24 @@ export class EjeComponent implements OnInit {
   }
 
   public actualizar(form: any) {
-    this.ejesService.actualizar(form.value).subscribe((data) => {
+    if(this.form.status ==='VALID'){
+      this.router.navigate(['/pages/ejes'])
+      this.ejesService.actualizar(form.value).subscribe((data) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Eje modificado exitosamente',
+          showConfirmButton: false,
+          timer: 3000
+        })
+      });
+    }
+    else {
       Swal.fire({
-        icon: 'success',
-        title: 'Eje modificado exitosamente',
-        showConfirmButton: false,
-        timer: 3000
-      })
-    });
+        icon: 'error',
+        title: 'Error',
+        text: 'Favor revisar que la información esté ingresada correctamente',
+      })  
+    }
   }
   
   //metodo que carga la información del objetivo a modificar

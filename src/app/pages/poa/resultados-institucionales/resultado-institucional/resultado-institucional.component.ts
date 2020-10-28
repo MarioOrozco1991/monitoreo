@@ -24,11 +24,17 @@ export class ResultadoInstitucionalComponent implements OnInit {
   ngOnInit(): void {
     this.mostrar();
   }
+
+  //validaciones del formulario
+  get nombreInvalido(){
+    return this.form.get('nombre').invalid && this.form.get('nombre').touched
+  }
   
+  //definicion del formulario
   crearFormulario(){
     this.form = this.fb.group({
-      id:                     [null,],
-      nombre:                 ['',],
+      id:      [null,],
+      nombre:  ['', Validators.required],
     });
   }
   
@@ -41,25 +47,45 @@ export class ResultadoInstitucionalComponent implements OnInit {
   }
 
   public crear(form: any) {
-    this.resultadosInstitucionalesService.crear(form.value).subscribe((data) => {
+    if(this.form.status ==='VALID'){
+      this.resultadosInstitucionalesService.crear(form.value).subscribe((data) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Resultado Institucional creado exitosamente',
+          showConfirmButton: false,
+          timer: 3000
+        })
+      });
+      this.form.reset();
+    }
+    else {
       Swal.fire({
-        icon: 'success',
-        title: 'Resultado Institucional creado exitosamente',
-        showConfirmButton: false,
-        timer: 3000
-      })
-    });
+        icon: 'error',
+        title: 'Error',
+        text: 'Favor revisar que la información esté ingresada correctamente',
+      })  
+    }
   }
 
   public actualizar(form: any) {
-    this.resultadosInstitucionalesService.actualizar(form.value).subscribe((data) => {
+    if(this.form.status ==='VALID'){
+      this.router.navigate(['/pages/resultados-institucionales'])
+      this.resultadosInstitucionalesService.actualizar(form.value).subscribe((data) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Resultado Institucional modificado exitosamente',
+          showConfirmButton: false,
+          timer: 3000
+        })
+      });
+    }
+    else {
       Swal.fire({
-        icon: 'success',
-        title: 'Resultado Institucional modificado exitosamente',
-        showConfirmButton: false,
-        timer: 3000
-      })
-    });
+        icon: 'error',
+        title: 'Error',
+        text: 'Favor revisar que la información esté ingresada correctamente',
+      })  
+    }
   }
   
   //metodo que carga la información del objetivo a modificar

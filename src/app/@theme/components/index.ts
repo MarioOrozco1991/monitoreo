@@ -7,3 +7,4 @@ export * from './table/table.component';
 export * from './formulario/formulario.component';
 export * from './editar-proceso/editar-proceso.component';
 export * from './listado-revision/listado-revision.component';
+export * from './error-formulario/error-formulario.component';

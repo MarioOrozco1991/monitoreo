@@ -22,16 +22,19 @@ export class ProgramacionAccionPoaComponent implements OnInit {
   formDetalle: FormGroup;
   respuesta: any;
   editarDetalleIndice: number = -1;
+  locale = 'es';
   year = new Date().getFullYear();
+
   
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
+              private bsLocaleService: BsLocaleService,
               private accionesService: AccionesService,
               public programacionesService:ProgramacionesService, 
-              private fb:FormBuilder) {
-  
-
-    this.crearFormulario();
+              private fb:FormBuilder
+             ) {
+                  this.bsLocaleService.use('es');//fecha en español, datepicker  
+                  this.crearFormulario();
   }
 
   ngOnInit(): void {
@@ -52,8 +55,9 @@ export class ProgramacionAccionPoaComponent implements OnInit {
       items: this.fb.array([]),
     });
     this.formDetalle = this.fb.group({
-      idMes:              ['',],
-      valorProgramado:    ['',]
+      fechaInicio:      ['',],
+      fechaFin:         ['',],
+      valorProgramado:  ['',]
     });
   }
 

@@ -32,13 +32,27 @@ export class ProductoComponent implements OnInit {
     this.cargarResultadoInstitucional();
     this.cargarUnidadMedida();
   }
+
+  //validaciones del formulario
+  get resultadoInvalido(){
+    return this.form.get('idResultadoInstitucional').invalid && this.form.get('idResultadoInstitucional').touched
+  }
+
+  get nombreInvalido(){
+    return this.form.get('nombre').invalid && this.form.get('nombre').touched
+  }
+
+  get unidadMedidaInvalido(){
+    return this.form.get('idUnidadMedida').invalid && this.form.get('idUnidadMedida').touched
+  }
   
+  //defincion del formulario
   crearFormulario(){
     this.form = this.fb.group({
       id:                         [null,],
-      idResultadoInstitucional:   ['',],
-      nombre:                     ['',],
-      idUnidadMedida:             ['',],
+      idResultadoInstitucional:   ['', Validators.required],
+      nombre:                     ['', Validators.required],
+      idUnidadMedida:             ['', Validators.required],
     });
   }
   
@@ -51,25 +65,45 @@ export class ProductoComponent implements OnInit {
   }
 
   public crear(form: any) {
-    this.productosService.crear(form.value).subscribe((data) => {
+    if(this.form.status ==='VALID'){
+      this.productosService.crear(form.value).subscribe((data) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Producto creado exitosamente',
+          showConfirmButton: false,
+          timer: 3000
+        })
+      });
+      this.form.reset();
+    }
+    else {
       Swal.fire({
-        icon: 'success',
-        title: 'Producto creado exitosamente',
-        showConfirmButton: false,
-        timer: 3000
-      })
-    });
+        icon: 'error',
+        title: 'Error',
+        text: 'Favor revisar que la información esté ingresada correctamente',
+      })  
+    }
   }
 
   public actualizar(form: any) {
-    this.productosService.actualizar(form.value).subscribe((data) => {
+    if(this.form.status ==='VALID'){
+      this.router.navigate(['/pages/productos'])
+      this.productosService.actualizar(form.value).subscribe((data) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Producto modificado exitosamente',
+          showConfirmButton: false,
+          timer: 3000
+        })
+      });
+    }
+    else {
       Swal.fire({
-        icon: 'success',
-        title: 'Producto modificado exitosamente',
-        showConfirmButton: false,
-        timer: 3000
-      })
-    });
+        icon: 'error',
+        title: 'Error',
+        text: 'Favor revisar que la información esté ingresada correctamente',
+      })  
+    }
   }
   
   //metodo que carga la información del objetivo a modificar

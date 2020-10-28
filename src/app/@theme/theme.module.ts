@@ -29,7 +29,8 @@ import {
     SwitcherComponent,
     TableComponent,
     FormularioComponent,
-    EditarProcesoComponent
+    EditarProcesoComponent,
+    ErrorFormularioComponent
 } from './components';
 
 import {
@@ -85,6 +86,7 @@ const COMPONENTS = [
   TableComponent,
   FormularioComponent,
   EditarProcesoComponent,
+  ErrorFormularioComponent
 ];
 const PIPES = [
   CapitalizePipe,

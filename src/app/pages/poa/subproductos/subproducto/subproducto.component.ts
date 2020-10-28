@@ -33,12 +33,25 @@ export class SubproductoComponent implements OnInit {
     this.cargarUnidadMedida();
   }
   
+  //validaciones del formulario
+  get productoInvalido(){
+    return this.form.get('idProducto').invalid && this.form.get('idProducto').touched
+  }
+
+  get nombreInvalido(){
+    return this.form.get('nombre').invalid && this.form.get('nombre').touched
+  }
+
+  get unidadMedidaInvalido(){
+    return this.form.get('idUnidadMedida').invalid && this.form.get('idUnidadMedida').touched
+  }
+
   crearFormulario(){
     this.form = this.fb.group({
       id:                         [null,],
-      idProducto:                 ['',],
-      nombre:                     ['',],
-      idUnidadMedida:             ['',],
+      idProducto:                 ['', Validators.required],
+      nombre:                     ['', Validators.required],
+      idUnidadMedida:             ['', Validators.required],
     });
   }
   
@@ -51,25 +64,45 @@ export class SubproductoComponent implements OnInit {
   }
 
   public crear(form: any) {
-    this.subproductosService.crear(form.value).subscribe((data) => {
+    if(this.form.status ==='VALID'){
+      this.subproductosService.crear(form.value).subscribe((data) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Subproducto creado exitosamente',
+          showConfirmButton: false,
+          timer: 3000
+        })
+      });
+      this.form.reset();
+    }
+    else {
       Swal.fire({
-        icon: 'success',
-        title: 'Subproducto creado exitosamente',
-        showConfirmButton: false,
-        timer: 3000
-      })
-    });
+        icon: 'error',
+        title: 'Error',
+        text: 'Favor revisar que la información esté ingresada correctamente',
+      })  
+    }
   }
 
   public actualizar(form: any) {
-    this.subproductosService.actualizar(form.value).subscribe((data) => {
+    if(this.form.status ==='VALID'){
+      this.router.navigate(['/pages/subproductos'])
+      this.subproductosService.actualizar(form.value).subscribe((data) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Subproducto modificado exitosamente',
+          showConfirmButton: false,
+          timer: 3000
+        })
+      });
+    }
+    else {
       Swal.fire({
-        icon: 'success',
-        title: 'Subproducto modificado exitosamente',
-        showConfirmButton: false,
-        timer: 3000
-      })
-    });
+        icon: 'error',
+        title: 'Error',
+        text: 'Favor revisar que la información esté ingresada correctamente',
+      })  
+    }
   }
   
   //metodo que carga la información del objetivo a modificar

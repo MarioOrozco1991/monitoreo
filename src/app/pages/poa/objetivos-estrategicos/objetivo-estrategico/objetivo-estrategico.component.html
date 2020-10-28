@@ -33,7 +33,7 @@
                    formControlName="fechaInicio"
                    bsDatepicker
                    [bsConfig]="{ adaptivePosition: true, containerClass: 'theme-dark-blue' }">
-            <small *ngIf="fechaInicioInvalida" class="text-danger">El formato de la fecha es incorrecto</small>
+            <small *ngIf="fechaInicioInvalida" class="text-danger">La fecha es requerida</small>
           </div>
           <div class="col-lg-6">
             <label>Fecha final (vigencia)</label>
@@ -43,7 +43,7 @@
                    formControlName="fechaFin"
                    bsDatepicker
                    [bsConfig]="{ adaptivePosition: true, containerClass: 'theme-dark-blue' }">
-            <small *ngIf="fechaFinInvalida" class="text-danger">El formato de la fecha es incorrecto</small>
+            <small *ngIf="fechaFinInvalida" class="text-danger">La fecha es requerida</small>
           </div>
         </div>
         <div class="row card-block mt-5">

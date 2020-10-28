@@ -29,32 +29,29 @@
         <h2>Programación</h2>
       <div [formGroup]="formDetalle">
         <div class="row mt-5">
-          <div class="col-lg-5">
-            <div>
-              
-              <label>Seleccione el mes</label>
-              <select class="custom-select" formControlName="idMes">
-                <option selected disabled value="">Seleccione</option>
-                <option [value]=1>Enero</option>
-                <option [value]=2>Febrero</option>
-                <option [value]=3>Marzo</option> 
-                <option [value]=4>Abril</option>
-                <option [value]=5>Mayo</option>
-                <option [value]=6>Junio</option>
-                <option [value]=7>Julio</option>
-                <option [value]=8>Agosto</option>
-                <option [value]=9>Septiembre</option>
-                <option [value]=10>Octubre</option>
-                <option [value]=11>Nombre</option>
-                <option [value]=12>Diciembre</option>
-              </select>
-            </div>
+          <div class="col-lg-4">
+              <label>Fecha inicial</label>
+              <input 
+                type="text"
+                placeholder="dd/mm/aaaa"
+                class="form-control"
+                formControlName="fechaInicio"
+                bsDatepicker
+                [bsConfig]="{ adaptivePosition: true, containerClass: 'theme-dark-blue'}">
           </div>
-          <div class="col-lg-5">
-            <div>
+          <div class="col-lg-4">
+              <label>Fecha final</label>
+              <input 
+                type="text"
+                placeholder="dd/mm/aaaa"
+                class="form-control"
+                formControlName="fechaFin"
+                bsDatepicker
+                [bsConfig]="{ adaptivePosition: true, containerClass: 'theme-dark-blue'}">
+          </div>
+          <div class="col-lg-2">
               <label>Cantidad a programar</label>
               <input class="form-control" type="text" formControlName="valorProgramado">
-            </div>
           </div>
           <div class="col-lg-2" style="margin-top: 28px;">
             <button (click)="agregarEditarItem()" type="button" class="btn btn-primary btn-block waves-effect"><i class="fas fa-check  "></i>{{editarDetalleIndice === -1 ? ' Agregar' : ' Editar'}}</button>

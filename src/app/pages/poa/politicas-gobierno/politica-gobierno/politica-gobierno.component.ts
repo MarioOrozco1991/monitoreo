@@ -25,41 +25,71 @@ export class PoliticaGobiernoComponent implements OnInit {
     this.mostrar();
   }
   
+  //validaciones del formulario
+  get nombreInvalido(){
+    return this.form.get('nombre').invalid && this.form.get('nombre').touched
+  }
+
+  //definicion del formulario
   crearFormulario(){
     this.form = this.fb.group({
-      id:                         [null,],
-      nombre:                     ['',],
+      id:      [null,],
+      nombre:  ['', Validators.required],
     });
   }
   
+  //recibe el formulario
   enviarFormulario(form: any) {
+    //si no trae id quiere decir que no es actualizacion y se va al método crear
     if (!this.form.value.id) {
       this.crear(form);
     } else {
       this.actualizar(form);
     }
   }
-
+  
+  //crear el registro
   public crear(form: any) {
-    this.politicasGobiernoService.crear(form.value).subscribe((data) => {
+    if(this.form.status ==='VALID'){
+      this.politicasGobiernoService.crear(form.value).subscribe((data) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Política creada exitosamente',
+          showConfirmButton: false,
+          timer: 3000
+        })
+      });
+      this.form.reset();
+    }
+    else {
       Swal.fire({
-        icon: 'success',
-        title: 'Política creada exitosamente',
-        showConfirmButton: false,
-        timer: 3000
-      })
-    });
+        icon: 'error',
+        title: 'Error',
+        text: 'Favor revisar que la información esté ingresada correctamente',
+      })  
+    }
   }
-
+  
+  //modificar el registro
   public actualizar(form: any) {
-    this.politicasGobiernoService.actualizar(form.value).subscribe((data) => {
+    if(this.form.status ==='VALID'){
+      this.router.navigate(['/pages/politicas-gobierno'])
+      this.politicasGobiernoService.actualizar(form.value).subscribe((data) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Política modificada exitosamente',
+          showConfirmButton: false,
+          timer: 3000
+        })
+      });
+    }
+    else {
       Swal.fire({
-        icon: 'success',
-        title: 'Política modificada exitosamente',
-        showConfirmButton: false,
-        timer: 3000
-      })
-    });
+        icon: 'error',
+        title: 'Error',
+        text: 'Favor revisar que la información esté ingresada correctamente',
+      })  
+    }
   }
   
   //metodo que carga la información del objetivo a modificar

@@ -26,10 +26,16 @@ export class PoliticaPublicaComponent implements OnInit {
     this.mostrar();
   }
   
+  //validaciones del formulario
+  get nombreInvalido(){
+    return this.form.get('nombre').invalid && this.form.get('nombre').touched
+  }
+
+  //definicion del formulario
   crearFormulario(){
     this.form = this.fb.group({
-      id:                         [null,],
-      nombre:                     ['',],
+      id:      [null,],
+      nombre:  ['', Validators.required],
     });
   }
   
@@ -42,25 +48,45 @@ export class PoliticaPublicaComponent implements OnInit {
   }
 
   public crear(form: any) {
-    this.politicasPublicasService.crear(form.value).subscribe((data) => {
+    if(this.form.status ==='VALID'){
+      this.politicasPublicasService.crear(form.value).subscribe((data) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Política creada exitosamente',
+          showConfirmButton: false,
+          timer: 3000
+        })
+      });
+      this.form.reset();
+    }
+    else {
       Swal.fire({
-        icon: 'success',
-        title: 'Política creada exitosamente',
-        showConfirmButton: false,
-        timer: 3000
-      })
-    });
+        icon: 'error',
+        title: 'Error',
+        text: 'Favor revisar que la información esté ingresada correctamente',
+      })  
+    }
   }
 
   public actualizar(form: any) {
-    this.politicasPublicasService.actualizar(form.value).subscribe((data) => {
+    if(this.form.status ==='VALID'){
+      this.router.navigate(['/pages/politicas-publicas'])
+      this.politicasPublicasService.actualizar(form.value).subscribe((data) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Política modificada exitosamente',
+          showConfirmButton: false,
+          timer: 3000
+        })
+      });
+    }
+    else {
       Swal.fire({
-        icon: 'success',
-        title: 'Política modificada exitosamente',
-        showConfirmButton: false,
-        timer: 3000
-      })
-    });
+        icon: 'error',
+        title: 'Error',
+        text: 'Favor revisar que la información esté ingresada correctamente',
+      })  
+    }
   }
   
   //metodo que carga la información del objetivo a modificar

@@ -28,29 +28,29 @@
           <div class="col-lg-6">
             <label>Fecha inicio (vigencia)</label>
             <input type="text"
-                   placeholder="día-mes-año"
+                   placeholder="dd/mm/aaaa"
                    class="form-control"
                    formControlName="fechaInicio"
                    bsDatepicker
                    [bsConfig]="{ adaptivePosition: true, dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-dark-blue' }">
-                   <small *ngIf="fechaInicioInvalida" class="text-danger">El formato de la fecha es incorrecto</small>
+                   <small *ngIf="fechaInicioInvalida" class="text-danger">La fecha es requerida</small>
           </div>
           <div class="col-lg-6">
             <label>Fecha final (vigencia)</label>
             <input type="text"
-                   placeholder="día-mes-año"
+                   placeholder="dd/mm/aaaa"
                    class="form-control"
                    formControlName="fechaFin"
                    bsDatepicker
                    [bsConfig]="{ adaptivePosition: true, dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-dark-blue' }">
-                   <small *ngIf="fechaFinInvalida" class="text-danger">El formato de la fecha es incorrecto</small>
+                   <small *ngIf="fechaFinInvalida" class="text-danger">La fecha es requerida</small>
           </div>
         </div>
         <div class="row card-block mt-5">
           <div class="col-lg-6">
             <input type="submit" class="btn btn-primary btn-block waves-effect" (click)='enviarFormulario(form)' *ngIf="!form.value.id else botonActualizar" value = "Crear">
             <ng-template #botonActualizar>
-              <input [routerLink]="['..']" type="submit" class="btn btn-primary btn-block waves-effect" (click)="enviarFormulario(form)" value="Modificar Objetivo">
+              <input type="submit" class="btn btn-primary btn-block waves-effect" (click)="enviarFormulario(form)" value="Modificar Objetivo">
             </ng-template>
           </div>
           <div class="col-lg-6">
