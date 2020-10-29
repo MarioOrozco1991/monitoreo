@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/auth/authentication.service';
 
 @Component({
@@ -9,8 +10,7 @@ import { AuthenticationService } from '../../services/auth/authentication.servic
 })
 export class LoginComponent implements OnInit {
 
-  username = '';
-  password = '';
+  form: FormGroup;
   invalidLogin = false;
 
   blockedPanel = false;
@@ -19,10 +19,18 @@ export class LoginComponent implements OnInit {
   // username;
 
   constructor(private router: Router,
+              private fb:FormBuilder,
               private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
     
+  }
+
+  crearFormulario(){
+    this.form = this.fb.group({
+      username:     ['', Validators.required],
+      password:     ['', Validators.required],
+    })
   }
 
   blockDocument() {
@@ -32,8 +40,8 @@ export class LoginComponent implements OnInit {
     }, 3000);
   }
 
-  checkLogin() {
-    (this.authenticationService.authenticate(this.username, this.password ).subscribe(
+  checkLogin(form: any) {
+    (this.authenticationService.authenticate(form.value.username, form.value.password).subscribe(
       data => {
         // this.router.navigate(['requisitos']);
         console.log('autenticado');
