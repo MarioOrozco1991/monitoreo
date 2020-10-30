@@ -16,7 +16,7 @@ import { PagesModule } from './pages/pages.module';
 import { AppRoutingModule } from './app-routing.module';
 import { DataTablesModule } from 'angular-datatables';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { NbPasswordAuthStrategy, NbAuthModule, NbDummyAuthStrategy } from '@nebular/auth';
+import { NbPasswordAuthStrategy, NbAuthModule, NbAuthJWTToken } from '@nebular/auth';
 import { AuthGuard } from './auth-guard.service';
 
 
@@ -73,8 +73,18 @@ import {
     CoreModule.forRoot(),
     NbAuthModule.forRoot({
       strategies: [
-        NbDummyAuthStrategy.setup({
+        NbPasswordAuthStrategy.setup({
           name: 'email',
+          baseEndpoint: 'http://172.21.26.175:8090/biometric-explorer',
+          login: {
+            // ...
+            endpoint: '/authenticate',
+          },
+          token: {
+            class: NbAuthJWTToken,
+
+            key: 'jwttoken', // this parameter tells where to look for the token
+          }
         }),
       ],
       forms: {},
