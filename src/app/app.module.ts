@@ -16,7 +16,8 @@ import { PagesModule } from './pages/pages.module';
 import { AppRoutingModule } from './app-routing.module';
 import { DataTablesModule } from 'angular-datatables';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import { NbPasswordAuthStrategy, NbAuthModule } from '@nebular/auth';
+import { NbPasswordAuthStrategy, NbAuthModule, NbDummyAuthStrategy } from '@nebular/auth';
+import { AuthGuard } from './auth-guard.service';
 
 
 
@@ -72,12 +73,16 @@ import {
     CoreModule.forRoot(),
     NbAuthModule.forRoot({
       strategies: [
-        NbPasswordAuthStrategy.setup({
+        NbDummyAuthStrategy.setup({
           name: 'email',
         }),
       ],
       forms: {},
     }),
+  ],
+
+  providers: [
+    AuthGuard
   ],
 
   bootstrap: [AppComponent],

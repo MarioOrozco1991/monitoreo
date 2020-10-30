@@ -3,9 +3,10 @@ import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeServ
 
 import { UserData } from '../../../@core/data/users';
 import { LayoutService } from '../../../@core/utils';
-import { map, takeUntil } from 'rxjs/operators';
+import { filter, map, takeUntil } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
 import { RippleService } from '../../../@core/utils/ripple.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-header',
@@ -58,6 +59,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private layoutService: LayoutService,
     private breakpointService: NbMediaBreakpointsService,
     private rippleService: RippleService,
+    private nbMenuService: NbMenuService,
+    protected router: Router,
   ) {
     this.materialTheme$ = this.themeService.onThemeChange()
       .pipe(map(theme => {
@@ -89,6 +92,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .subscribe(themeName => {
         this.currentTheme = themeName;
         this.rippleService.toggle(themeName?.startsWith('material'));
+      });
+
+    this.nbMenuService.onItemClick()
+      .pipe(
+        filter(({ tag }) => tag === 'my-context-menu'),
+        map(({ item: { title } }) => title),
+      )
+      .subscribe(title => {
+        if (title === 'Salir') {
+          this.router.navigate(['auth/logout']);
+        }
       });
   }
 

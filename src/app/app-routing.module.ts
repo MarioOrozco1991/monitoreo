@@ -1,24 +1,21 @@
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { AuthGuard } from './auth-guard.service';
 
 import { LoginComponent } from './pages/login/login.component';
 
 export const routes: Routes = [
   {
-    path: 'autentic',
-    component: LoginComponent
-  },
-  {
-    path: 'pages',
-    loadChildren: () => import('./pages/pages.module')
-      .then(m => m.PagesModule),
-  },
-  {
     path: 'auth',
     loadChildren: './auth/auth.module#NgxAuthModule',
   },
+  {
+    path: 'pages',
+    canActivate: [AuthGuard], // here we tell Angular to check the access with our AuthGuard
+    loadChildren: () => import('./pages/pages.module')
+      .then(m => m.PagesModule),
+  },
   { path: '', redirectTo: 'pages', pathMatch: 'full' },
-//   { path: '/editar', component: EditarProcesoComponent },
   { path: '**', redirectTo: 'pages' },
 ];
 
