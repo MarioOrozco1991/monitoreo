@@ -48,8 +48,6 @@ import { PoliticasGobiernoComponent } from './poa/politicas-gobierno/politicas-g
 import { PoliticaGobiernoComponent } from './poa/politicas-gobierno/politica-gobierno/politica-gobierno.component';
 import { PoliticasPublicasComponent } from './poa/politicas-publicas/politicas-publicas.component';
 import { PoliticaPublicaComponent } from './poa/politicas-publicas/politica-publica/politica-publica.component';
-import { LoginComponent } from './login/login.component';
-
 
 @NgModule({
   imports: [
@@ -65,7 +63,7 @@ import { LoginComponent } from './login/login.component';
     ComponentsModule,
     RouterModule,
     BsDatepickerModule.forRoot(),
-    
+
 
   ],
   declarations: [
@@ -105,7 +103,6 @@ import { LoginComponent } from './login/login.component';
     PoliticaGobiernoComponent,
     PoliticasPublicasComponent,
     PoliticaPublicaComponent,
-    LoginComponent,
   ],
 })
 export class PagesModule {

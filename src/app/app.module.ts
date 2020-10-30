@@ -16,6 +16,7 @@ import { PagesModule } from './pages/pages.module';
 import { AppRoutingModule } from './app-routing.module';
 import { DataTablesModule } from 'angular-datatables';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { NbPasswordAuthStrategy, NbAuthModule } from '@nebular/auth';
 
 
 
@@ -40,7 +41,7 @@ import {
 
 @NgModule({
   declarations: [AppComponent,],
-  
+
   imports: [
 
     BrowserModule,
@@ -55,7 +56,7 @@ import {
     ReactiveFormsModule,
     DataTablesModule,
     NbInputModule,
-    
+
 
     ThemeModule.forRoot(),
     NbSidebarModule.forRoot(),
@@ -69,6 +70,14 @@ import {
       messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
     }),
     CoreModule.forRoot(),
+    NbAuthModule.forRoot({
+      strategies: [
+        NbPasswordAuthStrategy.setup({
+          name: 'email',
+        }),
+      ],
+      forms: {},
+    }),
   ],
 
   bootstrap: [AppComponent],
