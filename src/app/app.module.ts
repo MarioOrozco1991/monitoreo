@@ -75,10 +75,14 @@ import {
       strategies: [
         NbPasswordAuthStrategy.setup({
           name: 'email',
-          baseEndpoint: 'http://172.21.26.175:8090/biometric-explorer',
+          baseEndpoint: '',
           login: {
             // ...
-            endpoint: '/authenticate',
+            endpoint: 'http://172.21.26.175:8090/biometric-explorer/authenticate',
+          },
+          logout: {
+            // ...
+            endpoint: null,
           },
           token: {
             class: NbAuthJWTToken,
