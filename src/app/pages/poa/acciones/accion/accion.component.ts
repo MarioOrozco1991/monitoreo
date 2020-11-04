@@ -68,8 +68,6 @@ export class AccionComponent implements OnInit {
       nombreAccion:             ['',],
       idDependencia:            ['',],
       idPuestoResponsable:      ['',],
-      idEjeEstrategico:         ['',],
-      idObjetivoEstrategico:    ['',],
       idObjetivoOperativo:      ['',],
       idPoliticaGobierno:       ['',],
       idPoliticaPublica:        ['',],

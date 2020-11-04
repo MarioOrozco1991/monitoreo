@@ -23,7 +23,7 @@ export class ProgramacionAccionPoaComponent implements OnInit {
   respuesta: any;
   editarDetalleIndice: number = -1;
   locale = 'es';
-  year = new Date().getFullYear();
+  //year = new Date().getFullYear();
 
   
   constructor(private router: Router,
@@ -50,7 +50,6 @@ export class ProgramacionAccionPoaComponent implements OnInit {
     //inicializando el formulario
     this.form = this.fb.group({
       id:                 [null,],
-      periodo:            ['',],
       idAccion:           ['',],
       items: this.fb.array([]),
     });

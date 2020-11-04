@@ -5,100 +5,86 @@
 			<form autocomplete="off" [formGroup]="form">
 				<div class="row mt-5">
 					<div class="col-lg-6">
-						<div>
-							<label>Tipo de programación</label>
-							<select class="custom-select" formControlName="tipoProgramacion">
-								<option selected disabled value="">Seleccione</option>
-								<option value="producto">Producto</option>
-								<option value="subproducto">Subproducto</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-lg-6">
-						<div>
-							<label>Periodo</label>
-							<select class="custom-select" formControlName="periodo">
-								<option selected disabled value="">Seleccione</option>
-								<option [value] >2021-2025</option>
-								<option [value]>2026-2030</option>
-								<option [value]>2031-2035</option> 
-							</select>
-						</div>
+						<label>Tipo de programación</label>
+						<select class="custom-select" formControlName="tipoProgramacion">
+							<option selected disabled value="">Seleccione</option>
+							<option value="producto">Producto</option>
+							<option value="subproducto">Subproducto</option>
+						</select>
 					</div>
 				</div>
 				<div class="row mt-5" *ngIf="form.get('tipoProgramacion').value=== 'producto'">
 					<div class="col-lg-12">
-						<div>
-							<label>Nombre del Producto</label>
-							<select class="custom-select" formControlName="idProducto">
-								<option selected disabled value="">Seleccione</option>
-								<option [value]="producto.id" *ngFor="let producto of productos">{{producto.descripcion}}</option>
-							</select>
-						</div>
+						<label>Nombre del Producto</label>
+						<select class="custom-select" formControlName="idProducto">
+							<option selected disabled value="">Seleccione</option>
+							<option [value]="producto.id" *ngFor="let producto of productos">{{producto.nombre}}</option>
+						</select>
 					</div>
 				</div>
 				<div class="row mt-5" *ngIf="form.get('tipoProgramacion').value=== 'subproducto'">
 					<div class="col-lg-12">
-						<div>
-							<label>Nombre del Subproducto</label>
-							<select class="custom-select" formControlName="idSubproducto">
-								<option selected disabled value="">Seleccione</option>
-								<option [value]="subproducto.id" *ngFor="let subproducto of subproductos">{{subproducto.descripcion}}</option>
-							</select>
-						</div>
+						<label>Nombre del Subproducto</label>
+						<select class="custom-select" formControlName="idSubproducto">
+							<option selected disabled value="">Seleccione</option>
+							<option [value]="subproducto.id" *ngFor="let subproducto of subproductos">{{subproducto.nombre}}</option>
+						</select>
 					</div>
 				</div>
-				<hr class="mt-5">
-				<h2>Programación</h2>
 			<div [formGroup]="formDetalle">
 				<div class="row mt-5">
-					<div class="col-lg-5">
-						<div>
-							<label>Seleccione el año</label>
-							<select class="custom-select" formControlName="año">
-								<option selected disabled value="">Seleccione</option>
-								<option [value]>2021</option>
-								<option [value]>2022</option>
-								<option [value]>2023</option> 
-								<option [value]>2024</option>
-								<option [value]>2025</option>
-							</select>
-						</div>
+					<div class="col-lg-4">
+						<label>Fecha inicial</label>
+						<input 
+							type="text"
+							placeholder="dd/mm/aaaa"
+							class="form-control"
+							formControlName="fechaInicio"
+							bsDatepicker
+							[bsConfig]="{ adaptivePosition: true, containerClass: 'theme-dark-blue'}">
 					</div>
-					<div class="col-lg-5">
-						<div>
-							<label>Cantidad a programar</label>
-							<input class="form-control" type="text" formControlName="cantidadProgramada">
-						</div>
+					<div class="col-lg-4">
+						<label>Fecha final</label>
+						<input 
+							type="text"
+							placeholder="dd/mm/aaaa"
+							class="form-control"
+							formControlName="fechaFin"
+							bsDatepicker
+							[bsConfig]="{ adaptivePosition: true, containerClass: 'theme-dark-blue'}">
+					</div>
+					<div class="col-lg-2">
+						<label>Cantidad a programar</label>
+						<input class="form-control" type="text" formControlName="valorProgramado">
 					</div>
 					<div class="col-lg-2" style="margin-top: 28px;">
-						<button (click)="agregarItem()" nbTooltip="Agregar" nbTooltipPlacement="top" nbButton status="control" type="button" class="btn btn-primary btn-block waves-effect">+</button>
+						<button (click)="agregarEditarItem()" type="button" class="btn btn-primary btn-block waves-effect"><i class="fas fa-check  "></i>{{editarDetalleIndice === -1 ? ' Agregar' : ' Editar'}}</button>
 					</div>   
 				</div>
 			</div>
-				<div class="container mt-5">
-					<table class="table table-striped table-bordered row-border hover responsive text-center" style="margin: 0 auto;">
-						<thead class="thead-dark">
-							<tr>
-								<th class="text-center">#</th>
-								<th class="text-center">Año</th>
-								<th class="text-center">Cantidad Programada</th>		
-								<th class="text-center">Opciones</th>
-							</tr>
-						</thead>
-						<tbody formArrayName="items">
-							<tr *ngFor="let item of items.controls; let i = index">
-								<td class="text-center" style="width: 20px;">{{i + 1}}</td>
-								<td style="width: 500px;">{{item.get('año').value}}</td>
-								<td style="width: 500px;">{{item.get('cantidadProgramada').value}}</td>
-								<td class="text-center" style="width: 200px;">
-									<button nbTooltip="Editar" nbTooltipPlacement="bottom" nbButton status="control" type="button" class="btn btn-sm btn-success mr-2" (click)="editarItem(i)"> <nb-icon icon="edit-2-outline"></nb-icon></button>
-									<button nbTooltip="Eliminar" nbTooltipPlacement="bottom" nbButton status="control" type="button" class="btn btn-sm btn-danger" (click)="eliminarItem(i)"> <nb-icon icon="trash-2-outline"></nb-icon></button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+			<div class="mt-5">
+				<table class="table table-striped table-bordered row-border hover responsive text-center" style="margin: 0 auto;">
+					<thead class="thead-dark">
+						<tr>
+							<th class="text-center">Fecha Inicial</th>
+							<th class="text-center">Fecha Final</th>
+							<th class="text-center">Cantidad Programada</th>		
+							<th class="text-center">Opciones</th>
+						</tr>
+					</thead>
+					<tbody formArrayName="items">
+						<tr *ngFor="let item of items.controls; let i = index">
+							<td style="width: 500px;">{{item.get('fechaInicio').value | date: 'dd/MM/yyyy'}}</td>
+							<td style="width: 500px;">{{item.get('fechaFin').value | date: 'dd/MM/yyyy'}}</td>
+							<td style="width: 500px;">{{item.get('valorProgramado').value}}</td>
+							<td class="text-center" style="width: 200px;">
+								<button nbTooltip="Editar" nbTooltipPlacement="bottom" nbButton status="control" type="button" class="btn btn-sm btn-success mr-2" (click)="editarItem(i)"> <nb-icon icon="edit-2-outline"></nb-icon></button>
+								<button nbTooltip="Eliminar" nbTooltipPlacement="bottom" nbButton status="control" type="button" class="btn btn-sm btn-danger" (click)="eliminarItem(i)"> <nb-icon icon="trash-2-outline"></nb-icon></button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				</div> 
 				<div class="row card-block mt-5">
 					<div class="col-lg-6">
 						<input [routerLink]="['..']" type="submit" class="btn btn-primary btn-block waves-effect" (click)="enviarFormulario(form)" *ngIf="!form.value.id else botonActualizar" value="Crear Programación">

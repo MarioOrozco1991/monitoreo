@@ -15,29 +15,6 @@
 					</div>
 					<div class="col-lg-6">
 						<div>
-							<label>Eje Estrategico</label>
-							<select class="custom-select" formControlName="idEjeEstrategico">
-								<option selected disabled value="">Seleccione</option>
-								<option [value]="ejeEstrategico.id" *ngFor="let ejeEstrategico of ejesEstrategicos">{{ejeEstrategico.numero}} {{ejeEstrategico.nombre}}</option>
-							</select>
-						</div>
-					</div>
-				</div>
-				<div class="row mt-5">
-					<div class="col-lg-6">
-						<div>
-							<label>Objetivo Estratégico</label>
-							<select class="custom-select" formControlName="idObjetivoEstrategico">
-								<option selected disabled value="">Seleccione</option>
-								<option [value]="objetivoEstrategico.id" *ngFor="let objetivoEstrategico of objetivosEstrategicos">{{objetivoEstrategico.idEjeEstrategico}}.{{objetivoEstrategico.numero}} {{objetivoEstrategico.nombre}}</option>
-							</select>
-								<!-- <small *ngIf="alcanceNoValido" class="form-text text-danger">
-								Este campo es obligatorio
-								</small> -->
-						</div>
-					</div>
-					<div class="col-lg-6">
-						<div>
 							<label>Objetivo Operativo</label>
 							<select class="custom-select" formControlName="idObjetivoOperativo">
 								<option selected disabled value="">Seleccione</option>

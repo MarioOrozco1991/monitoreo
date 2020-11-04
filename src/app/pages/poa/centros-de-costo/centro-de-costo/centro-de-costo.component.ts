@@ -27,9 +27,9 @@ export class CentroDeCostoComponent implements OnInit {
   
   crearFormulario(){
     this.form = this.fb.group({
-      id:                         [null,],
-      idDependenciaResponsable:   ['',],
-      nombre:                     ['',],
+      id:              [null,],
+      idDependencia:   ['',],
+      nombre:          ['',],
     });
   }
   
