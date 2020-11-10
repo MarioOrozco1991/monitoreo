@@ -56,6 +56,10 @@ export class ProductosComponent implements OnInit {
       if (resp.value) {
         this.respuesta.splice(i, 1)
         this.productosService.eliminar(datos.id).subscribe();
+        this.productosService.listado().subscribe((data: any) => {
+          this.respuesta = data
+         this.dtTrigger.next();
+       });
         Swal.fire({
           //position: 'top-end',
           icon: 'success',
@@ -64,6 +68,7 @@ export class ProductosComponent implements OnInit {
           timer: 2000
         })
         this.router.navigate['centros-de-costo']
+        
       }
     })
   }

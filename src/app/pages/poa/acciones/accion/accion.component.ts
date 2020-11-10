@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { EjesService } from './../../../../services/ejes.service';
+//import { EjesService } from './../../../../services/ejes.service';
+//import { ObjetivosEstrategicosService } from './../../../../services/objetivos-estrategicos.service';
 import { AccionesService } from './../../../../services/acciones.service';
-import { ObjetivosEstrategicosService } from './../../../../services/objetivos-estrategicos.service';
 import { ObjetivosOperativosService } from './../../../../services/objetivos-operativos.service';
+import { EmpleadoService } from './../../../../services/empleado.service';
 import { UnidadMedidaService } from './../../../../services/unidad-medida.service';
 import { PoliticasGobiernoService } from './../../../../services/politicas-gobierno.service';
 import { PoliticasPublicasService } from './../../../../services/politicas-publicas.service';
@@ -17,9 +18,10 @@ import Swal from 'sweetalert2';
 })
 export class AccionComponent implements OnInit {
 
-  ejesEstrategicos: any[];
-  objetivosEstrategicos: any[];
+  //ejesEstrategicos: any[];
+  //objetivosEstrategicos: any[];
   objetivosOperativos: any[];
+  empleados: any;
   mostrarNombreSistema: boolean = false;
   listadoPoliticasGobierno: any[];
   listadoPoliticasPublicas: any[];
@@ -33,9 +35,10 @@ export class AccionComponent implements OnInit {
               private router: Router,
               private activatedRoute: ActivatedRoute,
               private accionesService: AccionesService,
-              private ejesService: EjesService,
-              private objetivosEstrategicosService: ObjetivosEstrategicosService,  
+              //private ejesService: EjesService,
+              //private objetivosEstrategicosService: ObjetivosEstrategicosService,  
               private objetivosOperativosService: ObjetivosOperativosService,
+              private empleadoService: EmpleadoService,
               private unidadMedidaService: UnidadMedidaService,
               private politicasGobiernoService: PoliticasGobiernoService,
               private politicasPublicasService: PoliticasPublicasService
@@ -47,9 +50,10 @@ export class AccionComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarAccion();
-    this.cargarEjeEstrategico();
-    this.cargarObjetivoEstrategico();
+    //this.cargarEjeEstrategico();
+    //this.cargarObjetivoEstrategico();
     this.cargarObjetivoOperativo();
+    this.cargarDependencia();
     this.cargarPoliticaGobierno();
     this.cargarPoliticaPublica();
     this.cargarUnidadMedida();
@@ -173,21 +177,28 @@ export class AccionComponent implements OnInit {
     });
   }
 
-  public cargarEjeEstrategico(): void {
-    this.ejesService.listado().subscribe((respuesta) => {
-      this.ejesEstrategicos = respuesta;
-    });   
-  }
+  // public cargarEjeEstrategico(): void {
+  //   this.ejesService.listado().subscribe((respuesta) => {
+  //     this.ejesEstrategicos = respuesta;
+  //   });   
+  // }
 
-  public cargarObjetivoEstrategico(): void {
-    this.objetivosEstrategicosService.listado().subscribe((respuesta) => {
-      this.objetivosEstrategicos = respuesta;
-    });   
-  }
+  // public cargarObjetivoEstrategico(): void {
+  //   this.objetivosEstrategicosService.listado().subscribe((respuesta) => {
+  //     this.objetivosEstrategicos = respuesta;
+  //   });   
+  // }
 
   public cargarObjetivoOperativo(): void {
     this.objetivosOperativosService.listado().subscribe((respuesta) => {
       this.objetivosOperativos = respuesta;
+    });   
+  }
+
+  public cargarDependencia(): void {
+    
+    this.empleadoService.get(parseInt(localStorage.getItem('cui'))).subscribe((respuesta) => {
+      this.empleados = respuesta;
     });   
   }
 
