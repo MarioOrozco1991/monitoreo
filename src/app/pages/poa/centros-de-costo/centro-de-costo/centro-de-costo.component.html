@@ -9,7 +9,7 @@
               <label>Dependencia Responsable</label>
               <select class="custom-select" formControlName="idDependencia">
                 <option selected disabled value="">Seleccione</option>
-                <option [value]=1>Informatica y estadistica</option>
+                <option [value]="dependencia.id" *ngFor="let dependencia of dependencias">{{dependencia.nombre}}</option>
               </select>
             </div>
           </div>   

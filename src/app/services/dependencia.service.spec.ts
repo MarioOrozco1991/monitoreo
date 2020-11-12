@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { EjesService } from './ejes.service';
+import { DependenciaService } from './dependencia.service';
 
-describe('EjesService', () => {
-  let service: EjesService;
+describe('DependenciaService', () => {
+  let service: DependenciaService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(EjesService);
+    service = TestBed.inject(DependenciaService);
   });
 
   it('should be created', () => {

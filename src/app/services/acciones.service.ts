@@ -20,7 +20,7 @@ export class AccionesService {
     return this.httpClient.post(this.url + 'acciones', JSON.stringify(datos), {headers: this.httpHeaders});
   }
 
-  cargar(id: any){
+  cargarAccion(id: any){
     return this.httpClient.get(this.url + 'acciones/' + id);
   }
 

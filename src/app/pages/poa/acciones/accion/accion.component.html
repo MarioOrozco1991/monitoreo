@@ -27,10 +27,7 @@
 					<div class="col-lg-6">
 						<div>
 							<label>Nombre de la dependencia</label>
-							<select class="custom-select" formControlName="idDependencia">
-								<option selected disabled value="">Seleccione</option>
-								<option [value]=1>Informatica y estadistica</option>
-							</select>
+							<input class="form-control" type="text" formControlName="idDependencia" [value]="dependencia.nombre" [attr.disabled]="true">
 						</div>
 					</div>
 					<div class="col-lg-6">
@@ -38,7 +35,7 @@
 							<label>Responsable</label>
 							<select class="custom-select" formControlName="idPuestoResponsable">
 								<option selected disabled value="">Seleccione</option>
-								<option [value]=1 >Subdirector</option>
+								<option [value]="clasePuesto.id" *ngFor="let clasePuesto of clasePuestos">{{clasePuesto.nombre}}</option>
 							</select>
 								<!-- <small *ngIf="alcanceNoValido" class="form-text text-danger">
 								Este campo es obligatorio
@@ -136,8 +133,8 @@
 							<div>
 								<label>¿Quién la realiza?</label>
 								<select class="custom-select" formControlName="idDependenciaRealiza">
-									<option selected disabled value="">Dependencia/Depto.</option>
-									<option [value]=1>Direccion de Informatica y Estadistica</option>
+									<option selected disabled value="">Unidad/Depto.</option>
+									<option [value]="clasePuesto.id" *ngFor="let clasePuesto of clasePuestos">{{clasePuesto.nombre}}</option>
 								</select>
 							</div>
 						</div>
@@ -145,7 +142,7 @@
 							<div style="margin-top: 3px;">
 								<select class="custom-select mt-4" formControlName="idPuestoRealiza">
 									<option selected disabled value="">Puesto</option>
-									<option [value]=1>Subdirector</option>
+									<option [value]="clasePuesto.id" *ngFor="let clasePuesto of clasePuestos">{{clasePuesto.nombre}}</option>
 								</select>
 							</div>
 						</div>
@@ -154,18 +151,15 @@
 						<div class="col-lg-6">
 							<div>
 								<label>¿Qué necesita para realizarla?</label>
-								<select class="custom-select" formControlName="entrada">
-									<option selected disabled value="">Seleccione</option>
-									<option [value]>Oficio</option>
-								</select>
+								<input class="form-control" type="text" formControlName="entrada">
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div>
 								<label>¿Quién solicita?</label>
 								<select class="custom-select" formControlName="idDependenciaSolicita">
-									<option selected disabled value="">Dependencia/Depto.</option>
-									<option [value]=2>dependencia 1</option>
+									<option selected disabled value="">Unidad/Depto.</option>
+									<option [value]="dependencia.id" *ngFor="let dependencia of dependencias">{{dependencia.nombre}}</option>
 								</select>
 							</div>
 						</div>
@@ -173,8 +167,7 @@
 							<div style="margin-top: 3px;">
 								<select class="custom-select mt-4" formControlName="idPuestoSolicita">
 									<option selected disabled value="">Puesto</option>
-									<option [value]=1>Desarrollador de Sistemas I</option>
-									<option [value]=2>Desarrollador de Sistemas II</option> 
+									<option [value]="clasePuestoListado.id" *ngFor="let clasePuestoListado of clasePuestoListado">{{clasePuestoListado.nombre}}</option>
 								</select>
 							</div>
 						</div>
@@ -185,7 +178,7 @@
 								<label>¿Qué resultado genera?</label>
 								<select class="custom-select" formControlName="resultadoDocumento">
 									<option selected disabled value="">Seleccione</option>
-									<option [value]=1>Oficio</option>
+									<option [value]="UnidadMedida.id" *ngFor="let UnidadMedida of listadoUnidadMedida">{{UnidadMedida.nombreUnidadMedida}}</option>
 								</select>
 							</div>
 						</div>
@@ -193,8 +186,8 @@
 							<div>
 								<label>¿Quién recibe el resultado?</label>
 								<select class="custom-select" formControlName="idDependenciaResultado">
-									<option selected disabled value="">Dependencia/Depto.</option>
-									<option [value]=1>RRHH</option>
+									<option selected disabled value="">Unidad/Depto.</option>
+									<option [value]="dependencia.id" *ngFor="let dependencia of dependencias">{{dependencia.nombre}}</option>
 								</select>
 							</div>
 						</div>
@@ -202,8 +195,7 @@
 							<div style="margin-top: 3px;">
 								<select class="custom-select mt-4" formControlName="idPuestoResultado">
 									<option selected disabled value="">Puesto</option>
-									<option [value]=1>Puesto 1</option>
-									<option [value]=2>puesto 2</option> 
+									<option [value]="clasePuestoListado.id" *ngFor="let clasePuestoListado of clasePuestoListado">{{clasePuestoListado.nombre}}</option> 
 								</select>
 							</div>
 						</div>
@@ -246,9 +238,7 @@
 								<label>Nombre del sistema</label>
 								<select class="custom-select" formControlName="idSistema">
 									<option selected disabled value="">Seleccione</option>
-									<option [value]=1>POINTER</option>
-									<option [value]=2>SICABI</option>
-									<option [value]=3>CIMCORR</option>
+									<option [value]="sistema.id" *ngFor="let sistema of sistemas">{{sistema.nombre}}</option>
 								</select>
 							</div>
 						</div>

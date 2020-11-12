@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class EmpleadoService {
+export class ClasePuestoService {
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json'});
 
@@ -13,8 +13,13 @@ export class EmpleadoService {
   constructor(private httpClient: HttpClient) {}
   
   get(cui: number){
-    return this.httpClient.get(this.url + 'empleado/' + cui);
+    return this.httpClient.get<any>(this.url + 'clase-puestos/cui/' + cui);
   }
 
+  listado(){
+    return this.httpClient.get<any>(this.url + 'clase-puestos');
+  }
   
+
+
 }

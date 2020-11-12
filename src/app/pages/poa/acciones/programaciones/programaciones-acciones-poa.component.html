@@ -12,8 +12,6 @@
       <tr class="text-center">
         <th><font color="white">#</font></th>
         <th><font color="white">Nombre de la Acción</font></th>
-        <th><font color="white">Periodo</font></th>
-        <th><font color="white">Fecha en que fue programada</font></th>
         <th><font color="white">Opciones</font></th>
       </tr>
     </thead>
@@ -21,8 +19,6 @@
       <tr *ngFor="let datos of respuesta; let i=index">
         <td class="text-center" style="width: 30px;">{{datos.id}}</td>
         <td class="text-center">{{datos.nombreAccion}}</td>
-        <td class="text-center" style="width: 50px;">{{datos.periodo}}</td>
-        <td class="text-center" style="width: 150px;">{{datos.createAt | date: 'dd-MM-yyyy'}}</td>
         <td class="text-center" style="width: 150px;">
           <button type="button" class="btn btn-sm btn-primary mr-2"> <nb-icon icon="eye-outline"></nb-icon></button>
           <button [routerLink]="[datos.id]" nbTooltip="Editar" nbTooltipPlacement="bottom" nbButton status="control" type="button" class="btn btn-sm btn-success mr-2"> <nb-icon icon="edit-2-outline"></nb-icon> </button>

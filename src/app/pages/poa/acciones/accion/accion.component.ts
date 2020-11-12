@@ -5,10 +5,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 //import { ObjetivosEstrategicosService } from './../../../../services/objetivos-estrategicos.service';
 import { AccionesService } from './../../../../services/acciones.service';
 import { ObjetivosOperativosService } from './../../../../services/objetivos-operativos.service';
-import { EmpleadoService } from './../../../../services/empleado.service';
-import { UnidadMedidaService } from './../../../../services/unidad-medida.service';
+import { DependenciaService } from './../../../../services/dependencia.service';
+import { ClasePuestoService } from './../../../../services/clase-puesto.service';
 import { PoliticasGobiernoService } from './../../../../services/politicas-gobierno.service';
 import { PoliticasPublicasService } from './../../../../services/politicas-publicas.service';
+import { UnidadMedidaService } from './../../../../services/unidad-medida.service';
+import { SistemasService } from './../../../../services/sistemas.service';
 import Swal from 'sweetalert2'; 
 
 @Component({
@@ -21,11 +23,15 @@ export class AccionComponent implements OnInit {
   //ejesEstrategicos: any[];
   //objetivosEstrategicos: any[];
   objetivosOperativos: any[];
-  empleados: any;
+  dependencia: any = {};
+  dependencias: any[];
+  clasePuestos: any[];
+  clasePuestoListado: any[];
   mostrarNombreSistema: boolean = false;
   listadoPoliticasGobierno: any[];
   listadoPoliticasPublicas: any[];
   listadoUnidadMedida: any[];
+  sistemas: any[];
   form: FormGroup;
   formDetalle: FormGroup;
   editarDetalleIndice: number = -1;
@@ -38,10 +44,12 @@ export class AccionComponent implements OnInit {
               //private ejesService: EjesService,
               //private objetivosEstrategicosService: ObjetivosEstrategicosService,  
               private objetivosOperativosService: ObjetivosOperativosService,
-              private empleadoService: EmpleadoService,
-              private unidadMedidaService: UnidadMedidaService,
+              private dependenciaService: DependenciaService,
+              private clasePuestoService: ClasePuestoService,
               private politicasGobiernoService: PoliticasGobiernoService,
-              private politicasPublicasService: PoliticasPublicasService
+              private politicasPublicasService: PoliticasPublicasService,
+              private unidadMedidaService: UnidadMedidaService,
+              private sistemasService: SistemasService
   ) {
   
     this.crearFormulario();
@@ -54,9 +62,15 @@ export class AccionComponent implements OnInit {
     //this.cargarObjetivoEstrategico();
     this.cargarObjetivoOperativo();
     this.cargarDependencia();
+    this.cargarDependencias();
     this.cargarPoliticaGobierno();
     this.cargarPoliticaPublica();
     this.cargarUnidadMedida();
+    this.cargarClasePuesto();
+    this.cargarClasePuestoListado();
+    this.cargarSistemas();
+    console.log('form', this.form);
+    //this.form.controls['idDependencia'].disable();
   }
   
   get items(): FormArray {
@@ -69,12 +83,12 @@ export class AccionComponent implements OnInit {
     this.form = this.fb.group({
       id:                       [null,],
       ejercicioFiscal:          ['',],
-      nombreAccion:             ['',],
+      idObjetivoOperativo:      ['',],
       idDependencia:            ['',],
       idPuestoResponsable:      ['',],
-      idObjetivoOperativo:      ['',],
       idPoliticaGobierno:       ['',],
       idPoliticaPublica:        ['',],
+      nombreAccion:             ['',],
       idUnidadMedida:           ['',],
       nombreIndicador:          ['',],
       interpretacion:           ['',],
@@ -137,7 +151,8 @@ export class AccionComponent implements OnInit {
   cargarAccion(): void {
     this.activatedRoute.params.subscribe(params => {
       if(params.id){
-        this.accionesService.cargar(params.id).subscribe((respuesta) => {
+        this.accionesService.cargarAccion(params.id).subscribe((respuesta) => {
+          console.log('accion cargada', respuesta);
           this.form.patchValue(respuesta);
         });
       }       
@@ -151,9 +166,11 @@ export class AccionComponent implements OnInit {
       this.actualizar(form);
     }
   }
-
+  
   public crear(form: any) {
+    this.form.controls['idDependencia'].setValue(this.dependencia.id);
     this.accionesService.crear(form.value).subscribe((data) => {
+      
       Swal.fire({
         icon: 'success',
         title: 'Acción creada exitosamente',
@@ -196,9 +213,28 @@ export class AccionComponent implements OnInit {
   }
 
   public cargarDependencia(): void {
-    
-    this.empleadoService.get(parseInt(localStorage.getItem('cui'))).subscribe((respuesta) => {
-      this.empleados = respuesta;
+    this.dependenciaService.get(parseInt(localStorage.getItem('cui'))).subscribe((respuesta) => {
+      this.dependencia = respuesta;
+      console.log('respuesta', this.dependencia);
+        //this.form.idDepenencia.setValue(this.dependencia.id);
+    });   
+  }
+
+  public cargarDependencias(): void {
+    this.dependenciaService.listado().subscribe((respuesta) => {
+      this.dependencias = respuesta;
+    });   
+  }
+
+  public cargarClasePuesto(): void {
+    this.clasePuestoService.get(parseInt(localStorage.getItem('cui'))).subscribe((respuesta) => {
+      this.clasePuestos = respuesta;
+    });   
+  }
+
+  public cargarClasePuestoListado(): void {
+    this.clasePuestoService.listado().subscribe((respuesta) => {
+      this.clasePuestoListado = respuesta;
     });   
   }
 
@@ -217,6 +253,12 @@ export class AccionComponent implements OnInit {
   public cargarUnidadMedida(): void {
     this.unidadMedidaService.listado().subscribe((respuesta) => {
       this.listadoUnidadMedida = respuesta;  
+    });   
+  }
+
+  public cargarSistemas(): void {
+    this.sistemasService.listado().subscribe((respuesta) => {
+      this.sistemas = respuesta;  
     });   
   }
 
