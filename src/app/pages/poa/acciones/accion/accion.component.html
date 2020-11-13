@@ -157,7 +157,7 @@
 						<div class="col-lg-3">
 							<div>
 								<label>¿Quién solicita?</label>
-								<select class="custom-select" formControlName="idDependenciaSolicita">
+								<select (change)="clasePuestoPorUnidad($event.target.value)" class="custom-select" formControlName="idDependenciaSolicita">
 									<option selected disabled value="">Unidad/Depto.</option>
 									<option [value]="dependencia.id" *ngFor="let dependencia of dependencias">{{dependencia.nombre}}</option>
 								</select>
@@ -167,7 +167,7 @@
 							<div style="margin-top: 3px;">
 								<select class="custom-select mt-4" formControlName="idPuestoSolicita">
 									<option selected disabled value="">Puesto</option>
-									<option [value]="clasePuestoListado.id" *ngFor="let clasePuestoListado of clasePuestoListado">{{clasePuestoListado.nombre}}</option>
+									<option [value]="clasePuestoUnidad.id" *ngFor="let clasePuestoUnidad of clasePuestoUnidad">{{clasePuestoUnidad.nombre}}</option>
 								</select>
 							</div>
 						</div>

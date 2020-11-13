@@ -16,6 +16,10 @@ export class ClasePuestoService {
     return this.httpClient.get<any>(this.url + 'clase-puestos/cui/' + cui);
   }
 
+  puestoPorUnidad(id: number){
+    return this.httpClient.get<any>(this.url + 'clase-puestos/unidad/' + id);
+  }
+
   listado(){
     return this.httpClient.get<any>(this.url + 'clase-puestos');
   }

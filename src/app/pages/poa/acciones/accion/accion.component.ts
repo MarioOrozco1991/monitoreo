@@ -25,6 +25,7 @@ export class AccionComponent implements OnInit {
   objetivosOperativos: any[];
   dependencia: any = {};
   dependencias: any[];
+  clasePuestoUnidad: any[];
   clasePuestos: any[];
   clasePuestoListado: any[];
   mostrarNombreSistema: boolean = false;
@@ -51,10 +52,8 @@ export class AccionComponent implements OnInit {
               private unidadMedidaService: UnidadMedidaService,
               private sistemasService: SistemasService
   ) {
-  
-    this.crearFormulario();
-  
-  }
+      this.crearFormulario();
+    }
 
   ngOnInit(): void {
     this.cargarAccion();
@@ -116,7 +115,7 @@ export class AccionComponent implements OnInit {
       observaciones:           ['',],
     });
   }
-
+  
   // agregar o editar item
   agregarEditarItem(){
     // this.items.push( this.fb.control('', Validators.required ) );
@@ -169,6 +168,8 @@ export class AccionComponent implements OnInit {
   
   public crear(form: any) {
     this.form.controls['idDependencia'].setValue(this.dependencia.id);
+    console.log('formulario antes de crear', form);
+    return;
     this.accionesService.crear(form.value).subscribe((data) => {
       
       Swal.fire({
@@ -231,6 +232,16 @@ export class AccionComponent implements OnInit {
       this.clasePuestos = respuesta;
     });   
   }
+
+    //para obtener que dependencia seleccionó el usuario en el select obtengo el valor desde html
+    //con change() y le paso el valor.
+    public clasePuestoPorUnidad(valor: number): void {
+      this.clasePuestoService.puestoPorUnidad(valor).subscribe((respuesta) => {
+        this.clasePuestoUnidad = respuesta;
+        console.log('respuesta', this.dependencia);
+          //this.form.idDepenencia.setValue(this.dependencia.id);
+      });   
+    }
 
   public cargarClasePuestoListado(): void {
     this.clasePuestoService.listado().subscribe((respuesta) => {
