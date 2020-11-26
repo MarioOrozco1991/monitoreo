@@ -135,41 +135,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'checkmark-circle-2-outline',
     link: '/pages/aprobacion',
   },
-  {
-    title: 'Reportes',
-    icon: 'file-text-outline',
-    link: '/pages/reportes',
-  },
-  {
-    title: 'Rol',
-    icon: 'person-outline',
-    children: [
-        {
-          title: 'Crear',
-          link: '/pages/rol',
-        },
-      ],
-  },
-  {
-    title: 'Auth',
-    icon: 'lock-outline',
-      children: [
-        {
-         title: 'Login',
-         link: '/auth/login',
-       },
-//       {
-//         title: 'Register',
-//         link: '/auth/register',
-//       },
-//       {
-//         title: 'Request Password',
-//         link: '/auth/request-password',
-//       },
-//       {
-//         title: 'Reset Password',
-//         link: '/auth/reset-password',
-//       },
-     ],
-   },
+  // {
+  //   title: 'Reportes',
+  //   icon: 'file-text-outline',
+  //   link: '/pages/reportes',
+  // },
 ];

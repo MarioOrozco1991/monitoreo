@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AccionesService} from './../../../../../services/acciones.service'
 import { ProgramacionesService } from './../../../../../services/programaciones.service';
+import { BsDatepickerConfig, BsDatepickerViewMode, BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { esLocale } from 'ngx-bootstrap/locale';
+defineLocale('es', esLocale);
 import Swal from 'sweetalert2'; 
 
 @Component({
@@ -11,23 +16,33 @@ import Swal from 'sweetalert2';
 })
 export class ProgramacionAccionPomComponent implements OnInit {
 
-  mostrarNombreSistema: boolean = false;
+  params: any;
+  acciones: any[];
   form: FormGroup;
   formDetalle: FormGroup;
   respuesta: any;
   editarDetalleIndice: number = -1;
+  locale = 'es';
+  //year = new Date().getFullYear();
+
   
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
+              private bsLocaleService: BsLocaleService,
+              private accionesService: AccionesService,
               public programacionesService:ProgramacionesService, 
-              private fb:FormBuilder) {
-  
-    this.crearFormulario();
-
+              private fb:FormBuilder
+             ) {
+                  this.bsLocaleService.use('es');//fecha en español, datepicker  
+                  this.crearFormulario();
   }
-      
+
   ngOnInit(): void {
-    this.cargarProgramacion();
+    this.activatedRoute.params.subscribe(params => {
+      this.params = params; 
+    })
+    this.cargarProgramaciones()
+    this.cargarAccion();
   }
   
   get items(): FormArray {
@@ -36,65 +51,119 @@ export class ProgramacionAccionPomComponent implements OnInit {
   
   crearFormulario(){
     //inicializando el formulario
-  
     this.form = this.fb.group({
-      id:                          [null,],
-      accion:                      ['',],
-      periodo:                     ['',],
+      id:                 [null,],
+      idAccion:           [null,],
       items: this.fb.array([]),
     });
     this.formDetalle = this.fb.group({
-      año:                 ['',],
-      cantidadProgramada:  ['',]
+      id:               [null,],
+      idAccion:         [null,],
+      fechaInicio:      ['',],
+      fechaFin:         ['',],
+      valorProgramado:  ['',]
     });
   }
 
-   // agregar o editar item
-   agregarEditarItem(){
+  // agregar o editar item
+  agregarEditarItem(){
     // this.items.push( this.fb.control('', Validators.required ) );
     console.log('this.formDetalle', this.formDetalle.getRawValue());
     if (this.editarDetalleIndice === -1) { // crear
-      this.items.push(
-        this.fb.group(this.formDetalle.getRawValue())
-      );
+      if(this.params.id){
+        this.programacionesService.crear(this.formDetalle.getRawValue()).subscribe((respuesta: any) => {
+          this.items.push(
+            this.fb.group(respuesta)
+          );
+          this.formDetalle.reset();
+        })
+      } else {
+        this.items.push(
+          this.fb.group(this.formDetalle.getRawValue())
+        );
+        this.formDetalle.reset();
+      }
     } else { // editar
-      this.items.setControl(
-        this.editarDetalleIndice,
-        this.fb.group(this.formDetalle.getRawValue())
-      );
-      this.editarDetalleIndice = -1;
+      if(this.params.id){
+        console.log('object');
+        this.programacionesService.actualizar(this.formDetalle.getRawValue()).subscribe((respuesta: any) => {
+          console.log('respuesta', respuesta);
+          this.items.setControl(
+            this.editarDetalleIndice,
+            this.fb.group(respuesta)
+          );
+          this.editarDetalleIndice = -1;
+          this.formDetalle.reset();
+        })
+      } else {
+        this.items.setControl(
+          this.editarDetalleIndice,
+          this.fb.group(this.formDetalle.getRawValue())
+        );
+        this.editarDetalleIndice = -1;
+        this.formDetalle.reset();
+      }   
     }
-    this.formDetalle.reset();
   }
   
   editarItem(i: any){
     console.log('i', i, this.items);
     this.editarDetalleIndice = i;
     const item = this.items.at(i) as FormGroup
+    console.log('item', item.value.fechaInicio);
+    item.patchValue({
+      fechaInicio: item.value.fechaInicio ? new Date(item.value.fechaInicio) : '',
+      fechaFin: item.value.fechaFin ? new Date(item.value.fechaFin) : ''    
+    })
     this.formDetalle.patchValue(item.getRawValue())
   }
 
   eliminarItem(i: number ){
     console.log('i', i);
-    this.items.removeAt(i);
+    if(this.params.id){
+      const item = this.items.at(i) as FormGroup
+      Swal.fire({
+        title: '¡Advertencia!',
+        text: '¿Está seguro que desea eliminarla?',
+        icon: 'question',
+        // showConfirmButton: true,
+        confirmButtonText: `Sí`,
+        showCancelButton: true,
+        cancelButtonText: `Cancelar`,
+      }).then( resp => {
+        if (resp.value) {
+          this.programacionesService.eliminar(item.get('id').value).subscribe((respuesta: any) => {
+            this.items.removeAt(i);
+          })
+        }
+      })  
+    } else {
+      this.items.removeAt(i);
+    }
     this.formDetalle.reset();
   }
 
-  cargarProgramacion(): void {
-    console.log('desde cargrar programacion');
-    this.activatedRoute.params.subscribe(params => {
+  public cargarAccion(): void {
+    this.accionesService.listado().subscribe((respuesta) => {
+      this.acciones= respuesta;
+    });   
+  }
 
-      if(params.id){
-        this.programacionesService.get(params.id).subscribe((respuesta) => {
-          this.form.patchValue(respuesta);
-        });
-      }       
-    });
+  cargarProgramaciones(): void {
+    if(this.params.id){
+      console.log('desde cargar programaciones');
+      this.accionesService.accionConProgramacionesPom(this.params.id).subscribe((respuesta: any) => {
+        console.log('programaciones cargadas', respuesta);
+        //this.form.patchValue(respuesta);
+          respuesta.forEach((item) => {
+            this.items.push(this.fb.group(item))
+          })
+      });
+    }       
   }
 
   public crear(form: any) {
     console.log('formulario',form.value);
-    return;
     this.programacionesService.crear(form.value).subscribe((data) => {
       console.log('datos listado', data);
       Swal.fire({

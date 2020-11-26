@@ -22,7 +22,6 @@
            #email="ngModel"
            name="email"
            id="input-email"
-           placeholder="Usuario"
            autofocus
            [status]="email.dirty ? (email.invalid  ? 'danger' : 'success') : ''"
            [required]="getConfigValue('forms.validation.email.required')"
@@ -35,7 +34,7 @@
   </div>
 
   <div class="form-control-group">
-    <label class="label" for="input-password">Password:</label>
+    <label class="label" for="input-password">Contraseña:</label>
     <input nbInput
            fullWidth
            [(ngModel)]="user.password"
@@ -43,7 +42,6 @@
            name="password"
            type="password"
            id="input-password"
-           placeholder="Password"
            [status]="password.dirty ? (password.invalid  ? 'danger' : 'success') : ''"
            [required]="getConfigValue('forms.validation.password.required')"
            [attr.aria-invalid]="password.invalid && password.touched ? true : null">

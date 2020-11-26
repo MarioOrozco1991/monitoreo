@@ -41,8 +41,8 @@ export class ProgramacionesMetasPoaComponent implements OnInit {
 
   public eliminar(datos: any, i: any) {
     Swal.fire({
-      title: '¿Está seguro?',
-      text: 'Esta seguro que desea eliminarla',
+      title: '¡Advertencia!',
+      text: '¿Está seguro que desea eliminarla?',
       icon: 'question',
       confirmButtonText: `Sí`,
       showCancelButton: true,

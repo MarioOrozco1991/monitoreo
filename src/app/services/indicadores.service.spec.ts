@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ClasePuestoService } from './clase-puesto.service';
+import { IndicadoresService } from './indicadores.service';
 
-describe('ClasePuestoService', () => {
-  let service: ClasePuestoService;
+describe('IndicadoresService', () => {
+  let service: IndicadoresService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ClasePuestoService);
+    service = TestBed.inject(IndicadoresService);
   });
 
   it('should be created', () => {

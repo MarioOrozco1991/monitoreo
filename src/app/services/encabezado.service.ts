@@ -21,6 +21,10 @@ export class EncabezadoService {
     return this.httpClient.put(this.url + 'encabezado/' + datos.id, JSON.stringify(datos), {headers: this.httpHeaders});
   }
 
+  eliminar(id: any) {
+    return this.httpClient.delete(this.url + 'encabezado/' + id);
+  }
+
   listadoProgramas() {
     return this.httpClient.get<any>(this.url + 'programas');
   }
@@ -33,17 +37,19 @@ export class EncabezadoService {
     return this.httpClient.get<any>(this.url + 'resultado-institucional');
   }
 
-  listadoActividades() {
-    return this.httpClient.get<any>(this.url + 'actividades');
+  listadoActividades(id: number) {
+    return this.httpClient.get<any>(this.url + 'actividades/actividad/' + id);
   }
 
-  listadoProductos() {
-    return this.httpClient.get<any>(this.url + 'productos');
+  listadoProductos(id: number) {
+    return this.httpClient.get<any>(this.url + 'productos/producto/' + id);
   }
 
-  listadoSubproductos() {
-    return this.httpClient.get<any>(this.url + 'subproductos');
+  listadoSubproductos(id: number) {
+    return this.httpClient.get<any>(this.url + 'subproductos/subproducto/' + id);
   }
+
+
 
   
 }

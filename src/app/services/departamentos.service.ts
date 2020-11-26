@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class ClasePuestoService {
+export class DepartamentosService {
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json'});
 
@@ -13,15 +13,15 @@ export class ClasePuestoService {
   constructor(private httpClient: HttpClient) {}
   
   get(cui: number){
-    return this.httpClient.get<any>(this.url + 'clase-puestos/cui/' + cui);
+    return this.httpClient.get<any>(this.url + 'departamentos/cui/' + cui);
   }
 
-  puestoPorUnidad(id: number){
-    return this.httpClient.get<any>(this.url + 'clase-puestos/unidad/' + id);
+  deptoPorDependencia(id: number){
+    return this.httpClient.get<any>(this.url + 'departamentos/departamento/' + id);
   }
 
   listado(){
-    return this.httpClient.get<any>(this.url + 'clase-puestos');
+    return this.httpClient.get<any>(this.url + 'departamentos');
   }
   
 

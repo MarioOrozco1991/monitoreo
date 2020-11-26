@@ -17,6 +17,7 @@ import Swal from 'sweetalert2';
 })
 export class ProgramacionAccionPoaComponent implements OnInit {
 
+  params: any;
   acciones: any[];
   form: FormGroup;
   formDetalle: FormGroup;
@@ -38,7 +39,10 @@ export class ProgramacionAccionPoaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cargarProgramacion();
+    this.activatedRoute.params.subscribe(params => {
+      this.params = params; 
+    })
+    this.cargarProgramaciones()
     this.cargarAccion();
   }
   
@@ -50,10 +54,12 @@ export class ProgramacionAccionPoaComponent implements OnInit {
     //inicializando el formulario
     this.form = this.fb.group({
       id:                 [null,],
-      idAccion:           ['',],
+      idAccion:           [null,],
       items: this.fb.array([]),
     });
     this.formDetalle = this.fb.group({
+      id:               [null,],
+      idAccion:         [null,],
       fechaInicio:      ['',],
       fechaFin:         ['',],
       valorProgramado:  ['',]
@@ -65,29 +71,75 @@ export class ProgramacionAccionPoaComponent implements OnInit {
     // this.items.push( this.fb.control('', Validators.required ) );
     console.log('this.formDetalle', this.formDetalle.getRawValue());
     if (this.editarDetalleIndice === -1) { // crear
-      this.items.push(
-        this.fb.group(this.formDetalle.getRawValue())
-      );
+      if(this.params.id){
+        this.programacionesService.crear(this.formDetalle.getRawValue()).subscribe((respuesta: any) => {
+          this.items.push(
+            this.fb.group(respuesta)
+          );
+          this.formDetalle.reset();
+        })
+      } else {
+        this.items.push(
+          this.fb.group(this.formDetalle.getRawValue())
+        );
+        this.formDetalle.reset();
+      }
     } else { // editar
-      this.items.setControl(
-        this.editarDetalleIndice,
-        this.fb.group(this.formDetalle.getRawValue())
-      );
-      this.editarDetalleIndice = -1;
+      if(this.params.id){
+        console.log('object');
+        this.programacionesService.actualizar(this.formDetalle.getRawValue()).subscribe((respuesta: any) => {
+          console.log('respuesta', respuesta);
+          this.items.setControl(
+            this.editarDetalleIndice,
+            this.fb.group(respuesta)
+          );
+          this.editarDetalleIndice = -1;
+          this.formDetalle.reset();
+        })
+      } else {
+        this.items.setControl(
+          this.editarDetalleIndice,
+          this.fb.group(this.formDetalle.getRawValue())
+        );
+        this.editarDetalleIndice = -1;
+        this.formDetalle.reset();
+      }   
     }
-    this.formDetalle.reset();
   }
   
   editarItem(i: any){
-    console.log('i', i, this.items);
+    //console.log('i', i, this.items);
     this.editarDetalleIndice = i;
     const item = this.items.at(i) as FormGroup
+    item.patchValue({
+      fechaInicio: item.value.fechaInicio ? new Date(item.value.fechaInicio) : '',
+      fechaFin: item.value.fechaFin ? new Date(item.value.fechaFin) : ''    
+    })
     this.formDetalle.patchValue(item.getRawValue())
   }
 
   eliminarItem(i: number ){
     console.log('i', i);
-    this.items.removeAt(i);
+    if(this.params.id){
+      const item = this.items.at(i) as FormGroup
+      Swal.fire({
+        title: '¡Advertencia!',
+        text: '¿Está seguro que desea eliminarla?',
+        icon: 'question',
+        // showConfirmButton: true,
+        confirmButtonText: `Sí`,
+        showCancelButton: true,
+        cancelButtonText: `Cancelar`,
+      }).then( resp => {
+        if (resp.value) {
+          this.programacionesService.eliminar(item.get('id').value).subscribe((respuesta: any) => {
+            this.items.removeAt(i);
+          })
+        }
+      })  
+    } else {
+      this.items.removeAt(i);
+    }
     this.formDetalle.reset();
   }
 
@@ -97,15 +149,16 @@ export class ProgramacionAccionPoaComponent implements OnInit {
     });   
   }
 
-  cargarProgramacion(): void {
-    console.log('desde cargrar programacion');
-    this.activatedRoute.params.subscribe(params => {
-      if(params.id){
-        this.programacionesService.get(params.id).subscribe((respuesta) => {
-          this.form.patchValue(respuesta);
-        });
-      }       
-    });
+  cargarProgramaciones(): void {
+    if(this.params.id){
+      console.log('desde cargar programaciones');
+      this.accionesService.accionConProgramacionesPoa(this.params.id).subscribe((respuesta: any) => {
+        console.log('programaciones cargadas', respuesta);
+          respuesta.forEach((item) => {
+            this.items.push(this.fb.group(item))
+          })
+      });
+    }       
   }
 
   public crear(form: any) {
@@ -113,7 +166,6 @@ export class ProgramacionAccionPoaComponent implements OnInit {
     this.programacionesService.crear(form.value).subscribe((data) => {
       console.log('datos listado', data);
       Swal.fire({
-        //position: 'top-end',
         icon: 'success',
         title: 'Programación creada exitosamente',
         showConfirmButton: false,

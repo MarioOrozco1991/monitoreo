@@ -4,9 +4,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 //import { EjesService } from './../../../../services/ejes.service';
 //import { ObjetivosEstrategicosService } from './../../../../services/objetivos-estrategicos.service';
 import { AccionesService } from './../../../../services/acciones.service';
+import { TareasService } from './../../../../services/tareas.service';
 import { ObjetivosOperativosService } from './../../../../services/objetivos-operativos.service';
 import { DependenciaService } from './../../../../services/dependencia.service';
-import { ClasePuestoService } from './../../../../services/clase-puesto.service';
+import { DepartamentosService } from './../../../../services/departamentos.service';
 import { PoliticasGobiernoService } from './../../../../services/politicas-gobierno.service';
 import { PoliticasPublicasService } from './../../../../services/politicas-publicas.service';
 import { UnidadMedidaService } from './../../../../services/unidad-medida.service';
@@ -22,12 +23,13 @@ export class AccionComponent implements OnInit {
 
   //ejesEstrategicos: any[];
   //objetivosEstrategicos: any[];
+  params: any;
   objetivosOperativos: any[];
-  dependencia: any = {};
+  dependenciaUsuario: any = {};
   dependencias: any[];
-  clasePuestoUnidad: any[];
-  clasePuestos: any[];
-  clasePuestoListado: any[];
+  departamentosUsuario: any[];
+  departamentoSolicita: any[];
+  departamentoRecibe: any[];
   mostrarNombreSistema: boolean = false;
   listadoPoliticasGobierno: any[];
   listadoPoliticasPublicas: any[];
@@ -42,11 +44,12 @@ export class AccionComponent implements OnInit {
               private router: Router,
               private activatedRoute: ActivatedRoute,
               private accionesService: AccionesService,
+              private tareasService: TareasService,
               //private ejesService: EjesService,
               //private objetivosEstrategicosService: ObjetivosEstrategicosService,  
               private objetivosOperativosService: ObjetivosOperativosService,
               private dependenciaService: DependenciaService,
-              private clasePuestoService: ClasePuestoService,
+              private departamentosService: DepartamentosService,
               private politicasGobiernoService: PoliticasGobiernoService,
               private politicasPublicasService: PoliticasPublicasService,
               private unidadMedidaService: UnidadMedidaService,
@@ -56,7 +59,11 @@ export class AccionComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe(params => {
+      this.params = params; 
+    })
     this.cargarAccion();
+    console.log('identificador', this.params.id);
     //this.cargarEjeEstrategico();
     //this.cargarObjetivoEstrategico();
     this.cargarObjetivoOperativo();
@@ -65,42 +72,45 @@ export class AccionComponent implements OnInit {
     this.cargarPoliticaGobierno();
     this.cargarPoliticaPublica();
     this.cargarUnidadMedida();
-    this.cargarClasePuesto();
-    this.cargarClasePuestoListado();
+    this.cargarDepartamentos();
     this.cargarSistemas();
     console.log('form', this.form);
     //this.form.controls['idDependencia'].disable();
   }
   
-  get items(): FormArray {
-    return this.form.get('items') as FormArray;
+  get tareas(): FormArray {
+    return this.form.get('tareas') as FormArray;
   }
   
   crearFormulario(){
     //inicializando el formulario
-
     this.form = this.fb.group({
-      id:                       [null,],
-      ejercicioFiscal:          ['',],
-      idObjetivoOperativo:      ['',],
-      idDependencia:            ['',],
-      idPuestoResponsable:      ['',],
-      idPoliticaGobierno:       ['',],
-      idPoliticaPublica:        ['',],
-      nombreAccion:             ['',],
-      idUnidadMedida:           ['',],
-      nombreIndicador:          ['',],
-      interpretacion:           ['',],
-      formulaCalculo:           ['',],
-      procedenciaDatos:         ['',],
-      metodologiaRecopilacion:  ['',],      
-      items: this.fb.array([]),
+      accion:                     this.fb.group({
+        id:                       [null,],
+        ejercicioFiscal:          ['',],
+        idObjetivoOperativo:      ['',],
+        idDependencia:            ['',],
+        idPuestoResponsable:      ['',],
+        idPoliticaGobierno:       ['',],
+        idPoliticaPublica:        ['',],
+        nombreAccion:             ['',],
+        idUnidadMedida:           ['',],
+      }), 
+      indicador:                  this.fb.group({
+        id:                       [null,],
+        idAccion:                 [null,],
+        nombreIndicador:          ['',],
+        interpretacion:           ['',],
+        formulaCalculo:           ['',],
+        procedenciaDatos:         ['',],
+        metodologiaRecopilacion:  ['',],  
+      }),
+      tareas: this.fb.array([]),
     });
-
     this.formDetalle = this.fb.group({
+      id:                      [null,],
+      idAccion:                [null,],
       tarea:                   ['',],
-      idDependenciaRealiza:    ['',],
-      idPuestoRealiza:         ['',],
       entrada:                 ['',],
       idDependenciaSolicita:   ['',],
       idPuestoSolicita:        ['',],
@@ -118,48 +128,93 @@ export class AccionComponent implements OnInit {
   
   // agregar o editar item
   agregarEditarItem(){
-    // this.items.push( this.fb.control('', Validators.required ) );
+    // this.tareas.push( this.fb.control('', Validators.required ) );
     console.log('this.formDetalle', this.formDetalle.getRawValue());
-    if (this.editarDetalleIndice === -1) { // crear
-      this.items.push(
-        this.fb.group(this.formDetalle.getRawValue())
-      );
+    if (this.editarDetalleIndice === -1) { // crear tarea
+      if(this.params.id){
+        this.formDetalle.patchValue({'idAccion': this.params.id});
+        this.tareasService.crear(this.formDetalle.getRawValue()).subscribe((respuesta: any) => {
+          this.tareas.push(
+            this.fb.group(respuesta)
+          );
+          this.formDetalle.reset();
+        })
+      } else {
+        this.tareas.push(
+          this.fb.group(this.formDetalle.getRawValue())
+        );
+        this.formDetalle.reset();
+      }
     } else { // editar
-      this.items.setControl(
-        this.editarDetalleIndice,
-        this.fb.group(this.formDetalle.getRawValue())
-      );
-      this.editarDetalleIndice = -1;
+      if(this.params.id){
+        console.log('object');
+        this.tareasService.actualizar(this.formDetalle.getRawValue()).subscribe((respuesta: any) => {
+          this.tareas.setControl(
+            this.editarDetalleIndice,
+            this.fb.group(this.formDetalle.getRawValue())
+          );
+          this.editarDetalleIndice = -1;
+          this.formDetalle.reset();
+        })
+      } else {
+        this.tareas.setControl(
+          this.editarDetalleIndice,
+          this.fb.group(this.formDetalle.getRawValue())
+        );
+        this.editarDetalleIndice = -1;
+        this.formDetalle.reset();
+      }
     }
-    this.formDetalle.reset();
   }
 
   editarItem(i: any){
-    console.log('i', i, this.items);
+    console.log('i', i, this.tareas);
     this.editarDetalleIndice = i;
-    const item = this.items.at(i) as FormGroup
+    const item = this.tareas.at(i) as FormGroup
     this.formDetalle.patchValue(item.getRawValue())
   }
 
   eliminarItem(i: number ){
     console.log('i', i);
-    this.items.removeAt(i);
+    if(this.params.id){
+      const item = this.tareas.at(i) as FormGroup
+      Swal.fire({
+        title: '¡Advertencia!',
+        text: '¿Está seguro que desea eliminarla?',
+        icon: 'question',
+        // showConfirmButton: true,
+        confirmButtonText: `Sí`,
+        showCancelButton: true,
+        cancelButtonText: `Cancelar`,
+      }).then( resp => {
+        if (resp.value) {
+          this.tareasService.eliminar(item.get('id').value).subscribe((respuesta: any) => {
+            this.tareas.removeAt(i);
+          })
+        }
+      })  
+    } else {
+      this.tareas.removeAt(i);
+    }
     this.formDetalle.reset();
   }
 
   cargarAccion(): void {
-    this.activatedRoute.params.subscribe(params => {
-      if(params.id){
-        this.accionesService.cargarAccion(params.id).subscribe((respuesta) => {
-          console.log('accion cargada', respuesta);
-          this.form.patchValue(respuesta);
-        });
-      }       
-    });
+    if(this.params.id){
+      this.accionesService.cargarAccion(this.params.id).subscribe((respuesta: any) => {
+        console.log('accion cargada', respuesta);
+        this.form.patchValue(respuesta);
+        if (respuesta.tareas) {
+          respuesta.tareas.forEach((item) => {
+            this.tareas.push(this.fb.group(item))
+          })
+        }
+      });
+    }       
   }
 
   enviarFormulario(form: any) {
-    if (!this.form.value.id) {
+    if (!this.params.id) {
       this.crear(form);
     } else {
       this.actualizar(form);
@@ -167,9 +222,10 @@ export class AccionComponent implements OnInit {
   }
   
   public crear(form: any) {
-    this.form.controls['idDependencia'].setValue(this.dependencia.id);
-    console.log('formulario antes de crear', form);
-    return;
+   // this.form.controls['idDependencia'].setValue(this.dependencia.id);
+    this.form.get('accion.idDependencia').setValue(this.dependenciaUsuario.id)
+    console.log('formulario antes de crear', form, this.dependenciaUsuario);
+    //return;
     this.accionesService.crear(form.value).subscribe((data) => {
       
       Swal.fire({
@@ -177,10 +233,10 @@ export class AccionComponent implements OnInit {
         title: 'Acción creada exitosamente',
         showConfirmButton: false,
         timer: 3000
-      }) 
+      });
+      this.form.reset();
+      this.tareas.clear();
     });
-    this.form.reset();
-    this.items.clear();
   }
 
   public actualizar(form: any) {
@@ -212,42 +268,43 @@ export class AccionComponent implements OnInit {
       this.objetivosOperativos = respuesta;
     });   
   }
-
+  
+  //método para obtener la dependencia del usuario logado
   public cargarDependencia(): void {
     this.dependenciaService.get(parseInt(localStorage.getItem('cui'))).subscribe((respuesta) => {
-      this.dependencia = respuesta;
-      console.log('respuesta', this.dependencia);
+      this.dependenciaUsuario = respuesta;
+      console.log('respuesta', this.dependenciaUsuario);
         //this.form.idDepenencia.setValue(this.dependencia.id);
     });   
   }
-
+  
+  //método para obteber el listado general de las dependencias
   public cargarDependencias(): void {
     this.dependenciaService.listado().subscribe((respuesta) => {
       this.dependencias = respuesta;
     });   
   }
 
-  public cargarClasePuesto(): void {
-    this.clasePuestoService.get(parseInt(localStorage.getItem('cui'))).subscribe((respuesta) => {
-      this.clasePuestos = respuesta;
+  //obtener los departamentos de la dependencia a la que el usuario logado pertenece
+  public cargarDepartamentos(): void {
+    this.departamentosService.get(parseInt(localStorage.getItem('cui'))).subscribe((respuesta) => {
+      this.departamentosUsuario = respuesta;
     });   
   }
 
-    //para obtener que dependencia seleccionó el usuario en el select obtengo el valor desde html
-    //con change() y le paso el valor.
-    public clasePuestoPorUnidad(valor: number): void {
-      this.clasePuestoService.puestoPorUnidad(valor).subscribe((respuesta) => {
-        this.clasePuestoUnidad = respuesta;
-        console.log('respuesta', this.dependencia);
-          //this.form.idDepenencia.setValue(this.dependencia.id);
+    /*para obtener que dependencia seleccionó el usuario en el select obtengo el valor desde html
+      con change() y le paso el valor.*/
+    public listadodepartamentosSolicita(valor: number): void {
+      this.departamentosService.deptoPorDependencia(valor).subscribe((respuesta) => {
+        this.departamentoSolicita = respuesta;
       });   
     }
 
-  public cargarClasePuestoListado(): void {
-    this.clasePuestoService.listado().subscribe((respuesta) => {
-      this.clasePuestoListado = respuesta;
-    });   
-  }
+    public listadodepartamentoRecibe(valor: number): void {
+      this.departamentosService.deptoPorDependencia(valor).subscribe((respuesta) => {
+        this.departamentoRecibe = respuesta;
+      });   
+    }
 
   public cargarPoliticaGobierno(): void {
     this.politicasGobiernoService.listado().subscribe((respuesta) => {

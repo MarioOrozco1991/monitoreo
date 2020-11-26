@@ -45,8 +45,8 @@ export class CentrosDeCostoComponent implements OnInit {
 
   public eliminar(datos: any, i: any) {
     Swal.fire({
-      title: 'Está seguro?',
-      text: 'Esta seguro que desea eliminarlo',
+      title: '¡Advertencia!',
+      text: '¿Está seguro que desea eliminarlo?',
       icon: 'question',
       // showConfirmButton: true,
       confirmButtonText: `Sí`,

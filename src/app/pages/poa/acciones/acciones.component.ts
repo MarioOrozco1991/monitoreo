@@ -44,10 +44,9 @@ export class AccionesComponent implements OnDestroy, OnInit{
   }
 
   public eliminarAccion(datos: any, i: any) {
-
     Swal.fire({
-      title: 'Está seguro?',
-      text: 'Esta seguro que desea eliminarla',
+      title: '¡Advertencia!',
+      text: '¿Está seguro que desea eliminarla?',
       icon: 'question',
       // showConfirmButton: true,
       confirmButtonText: `Sí`,

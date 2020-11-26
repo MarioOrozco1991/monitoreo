@@ -16,6 +16,29 @@ export class AccionesService {
     return this.httpClient.get<any>(this.url + 'acciones');
   }
 
+  listadoAccionesConProgramacionesPoa(cui: number) {
+    return this.httpClient.get<any>(this.url + 'acciones/programaciones/poa/' + cui);
+  }
+
+  listadoAccionesConProgramacionesPom(cui: number) {
+    return this.httpClient.get<any>(this.url + 'acciones/programaciones/pom/' + cui);
+  }
+  
+  //obtiene todas las programaciones de la accion incluyendo mensual y anual
+  accionConProgramaciones(id: number) {
+    return this.httpClient.get<any>(this.url + 'acciones/' + id + '/programaciones');
+  }
+
+  //obtiene todas las programaciones de la accion que solo sean mensuales (POA)
+  accionConProgramacionesPoa(id: number) {
+    return this.httpClient.get<any>(this.url + 'acciones/' + id + '/programaciones/poa');
+  }
+
+  //obtiene todas las programaciones de la accion que solo sean mensuales (POM)
+  accionConProgramacionesPom(id: number) {
+    return this.httpClient.get<any>(this.url + 'acciones/' + id + '/programaciones/pom');
+  }
+
   crear(datos: any) {
     return this.httpClient.post(this.url + 'acciones', JSON.stringify(datos), {headers: this.httpHeaders});
   }
@@ -28,8 +51,13 @@ export class AccionesService {
     return this.httpClient.delete(this.url + 'acciones/' + id);
   }
 
-  actualizar(datos: any) {
-    return this.httpClient.put(this.url + 'acciones/' + datos.id, JSON.stringify(datos), {headers: this.httpHeaders});
+  eliminarTarea(id: any){
+    return this.httpClient.delete(this.url + 'tareas/' + id);
   }
+
+  actualizar(datos: any) {
+    return this.httpClient.put(this.url + 'acciones/' + datos.accion.id, JSON.stringify(datos), {headers: this.httpHeaders});
+  }
+
 
 }

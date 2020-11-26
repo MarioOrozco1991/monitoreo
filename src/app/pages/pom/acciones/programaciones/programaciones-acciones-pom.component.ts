@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AccionesService } from './../../../../services/acciones.service';
 import { ProgramacionesService } from '../../../../services/programaciones.service';
 import Swal from 'sweetalert2'; 
 @Component({
@@ -21,7 +22,8 @@ export class ProgramacionesAccionesPomComponent implements OnInit {
 
   constructor(private http:HttpClient, 
               private router:Router,
-              public programacionesService:ProgramacionesService){
+              private accionesService: AccionesService,
+              private programacionesService:ProgramacionesService){
 
   }
 
@@ -31,7 +33,7 @@ export class ProgramacionesAccionesPomComponent implements OnInit {
       pageLength: 10
     };
 
-    this.programacionesService.listado().subscribe((data: any) => {
+    this.accionesService.listadoAccionesConProgramacionesPom(parseInt(localStorage.getItem('cui'))).subscribe((data: any) => {
       console.log('datos listado', data);
        this.respuesta = data
       this.dtTrigger.next();
@@ -40,8 +42,8 @@ export class ProgramacionesAccionesPomComponent implements OnInit {
 
   public eliminar(datos: any, i: any) {
     Swal.fire({
-      title: '¿Está seguro?',
-      text: 'Esta seguro que desea eliminarla',
+      title: '¡Advertencia!',
+      text: '¿Está seguro que desea eliminarla?',
       icon: 'question',
       confirmButtonText: `Sí`,
       showCancelButton: true,

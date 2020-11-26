@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { EncabezadoService } from '../../../services/encabezado.service';
+import { DependenciaService } from './../../../services/dependencia.service';
+import { DepartamentosService } from './../../../services/departamentos.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2'; 
 
@@ -12,8 +14,9 @@ import Swal from 'sweetalert2';
 })
 export class EncabezadoComponent implements OnInit {
 
-  mostrarNombreSistema: boolean = false;
-
+  params: any;
+  dependenciaUsuario: any = {};
+  departamentosUsuario: any[];
   programas: any[]; 
   subprogramas: any[];
   actividades: any[]; 
@@ -21,11 +24,15 @@ export class EncabezadoComponent implements OnInit {
   subproductos: any[];
   resultadoInstitucional: any[];
   formDetalle: FormGroup;
+  year = new Date().getFullYear();
+  editarDetalleIndice: number = -1;
 
   form: FormGroup;
 
   constructor( private fb:FormBuilder,
-               public encabezadoService:EncabezadoService,
+               private encabezadoService:EncabezadoService,
+               private dependenciaService: DependenciaService,
+               private departamentosService: DepartamentosService,
                private router: Router,
                private activatedRoute: ActivatedRoute
   ) {
@@ -33,11 +40,12 @@ export class EncabezadoComponent implements OnInit {
   }  
       
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe(params => {
+      this.params = params; 
+    })
+    this.cargarDependencia();
+    this.cargarDepartamentos();
     this.cargarPrograma(); //preguntar de que forma se podria reducir este codigo para que no mande a llamar a todas la funciones cuando carga la app
-    this.cargarActividad();
-    this.cargarProducto();
-    this.cargarSubproducto();
-    this.cargarSubprograma();
     this.cargarResultadoInstitucional();
   }
     
@@ -49,38 +57,96 @@ export class EncabezadoComponent implements OnInit {
     
     this.form = this.fb.group({
       id:                         [null,],
+      idDependencia:              ['',],
+      idUnidad:                   ['',],
       idProgramaPresupuestario:   ['',],
-      idSubprograma:              ['',],
       idResultadoInstitucional:   ['',],
-      idDependenciaResponsable:   ['',],
+      periodoFiscal:              ['',],
       items: this.fb.array([]),
     });
     this.formDetalle = this.fb.group({
+      id:                         [null,],
       idActividadPresupuestaria:  ['',],
       idProducto:                 ['',],
       idSubproducto:              ['',],
+      nombreSubproducto:          ['',]
     });
   }
 
-  // agregar item
-  agregarItem(){
+  // agregar o editar item
+  agregarEditarItem(){
     // this.items.push( this.fb.control('', Validators.required ) );
     console.log('this.formDetalle', this.formDetalle.getRawValue());
-    this.items.push(
-      this.fb.group(this.formDetalle.getRawValue())
-    );
-    this.formDetalle.reset();
+    if (this.editarDetalleIndice === -1) { // crear
+      if(this.params.id){
+        this.encabezadoService.crear(this.formDetalle.getRawValue()).subscribe((respuesta: any) => {
+          this.items.push(
+            this.fb.group(respuesta)
+          );
+          this.formDetalle.reset();
+        })
+      } else {
+        const subproducto = this.subproductos.find((subproducto) => subproducto.id == this.formDetalle.get('idSubproducto').value)
+        console.log('subproducto', subproducto, this.formDetalle.get('idSubproducto').value);
+        this.formDetalle.get('nombreSubproducto').setValue(subproducto.nombre);
+        this.items.push(
+          this.fb.group(this.formDetalle.getRawValue())
+        );
+        this.formDetalle.reset();
+        this.formDetalle.get('idSubproducto').setValue('');
+      }
+    } else { // editar
+      if(this.params.id){
+        console.log('object');
+        this.encabezadoService.actualizar(this.formDetalle.getRawValue()).subscribe((respuesta: any) => {
+          console.log('respuesta', respuesta);
+          this.items.setControl(
+            this.editarDetalleIndice,
+            this.fb.group(respuesta)
+          );
+          this.editarDetalleIndice = -1;
+          this.formDetalle.reset();
+        })
+      } else {
+        this.items.setControl(
+          this.editarDetalleIndice,
+          this.fb.group(this.formDetalle.getRawValue())
+        );
+        this.editarDetalleIndice = -1;
+        this.formDetalle.reset();
+      }   
+    }
   }
 
   editarItem(i: any){
     console.log('i', i, this.items);
+    this.editarDetalleIndice = i;
     const item = this.items.at(i) as FormGroup
     this.formDetalle.patchValue(item.getRawValue())
   }
 
   eliminarItem(i: number ){
     console.log('i', i);
-    this.items.removeAt(i);
+    if(this.params.id){
+      const item = this.items.at(i) as FormGroup
+      Swal.fire({
+        title: '¡Advertencia!',
+        text: '¿Está seguro que desea eliminarla?',
+        icon: 'question',
+        // showConfirmButton: true,
+        confirmButtonText: `Sí`,
+        showCancelButton: true,
+        cancelButtonText: `Cancelar`,
+      }).then( resp => {
+        if (resp.value) {
+          this.encabezadoService.eliminar(item.get('id').value).subscribe((respuesta: any) => {
+            this.items.removeAt(i);
+          })
+        }
+      })  
+    } else {
+      this.items.removeAt(i);
+    }
     this.formDetalle.reset();
   }
 
@@ -90,34 +156,43 @@ export class EncabezadoComponent implements OnInit {
       this.programas = respuesta;
     });
   }    
-  
-  cargarSubprograma(): void {
-    this.encabezadoService.listadoSubrogramas().subscribe((respuesta) => {
-      this.subprogramas = respuesta;
-    });
-  }    
+
+  //método para obtener la dependencia del usuario logado
+  public cargarDependencia(): void {
+    this.dependenciaService.get(parseInt(localStorage.getItem('cui'))).subscribe((respuesta) => {
+      this.dependenciaUsuario = respuesta;
+      console.log('dependencia usuario', this.dependenciaUsuario);
+    });   
+  }
+
+  //obtener los departamentos de la dependencia a la que el usuario logado pertenece
+  public cargarDepartamentos(): void {
+    this.departamentosService.get(parseInt(localStorage.getItem('cui'))).subscribe((respuesta) => {
+      this.departamentosUsuario = respuesta;
+    });   
+  }
 
   cargarResultadoInstitucional(): void {
     this.encabezadoService.listadoResultadoInstitucional().subscribe((respuesta) => {
       this.resultadoInstitucional = respuesta;
     });
   }  
-  
 
-  cargarActividad(): void {
-    this.encabezadoService.listadoActividades().subscribe((respuesta) => {
+  cargarActividades(programa: number): void {
+    this.encabezadoService.listadoActividades(programa).subscribe((respuesta) => {
       this.actividades = respuesta;
+      console.log('actividades', this.actividades);
     });
   }   
   
-  cargarProducto(): void {
-    this.encabezadoService.listadoProductos().subscribe((respuesta) => {
+  cargarProductos(resultado): void {
+    this.encabezadoService.listadoProductos(resultado).subscribe((respuesta) => {
       this.productos = respuesta;
     });
   } 
 
-  cargarSubproducto(): void {
-    this.encabezadoService.listadoSubproductos().subscribe((respuesta) => {
+  cargarSubproductos(producto): void {
+    this.encabezadoService.listadoSubproductos(producto).subscribe((respuesta) => {
       this.subproductos = respuesta;
     });
   } 
@@ -132,7 +207,8 @@ export class EncabezadoComponent implements OnInit {
   }
 
   public crear(form: any) {
-    // console.log('agregando', form.value);  
+    this.form.get('idDependencia').setValue(this.dependenciaUsuario.id)
+    console.log('formulario antes de enviarlo al servicio', form.value);  
     this.encabezadoService.crear(form.value).subscribe((data) => {
       console.log('encabezado completo', form.value);
       Swal.fire({
@@ -142,9 +218,6 @@ export class EncabezadoComponent implements OnInit {
         timer: 3000
       })
     });
-    this.form.reset();
-    this.formDetalle.reset();
-    this.items.clear();
   }
 
   public actualizar(form: any) {

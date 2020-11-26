@@ -3,80 +3,79 @@
 		<div class="col-xl-12">
 			<h1>Definición de la acción</h1>
 			<form autocomplete="off" [formGroup]="form">
-				<div class="row mt-5">
-					<div class="col-lg-6">
-						<div>
-							<label>Ejercicio fiscal</label>
-							<select class="custom-select" formControlName="ejercicioFiscal">
-								<option selected disabled value="">Seleccione</option>
-								<option [value]>{{year}}</option>
-							</select>
+				<div formGroupName="accion">
+					<div class="row mt-5">
+						<div class="col-lg-6">
+							<div>
+								<label>Ejercicio fiscal</label>
+								<select class="custom-select" formControlName="ejercicioFiscal">
+									<option selected disabled value="">Seleccione</option>
+									<option [value]>{{year}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div>
+								<label>Objetivo Operativo</label>
+								<select class="custom-select" formControlName="idObjetivoOperativo">
+									<option selected disabled value="">Seleccione</option>
+									<option [value]="objetivoOperativo.id" *ngFor="let objetivoOperativo of objetivosOperativos">{{objetivoOperativo.nombre}}</option>
+								</select>
+							</div>
 						</div>
 					</div>
-					<div class="col-lg-6">
-						<div>
-							<label>Objetivo Operativo</label>
-							<select class="custom-select" formControlName="idObjetivoOperativo">
-								<option selected disabled value="">Seleccione</option>
-								<option [value]="objetivoOperativo.id" *ngFor="let objetivoOperativo of objetivosOperativos">{{objetivoOperativo.nombre}}</option>
-							</select>
+					<div class="row mt-5">
+						<div class="col-lg-6">
+							<div>
+								<label>Nombre de la dependencia</label>
+								<input class="form-control" type="text" formControlName="idDependencia" [value]="dependenciaUsuario.nombre" [attr.disabled]="true">
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div>
+								<label>Responsable</label>
+								<select class="custom-select" formControlName="idPuestoResponsable">
+									<option selected disabled value="">Seleccione</option>
+									<option [value]="departamentoUsuario.id" *ngFor="let departamentoUsuario of departamentosUsuario">{{departamentoUsuario.nombre}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row mt-5">
+						<div class="col-lg-6">
+							<div>
+								<label>Meta de la Política General de Gobierno asociada</label>
+								<select class="custom-select" formControlName="idPoliticaGobierno">
+									<option selected disabled value="">Seleccione</option>
+									<option [value]="politicaGobierno.id" *ngFor="let politicaGobierno of listadoPoliticasGobierno">{{politicaGobierno.nombre}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div>
+								<label>Política pública asociada</label>
+								<select class="custom-select" formControlName="idPoliticaPublica">
+									<option selected disabled value="">Seleccione</option>
+									<option [value]="politicaPublica.id" *ngFor="let politicaPublica of listadoPoliticasPublicas">{{politicaPublica.nombre}}</option>
+								</select>
+									<!-- <small *ngIf="alcanceNoValido" class="form-text text-danger">
+									Este campo es obligatorio
+									</small> -->
+							</div>
+						</div>
+					</div>
+					<div class="row mt-5">
+						<div class="col-lg-12">
+							<div>
+								<label>Acción </label>
+								<a style="color:blue; " nbTooltip="La acción es *********" nbTooltipPlacement="right" nbTooltipStatus="primary" nbButton status="control"> ?</a>
+								<input class="form-control" type="text" formControlName="nombreAccion">
+							</div>
 						</div>
 					</div>
 				</div>
 				<div class="row mt-5">
-					<div class="col-lg-6">
-						<div>
-							<label>Nombre de la dependencia</label>
-							<input class="form-control" type="text" formControlName="idDependencia" [value]="dependencia.nombre" [attr.disabled]="true">
-						</div>
-					</div>
-					<div class="col-lg-6">
-						<div>
-							<label>Responsable</label>
-							<select class="custom-select" formControlName="idPuestoResponsable">
-								<option selected disabled value="">Seleccione</option>
-								<option [value]="clasePuesto.id" *ngFor="let clasePuesto of clasePuestos">{{clasePuesto.nombre}}</option>
-							</select>
-								<!-- <small *ngIf="alcanceNoValido" class="form-text text-danger">
-								Este campo es obligatorio
-								</small> -->
-						</div>
-					</div>
-				</div>
-				<div class="row mt-5">
-					<div class="col-lg-6">
-						<div>
-							<label>Meta de la Política General de Gobierno asociada</label>
-							<select class="custom-select" formControlName="idPoliticaGobierno">
-								<option selected disabled value="">Seleccione</option>
-								<option [value]="politicaGobierno.id" *ngFor="let politicaGobierno of listadoPoliticasGobierno">{{politicaGobierno.nombre}}</option>
-							</select>
-						</div>
-					</div>
-					<div class="col-lg-6">
-						<div>
-							<label>Política pública asociada</label>
-							<select class="custom-select" formControlName="idPoliticaPublica">
-								<option selected disabled value="">Seleccione</option>
-								<option [value]="politicaPublica.id" *ngFor="let politicaPublica of listadoPoliticasPublicas">{{politicaPublica.nombre}}</option>
-							</select>
-								<!-- <small *ngIf="alcanceNoValido" class="form-text text-danger">
-								Este campo es obligatorio
-								</small> -->
-						</div>
-					</div>
-				</div>
-				<div class="row mt-5">
-					<div class="col-lg-12">
-						<div>
-							<label>Acción </label>
-							<a style="color:blue; " nbTooltip="La acción es *********" nbTooltipPlacement="right" nbTooltipStatus="primary" nbButton status="control"> ?</a>
-							<input class="form-control" type="text" formControlName="nombreAccion">
-						</div>
-					</div>
-				</div>
-				<div class="row mt-5">
-					<div class="col-lg-6">
+					<div formGroupName="accion" class="col-lg-6">
 						<div>
 							<label>Unidad de medida</label>
 							<select class="custom-select" formControlName="idUnidadMedida">
@@ -85,65 +84,55 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-lg-6">
+					<div formGroupName="indicador" class="col-lg-6">
 						<div>
 							<label>Descripcion del indicador</label>
 							<input class="form-control" type="text" formControlName="nombreIndicador">
 						</div>
 					</div>
 				</div>
-				<div class="row mt-5">
-					<div class="col-lg-6">
-						<div>
-							<label>Interpretacion</label>
-							<input class="form-control" type="text" formControlName="interpretacion">
+				<div formGroupName="indicador">
+					<div class="row mt-5">
+						<div class="col-lg-6">
+							<div>
+								<label>Interpretacion</label>
+								<input class="form-control" type="text" formControlName="interpretacion">
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div>
+								<label>Fórmula de cálculo</label>
+								<input class="form-control" type="text" formControlName="formulaCalculo">
+							</div>
 						</div>
 					</div>
-					<div class="col-lg-6">
-						<div>
-							<label>Fórmula de cálculo</label>
-							<input class="form-control" type="text" formControlName="formulaCalculo">
+					<div class="row mt-5">
+						<div class="col-lg-6">
+							<div>
+								<label>Procedencia de los datos</label>
+								<input class="form-control" type="text" formControlName="procedenciaDatos">
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div>
+								<label>Metodología de recopilación</label>
+								<input class="form-control" type="text" formControlName="metodologiaRecopilacion">
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="row mt-5">
+				<div class="row card-block mt-5">
 					<div class="col-lg-6">
-						<div>
-							<label>Procedencia de los datos</label>
-							<input class="form-control" type="text" formControlName="procedenciaDatos">
-						</div>
-					</div>
-					<div class="col-lg-6">
-						<div>
-							<label>Metodología de recopilación</label>
-							<input class="form-control" type="text" formControlName="metodologiaRecopilacion">
-						</div>
+						<input  type="submit" class="btn btn-primary btn-block waves-effect" (click)="enviarFormulario(form)" *ngIf="params.id"value="Modificar accion">
 					</div>
 				</div>
 				<div [formGroup]="formDetalle">
 					<h2 class="mt-5">Detalle de la acción</h2>
 					<div class="row mt-5">
-						<div class="col-lg-6">
+						<div class="col-lg-12">
 							<div>
 								<label>Tarea</label>
 								<input class="form-control" type="text" formControlName="tarea">
-							</div>
-						</div>
-						<div class="col-lg-3">
-							<div>
-								<label>¿Quién la realiza?</label>
-								<select class="custom-select" formControlName="idDependenciaRealiza">
-									<option selected disabled value="">Unidad/Depto.</option>
-									<option [value]="clasePuesto.id" *ngFor="let clasePuesto of clasePuestos">{{clasePuesto.nombre}}</option>
-								</select>
-							</div>
-						</div>
-						<div class="col-lg-3">
-							<div style="margin-top: 3px;">
-								<select class="custom-select mt-4" formControlName="idPuestoRealiza">
-									<option selected disabled value="">Puesto</option>
-									<option [value]="clasePuesto.id" *ngFor="let clasePuesto of clasePuestos">{{clasePuesto.nombre}}</option>
-								</select>
 							</div>
 						</div>
 					</div>
@@ -157,17 +146,17 @@
 						<div class="col-lg-3">
 							<div>
 								<label>¿Quién solicita?</label>
-								<select (change)="clasePuestoPorUnidad($event.target.value)" class="custom-select" formControlName="idDependenciaSolicita">
-									<option selected disabled value="">Unidad/Depto.</option>
-									<option [value]="dependencia.id" *ngFor="let dependencia of dependencias">{{dependencia.nombre}}</option>
+								<select (change)="listadodepartamentosSolicita($event.target.value)" class="custom-select" formControlName="idDependenciaSolicita">
+									<option selected disabled value="">Dependencia</option>
+									<option [value]="dependencia.id" *ngFor="let dependencia of dependencias">{{dependencia.nombre | uppercase}}</option>
 								</select>
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div style="margin-top: 3px;">
 								<select class="custom-select mt-4" formControlName="idPuestoSolicita">
-									<option selected disabled value="">Puesto</option>
-									<option [value]="clasePuestoUnidad.id" *ngFor="let clasePuestoUnidad of clasePuestoUnidad">{{clasePuestoUnidad.nombre}}</option>
+									<option selected disabled value="">Unidad/Depto.</option>
+									<option [value]="departamentoSolicita.id" *ngFor="let departamentoSolicita of departamentoSolicita">{{departamentoSolicita.nombre}}</option>
 								</select>
 							</div>
 						</div>
@@ -185,8 +174,8 @@
 						<div class="col-lg-3">
 							<div>
 								<label>¿Quién recibe el resultado?</label>
-								<select class="custom-select" formControlName="idDependenciaResultado">
-									<option selected disabled value="">Unidad/Depto.</option>
+								<select (change)="listadodepartamentoRecibe($event.target.value)" class="custom-select" formControlName="idDependenciaResultado">
+									<option selected disabled value="">Dependencia</option>
 									<option [value]="dependencia.id" *ngFor="let dependencia of dependencias">{{dependencia.nombre}}</option>
 								</select>
 							</div>
@@ -194,8 +183,8 @@
 						<div class="col-lg-3">
 							<div style="margin-top: 3px;">
 								<select class="custom-select mt-4" formControlName="idPuestoResultado">
-									<option selected disabled value="">Puesto</option>
-									<option [value]="clasePuestoListado.id" *ngFor="let clasePuestoListado of clasePuestoListado">{{clasePuestoListado.nombre}}</option> 
+									<option selected disabled value="">Unidad/Depto.</option>
+									<option [value]="departamentoRecibe.id" *ngFor="let departamentoRecibe of departamentoRecibe">{{departamentoRecibe.nombre}}</option> 
 								</select>
 							</div>
 						</div>
@@ -223,17 +212,17 @@
 								<label>¿Utiliza un sistema para realizarla?</label>
 								<div>
 									<div class="custom-control custom-radio custom-control-inline">
-										<input type="radio" id="customRadioInline1" name="utilizaSistema" class="custom-control-input" formControlName="utilizaSistema" [value]=1>
+										<input type="radio" id="customRadioInline1" name="utilizaSistema" class="custom-control-input" formControlName="utilizaSistema" value=1 [checked]>
 										<label class="custom-control-label" for="customRadioInline1">SI</label>
 									</div>
 									<div class="custom-control custom-radio custom-control-inline">
-										<input type="radio" id="customRadioInline2" name="utilizaSistema" class="custom-control-input" formControlName="utilizaSistema" [value]=2>
+										<input type="radio" id="customRadioInline2" name="utilizaSistema" class="custom-control-input" formControlName="utilizaSistema" value=2>
 										<label class="custom-control-label" for="customRadioInline2">NO</label>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="col-lg-3">
+						<div class="col-lg-3" >
 							<div style="margin-top: 3px;">
 								<label>Nombre del sistema</label>
 								<select class="custom-select" formControlName="idSistema">
@@ -257,8 +246,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="container mt-5">
-					<table class="table table-striped table-bordered row-border hover responsive" style="margin: 0 auto;">
+				<div class="mt-5">
+					<table class="table table-striped table-bordered row-border hover responsive text-center" style="margin: 0 auto;">
 						<thead class="thead-dark">
 							<tr>
 								<th class="text-center">#</th>
@@ -266,8 +255,8 @@
 								<th class="text-center">Opciones</th>
 							</tr>
 						</thead>
-						<tbody formArrayName="items">
-							<tr *ngFor="let item of items.controls; let i = index">
+						<tbody formArrayName="tareas">
+							<tr *ngFor="let item of tareas.controls; let i = index">
 								<td class="text-center" style="width: 20px;">{{i + 1}}</td>
 								<td style="width: 500px;">
 									{{item.get('tarea').value}}
@@ -282,13 +271,7 @@
 				</div>
 				<div class="row card-block mt-5">
 					<div class="col-lg-6">
-						<input type="submit" class="btn btn-primary btn-block waves-effect" (click)='enviarFormulario(form)' *ngIf="!form.value.id else botonActualizar" value="Crear acción">
-						<ng-template #botonActualizar>
-							<input type="submit" class="btn btn-primary btn-block waves-effect" (click)='enviarFormulario(form)' value="Modificar acción">
-						</ng-template>
-					</div>
-					<div class="col-lg-6">
-						<input [routerLink]="['..']" type="button" class="btn btn-danger btn-block waves-effect" value="Cancelar">
+						<input type="submit" class="btn btn-primary btn-block waves-effect" (click)="enviarFormulario(form)" *ngIf="!params.id" value="Crear acción">
 					</div>
 				</div>
 			</form>
