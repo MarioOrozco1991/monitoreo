@@ -16,7 +16,7 @@
       <tr *ngFor="let datos of respuesta; let i=index">
         <td>{{datos.nombre}}</td>
         <td class="text-center" style="width: 150px;">
-          <button type="button" class="btn btn-sm btn-primary mr-2"> <nb-icon icon="eye-outline"></nb-icon></button>
+          <!-- <button type="button" class="btn btn-sm btn-primary mr-2"> <nb-icon icon="eye-outline"></nb-icon></button> -->
           <button [routerLink]="[datos.id]" nbTooltip="Editar" nbTooltipPlacement="bottom" nbButton status="control" type="button" class="btn btn-sm btn-success mr-2"> <nb-icon icon="edit-2-outline"></nb-icon> </button>
           <button (click)="eliminar(datos, i)" nbTooltip="Eliminar" nbTooltipPlacement="bottom" nbButton status="control" type="button" class="btn btn-sm btn-danger"> <nb-icon icon="trash-2-outline"></nb-icon></button>
         </td>

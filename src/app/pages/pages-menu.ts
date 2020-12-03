@@ -45,12 +45,8 @@ export const MENU_ITEMS: NbMenuItem[] = [
           title: 'Encabezado',
           children: [
             {
-              title: 'Crear encabezado',
-              link: '/pages/encabezado/crear',
-            },
-            {
-              title: 'Editar encabezado  ',
-              link: '/pages/editar-encabezado',
+              title: 'Ver encabezado',
+              link: '/pages/encabezados',
             },
           ]
         },
@@ -58,7 +54,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
           title: 'Ejes y objetivos',
           children: [
             {
-              title: 'Ejes',
+              title: 'Ejes Estratégicos',
               link: '/pages/ejes',
             },
             {
@@ -88,15 +84,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
             },
           ]
         },
-        {
-          title: 'Metas Físicas',
-          children: [
-            {
-              title: 'Programaciones',
-              link: '/pages/programaciones-metas-poa',
-            },
-          ]
-        },  
+        // {
+        //   title: 'Metas Físicas',
+        //   children: [
+        //     {
+        //       title: 'Programaciones',
+        //       link: '/pages/programaciones-metas-poa',
+        //     },
+        //   ]
+        // },  
     ], 
   },
   {
@@ -114,26 +110,16 @@ export const MENU_ITEMS: NbMenuItem[] = [
             },
           ]
         },
-        {
-          title: 'Metas Físicas',
-          children: [
-            {
-              title: 'Programaciones',
-              link: '/pages/programaciones-metas-pom',
-            },
-          ]
-        },  
+        // {
+        //   title: 'Metas Físicas',
+        //   children: [
+        //     {
+        //       title: 'Programaciones',
+        //       link: '/pages/programaciones-metas-pom',
+        //     },
+        //   ]
+        // },  
     ], 
-  },
-  {
-    title: 'Revisión',
-    icon: 'eye-outline',
-    link: '/pages/revision',
-  },
-  {
-    title: 'Aprobación',
-    icon: 'checkmark-circle-2-outline',
-    link: '/pages/aprobacion',
   },
   // {
   //   title: 'Reportes',

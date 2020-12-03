@@ -24,7 +24,7 @@
         </div>
         <div class="row card-block mt-5">
           <div class="col-lg-6">
-            <input [routerLink]="['..']" type="submit" class="btn btn-primary btn-block waves-effect" (click)="enviarFormulario(form)" *ngIf="!form.value.id else botonActualizar" value="Crear">
+            <input type="submit" class="btn btn-primary btn-block waves-effect" (click)="enviarFormulario(form)" *ngIf="!form.value.id else botonActualizar" value="Crear">
             <ng-template #botonActualizar>
               <input [routerLink]="['..']" type="submit" class="btn btn-primary btn-block waves-effect" (click)="enviarFormulario(form)" value="Modificar">
             </ng-template>

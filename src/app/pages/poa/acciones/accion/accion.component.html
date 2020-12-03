@@ -8,19 +8,21 @@
 						<div class="col-lg-6">
 							<div>
 								<label>Ejercicio fiscal</label>
-								<select class="custom-select" formControlName="ejercicioFiscal">
+								<select class="custom-select" formControlName="ejercicioFiscal" [class.is-invalid]="ejercicioFiscalInvalido">
 									<option selected disabled value="">Seleccione</option>
 									<option [value]>{{year}}</option>
 								</select>
+								<small *ngIf="ejercicioFiscalInvalido" class="text-danger">Este campo es requerido</small>
 							</div>
 						</div>
 						<div class="col-lg-6">
 							<div>
 								<label>Objetivo Operativo</label>
-								<select class="custom-select" formControlName="idObjetivoOperativo">
+								<select class="custom-select" formControlName="idObjetivoOperativo" [class.is-invalid]="objetivoOperativolInvalido">
 									<option selected disabled value="">Seleccione</option>
 									<option [value]="objetivoOperativo.id" *ngFor="let objetivoOperativo of objetivosOperativos">{{objetivoOperativo.nombre}}</option>
 								</select>
+								<small *ngIf="objetivoOperativolInvalido" class="text-danger">Este campo es requerido</small>
 							</div>
 						</div>
 					</div>
@@ -34,10 +36,11 @@
 						<div class="col-lg-6">
 							<div>
 								<label>Responsable</label>
-								<select class="custom-select" formControlName="idPuestoResponsable">
+								<select class="custom-select" formControlName="idPuestoResponsable" [class.is-invalid]="puestoResponsableInvalido">
 									<option selected disabled value="">Seleccione</option>
 									<option [value]="departamentoUsuario.id" *ngFor="let departamentoUsuario of departamentosUsuario">{{departamentoUsuario.nombre}}</option>
 								</select>
+								<small *ngIf="puestoResponsableInvalido" class="text-danger">Este campo es requerido</small>
 							</div>
 						</div>
 					</div>
@@ -54,13 +57,11 @@
 						<div class="col-lg-6">
 							<div>
 								<label>Política pública asociada</label>
-								<select class="custom-select" formControlName="idPoliticaPublica">
+								<select class="custom-select" formControlName="idPoliticaPublica" [class.is-invalid]="politicaPublicaInvalido">
 									<option selected disabled value="">Seleccione</option>
 									<option [value]="politicaPublica.id" *ngFor="let politicaPublica of listadoPoliticasPublicas">{{politicaPublica.nombre}}</option>
 								</select>
-									<!-- <small *ngIf="alcanceNoValido" class="form-text text-danger">
-									Este campo es obligatorio
-									</small> -->
+								<small *ngIf="politicaPublicaInvalido" class="text-danger">Este campo es requerido</small>
 							</div>
 						</div>
 					</div>
@@ -69,7 +70,8 @@
 							<div>
 								<label>Acción </label>
 								<a style="color:blue; " nbTooltip="La acción es *********" nbTooltipPlacement="right" nbTooltipStatus="primary" nbButton status="control"> ?</a>
-								<input class="form-control" type="text" formControlName="nombreAccion">
+								<input class="form-control" type="text" formControlName="nombreAccion" [class.is-invalid]="nombreAccionInvalido">
+								<small *ngIf="nombreAccionInvalido" class="text-danger">Este campo es requerido</small>
 							</div>
 						</div>
 					</div>
@@ -78,16 +80,18 @@
 					<div formGroupName="accion" class="col-lg-6">
 						<div>
 							<label>Unidad de medida</label>
-							<select class="custom-select" formControlName="idUnidadMedida">
+							<select class="custom-select" formControlName="idUnidadMedida" [class.is-invalid]="idUnidadMedidaInvalido">
 								<option selected disabled value="">Seleccione</option>
 								<option [value]="UnidadMedida.id" *ngFor="let UnidadMedida of listadoUnidadMedida">{{UnidadMedida.nombreUnidadMedida}}</option>
 							</select>
+							<small *ngIf="idUnidadMedidaInvalido" class="text-danger">Este campo es requerido</small>
 						</div>
 					</div>
 					<div formGroupName="indicador" class="col-lg-6">
 						<div>
 							<label>Descripcion del indicador</label>
-							<input class="form-control" type="text" formControlName="nombreIndicador">
+							<input class="form-control" type="text" formControlName="nombreIndicador" [class.is-invalid]="nombreIndicadorInvalido">
+							<small *ngIf="nombreIndicadorInvalido" class="text-danger">Este campo es requerido</small>
 						</div>
 					</div>
 				</div>
@@ -96,13 +100,15 @@
 						<div class="col-lg-6">
 							<div>
 								<label>Interpretacion</label>
-								<input class="form-control" type="text" formControlName="interpretacion">
+								<input class="form-control" type="text" formControlName="interpretacion" [class.is-invalid]="interpretacionInvalido">
+								<small *ngIf="interpretacionInvalido" class="text-danger">Este campo es requerido</small>
 							</div>
 						</div>
 						<div class="col-lg-6">
 							<div>
 								<label>Fórmula de cálculo</label>
-								<input class="form-control" type="text" formControlName="formulaCalculo">
+								<input class="form-control" type="text" formControlName="formulaCalculo" [class.is-invalid]="formulaCalculoInvalido">
+								<small *ngIf="formulaCalculoInvalido" class="text-danger">Este campo es requerido</small>
 							</div>
 						</div>
 					</div>
@@ -110,13 +116,15 @@
 						<div class="col-lg-6">
 							<div>
 								<label>Procedencia de los datos</label>
-								<input class="form-control" type="text" formControlName="procedenciaDatos">
+								<input class="form-control" type="text" formControlName="procedenciaDatos" [class.is-invalid]="procedenciaDatosInvalido">
+								<small *ngIf="procedenciaDatosInvalido" class="text-danger">Este campo es requerido</small>
 							</div>
 						</div>
 						<div class="col-lg-6">
 							<div>
 								<label>Metodología de recopilación</label>
-								<input class="form-control" type="text" formControlName="metodologiaRecopilacion">
+								<input class="form-control" type="text" formControlName="metodologiaRecopilacion" [class.is-invalid]="metodologiaRecopilacionInvalido">
+								<small *ngIf="metodologiaRecopilacionInvalido" class="text-danger">Este campo es requerido</small>
 							</div>
 						</div>
 					</div>
@@ -132,7 +140,8 @@
 						<div class="col-lg-12">
 							<div>
 								<label>Tarea</label>
-								<input class="form-control" type="text" formControlName="tarea">
+								<input class="form-control" type="text" formControlName="tarea" [class.is-invalid]="tareaInvalido">
+								<small *ngIf="tareaInvalido" class="text-danger">Este campo es requerido</small>
 							</div>
 						</div>
 					</div>
@@ -140,7 +149,8 @@
 						<div class="col-lg-6">
 							<div>
 								<label>¿Qué necesita para realizarla?</label>
-								<input class="form-control" type="text" formControlName="entrada">
+								<input class="form-control" type="text" formControlName="entrada" [class.is-invalid]="entradaInvalido">
+								<small *ngIf="entradaInvalido" class="text-danger">Este campo es requerido</small>
 							</div>
 						</div>
 						<div class="col-lg-3">
@@ -165,10 +175,11 @@
 						<div class="col-lg-6">
 							<div>
 								<label>¿Qué resultado genera?</label>
-								<select class="custom-select" formControlName="resultadoDocumento">
+								<select class="custom-select" formControlName="resultadoDocumento" [class.is-invalid]="resultadoDocumentoInvalido">
 									<option selected disabled value="">Seleccione</option>
 									<option [value]="UnidadMedida.id" *ngFor="let UnidadMedida of listadoUnidadMedida">{{UnidadMedida.nombreUnidadMedida}}</option>
 								</select>
+								<small *ngIf="resultadoDocumentoInvalido" class="text-danger">Este campo es requerido</small>
 							</div>
 						</div>
 						<div class="col-lg-3">
@@ -204,7 +215,7 @@
 						<div class="col-lg-3">
 							<div>
 								<label>Duración</label>
-								<input class="form-control" type="text" formControlName="duracion">
+								<input class="form-control" type="number" formControlName="duracion">
 							</div>
 						</div>
 						<div class="col-lg-3">
@@ -275,6 +286,28 @@
 					</div>
 				</div>
 			</form>
+			<div class="row card-block mt-5" *ngIf="mostrarBotonesRevision()">
+				<div class="col-lg-1"> 
+					<button (click)="validarAccion()" type="button" class="btn btn-sm btn-primary">{{validarOAprobar()}}</button>
+				</div>
+				<div class="col-lg-1">
+					<button (click)="mostrarCampoObservaciones()" type="button" class="btn btn-sm btn-danger">Rechazar</button>
+				</div>
+			</div>
+			<div class="row mt-5" [formGroup]="form" *ngIf="mostrarObservaciones()">
+				<div class="col-lg-12" formGroupName="accion">
+					<div>
+						<label>Observaciones</label>
+						<textarea class="form-control" formControlName="observaciones" [attr.disabled]="bloquearObservaciones()">
+						</textarea>
+					</div>
+				</div>
+			</div>
+			<div class="row card-block mt-5" *ngIf="mostrarObservaciones() && mostrarBotonesRevision()">
+				<div class="col-lg-3">
+					<button (click)="rechazarAccion()" type="button" class="btn btn-sm btn-danger">Confirmar rechazo</button>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

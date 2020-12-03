@@ -13,13 +13,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 //componentes
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
-import { RevisionComponent } from './poa/revision/revision.component';
-import { AprobacionComponent } from './poa/aprobacion/aprobacion.component';
-import { CrearComponent } from './crear/crear.component';
-import { RolComponent } from './rol/rol.component';
 import { ReportesComponent } from './poa/reportes/reportes.component';
-import { EncabezadoComponent } from './poa/encabezado/encabezado.component';
-import { EditarEncabezadoComponent } from './poa/editar-encabezado/editar-encabezado.component';
+import { EncabezadoComponent } from './poa/encabezados/encabezado/encabezado.component';
 import { AccionesComponent } from './poa/acciones/acciones.component';
 import { AccionComponent } from './poa/acciones/accion/accion.component';
 import { ProgramacionMetasPoaComponent } from './poa/metas-fisicas/programaciones/programacion/programacion-metas-poa.component';
@@ -48,6 +43,7 @@ import { PoliticasGobiernoComponent } from './poa/politicas-gobierno/politicas-g
 import { PoliticaGobiernoComponent } from './poa/politicas-gobierno/politica-gobierno/politica-gobierno.component';
 import { PoliticasPublicasComponent } from './poa/politicas-publicas/politicas-publicas.component';
 import { PoliticaPublicaComponent } from './poa/politicas-publicas/politica-publica/politica-publica.component';
+import { EncabezadosComponent } from './poa/encabezados/encabezados.component';
 
 @NgModule({
   imports: [
@@ -69,13 +65,8 @@ import { PoliticaPublicaComponent } from './poa/politicas-publicas/politica-publ
   declarations: [
     PagesComponent,
     AccionesComponent,
-    RevisionComponent,
-    AprobacionComponent,
     ReportesComponent,
-    CrearComponent,
-    RolComponent,
     EncabezadoComponent,
-    EditarEncabezadoComponent,
     AccionComponent,
     ProgramacionMetasPoaComponent,
     EjeComponent,
@@ -103,6 +94,7 @@ import { PoliticaPublicaComponent } from './poa/politicas-publicas/politica-publ
     PoliticaGobiernoComponent,
     PoliticasPublicasComponent,
     PoliticaPublicaComponent,
+    EncabezadosComponent,
   ],
 })
 export class PagesModule {

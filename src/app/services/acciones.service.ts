@@ -16,6 +16,10 @@ export class AccionesService {
     return this.httpClient.get<any>(this.url + 'acciones');
   }
 
+  listadoAccionesPorDependencia(cui: number) {
+    return this.httpClient.get<any>(this.url + 'acciones/dependencia/' + cui);
+  }
+
   listadoAccionesConProgramacionesPoa(cui: number) {
     return this.httpClient.get<any>(this.url + 'acciones/programaciones/poa/' + cui);
   }
@@ -42,6 +46,24 @@ export class AccionesService {
   crear(datos: any) {
     return this.httpClient.post(this.url + 'acciones', JSON.stringify(datos), {headers: this.httpHeaders});
   }
+
+  enviarRevisionAccion(id: number) {
+    return this.httpClient.put(this.url + 'acciones/' + id + '/revision', null, {headers: this.httpHeaders});
+  }
+
+  validarAccion(id: number) {
+    return this.httpClient.put(this.url + 'acciones/' + id + '/validar', null, {headers: this.httpHeaders});
+  }
+
+  aprobarAccion(id: number) {
+    return this.httpClient.put(this.url + 'acciones/' + id + '/aprobar', null, {headers: this.httpHeaders});
+  }
+
+  rechazarAccion(datos: any) {
+    return this.httpClient.put(this.url + 'acciones/' + datos.id + '/rechazar', JSON.stringify(datos), {headers: this.httpHeaders});
+  }
+
+  
 
   cargarAccion(id: any){
     return this.httpClient.get(this.url + 'acciones/' + id);

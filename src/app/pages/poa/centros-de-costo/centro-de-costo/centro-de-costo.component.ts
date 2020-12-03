@@ -53,6 +53,7 @@ export class CentroDeCostoComponent implements OnInit {
         timer: 3000
       })
     });
+    this.form.reset();
   }
 
   public cargarDependencias(): void {

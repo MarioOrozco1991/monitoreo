@@ -2,22 +2,22 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { AccionesService } from '../../../services/acciones.service';
+import { EncabezadoService } from './../../../services/encabezado.service';
 import Swal from 'sweetalert2'; 
 
 @Component({
-  selector: 'ngx-acciones',
-  templateUrl: './acciones.component.html',
+  selector: 'ngx-encabezados',
+  templateUrl: './encabezados.component.html',
+  styleUrls: ['./encabezados.component.scss']
 })
-export class AccionesComponent implements OnDestroy, OnInit{
+export class EncabezadosComponent implements OnInit {
 
-  
   dtOptions: DataTables.Settings = {};
   perfilComponentes: any;  
   respuesta: any;
   dtTrigger = new Subject();
 
-  constructor(private accionesService:AccionesService,
+  constructor(private encabezadoService:EncabezadoService,
               private http:HttpClient, 
               private router:Router){
   }
@@ -25,13 +25,13 @@ export class AccionesComponent implements OnDestroy, OnInit{
   ngOnInit() {
     //convierte el perfilComponentes en un arreglo
     this.perfilComponentes = localStorage.getItem('perfilComponentes') ? JSON.parse(localStorage.getItem('perfilComponentes')) : null;
-    //console.log('perfilComponentes', this.perfilComponentes);  
+    console.log('perfilComponentes', this.perfilComponentes);  
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10
     };
 
-    this.accionesService.listado().subscribe((data: any) => {
+    this.encabezadoService.listadoEncabezados(parseInt(localStorage.getItem('cui'))).subscribe((data: any) => {
        this.respuesta = data
       this.dtTrigger.next();
     });
@@ -49,11 +49,11 @@ export class AccionesComponent implements OnDestroy, OnInit{
       this.dtTrigger.unsubscribe();
   }
 
-  editarAccion(){
+  editarEncabezado(){
       this.router.navigate(["editar"]);
   }
 
-  public eliminarAccion(datos: any, i: any) {
+  public eliminarEncabezado(datos: any, i: any) {
     Swal.fire({
       title: '¡Advertencia!',
       text: '¿Está seguro que desea eliminarla?',
@@ -66,41 +66,16 @@ export class AccionesComponent implements OnDestroy, OnInit{
       
       if (resp.value) {
         this.respuesta.splice(i, 1)
-        this.accionesService.eliminar(datos.id).subscribe((respuesta: any) => {  
-          Swal.fire({
-            //position: 'top-end',
-            icon: 'success',
-            title: 'Acción eliminada correctamente',
-            showConfirmButton: false,
-            timer: 2000
-          })
+        this.encabezadoService.eliminar(datos.id).subscribe();
+        Swal.fire({
+          //position: 'top-end',
+          icon: 'success',
+          title: 'Encabezado eliminado correctamente',
+          showConfirmButton: false,
+          timer: 2000
         })
       }
     })
-  }
 
-  public enviarRevisionAccion(datos: any, i: any) {
-    Swal.fire({
-      title: '¡Advertencia!',
-      text: '¿Está seguro que desea enviarla a revision?',
-      icon: 'question',
-      // showConfirmButton: true,
-      confirmButtonText: `Sí`,
-      showCancelButton: true,
-      cancelButtonText: `Cancelar`,
-    }).then( resp => {
-      if (resp.value) {
-        this.respuesta.splice(i, 1)
-        this.accionesService.enviarRevisionAccion(datos.id).subscribe((respuesta: any) => {  
-          Swal.fire({
-            //position: 'top-end',
-            icon: 'success',
-            title: 'La acción fue enviada para revisión',
-            showConfirmButton: false,
-            timer: 2000
-          });
-      })
-      }
-    })
   }
 }

@@ -3,12 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
 import { AccionesComponent } from './poa/acciones/acciones.component';
-import { RevisionComponent } from './poa/revision/revision.component';
-import { AprobacionComponent } from './poa/aprobacion/aprobacion.component';
 import { ReportesComponent } from './poa/reportes/reportes.component';
-import { RolComponent } from './rol/rol.component';
-import { EncabezadoComponent } from './poa/encabezado/encabezado.component';
-import { EditarEncabezadoComponent } from './poa/editar-encabezado/editar-encabezado.component';
+import { EncabezadoComponent } from './poa/encabezados/encabezado/encabezado.component';
+import { EncabezadosComponent } from './poa/encabezados/encabezados.component';
 import { AccionComponent } from './poa/acciones/accion/accion.component';
 import { ProgramacionMetasPoaComponent } from './poa/metas-fisicas/programaciones/programacion/programacion-metas-poa.component';
 import { ProgramacionesMetasPoaComponent} from './poa/metas-fisicas/programaciones/programaciones-metas-poa.component';
@@ -119,11 +116,15 @@ const routes: Routes = [{
       component: SubproductoComponent,
     },
     {
-      path: 'encabezado/crear',
+      path: 'encabezados',
+      component: EncabezadosComponent,
+    },
+    {
+      path: 'encabezados/crear',
       component: EncabezadoComponent,
     },
     {
-      path: 'encabezado/:id',
+      path: 'encabezados/:id',
       component: EncabezadoComponent,
     },
     {
@@ -221,23 +222,6 @@ const routes: Routes = [{
     {
       path: 'programaciones-metas-pom/:id',
       component: ProgramacionMetasPomComponent,
-    },
-    
-    {
-      path: 'revision',
-      component: RevisionComponent,
-    },
-    {
-        path: 'aprobacion',
-        component: AprobacionComponent,
-    },
-    {
-        path: 'reportes',
-        component: ReportesComponent,
-    },
-    {
-        path: 'rol',
-        component: RolComponent,
     },
     {
       path: '',

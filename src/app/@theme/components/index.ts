@@ -4,7 +4,3 @@ export * from './search-input/search-input.component';
 export * from './switcher/switcher.component';
 export * from './layout-direction-switcher/layout-direction-switcher.component';
 export * from './table/table.component';
-export * from './formulario/formulario.component';
-export * from './editar-proceso/editar-proceso.component';
-export * from './listado-revision/listado-revision.component';
-export * from './error-formulario/error-formulario.component';

@@ -24,6 +24,7 @@ export class AccionComponent implements OnInit {
   //ejesEstrategicos: any[];
   //objetivosEstrategicos: any[];
   params: any;
+  perfilComponentes: any;
   objetivosOperativos: any[];
   dependenciaUsuario: any = {};
   dependencias: any[];
@@ -39,6 +40,7 @@ export class AccionComponent implements OnInit {
   formDetalle: FormGroup;
   editarDetalleIndice: number = -1;
   year = new Date().getFullYear();
+  campoObservaciones: boolean = false;
   
   constructor(private fb:FormBuilder,
               private router: Router,
@@ -59,11 +61,16 @@ export class AccionComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this.perfilComponentes = localStorage.getItem('perfilComponentes') ? JSON.parse(localStorage.getItem('perfilComponentes')) : null;
     this.activatedRoute.params.subscribe(params => {
       this.params = params; 
-    })
+    });
+    //para deshabilitar el formulario cuando el usuario le de click en el boton editar
+    // if (!this.opcionDisponible('Editar accion')) {
+    //   this.form.disable();
+    // }
     this.cargarAccion();
-    console.log('identificador', this.params.id);
+    //console.log('identificador', this.params.id);
     //this.cargarEjeEstrategico();
     //this.cargarObjetivoEstrategico();
     this.cargarObjetivoOperativo();
@@ -74,47 +81,137 @@ export class AccionComponent implements OnInit {
     this.cargarUnidadMedida();
     this.cargarDepartamentos();
     this.cargarSistemas();
-    console.log('form', this.form);
+    //console.log('form', this.form);
     //this.form.controls['idDependencia'].disable();
   }
   
+  opcionDisponible(nombre: string) {
+    if (!this.perfilComponentes) {
+      return false;
+    }
+    return this.perfilComponentes.find((perfilComponente) => perfilComponente.nombre == nombre)
+  }
+
   get tareas(): FormArray {
     return this.form.get('tareas') as FormArray;
   }
+
+  //validaciones del formulario
+  get ejercicioFiscalInvalido(){
+    return this.form.get('accion.ejercicioFiscal').invalid && this.form.get('accion.ejercicioFiscal').touched
+  }
+
+  get objetivoOperativolInvalido(){
+    return this.form.get('accion.idObjetivoOperativo').invalid && this.form.get('accion.idObjetivoOperativo').touched
+  }
+
+  get puestoResponsableInvalido(){
+    return this.form.get('accion.idPuestoResponsable').invalid && this.form.get('accion.idPuestoResponsable').touched
+  }
   
+  get politicaPublicaInvalido(){
+    return this.form.get('accion.idPoliticaPublica').invalid && this.form.get('accion.idPoliticaPublica').touched
+  }
+
+  get nombreAccionInvalido(){
+    return this.form.get('accion.nombreAccion').invalid && this.form.get('accion.nombreAccion').touched
+  }
+
+  get idUnidadMedidaInvalido(){
+    return this.form.get('accion.idUnidadMedida').invalid && this.form.get('accion.idUnidadMedida').touched
+  }
+
+  get nombreIndicadorInvalido(){
+    return this.form.get('indicador.nombreIndicador').invalid && this.form.get('indicador.nombreIndicador').touched
+  }
+
+  get interpretacionInvalido(){
+    return this.form.get('indicador.interpretacion').invalid && this.form.get('indicador.interpretacion').touched
+  }
+
+  get formulaCalculoInvalido(){
+    return this.form.get('indicador.formulaCalculo').invalid && this.form.get('indicador.formulaCalculo').touched
+  }
+
+  get procedenciaDatosInvalido(){
+    return this.form.get('indicador.procedenciaDatos').invalid && this.form.get('indicador.procedenciaDatos').touched
+  }
+
+  get metodologiaRecopilacionInvalido(){
+    return this.form.get('indicador.metodologiaRecopilacion').invalid && this.form.get('indicador.metodologiaRecopilacion').touched
+  }
+
+  get tareaInvalido(){
+    return this.formDetalle.get('tarea').invalid && this.formDetalle.get('tarea').touched
+  }
+
+  get entradaInvalido(){
+    return this.formDetalle.get('entrada').invalid && this.formDetalle.get('entrada').touched
+  }
+
+  // get dependenciaSolicitaInvalido(){
+  //   return this.formDetalle.get('idDependenciaSolicita').invalid && this.formDetalle.get('idDependenciaSolicita').touched
+  // }
+
+  // get puestoSolicitaInvalido(){
+  //   return this.formDetalle.get('idPuestoSolicita').invalid && this.formDetalle.get('idPuestoSolicita').touched
+  // }
+
+  get resultadoDocumentoInvalido(){
+    return this.formDetalle.get('resultadoDocumento').invalid && this.formDetalle.get('resultadoDocumento').touched
+  }
+
+  // get dependenciaResultadoInvalido(){
+  //   return this.formDetalle.get('idDependenciaResultado').invalid && this.formDetalle.get('idDependenciaResultado').touched
+  // }
+
+  // get puestoResultadoInvalido(){
+  //   return this.formDetalle.get('idPuestoResultado').invalid && this.formDetalle.get('idPuestoResultado').touched
+  // }
+
+  // get unidadTiempoInvalido(){
+  //   return this.formDetalle.get('idUnidadTiempo').invalid && this.formDetalle.get('idUnidadTiempo').touched
+  // }
+
+  // get duracionInvalido(){
+  //   return this.formDetalle.get('duracion').invalid && this.formDetalle.get('duracion').touched
+  // }
+
   crearFormulario(){
     //inicializando el formulario
     this.form = this.fb.group({
       accion:                     this.fb.group({
         id:                       [null,],
-        ejercicioFiscal:          ['',],
-        idObjetivoOperativo:      ['',],
-        idDependencia:            ['',],
-        idPuestoResponsable:      ['',],
+        ejercicioFiscal:          ['', Validators.required],
+        idObjetivoOperativo:      ['', Validators.required],
+        idDependencia:            [''],
+        idPuestoResponsable:      ['', Validators.required],
         idPoliticaGobierno:       ['',],
-        idPoliticaPublica:        ['',],
-        nombreAccion:             ['',],
-        idUnidadMedida:           ['',],
+        idPoliticaPublica:        ['', Validators.required],
+        nombreAccion:             ['', Validators.required],
+        idUnidadMedida:           ['', Validators.required],
+        observaciones:            ['',],
+        idEstado:                 ['',],
       }), 
       indicador:                  this.fb.group({
         id:                       [null,],
         idAccion:                 [null,],
-        nombreIndicador:          ['',],
-        interpretacion:           ['',],
-        formulaCalculo:           ['',],
-        procedenciaDatos:         ['',],
-        metodologiaRecopilacion:  ['',],  
+        nombreIndicador:          ['', Validators.required],
+        interpretacion:           ['', Validators.required],
+        formulaCalculo:           ['', Validators.required] ,
+        procedenciaDatos:         ['', Validators.required],
+        metodologiaRecopilacion:  ['', Validators.required],  
       }),
       tareas: this.fb.array([]),
     });
     this.formDetalle = this.fb.group({
       id:                      [null,],
       idAccion:                [null,],
-      tarea:                   ['',],
-      entrada:                 ['',],
+      tarea:                   ['', Validators.required],
+      entrada:                 ['', Validators.required],
       idDependenciaSolicita:   ['',],
       idPuestoSolicita:        ['',],
-      resultadoDocumento:      ['',],
+      resultadoDocumento:      ['', Validators.required],
       idDependenciaResultado:  ['',],
       idPuestoResultado:       ['',],
       externoResultado:        ['',],
@@ -155,6 +252,13 @@ export class AccionComponent implements OnInit {
           );
           this.editarDetalleIndice = -1;
           this.formDetalle.reset();
+          Swal.fire({
+            //position: 'top-end',
+            icon: 'success',
+            title: 'Tarea actualizada exitosamente',
+            showConfirmButton: false,
+            timer: 3000
+          })
         })
       } else {
         this.tareas.setControl(
@@ -223,9 +327,9 @@ export class AccionComponent implements OnInit {
   
   public crear(form: any) {
    // this.form.controls['idDependencia'].setValue(this.dependencia.id);
-    this.form.get('accion.idDependencia').setValue(this.dependenciaUsuario.id)
-    console.log('formulario antes de crear', form, this.dependenciaUsuario);
-    //return;
+    this.form.get('accion.idDependencia').setValue(this.dependenciaUsuario.id);
+    this.form.get('accion.idEstado').setValue(1);
+    //console.log('formulario antes de crear', form, this.dependenciaUsuario);
     this.accionesService.crear(form.value).subscribe((data) => {
       
       Swal.fire({
@@ -251,6 +355,68 @@ export class AccionComponent implements OnInit {
     });
   }
 
+  validarAccion() {
+    this.accionesService.validarAccion(this.form.get('accion').value.id).subscribe((data) => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Acción validada exitosamente',
+        showConfirmButton: false,
+        timer: 3000
+      })
+      this.router.navigate(['..']);
+    });
+  }
+
+  aprobarAccion() {
+    console.log(this.form.get('accion').value);
+    this.accionesService.aprobarAccion(this.form.get('accion').value).subscribe((data) => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Acción aprobada exitosamente',
+        showConfirmButton: false,
+        timer: 3000
+      })
+      this.router.navigate(['..']);
+    });
+  }
+
+  rechazarAccion() {
+    console.log(this.form.get('accion').value);
+    this.accionesService.rechazarAccion(this.form.get('accion').value).subscribe((data) => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Acción rechazada exitosamente',
+        showConfirmButton: false,
+        timer: 3000
+      })
+      this.router.navigate(['..']);
+    });
+  }
+
+  mostrarCampoObservaciones() {
+    this.campoObservaciones = !this.campoObservaciones;
+  }
+
+  mostrarObservaciones() {
+    return this.form.get('accion').get('observaciones').value || this.campoObservaciones;
+  }
+
+  mostrarBotonesRevision() {
+    return this.form.get('accion').get('id').value && this.opcionDisponible('Revisar accion');
+  }
+
+  bloquearObservaciones(){
+    if(this.opcionDisponible('Crear nueva accion')) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  validarOAprobar() {
+    return this.opcionDisponible('Aprobar accion') ? 'Aprobar' : 'Validar';
+  }
   // public cargarEjeEstrategico(): void {
   //   this.ejesService.listado().subscribe((respuesta) => {
   //     this.ejesEstrategicos = respuesta;

@@ -78,7 +78,7 @@ import {
           baseEndpoint: '',
           login: {
             // ...
-            endpoint: 'http://172.21.26.175:8090/biometric-explorer/authenticate',
+            endpoint: 'http://172.16.1.19:8090/biometric-explorer/authenticate',
           },
           logout: {
             // ...

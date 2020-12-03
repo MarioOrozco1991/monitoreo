@@ -95,6 +95,13 @@ export class ProgramacionAccionPoaComponent implements OnInit {
           );
           this.editarDetalleIndice = -1;
           this.formDetalle.reset();
+          Swal.fire({
+            //position: 'top-end',
+            icon: 'success',
+            title: 'Programación actualizada exitosamente',
+            showConfirmButton: false,
+            timer: 3000
+          })
         })
       } else {
         this.items.setControl(
@@ -160,7 +167,7 @@ export class ProgramacionAccionPoaComponent implements OnInit {
       });
     }       
   }
-
+  
   public crear(form: any) {
     console.log('formulario',form.value);
     this.programacionesService.crear(form.value).subscribe((data) => {
@@ -170,7 +177,9 @@ export class ProgramacionAccionPoaComponent implements OnInit {
         title: 'Programación creada exitosamente',
         showConfirmButton: false,
         timer: 3000
-      })
+      });
+      this.form.reset();
+      this.items.clear();
     });
   }
 

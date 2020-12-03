@@ -13,16 +13,23 @@ export class EncabezadoService {
   constructor(private httpClient: HttpClient) {}
   
   crear(datos: any) {
-    console.log('desde el servicio', datos);
-    return this.httpClient.post(this.url + 'encabezado', JSON.stringify(datos), {headers: this.httpHeaders});
+    return this.httpClient.post(this.url + 'encabezados', JSON.stringify(datos), {headers: this.httpHeaders});
   }
   
   actualizar(datos: any) {
-    return this.httpClient.put(this.url + 'encabezado/' + datos.id, JSON.stringify(datos), {headers: this.httpHeaders});
+    return this.httpClient.put(this.url + 'encabezados/' + datos.id, JSON.stringify(datos), {headers: this.httpHeaders});
+  }
+
+  cargarEncabezado(id: any){
+    return this.httpClient.get(this.url + 'encabezados/' + id);
   }
 
   eliminar(id: any) {
-    return this.httpClient.delete(this.url + 'encabezado/' + id);
+    return this.httpClient.delete(this.url + 'encabezados/' + id);
+  }
+
+  listadoEncabezados(cui: number) {
+    return this.httpClient.get<any>(this.url + 'encabezados/dependencia/' + cui);
   }
 
   listadoProgramas() {

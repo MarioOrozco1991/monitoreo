@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { EncabezadoService } from '../../../services/encabezado.service';
-import { DependenciaService } from './../../../services/dependencia.service';
-import { DepartamentosService } from './../../../services/departamentos.service';
+import { EncabezadoService } from '../../../../services/encabezado.service';
+import { EncabezadoDetalleService } from './../../../../services/encabezado-detalle.service';
+import { DependenciaService } from './../../../../services/dependencia.service';
+import { DepartamentosService } from './../../../../services/departamentos.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2'; 
 
@@ -15,10 +16,10 @@ import Swal from 'sweetalert2';
 export class EncabezadoComponent implements OnInit {
 
   params: any;
+  perfilComponentes: any;
   dependenciaUsuario: any = {};
   departamentosUsuario: any[];
   programas: any[]; 
-  subprogramas: any[];
   actividades: any[]; 
   productos: any[]; 
   subproductos: any[];
@@ -31,6 +32,7 @@ export class EncabezadoComponent implements OnInit {
 
   constructor( private fb:FormBuilder,
                private encabezadoService:EncabezadoService,
+               private encabezadoDetalleService: EncabezadoDetalleService,
                private dependenciaService: DependenciaService,
                private departamentosService: DepartamentosService,
                private router: Router,
@@ -40,36 +42,49 @@ export class EncabezadoComponent implements OnInit {
   }  
       
   ngOnInit(): void {
+    this.perfilComponentes = localStorage.getItem('perfilComponentes') ? JSON.parse(localStorage.getItem('perfilComponentes')) : null;
     this.activatedRoute.params.subscribe(params => {
       this.params = params; 
     })
+    this.cargarEncabezado()
     this.cargarDependencia();
     this.cargarDepartamentos();
     this.cargarPrograma(); //preguntar de que forma se podria reducir este codigo para que no mande a llamar a todas la funciones cuando carga la app
     this.cargarResultadoInstitucional();
   }
     
+  opcionDisponible(nombre: string) {
+    if (!this.perfilComponentes) {
+      return false;
+    }
+    return this.perfilComponentes.find((perfilComponente) => perfilComponente.nombre == nombre)
+  }
+
   get items(): FormArray {
     return this.form.get('items') as FormArray;
   }
 
   crearFormulario(){
-    
     this.form = this.fb.group({
-      id:                         [null,],
-      idDependencia:              ['',],
-      idUnidad:                   ['',],
-      idProgramaPresupuestario:   ['',],
-      idResultadoInstitucional:   ['',],
-      periodoFiscal:              ['',],
+      encabezado:                   this.fb.group({
+        id:                         [null,],
+        idDependencia:              ['',],
+        idUnidad:                   ['',],
+        idProgramaPresupuestario:   ['',],
+        idResultadoInstitucional:   ['',],
+        periodoFiscal:              ['',],
+    }),
       items: this.fb.array([]),
     });
     this.formDetalle = this.fb.group({
-      id:                         [null,],
-      idActividadPresupuestaria:  ['',],
-      idProducto:                 ['',],
-      idSubproducto:              ['',],
-      nombreSubproducto:          ['',]
+      id:                            [null,],
+      idEncabezado:                  [null,],
+      idActividadPresupuestaria:     ['',],
+      idProducto:                    ['',],
+      idSubproducto:                 ['',],
+      nombreActividadpresupuestaria: ['',],
+      nombreProducto:                ['',],
+      nombreSubproducto:             ['',]
     });
   }
 
@@ -79,15 +94,19 @@ export class EncabezadoComponent implements OnInit {
     console.log('this.formDetalle', this.formDetalle.getRawValue());
     if (this.editarDetalleIndice === -1) { // crear
       if(this.params.id){
-        this.encabezadoService.crear(this.formDetalle.getRawValue()).subscribe((respuesta: any) => {
+        this.formDetalle.patchValue({'idEncabezado': this.params.id});
+        this.encabezadoDetalleService.crear(this.formDetalle.getRawValue()).subscribe((respuesta: any) => {
           this.items.push(
             this.fb.group(respuesta)
           );
           this.formDetalle.reset();
         })
       } else {
-        const subproducto = this.subproductos.find((subproducto) => subproducto.id == this.formDetalle.get('idSubproducto').value)
-        console.log('subproducto', subproducto, this.formDetalle.get('idSubproducto').value);
+        const actividadPresupuestaria = this.actividades.find((actividad) => actividad.id == this.formDetalle.get('idActividadPresupuestaria').value);
+        const producto = this.productos.find((producto) => producto.id == this.formDetalle.get('idProducto').value);
+        const subproducto = this.subproductos.find((subproducto) => subproducto.id == this.formDetalle.get('idSubproducto').value);
+        this.formDetalle.get('nombreActividadpresupuestaria').setValue(actividadPresupuestaria.descripcion);
+        this.formDetalle.get('nombreProducto').setValue(producto.nombre);
         this.formDetalle.get('nombreSubproducto').setValue(subproducto.nombre);
         this.items.push(
           this.fb.group(this.formDetalle.getRawValue())
@@ -98,8 +117,9 @@ export class EncabezadoComponent implements OnInit {
     } else { // editar
       if(this.params.id){
         console.log('object');
-        this.encabezadoService.actualizar(this.formDetalle.getRawValue()).subscribe((respuesta: any) => {
-          console.log('respuesta', respuesta);
+        this.encabezadoDetalleService.actualizar(this.formDetalle.getRawValue()).subscribe((respuesta: any) => {
+          console.log('respuesta que se muestra al editar', respuesta);
+          //aqui poner el codigo para mostrar la descripcion de la actividad, producto, subproducto
           this.items.setControl(
             this.editarDetalleIndice,
             this.fb.group(respuesta)
@@ -118,8 +138,10 @@ export class EncabezadoComponent implements OnInit {
     }
   }
 
+
+  
   editarItem(i: any){
-    console.log('i', i, this.items);
+    //console.log('i', i, this.items);
     this.editarDetalleIndice = i;
     const item = this.items.at(i) as FormGroup
     this.formDetalle.patchValue(item.getRawValue())
@@ -139,7 +161,7 @@ export class EncabezadoComponent implements OnInit {
         cancelButtonText: `Cancelar`,
       }).then( resp => {
         if (resp.value) {
-          this.encabezadoService.eliminar(item.get('id').value).subscribe((respuesta: any) => {
+          this.encabezadoDetalleService.eliminar(item.get('id').value).subscribe((respuesta: any) => {
             this.items.removeAt(i);
           })
         }
@@ -150,7 +172,7 @@ export class EncabezadoComponent implements OnInit {
     this.formDetalle.reset();
   }
 
-  //metodo cuando el usuario presione click en guardar
+  //metodo para listar los programas
   cargarPrograma(): void {
     this.encabezadoService.listadoProgramas().subscribe((respuesta) => {
       this.programas = respuesta;
@@ -197,6 +219,20 @@ export class EncabezadoComponent implements OnInit {
     });
   } 
 
+  cargarEncabezado(): void {
+    if(this.params.id){
+      this.encabezadoService.cargarEncabezado(this.params.id).subscribe((respuesta: any) => {
+        console.log('encabezado cargado', respuesta);
+        this.form.patchValue(respuesta);
+        if (respuesta.items) {
+          respuesta.items.forEach((item) => {
+            this.items.push(this.fb.group(item))
+          })
+        }
+      });
+    }       
+  }
+
   enviarFormulario(form: any) {
     console.log('resultado', form.value);
     if (!this.form.value.id) {
@@ -207,10 +243,10 @@ export class EncabezadoComponent implements OnInit {
   }
 
   public crear(form: any) {
-    this.form.get('idDependencia').setValue(this.dependenciaUsuario.id)
-    console.log('formulario antes de enviarlo al servicio', form.value);  
+    this.form.get('encabezado.idDependencia').setValue(this.dependenciaUsuario.id)
+    //console.log('formulario antes de enviarlo al servicio', form.value);  
     this.encabezadoService.crear(form.value).subscribe((data) => {
-      console.log('encabezado completo', form.value);
+      //console.log('encabezado completo', form.value);
       Swal.fire({
         icon: 'success',
         title: 'Encabezado creado exitosamente',
@@ -227,7 +263,7 @@ export class EncabezadoComponent implements OnInit {
       Swal.fire({
         //position: 'top-end',
         icon: 'success',
-        title:     'Acción modificada exitosamente',
+        title: 'Encabezado modificado exitosamente',
         showConfirmButton: false,
         timer: 3000
       })
@@ -235,7 +271,7 @@ export class EncabezadoComponent implements OnInit {
     });
   } 
 
-  limpiarTabla(){
-    this.items.clear();
-  }
+  // limpiarTabla(){
+  //   this.items.clear();
+  // }
 }
