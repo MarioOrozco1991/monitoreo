@@ -42,6 +42,11 @@
               </select>
             </div>                        
           </div>
+          <div class="row card-block mt-5">
+            <div class="col-lg-6">
+              <input  type="submit" class="btn btn-primary btn-block waves-effect" (click)="enviarFormulario(form)" *ngIf="params.id"value="Modificar Encabezado">
+            </div>
+          </div>
         </div>
         <div [formGroup]="formDetalle">
           <div class="row mt-5">
@@ -105,10 +110,10 @@
 				</div>
         <div class="row card-block mt-5">
           <div class="col-lg-6">
-            <input [routerLink]="['..']" type="submit" class="btn btn-primary btn-block waves-effect" (click)='enviarFormulario(form)' value = "Crear encabezado">
+            <input type="submit" class="btn btn-primary btn-block waves-effect" (click)='enviarFormulario(form)' *ngIf="!params.id" value="Crear Encabezado">
           </div>
           <div class="col-lg-6">
-            <input [routerLink]="['..']" type="button" class="btn btn-danger btn-block waves-effect" value="Cancelar">
+            <input [routerLink]="['..']" type="button" class="btn btn-danger btn-block waves-effect" *ngIf="!params.id" value="Cancelar">
           </div>
         </div>
       </form>

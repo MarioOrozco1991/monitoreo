@@ -24,9 +24,9 @@ export class EncabezadoService {
     return this.httpClient.get(this.url + 'encabezados/' + id);
   }
 
-  eliminar(id: any) {
-    return this.httpClient.delete(this.url + 'encabezados/' + id);
-  }
+  // eliminar(id: any) {
+  //   return this.httpClient.delete(this.url + 'encabezados/' + id);
+  // }
 
   listadoEncabezados(cui: number) {
     return this.httpClient.get<any>(this.url + 'encabezados/dependencia/' + cui);

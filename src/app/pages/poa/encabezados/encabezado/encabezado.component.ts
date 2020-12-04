@@ -252,7 +252,9 @@ export class EncabezadoComponent implements OnInit {
         title: 'Encabezado creado exitosamente',
         showConfirmButton: false,
         timer: 3000
-      })
+      });
+      this.form.reset();
+      this.items.reset();
     });
   }
 

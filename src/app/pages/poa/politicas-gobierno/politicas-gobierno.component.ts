@@ -52,12 +52,9 @@ export class PoliticasGobiernoComponent implements OnInit {
       showCancelButton: true,
       cancelButtonText: `Cancelar`,
     }).then( resp => {
-      
       if (resp.value) {
         this.respuesta.splice(i, 1)
-  
         this.politicasGobiernoService.eliminar(datos.id).subscribe();
-        
         Swal.fire({
           //position: 'top-end',
           icon: 'success',

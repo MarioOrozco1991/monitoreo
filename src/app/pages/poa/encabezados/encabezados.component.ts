@@ -53,29 +53,28 @@ export class EncabezadosComponent implements OnInit {
       this.router.navigate(["editar"]);
   }
 
-  public eliminarEncabezado(datos: any, i: any) {
-    Swal.fire({
-      title: '¡Advertencia!',
-      text: '¿Está seguro que desea eliminarla?',
-      icon: 'question',
-      // showConfirmButton: true,
-      confirmButtonText: `Sí`,
-      showCancelButton: true,
-      cancelButtonText: `Cancelar`,
-    }).then( resp => {
-      
-      if (resp.value) {
-        this.respuesta.splice(i, 1)
-        this.encabezadoService.eliminar(datos.id).subscribe();
-        Swal.fire({
-          //position: 'top-end',
-          icon: 'success',
-          title: 'Encabezado eliminado correctamente',
-          showConfirmButton: false,
-          timer: 2000
-        })
-      }
-    })
+  // public eliminarEncabezado(datos: any, i: any) {
+  //   Swal.fire({
+  //     title: '¡Advertencia!',
+  //     text: '¿Está seguro que desea eliminarla?',
+  //     icon: 'question',
+  //     // showConfirmButton: true,
+  //     confirmButtonText: `Sí`,
+  //     showCancelButton: true,
+  //     cancelButtonText: `Cancelar`,
+  //   }).then( resp => {
+  //     if (resp.value) {
+  //       this.respuesta.splice(i, 1)
+  //       this.encabezadoService.eliminar(datos.id).subscribe();
+  //       Swal.fire({
+  //         //position: 'top-end',
+  //         icon: 'success',
+  //         title: 'Encabezado eliminado correctamente',
+  //         showConfirmButton: false,
+  //         timer: 2000
+  //       })
+  //     }
+  //   })
 
-  }
+  // }
 }

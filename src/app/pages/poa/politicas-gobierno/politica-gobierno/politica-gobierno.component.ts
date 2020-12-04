@@ -35,6 +35,7 @@ export class PoliticaGobiernoComponent implements OnInit {
     this.form = this.fb.group({
       id:      [null,],
       nombre:  ['', Validators.required],
+      estado:  ['',]
     });
   }
   
