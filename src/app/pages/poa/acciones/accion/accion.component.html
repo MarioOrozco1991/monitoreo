@@ -130,8 +130,8 @@
 					</div>
 				</div>
 				<div class="row card-block mt-5">
-					<div class="col-lg-6">
-						<input  type="submit" class="btn btn-primary btn-block waves-effect" (click)="enviarFormulario(form)" *ngIf="params.id"value="Modificar accion">
+					<div *ngIf="opcionDisponible('Crear nueva accion')"  class="col-lg-6">
+						<input type="submit" class="btn btn-primary btn-block waves-effect" (click)="enviarFormulario(form)" *ngIf="params.id" value="Modificar accion">
 					</div>
 				</div>
 				<div [formGroup]="formDetalle">
@@ -201,18 +201,16 @@
 						</div>
 					</div>
 					<div class="row mt-5">
-						<div class="col-lg-3">
-							<div>
-								<label>Tiempo promedio para realizarla</label>
-								<select class="custom-select" formControlName="idUnidadTiempo">
-									<option selected disabled value="">Seleccione</option>
-									<option [value]=1>Días</option>
-									<option [value]=2>Horas</option>
-									<option [value]=3>Minutos</option>
-								</select>
-							</div>
+						<div class="col-lg-4">
+							<label>Tiempo promedio para realizarla</label>
+							<select class="custom-select" formControlName="idUnidadTiempo">
+								<option selected disabled value="">Seleccione</option>
+								<option [value]=1>Días</option>
+								<option [value]=2>Horas</option>
+								<option [value]=3>Minutos</option>
+							</select>
 						</div>
-						<div class="col-lg-3">
+						<div class="col-lg-2">
 							<div>
 								<label>Duración</label>
 								<input class="form-control" type="number" formControlName="duracion">
@@ -251,7 +249,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="row mt-5">
+					<div *ngIf="opcionDisponible('Crear nueva accion')" class="row mt-5">
 						<div class="input-group col-6">
 							<button (click)="agregarEditarItem()" type="button" class="btn btn-primary mb-3"> <i class="fas fa-check "></i>{{editarDetalleIndice === -1 ? 'Agregar' : 'Editar'}}</button>
 						</div>
@@ -273,8 +271,8 @@
 									{{item.get('tarea').value}}
 								</td>
 								<td class="text-center" style="width: 200px;">
-									<button type="button" class="btn btn-sm btn-success mr-2" (click)="editarItem(i)"> <nb-icon icon="edit-2-outline"></nb-icon></button>
-									<button type="button" class="btn btn-sm btn-danger" (click)="eliminarItem(i)"> <nb-icon icon="trash-2-outline"></nb-icon></button>
+									<button *ngIf="opcionDisponible('Crear nueva accion')" type="button" class="btn btn-sm btn-success mr-2" (click)="editarItem(i)"> <nb-icon icon="edit-2-outline"></nb-icon></button>
+									<button *ngIf="opcionDisponible('Crear nueva accion')" type="button" class="btn btn-sm btn-danger" (click)="eliminarItem(i)"> <nb-icon icon="trash-2-outline"></nb-icon></button>
 								</td>
 							</tr>
 						</tbody>
@@ -303,7 +301,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="row card-block mt-5" *ngIf="mostrarObservaciones() && mostrarBotonesRevision()">
+			<div class="row card-block mt-5 mb-5" *ngIf="mostrarObservaciones() && mostrarBotonesRevision()">
 				<div class="col-lg-3">
 					<button (click)="rechazarAccion()" type="button" class="btn btn-sm btn-danger">Confirmar rechazo</button>
 				</div>

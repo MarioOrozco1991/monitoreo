@@ -63,10 +63,9 @@ export class AccionesComponent implements OnDestroy, OnInit{
       showCancelButton: true,
       cancelButtonText: `Cancelar`,
     }).then( resp => {
-      
       if (resp.value) {
         this.respuesta.splice(i, 1)
-        this.accionesService.eliminar(datos.id).subscribe((respuesta: any) => {  
+        this.accionesService.inactivarAccion(datos.id).subscribe((respuesta: any) => {  
           Swal.fire({
             //position: 'top-end',
             icon: 'success',

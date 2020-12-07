@@ -151,7 +151,7 @@ export class ProgramacionAccionPoaComponent implements OnInit {
   }
 
   public cargarAccion(): void {
-    this.accionesService.listado().subscribe((respuesta) => {
+    this.accionesService.listadoAccionesAprobadas().subscribe((respuesta) => {
       this.acciones= respuesta;
     });   
   }

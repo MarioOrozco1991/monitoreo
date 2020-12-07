@@ -16,6 +16,10 @@ export class AccionesService {
     return this.httpClient.get<any>(this.url + 'acciones');
   }
 
+  listadoAccionesAprobadas() {
+    return this.httpClient.get<any>(this.url + 'acciones/aprobadas');
+  }
+
   listadoAccionesPorDependencia(cui: number) {
     return this.httpClient.get<any>(this.url + 'acciones/dependencia/' + cui);
   }
@@ -63,7 +67,9 @@ export class AccionesService {
     return this.httpClient.put(this.url + 'acciones/' + datos.id + '/rechazar', JSON.stringify(datos), {headers: this.httpHeaders});
   }
 
-  
+  inactivarAccion(id: number) {
+    return this.httpClient.put(this.url + 'acciones/' + id + '/inactivo', null, {headers: this.httpHeaders});
+  }
 
   cargarAccion(id: any){
     return this.httpClient.get(this.url + 'acciones/' + id);

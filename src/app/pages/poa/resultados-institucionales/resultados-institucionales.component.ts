@@ -54,7 +54,7 @@ export class ResultadosInstitucionalesComponent implements OnInit {
       
       if (resp.value) {
         this.respuesta.splice(i, 1)
-        this.resultadosInstitucionalesService.eliminar(datos.id).subscribe();
+        this.resultadosInstitucionalesService.InactivarResultado(datos.id).subscribe();
         Swal.fire({
           //position: 'top-end',
           icon: 'success',
@@ -62,7 +62,6 @@ export class ResultadosInstitucionalesComponent implements OnInit {
           showConfirmButton: false,
           timer: 2000
         })
-        this.router.navigate['centros-de-costo']
       }
     })
 

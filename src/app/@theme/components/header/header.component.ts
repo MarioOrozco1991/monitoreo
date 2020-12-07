@@ -47,7 +47,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     },
   ];
 
-  currentTheme = 'default';
+  currentTheme = 'material-dark';
 
   userMenu = [ { title: 'Salir' } ];
 

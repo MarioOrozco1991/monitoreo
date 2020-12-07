@@ -66,10 +66,13 @@ export class AccionComponent implements OnInit {
       this.params = params; 
     });
     //para deshabilitar el formulario cuando el usuario le de click en el boton editar
-    // if (!this.opcionDisponible('Editar accion')) {
-    //   this.form.disable();
+    // if (this.opcionDisponible('Revisar accion')) {
+    //    this.form.disable();
+    //    this.formDetalle.disable();
+    //    this.form.get('accion.observaciones').enable();
     // }
     this.cargarAccion();
+    this.cargarAccionSinTareas
     //console.log('identificador', this.params.id);
     //this.cargarEjeEstrategico();
     //this.cargarObjetivoEstrategico();
@@ -313,6 +316,15 @@ export class AccionComponent implements OnInit {
             this.tareas.push(this.fb.group(item))
           })
         }
+      });
+    }       
+  }
+
+  cargarAccionSinTareas(): void {
+    if(this.params.id){
+      this.accionesService.cargarAccion(this.params.id).subscribe((respuesta: any) => {
+        console.log('accion cargada', respuesta);
+        this.form.patchValue(respuesta);
       });
     }       
   }

@@ -28,6 +28,10 @@ export class ResultadosInstitucionalesService {
     return this.httpClient.delete(this.url + 'resultado-institucional/' + id);
   }
 
+  InactivarResultado(id: any){
+    return this.httpClient.delete(this.url + 'resultado-institucional/inactivo/' + id);
+  }
+
   actualizar(datos: any) {
     return this.httpClient.put(this.url + 'resultado-institucional/' + datos.id, JSON.stringify(datos), {headers: this.httpHeaders});
   }
