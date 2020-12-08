@@ -107,12 +107,12 @@ export class EncabezadoComponent implements OnInit {
         const subproducto = this.subproductos.find((subproducto) => subproducto.id == this.formDetalle.get('idSubproducto').value);
         this.formDetalle.get('nombreActividadpresupuestaria').setValue(actividadPresupuestaria.descripcion);
         this.formDetalle.get('nombreProducto').setValue(producto.nombre);
-        this.formDetalle.get('nombreSubproducto').setValue(subproducto.nombre);
+        this.formDetalle.get('nombreSubproducto').setValue(subproducto.nombre); 
         this.items.push(
           this.fb.group(this.formDetalle.getRawValue())
         );
         this.formDetalle.reset();
-        this.formDetalle.get('idSubproducto').setValue('');
+        //this.formDetalle.get('idSubproducto').setValue(''); 
       }
     } else { // editar
       if(this.params.id){
@@ -138,10 +138,8 @@ export class EncabezadoComponent implements OnInit {
     }
   }
 
-
-  
   editarItem(i: any){
-    //console.log('i', i, this.items);
+    console.log('i', i, this.items);
     this.editarDetalleIndice = i;
     const item = this.items.at(i) as FormGroup
     this.formDetalle.patchValue(item.getRawValue())

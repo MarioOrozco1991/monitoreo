@@ -102,6 +102,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       .subscribe(title => {
         if (title === 'Salir') {
           this.router.navigate(['auth/logout']);
+          localStorage.clear();
         }
       });
   }

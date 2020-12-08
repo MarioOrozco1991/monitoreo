@@ -368,7 +368,7 @@ export class AccionComponent implements OnInit {
   }
 
   validarAccion() {
-    this.accionesService.validarAccion(this.form.get('accion').value.id).subscribe((data) => {
+    this.accionesService.validarAccion(this.form.get('accion').value).subscribe((data) => {
       Swal.fire({
         icon: 'success',
         title: 'Acción validada exitosamente',
@@ -415,6 +415,10 @@ export class AccionComponent implements OnInit {
 
   mostrarBotonesRevision() {
     return this.form.get('accion').get('id').value && this.opcionDisponible('Revisar accion');
+  }
+
+  mostrarBotonesAprobacion() {
+    return this.form.get('accion').get('id').value && this.opcionDisponible('Aprobar accion');
   }
 
   bloquearObservaciones(){

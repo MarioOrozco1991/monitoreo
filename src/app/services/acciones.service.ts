@@ -16,8 +16,8 @@ export class AccionesService {
     return this.httpClient.get<any>(this.url + 'acciones');
   }
 
-  listadoAccionesAprobadas() {
-    return this.httpClient.get<any>(this.url + 'acciones/aprobadas');
+  listadoAccionesAprobadas(cui: number) {
+    return this.httpClient.get<any>(this.url + 'acciones/aprobadas/' + cui);
   }
 
   listadoAccionesPorDependencia(cui: number) {
@@ -55,12 +55,12 @@ export class AccionesService {
     return this.httpClient.put(this.url + 'acciones/' + id + '/revision', null, {headers: this.httpHeaders});
   }
 
-  validarAccion(id: number) {
-    return this.httpClient.put(this.url + 'acciones/' + id + '/validar', null, {headers: this.httpHeaders});
+  validarAccion(datos: any) {
+    return this.httpClient.put(this.url + 'acciones/' + datos.id + '/validar', JSON.stringify(datos), {headers: this.httpHeaders});
   }
 
-  aprobarAccion(id: number) {
-    return this.httpClient.put(this.url + 'acciones/' + id + '/aprobar', null, {headers: this.httpHeaders});
+  aprobarAccion(datos: any) {
+    return this.httpClient.put(this.url + 'acciones/' + datos.id + '/aprobar', JSON.stringify(datos), {headers: this.httpHeaders});
   }
 
   rechazarAccion(datos: any) {

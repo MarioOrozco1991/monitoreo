@@ -121,9 +121,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
         // },  
     ], 
   },
-  // {
-  //   title: 'Reportes',
-  //   icon: 'file-text-outline',
-  //   link: '/pages/reportes',
-  // },
+   {
+     title: 'Cerrar Sesión',
+     icon: 'file-text-outline',
+     link: 'auth/logout',
+   },
 ];

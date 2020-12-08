@@ -286,7 +286,15 @@
 			</form>
 			<div class="row card-block mt-5" *ngIf="mostrarBotonesRevision()">
 				<div class="col-lg-1"> 
-					<button (click)="validarAccion()" type="button" class="btn btn-sm btn-primary">{{validarOAprobar()}}</button>
+					<button (click)="validarAccion()" type="button" class="btn btn-sm btn-primary">Validar</button>
+				</div>
+				<div class="col-lg-1">
+					<button (click)="mostrarCampoObservaciones()" type="button" class="btn btn-sm btn-danger">Rechazar</button>
+				</div>
+			</div>
+			<div class="row card-block mt-5" *ngIf="mostrarBotonesAprobacion()">
+				<div class="col-lg-1"> 
+					<button (click)="aprobarAccion()" type="button" class="btn btn-sm btn-primary">Aprobar</button>
 				</div>
 				<div class="col-lg-1">
 					<button (click)="mostrarCampoObservaciones()" type="button" class="btn btn-sm btn-danger">Rechazar</button>
@@ -301,7 +309,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="row card-block mt-5 mb-5" *ngIf="mostrarObservaciones() && mostrarBotonesRevision()">
+			<div class="row card-block mt-5 mb-5" *ngIf="mostrarObservaciones() && mostrarBotonesRevision() || mostrarBotonesAprobacion()">
 				<div class="col-lg-3">
 					<button (click)="rechazarAccion()" type="button" class="btn btn-sm btn-danger">Confirmar rechazo</button>
 				</div>
