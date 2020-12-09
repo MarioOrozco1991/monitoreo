@@ -99,6 +99,7 @@ export class EncabezadoComponent implements OnInit {
           this.items.push(
             this.fb.group(respuesta)
           );
+        console.log('this.formDetalle con valores', this.formDetalle.getRawValue());
           this.formDetalle.reset();
         })
       } else {
@@ -109,7 +110,7 @@ export class EncabezadoComponent implements OnInit {
         this.formDetalle.get('nombreProducto').setValue(producto.nombre);
         this.formDetalle.get('nombreSubproducto').setValue(subproducto.nombre); 
         this.items.push(
-          this.fb.group(this.formDetalle.getRawValue())
+          this.fb.group(this.formDetalle.getRawValue()) 
         );
         this.formDetalle.reset();
         //this.formDetalle.get('idSubproducto').setValue(''); 

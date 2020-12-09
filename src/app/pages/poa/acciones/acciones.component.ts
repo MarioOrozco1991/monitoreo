@@ -30,11 +30,23 @@ export class AccionesComponent implements OnDestroy, OnInit{
       pagingType: 'full_numbers',
       pageLength: 10
     };
-
-    this.accionesService.listado().subscribe((data: any) => {
-       this.respuesta = data
-      this.dtTrigger.next();
-    });
+    
+    if(this.opcionDisponible('Aprobar accion')){
+      this.accionesService.listado().subscribe((data: any) => {
+        this.respuesta = data
+       this.dtTrigger.next();
+      });
+    } else if (this.opcionDisponible('Revisar accion')) {
+        this.accionesService.listadoAccionesPorDependenciaRevision(parseInt(localStorage.getItem('cui'))).subscribe((data: any) => {
+          this.respuesta = data
+          this.dtTrigger.next();
+      });
+    } else {
+        this.accionesService.listadoAccionesPorDependencia(parseInt(localStorage.getItem('cui'))).subscribe((data: any) => {
+          this.respuesta = data
+          this.dtTrigger.next();
+       });
+    }
   }
 
   //obtiene las opciones que tiene disponible el usuario logado

@@ -15,11 +15,9 @@ import Swal from 'sweetalert2';
 export class ProgramacionesAccionesPoaComponent implements OnInit {
 
   datos: any;
-
+  perfilComponentes: any; 
   dtOptions: DataTables.Settings = {};
-    
   dtTrigger = new Subject();
-
   respuesta: any;
 
   constructor(private http:HttpClient, 
@@ -30,6 +28,9 @@ export class ProgramacionesAccionesPoaComponent implements OnInit {
   }
 
   ngOnInit() {
+    //convierte el perfilComponentes en un arreglo
+    this.perfilComponentes = localStorage.getItem('perfilComponentes') ? JSON.parse(localStorage.getItem('perfilComponentes')) : null;
+    
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 10
@@ -40,6 +41,14 @@ export class ProgramacionesAccionesPoaComponent implements OnInit {
        this.respuesta = data
       this.dtTrigger.next();
     });
+  }
+
+  //obtiene las opciones que tiene disponible el usuario logado
+  opcionDisponible(nombre: string) {
+    if (!this.perfilComponentes) {
+      return false;
+    }
+    return this.perfilComponentes.find((perfilComponente) => perfilComponente.nombre == nombre)
   }
 
   public eliminar(datos: any, i: any) {

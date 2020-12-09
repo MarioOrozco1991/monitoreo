@@ -3,7 +3,7 @@
 </div>
 
 <div class="container mt-5">
-  <button [routerLink]="['crear']" type="button" class="btn btn-primary mr-3"><nb-icon icon="edit-2-outline"></nb-icon> Crear Nueva Programación </button>
+  <button *ngIf="opcionDisponible('Crear programacion POA')" [routerLink]="['crear']" type="button" class="btn btn-primary mr-3"><nb-icon icon="edit-2-outline"></nb-icon> Crear Nueva Programación </button>
 </div>
 
 <div class="container mt-5">

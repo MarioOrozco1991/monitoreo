@@ -24,6 +24,10 @@ export class AccionesService {
     return this.httpClient.get<any>(this.url + 'acciones/dependencia/' + cui);
   }
 
+  listadoAccionesPorDependenciaRevision(cui: number) {
+    return this.httpClient.get<any>(this.url + 'acciones/revision/dependencia/' + cui);
+  }
+
   listadoAccionesConProgramacionesPoa(cui: number) {
     return this.httpClient.get<any>(this.url + 'acciones/programaciones/poa/' + cui);
   }

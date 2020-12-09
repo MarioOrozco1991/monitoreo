@@ -12,30 +12,46 @@ import { MENU_ITEMS } from './pages-menu';
     </ngx-one-column-layout>
   `,
 })
-export class PagesComponent implements OnInit {
+export class PagesComponent {
 
   perfilComponentes: any;
 
-  ngOnInit(): void {
-    this.perfilComponentes = localStorage.getItem('perfilComponentes') ? JSON.parse(localStorage.getItem('perfilComponentes')) : null;
-  }
-
   opcionDisponible(nombre: string) {
+    //console.log('perfil componentes', this.perfilComponentes);
     if (!this.perfilComponentes) {
-      return false;
+      this.perfilComponentes = localStorage.getItem('perfilComponentes') ? JSON.parse(localStorage.getItem('perfilComponentes')) : null;
+      if (!this.perfilComponentes) {  
+        return false;
+      }
     }
     return this.perfilComponentes.find((perfilComponente) => perfilComponente.nombre == nombre)
   }
   
-     menu = MENU_ITEMS
-    // menu = MENU_ITEMS.filter(item => {
-    //   const subItems = item.children.filter(subItem => {
-    //     const subSubItems = item.children.filter(subSubItem => {
-    //       if (this.opcionDisponible(subSubItem.title)) {
-    //         return true;
-    //       }
-    //     });
-    //     return subItems.length;
-    //   }) 
-    // }) ;
+    //menu = MENU_ITEMS
+    menu = MENU_ITEMS.reduce((acumulador, item) => {
+      if (this.opcionDisponible(item.title)) {
+        acumulador.push(item);
+        return acumulador;
+      }
+      const subItems = (item.children || []).map(subItem => {
+        if (this.opcionDisponible(subItem.title)) {
+          return subItem;
+        }
+        const subSubItems = (subItem.children || []).filter(subSubItem => {
+          if (this.opcionDisponible(subSubItem.title)) {
+            return true;
+          }
+        });
+        return subSubItems.length > 0 ? subItem : null;
+      });
+      const subItemsFiltrados = subItems.filter(subItem => subItem != null);
+      //return subItemsFiltrados.length > 0;
+      if (subItemsFiltrados.length) {
+        acumulador.push({ 
+          ...item,
+          children: subItemsFiltrados
+        });
+      }
+      return acumulador;
+    }, []) ;
 }

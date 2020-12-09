@@ -70,16 +70,16 @@ export const MENU_ITEMS: NbMenuItem[] = [
         {
           title: 'Acciones',
           children: [
-            {
-              title: 'Crear acción',
-              link: '/pages/acciones/crear',
-            },
+            // {
+            //   title: 'Crear acción',
+            //   link: '/pages/acciones/crear',
+            // },
             {
               title: 'Listado de Acciones',
               link: '/pages/acciones',
             },
             {
-              title: 'Programaciones',
+              title: 'Programaciones POA',
               link: '/pages/programacion-acciones-poa',
             },
           ]
@@ -105,7 +105,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
           title: 'Acciones',
           children: [
             {
-              title: 'Programaciones',
+              title: 'Programaciones POM',
               link: '/pages/programacion-acciones-pom',
             },
           ]
