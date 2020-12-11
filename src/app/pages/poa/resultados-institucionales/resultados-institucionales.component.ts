@@ -54,7 +54,7 @@ export class ResultadosInstitucionalesComponent implements OnInit {
       
       if (resp.value) {
         this.respuesta.splice(i, 1)
-        this.resultadosInstitucionalesService.InactivarResultado(datos.id).subscribe();
+        this.resultadosInstitucionalesService.eliminar(datos.id).subscribe();
         Swal.fire({
           //position: 'top-end',
           icon: 'success',

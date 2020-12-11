@@ -17,7 +17,7 @@ export class EncabezadoDetalleService {
   }
 
   actualizar(datos: any) {
-    return this.httpClient.put(this.url + 'encabezad-detalle/' + datos.id, JSON.stringify(datos), {headers: this.httpHeaders});
+    return this.httpClient.put(this.url + 'encabezado-detalle/' + datos.id, JSON.stringify(datos), {headers: this.httpHeaders});
   }
   
   eliminar(id: any){

@@ -96,6 +96,12 @@ export class EncabezadoComponent implements OnInit {
       if(this.params.id){
         this.formDetalle.patchValue({'idEncabezado': this.params.id});
         this.encabezadoDetalleService.crear(this.formDetalle.getRawValue()).subscribe((respuesta: any) => {
+          const actividadPresupuestaria = this.actividades.find((actividad) => actividad.id == this.formDetalle.get('idActividadPresupuestaria').value);
+          const producto = this.productos.find((producto) => producto.id == this.formDetalle.get('idProducto').value);
+          const subproducto = this.subproductos.find((subproducto) => subproducto.id == this.formDetalle.get('idSubproducto').value);
+          respuesta.nombreActividadpresupuestaria = actividadPresupuestaria.descripcion;
+          respuesta.nombreProducto = producto.nombre;
+          respuesta.nombreSubproducto = subproducto.nombre;
           this.items.push(
             this.fb.group(respuesta)
           );
@@ -113,14 +119,18 @@ export class EncabezadoComponent implements OnInit {
           this.fb.group(this.formDetalle.getRawValue()) 
         );
         this.formDetalle.reset();
-        //this.formDetalle.get('idSubproducto').setValue(''); 
       }
     } else { // editar
       if(this.params.id){
         console.log('object');
         this.encabezadoDetalleService.actualizar(this.formDetalle.getRawValue()).subscribe((respuesta: any) => {
           console.log('respuesta que se muestra al editar', respuesta);
-          //aqui poner el codigo para mostrar la descripcion de la actividad, producto, subproducto
+          const actividadPresupuestaria = this.actividades.find((actividad) => actividad.id == this.formDetalle.get('idActividadPresupuestaria').value);
+          const producto = this.productos.find((producto) => producto.id == this.formDetalle.get('idProducto').value);
+          const subproducto = this.subproductos.find((subproducto) => subproducto.id == this.formDetalle.get('idSubproducto').value);
+          respuesta.nombreActividadpresupuestaria = actividadPresupuestaria.descripcion;
+          respuesta.nombreProducto = producto.nombre;
+          respuesta.nombreSubproducto = subproducto.nombre;
           this.items.setControl(
             this.editarDetalleIndice,
             this.fb.group(respuesta)
@@ -129,6 +139,12 @@ export class EncabezadoComponent implements OnInit {
           this.formDetalle.reset();
         })
       } else {
+        const actividadPresupuestaria = this.actividades.find((actividad) => actividad.id == this.formDetalle.get('idActividadPresupuestaria').value);
+        const producto = this.productos.find((producto) => producto.id == this.formDetalle.get('idProducto').value);
+        const subproducto = this.subproductos.find((subproducto) => subproducto.id == this.formDetalle.get('idSubproducto').value);
+        this.formDetalle.get('nombreActividadpresupuestaria').setValue(actividadPresupuestaria.descripcion);
+        this.formDetalle.get('nombreProducto').setValue(producto.nombre);
+        this.formDetalle.get('nombreSubproducto').setValue(subproducto.nombre);
         this.items.setControl(
           this.editarDetalleIndice,
           this.fb.group(this.formDetalle.getRawValue())
@@ -143,7 +159,16 @@ export class EncabezadoComponent implements OnInit {
     console.log('i', i, this.items);
     this.editarDetalleIndice = i;
     const item = this.items.at(i) as FormGroup
-    this.formDetalle.patchValue(item.getRawValue())
+    this.encabezadoService.listadoActividades(item.get('idProgramaPresupuestario').value).subscribe((respuesta) => {
+      this.actividades = respuesta;
+      this.encabezadoService.listadoProductos(item.get('idResultadoInstitucional').value).subscribe((respuesta) => {
+        this.productos = respuesta;
+        this.encabezadoService.listadoSubproductos(item.get('idProducto').value).subscribe((respuesta) => {
+          this.subproductos = respuesta;
+          this.formDetalle.patchValue(item.getRawValue());
+        });
+      });
+    });
   }
 
   eliminarItem(i: number ){
@@ -200,6 +225,7 @@ export class EncabezadoComponent implements OnInit {
   }  
 
   cargarActividades(programa: number): void {
+    this.formDetalle.get('idActividadPresupuestaria').setValue("");
     this.encabezadoService.listadoActividades(programa).subscribe((respuesta) => {
       this.actividades = respuesta;
       console.log('actividades', this.actividades);
@@ -207,12 +233,14 @@ export class EncabezadoComponent implements OnInit {
   }   
   
   cargarProductos(resultado): void {
+    this.formDetalle.get('idProducto').setValue("");
     this.encabezadoService.listadoProductos(resultado).subscribe((respuesta) => {
       this.productos = respuesta;
     });
   } 
 
   cargarSubproductos(producto): void {
+    this.formDetalle.get('idSubproducto').setValue("");
     this.encabezadoService.listadoSubproductos(producto).subscribe((respuesta) => {
       this.subproductos = respuesta;
     });
@@ -222,6 +250,8 @@ export class EncabezadoComponent implements OnInit {
     if(this.params.id){
       this.encabezadoService.cargarEncabezado(this.params.id).subscribe((respuesta: any) => {
         console.log('encabezado cargado', respuesta);
+        this.cargarActividades(respuesta.encabezado.idProgramaPresupuestario);
+        this.cargarProductos(respuesta.encabezado.idResultadoInstitucional);
         this.form.patchValue(respuesta);
         if (respuesta.items) {
           respuesta.items.forEach((item) => {

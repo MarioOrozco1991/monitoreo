@@ -33,6 +33,7 @@ export class CentroDeCostoComponent implements OnInit {
       id:              [null,],
       idDependencia:   ['',],
       nombre:          ['',],
+      estado:          ['']
     });
   }
   
@@ -45,6 +46,7 @@ export class CentroDeCostoComponent implements OnInit {
   }
 
   public crear(form: any) {
+    this.form.get('estado').setValue(1);
     this.centrosDeCostoService.crear(form.value).subscribe((data) => {
       Swal.fire({
         icon: 'success',
