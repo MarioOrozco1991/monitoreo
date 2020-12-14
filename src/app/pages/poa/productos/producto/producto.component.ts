@@ -53,6 +53,7 @@ export class ProductoComponent implements OnInit {
       idResultadoInstitucional:   ['', Validators.required],
       nombre:                     ['', Validators.required],
       idUnidadMedida:             ['', Validators.required],
+      estado:                     ['']
     });
   }
   
@@ -66,6 +67,7 @@ export class ProductoComponent implements OnInit {
 
   public crear(form: any) {
     if(this.form.status ==='VALID'){
+      this.form.get('estado').setValue(1);
       this.productosService.crear(form.value).subscribe((data) => {
         Swal.fire({
           icon: 'success',

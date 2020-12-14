@@ -36,6 +36,7 @@ export class PoliticaPublicaComponent implements OnInit {
     this.form = this.fb.group({
       id:      [null,],
       nombre:  ['', Validators.required],
+      estado:  ['']
     });
   }
   
@@ -49,6 +50,7 @@ export class PoliticaPublicaComponent implements OnInit {
 
   public crear(form: any) {
     if(this.form.status ==='VALID'){
+      this.form.get('estado').setValue(1);
       this.politicasPublicasService.crear(form.value).subscribe((data) => {
         Swal.fire({
           icon: 'success',
