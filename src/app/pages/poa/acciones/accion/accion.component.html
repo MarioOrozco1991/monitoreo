@@ -18,11 +18,29 @@
 						<div class="col-lg-6">
 							<div>
 								<label>Objetivo Operativo</label>
-								<select class="custom-select" formControlName="idObjetivoOperativo" [class.is-invalid]="objetivoOperativolInvalido">
+								<select (change)="cargarEjeEstrategico($event.target.value)" class="custom-select" formControlName="idObjetivoOperativo" [class.is-invalid]="objetivoOperativolInvalido">
 									<option selected disabled value="">Seleccione</option>
 									<option [value]="objetivoOperativo.id" *ngFor="let objetivoOperativo of objetivosOperativos">{{objetivoOperativo.nombre}}</option>
 								</select>
 								<small *ngIf="objetivoOperativolInvalido" class="text-danger">Este campo es requerido</small>
+							</div>
+						</div>
+					</div>
+					<div class="row mt-5">
+						<div class="col-lg-6">
+							<div>
+								<label>Objetivo Estrategico</label>
+								<select class="custom-select" formControlName="objetivoEstrategico">
+									<option selected disabled value="" *ngFor="let objetivoEstrategico of objetivoEstrategico">{{objetivoEstrategico.nombre}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div>
+								<label>Eje Estrategico</label>
+								<select class="custom-select" formControlName="ejeEstrategico">
+									<option selected disabled value="" *ngFor="let ejeEstrategico of ejeEstrategico">{{ejeEstrategico.nombre}}</option>
+								</select>
 							</div>
 						</div>
 					</div>
@@ -106,25 +124,35 @@
 						</div>
 						<div class="col-lg-6">
 							<div>
-								<label>Fórmula de cálculo</label>
-								<input class="form-control" type="text" formControlName="formulaCalculo" [class.is-invalid]="formulaCalculoInvalido">
-								<small *ngIf="formulaCalculoInvalido" class="text-danger">Este campo es requerido</small>
-							</div>
-						</div>
-					</div>
-					<div class="row mt-5">
-						<div class="col-lg-6">
-							<div>
 								<label>Procedencia de los datos</label>
 								<input class="form-control" type="text" formControlName="procedenciaDatos" [class.is-invalid]="procedenciaDatosInvalido">
 								<small *ngIf="procedenciaDatosInvalido" class="text-danger">Este campo es requerido</small>
 							</div>
 						</div>
-						<div class="col-lg-6">
+					</div>
+					<div class="row mt-5">
+						<div class="col-lg-12">
 							<div>
 								<label>Metodología de recopilación</label>
 								<input class="form-control" type="text" formControlName="metodologiaRecopilacion" [class.is-invalid]="metodologiaRecopilacionInvalido">
 								<small *ngIf="metodologiaRecopilacionInvalido" class="text-danger">Este campo es requerido</small>
+							</div>
+						</div>
+					</div>
+					<h5 class="mt-4">Fórmula de cálculo</h5>
+					<div class="row mt-4">
+						<div class="col-lg-6">
+							<div>
+								<label>Numerador/Ejecución</label>
+								<input class="form-control" type="text" formControlName="numerador" [class.is-invalid]="numeradorInvalido">
+								<small *ngIf="numeradorInvalido" class="text-danger">Este campo es requerido</small>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div>
+								<label>Denominador/Programado</label>
+								<input class="form-control" type="text" formControlName="denominador" [class.is-invalid]="denominadorInvalido">
+								<small *ngIf="denominadorInvalido" class="text-danger">Este campo es requerido</small>
 							</div>
 						</div>
 					</div>

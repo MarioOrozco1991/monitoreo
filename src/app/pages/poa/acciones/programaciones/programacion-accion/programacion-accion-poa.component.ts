@@ -62,16 +62,19 @@ export class ProgramacionAccionPoaComponent implements OnInit {
       idAccion:         [null,],
       fechaInicio:      ['',],
       fechaFin:         ['',],
-      valorProgramado:  ['',]
+      valorProgramado:  ['',],
+      estado:           ['']
     });
   }
 
   // agregar o editar item
   agregarEditarItem(){
     // this.items.push( this.fb.control('', Validators.required ) );
+    this.formDetalle.get('estado').setValue(1);
     console.log('this.formDetalle', this.formDetalle.getRawValue());
     if (this.editarDetalleIndice === -1) { // crear
       if(this.params.id){
+        //this.formDetalle.get('estado').setValue(1);
         this.programacionesService.crear(this.formDetalle.getRawValue()).subscribe((respuesta: any) => {
           this.items.push(
             this.fb.group(respuesta)

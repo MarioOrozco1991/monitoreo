@@ -16,6 +16,11 @@ export class ObjetivosEstrategicosService {
     return this.httpClient.get<any>(this.url + 'objetivo-estrategico');
   }
 
+  //muestra el eje estrategico segun el objetivo operativo seleccionado
+  mostarObjetivoEstrategico(id: any) {
+    return this.httpClient.get<any>(this.url + 'objetivo-estrategico/' + id + '/objetivo-operativo');
+  }
+
   crear(datos: any) {
     return this.httpClient.post(this.url + 'objetivo-estrategico', JSON.stringify(datos), {headers: this.httpHeaders});
   }

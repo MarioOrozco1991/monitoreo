@@ -157,11 +157,12 @@ export class EncabezadoComponent implements OnInit {
 
   editarItem(i: any){
     console.log('i', i, this.items);
+    console.log('presione click en boton editar');
     this.editarDetalleIndice = i;
     const item = this.items.at(i) as FormGroup
-    this.encabezadoService.listadoActividades(item.get('idProgramaPresupuestario').value).subscribe((respuesta) => {
+    this.encabezadoService.listadoActividades(this.form.get('encabezado.idProgramaPresupuestario').value).subscribe((respuesta) => {
       this.actividades = respuesta;
-      this.encabezadoService.listadoProductos(item.get('idResultadoInstitucional').value).subscribe((respuesta) => {
+      this.encabezadoService.listadoProductos(this.form.get('encabezado.idResultadoInstitucional').value).subscribe((respuesta) => {
         this.productos = respuesta;
         this.encabezadoService.listadoSubproductos(item.get('idProducto').value).subscribe((respuesta) => {
           this.subproductos = respuesta;

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-//import { EjesService } from './../../../../services/ejes.service';
-//import { ObjetivosEstrategicosService } from './../../../../services/objetivos-estrategicos.service';
+import { EjesService } from './../../../../services/ejes.service';
+import { ObjetivosEstrategicosService } from './../../../../services/objetivos-estrategicos.service';
 import { AccionesService } from './../../../../services/acciones.service';
 import { TareasService } from './../../../../services/tareas.service';
 import { ObjetivosOperativosService } from './../../../../services/objetivos-operativos.service';
@@ -21,8 +21,8 @@ import Swal from 'sweetalert2';
 })
 export class AccionComponent implements OnInit {
 
-  //ejesEstrategicos: any[];
-  //objetivosEstrategicos: any[];
+  ejeEstrategico: any[];
+  objetivoEstrategico: any[];
   params: any;
   perfilComponentes: any;
   objetivosOperativos: any[];
@@ -47,8 +47,8 @@ export class AccionComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private accionesService: AccionesService,
               private tareasService: TareasService,
-              //private ejesService: EjesService,
-              //private objetivosEstrategicosService: ObjetivosEstrategicosService,  
+              private ejesService: EjesService,
+              private objetivosEstrategicosService: ObjetivosEstrategicosService,  
               private objetivosOperativosService: ObjetivosOperativosService,
               private dependenciaService: DependenciaService,
               private departamentosService: DepartamentosService,
@@ -132,8 +132,12 @@ export class AccionComponent implements OnInit {
     return this.form.get('indicador.interpretacion').invalid && this.form.get('indicador.interpretacion').touched
   }
 
-  get formulaCalculoInvalido(){
-    return this.form.get('indicador.formulaCalculo').invalid && this.form.get('indicador.formulaCalculo').touched
+  get numeradorInvalido(){
+    return this.form.get('indicador.numerador').invalid && this.form.get('indicador.numerador').touched
+  }
+  
+  get denominadorInvalido(){
+    return this.form.get('indicador.denominador').invalid && this.form.get('indicador.denominador').touched
   }
 
   get procedenciaDatosInvalido(){
@@ -195,13 +199,16 @@ export class AccionComponent implements OnInit {
         idUnidadMedida:           ['', Validators.required],
         observaciones:            ['',],
         idEstado:                 ['',],
+        ejeEstrategico:           [''],
+        objetivoEstrategico:      [''],
       }), 
       indicador:                  this.fb.group({
         id:                       [null,],
         idAccion:                 [null,],
         nombreIndicador:          ['', Validators.required],
         interpretacion:           ['', Validators.required],
-        formulaCalculo:           ['', Validators.required] ,
+        numerador:                ['', Validators.required],
+        denominador:              ['', Validators.required],
         procedenciaDatos:         ['', Validators.required],
         metodologiaRecopilacion:  ['', Validators.required],  
       }),
@@ -451,6 +458,20 @@ export class AccionComponent implements OnInit {
     });   
   }
   
+  //carga el Eje Estrategico segun el objetivo operativo seleccionado
+  public cargarEjeEstrategico(idObjetivoOperativo): void {
+    this.ejesService.mostarEjeEstrategico(idObjetivoOperativo).subscribe((respuesta) => {
+      this.ejeEstrategico = respuesta;  
+      console.log('objetivo estrategico', respuesta);
+    });   
+  }
+
+  public cargarObjetivoEstrategico(idObjetivoOperativo): void {
+    this.objetivosEstrategicosService.mostarObjetivoEstrategico(idObjetivoOperativo).subscribe((respuesta) => {
+      this.objetivoEstrategico = respuesta;  
+      console.log('objetivo estrategico', respuesta);
+    });   
+  }
   //método para obtener la dependencia del usuario logado
   public cargarDependencia(): void {
     this.dependenciaService.get(parseInt(localStorage.getItem('cui'))).subscribe((respuesta) => {

@@ -40,31 +40,31 @@ export class ProgramacionesAccionesPomComponent implements OnInit {
     });
   }
 
-  public eliminar(datos: any, i: any) {
-    Swal.fire({
-      title: '¡Advertencia!',
-      text: '¿Está seguro que desea eliminarla?',
-      icon: 'question',
-      confirmButtonText: `Sí`,
-      showCancelButton: true,
-      cancelButtonText: `Cancelar`,
-    }).then( resp => {
-      if (resp.value) {
-        console.log('click eliminar');
-        this.respuesta.splice(i, 1)
+  // public eliminar(datos: any, i: any) {
+  //   Swal.fire({
+  //     title: '¡Advertencia!',
+  //     text: '¿Está seguro que desea eliminarla?',
+  //     icon: 'question',
+  //     confirmButtonText: `Sí`,
+  //     showCancelButton: true,
+  //     cancelButtonText: `Cancelar`,
+  //   }).then( resp => {
+  //     if (resp.value) {
+  //       console.log('click eliminar');
+  //       this.respuesta.splice(i, 1)
   
-        this.programacionesService.eliminar(datos.id).subscribe();
+  //       this.programacionesService.eliminar(datos.id).subscribe();
 
-        Swal.fire({
-          //position: 'top-end',
-          icon: 'success',
-          title: 'Programación eliminada correctamente',
-          showConfirmButton: false,
-          timer: 2000
-        })
-      }
-    })
-  }
+  //       Swal.fire({
+  //         //position: 'top-end',
+  //         icon: 'success',
+  //         title: 'Programación eliminada correctamente',
+  //         showConfirmButton: false,
+  //         timer: 2000
+  //       })
+  //     }
+  //   })
+  // }
   
   ngOnDestroy(): void {
       this.dtTrigger.unsubscribe();

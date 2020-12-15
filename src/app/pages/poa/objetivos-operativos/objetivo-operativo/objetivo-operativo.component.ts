@@ -117,7 +117,7 @@ export class ObjetivoOperativoComponent implements OnInit {
       })  
     }
   }
-  
+ 
   //metodo que carga la información del objetivo a modificar
   mostrarObjetivo(): void {
     this.activatedRoute.params.subscribe(params => {

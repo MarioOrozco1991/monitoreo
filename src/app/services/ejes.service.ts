@@ -15,7 +15,12 @@ export class EjesService {
   listado() {
     return this.httpClient.get<any>(this.url + 'eje-estrategico');
   }
-  
+
+  //muestra el eje estrategico segun el objetivo operativo seleccionado
+  mostarEjeEstrategico(id: any) {
+    return this.httpClient.get<any>(this.url + 'ejes-estrategicos/eje-estrategico/' + id);
+  }
+ 
   crear(datos: any) {
     return this.httpClient.post(this.url + 'eje-estrategico', JSON.stringify(datos), {headers: this.httpHeaders});
   }
