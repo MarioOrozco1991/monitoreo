@@ -35,7 +35,6 @@ export class PoliticaGobiernoComponent implements OnInit {
     this.form = this.fb.group({
       id:      [null,],
       nombre:  ['', Validators.required],
-      estado:  ['',]
     });
   }
   
@@ -52,7 +51,6 @@ export class PoliticaGobiernoComponent implements OnInit {
   //crear el registro
   public crear(form: any) {
     if(this.form.status ==='VALID'){
-      this.form.get('estado').setValue(1);
       this.politicasGobiernoService.crear(form.value).subscribe((data) => {
         Swal.fire({
           icon: 'success',

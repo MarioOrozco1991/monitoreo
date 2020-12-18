@@ -13,28 +13,28 @@ export class EjesService {
   constructor(private httpClient: HttpClient) {}
   
   listado() {
-    return this.httpClient.get<any>(this.url + 'eje-estrategico');
+    return this.httpClient.get<any>(this.url + 'ejes-estrategicos');
   }
 
   //muestra el eje estrategico segun el objetivo operativo seleccionado
   mostarEjeEstrategico(id: any) {
-    return this.httpClient.get<any>(this.url + 'ejes-estrategicos/eje-estrategico/' + id);
+    return this.httpClient.get<any>(this.url + 'ejes-estrategicos/' + id + '/objetivo-operativo');
   }
  
   crear(datos: any) {
-    return this.httpClient.post(this.url + 'eje-estrategico', JSON.stringify(datos), {headers: this.httpHeaders});
+    return this.httpClient.post(this.url + 'ejes-estrategicos', JSON.stringify(datos), {headers: this.httpHeaders});
   }
 
   get(id: any){
-    return this.httpClient.get(this.url + 'eje-estrategico/' + id);
+    return this.httpClient.get(this.url + 'ejes-estrategicos/' + id);
   }
 
   eliminar(id: any){
-    return this.httpClient.delete(this.url + 'eje-estrategico/' + id);
+    return this.httpClient.delete(this.url + 'ejes-estrategicos/' + id);
   }
 
   actualizar(datos: any) {
-    return this.httpClient.put(this.url + 'eje-estrategico/' + datos.id, JSON.stringify(datos), {headers: this.httpHeaders});
+    return this.httpClient.put(this.url + 'ejes-estrategicos/' + datos.id, JSON.stringify(datos), {headers: this.httpHeaders});
   }
 
 }

@@ -56,7 +56,6 @@ export class EjeComponent implements OnInit {
       descripcion:  ['', ],
       fechaInicio:  ['', Validators.required],
       fechaFin:     ['', Validators.required],
-      estado:       ['']
     })
   }
 
@@ -70,7 +69,6 @@ export class EjeComponent implements OnInit {
 
   public crear(form: any) {
     if(this.form.status ==='VALID'){
-      this.form.get('estado').setValue(1);
       this.ejesService.crear(form.value).subscribe((data) => {
         Swal.fire({
           icon: 'success',

@@ -44,6 +44,7 @@ import { PoliticaGobiernoComponent } from './poa/politicas-gobierno/politica-gob
 import { PoliticasPublicasComponent } from './poa/politicas-publicas/politicas-publicas.component';
 import { PoliticaPublicaComponent } from './poa/politicas-publicas/politica-publica/politica-publica.component';
 import { EncabezadosComponent } from './poa/encabezados/encabezados.component';
+import { VerProgramacionesComponent } from './poa/acciones/programaciones/ver-programaciones/ver-programaciones.component';
 
 @NgModule({
   imports: [
@@ -95,6 +96,7 @@ import { EncabezadosComponent } from './poa/encabezados/encabezados.component';
     PoliticasPublicasComponent,
     PoliticaPublicaComponent,
     EncabezadosComponent,
+    VerProgramacionesComponent,
   ],
 })
 export class PagesModule {

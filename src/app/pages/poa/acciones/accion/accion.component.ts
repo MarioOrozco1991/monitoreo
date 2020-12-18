@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { NbDialogService } from '@nebular/theme';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EjesService } from './../../../../services/ejes.service';
 import { ObjetivosEstrategicosService } from './../../../../services/objetivos-estrategicos.service';
@@ -13,6 +14,7 @@ import { PoliticasPublicasService } from './../../../../services/politicas-publi
 import { UnidadMedidaService } from './../../../../services/unidad-medida.service';
 import { SistemasService } from './../../../../services/sistemas.service';
 import Swal from 'sweetalert2'; 
+import { VerProgramacionesComponent } from '../programaciones/ver-programaciones/ver-programaciones.component';
 
 @Component({
   selector: 'ngx-crear-accion',
@@ -41,10 +43,12 @@ export class AccionComponent implements OnInit {
   editarDetalleIndice: number = -1;
   year = new Date().getFullYear();
   campoObservaciones: boolean = false;
+  hasScroll: boolean = true;
   
   constructor(private fb:FormBuilder,
               private router: Router,
               private activatedRoute: ActivatedRoute,
+              private dialogService: NbDialogService,
               private accionesService: AccionesService,
               private tareasService: TareasService,
               private ejesService: EjesService,
@@ -64,6 +68,7 @@ export class AccionComponent implements OnInit {
     this.perfilComponentes = localStorage.getItem('perfilComponentes') ? JSON.parse(localStorage.getItem('perfilComponentes')) : null;
     this.activatedRoute.params.subscribe(params => {
       this.params = params; 
+      console.log('params', params.id);
     });
     //para deshabilitar el formulario cuando el usuario le de click en el boton editar
     // if (this.opcionDisponible('Revisar accion')) {
@@ -428,6 +433,10 @@ export class AccionComponent implements OnInit {
     return this.form.get('accion').get('id').value && this.opcionDisponible('Aprobar accion');
   }
 
+  mostrarBotonVerProgramacion() {
+    return this.form.get('accion').get('id').value && this.opcionDisponible('Aprobar accion');
+  }
+
   bloquearObservaciones(){
     if(this.opcionDisponible('Crear nueva accion')) {
       return true;
@@ -457,14 +466,7 @@ export class AccionComponent implements OnInit {
       this.objetivosOperativos = respuesta;
     });   
   }
-  
-  //carga el Eje Estrategico segun el objetivo operativo seleccionado
-  public cargarEjeEstrategico(idObjetivoOperativo): void {
-    this.ejesService.mostarEjeEstrategico(idObjetivoOperativo).subscribe((respuesta) => {
-      this.ejeEstrategico = respuesta;  
-      console.log('objetivo estrategico', respuesta);
-    });   
-  }
+
 
   public cargarObjetivoEstrategico(idObjetivoOperativo): void {
     this.objetivosEstrategicosService.mostarObjetivoEstrategico(idObjetivoOperativo).subscribe((respuesta) => {
@@ -472,6 +474,15 @@ export class AccionComponent implements OnInit {
       console.log('objetivo estrategico', respuesta);
     });   
   }
+  
+  //carga el Eje Estrategico segun el objetivo operativo seleccionado
+  public cargarEjeEstrategico(idObjetivoOperativo): void {
+    this.ejesService.mostarEjeEstrategico(idObjetivoOperativo).subscribe((respuesta) => {
+      this.ejeEstrategico = respuesta;  
+      console.log('Eje estrategico', respuesta);
+    });   
+  }
+
   //método para obtener la dependencia del usuario logado
   public cargarDependencia(): void {
     this.dependenciaService.get(parseInt(localStorage.getItem('cui'))).subscribe((respuesta) => {
@@ -481,7 +492,7 @@ export class AccionComponent implements OnInit {
     });   
   }
   
-  //método para obteber el listado general de las dependencias
+  //método para obtener el listado general de las dependencias
   public cargarDependencias(): void {
     this.dependenciaService.listado().subscribe((respuesta) => {
       this.dependencias = respuesta;
@@ -533,5 +544,13 @@ export class AccionComponent implements OnInit {
     });   
   }
 
+   
+  //abre el dialogo y muestra el componente de programaciones
+  mostrarProgramaciones(id: number) {
+      this.dialogService.open(VerProgramacionesComponent,  {
+        //   hasScroll: this.hasScroll,
+        context: { id: id }
+      });
+  }
 }
 

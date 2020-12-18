@@ -63,7 +63,6 @@ export class ObjetivoEstrategicoComponent implements OnInit {
       nombre:             ['', Validators.required],
       fechaInicio:        ['', Validators.required],
       fechaFin:           ['', Validators.required],
-      estado:             ['']
     });
   }
 
@@ -77,7 +76,6 @@ export class ObjetivoEstrategicoComponent implements OnInit {
 
   public crear(form: any) {
     if(this.form.status ==='VALID'){
-      this.form.get('estado').setValue(1);
       this.objetivosEstrategicosService.crear(form.value).subscribe((data) => {
         Swal.fire({
           icon: 'success',

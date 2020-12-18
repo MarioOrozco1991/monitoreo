@@ -35,7 +35,6 @@ export class ResultadoInstitucionalComponent implements OnInit {
     this.form = this.fb.group({
       id:      [null,],
       nombre:  ['', Validators.required],
-      estado:  ['']
     });
   }
   
@@ -49,7 +48,6 @@ export class ResultadoInstitucionalComponent implements OnInit {
 
   public crear(form: any) {
     if(this.form.status ==='VALID'){
-      this.form.get('estado').setValue(1);
       this.resultadosInstitucionalesService.crear(form.value).subscribe((data) => {
         Swal.fire({
           icon: 'success',

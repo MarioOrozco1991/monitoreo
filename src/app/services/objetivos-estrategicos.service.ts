@@ -13,28 +13,28 @@ export class ObjetivosEstrategicosService {
   constructor(private httpClient: HttpClient) {}
 
   listado() {
-    return this.httpClient.get<any>(this.url + 'objetivo-estrategico');
+    return this.httpClient.get<any>(this.url + 'objetivos-estrategicos');
   }
 
-  //muestra el eje estrategico segun el objetivo operativo seleccionado
+  //muestra el objetivo estrategico segun el objetivo operativo seleccionado
   mostarObjetivoEstrategico(id: any) {
-    return this.httpClient.get<any>(this.url + 'objetivo-estrategico/' + id + '/objetivo-operativo');
+    return this.httpClient.get<any>(this.url + 'objetivos-estrategicos/' + id + '/objetivo-operativo');
   }
 
   crear(datos: any) {
-    return this.httpClient.post(this.url + 'objetivo-estrategico', JSON.stringify(datos), {headers: this.httpHeaders});
+    return this.httpClient.post(this.url + 'objetivos-estrategicos', JSON.stringify(datos), {headers: this.httpHeaders});
   }
 
   get(id: any){
-    return this.httpClient.get(this.url + 'objetivo-estrategico/' + id);
+    return this.httpClient.get(this.url + 'objetivos-estrategicos/' + id);
   }
 
   eliminar(id: any){
-    return this.httpClient.delete(this.url + 'objetivo-estrategico/' + id);
+    return this.httpClient.delete(this.url + 'objetivos-estrategicos/' + id);
   }
 
   actualizar(datos: any) {
-    return this.httpClient.put(this.url + 'objetivo-estrategico/' + datos.id, JSON.stringify(datos), {headers: this.httpHeaders});
+    return this.httpClient.put(this.url + 'objetivos-estrategicos/' + datos.id, JSON.stringify(datos), {headers: this.httpHeaders});
   }
 
 }

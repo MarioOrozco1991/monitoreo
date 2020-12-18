@@ -62,7 +62,6 @@ export class ObjetivoOperativoComponent implements OnInit {
       nombre:                 ['', Validators.required],
       fechaInicio:            ['', Validators.required],
       fechaFin:               ['', Validators.required],
-      estado:                 ['']
     });
   }
 
@@ -76,7 +75,6 @@ export class ObjetivoOperativoComponent implements OnInit {
 
   public crear(form: any) {
     if(this.form.status ==='VALID'){
-      this.form.get('estado').setValue(1);
       this.objetivosOperativosService.crear(form.value).subscribe((data) => {
         // console.log(form.value);
         Swal.fire({

@@ -18,7 +18,7 @@
 						<div class="col-lg-6">
 							<div>
 								<label>Objetivo Operativo</label>
-								<select (change)="cargarEjeEstrategico($event.target.value)" class="custom-select" formControlName="idObjetivoOperativo" [class.is-invalid]="objetivoOperativolInvalido">
+								<select (change)="cargarObjetivoEstrategico($event.target.value)" (change)="cargarEjeEstrategico($event.target.value)" class="custom-select" formControlName="idObjetivoOperativo" [class.is-invalid]="objetivoOperativolInvalido">
 									<option selected disabled value="">Seleccione</option>
 									<option [value]="objetivoOperativo.id" *ngFor="let objetivoOperativo of objetivosOperativos">{{objetivoOperativo.nombre}}</option>
 								</select>
@@ -26,7 +26,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="row mt-5">
+					<div class="row mt-5" *ngIf="!params.id">
 						<div class="col-lg-6">
 							<div>
 								<label>Objetivo Estrategico</label>
@@ -312,6 +312,11 @@
 					</div>
 				</div>
 			</form>
+			<div class="row card-block mt-5" *ngIf="mostrarBotonVerProgramacion()">
+				<div class="col-lg-6">
+					<button (click)=mostrarProgramaciones(params.id) type="button" class="btn btn-success btn-block waves-effect">Ver Programaciones</button>
+				</div>
+			</div>
 			<div class="row card-block mt-5" *ngIf="mostrarBotonesRevision()">
 				<div class="col-lg-1"> 
 					<button (click)="validarAccion()" type="button" class="btn btn-sm btn-primary">Validar</button>
