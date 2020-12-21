@@ -1,8 +1,6 @@
-import { Component, OnInit, TemplateRef  } from '@angular/core';
-import { FormGroup, FormBuilder} from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit} from '@angular/core';
 import { AccionesService} from './../../../../../services/acciones.service'
-import { ProgramacionesService } from './../../../../../services/programaciones.service';
+import { NbDialogRef } from '@nebular/theme';
 
 
 @Component({
@@ -16,11 +14,8 @@ export class VerProgramacionesComponent implements OnInit {
   programaciones: any[];
   acciones: any[];
 
-  constructor(private router: Router,
-              private activatedRoute: ActivatedRoute,
+  constructor(protected dialogRef : NbDialogRef<any>,
               private accionesService: AccionesService,
-              public programacionesService:ProgramacionesService, 
-              private fb:FormBuilder
              ) {
   }
 
@@ -28,6 +23,7 @@ export class VerProgramacionesComponent implements OnInit {
     this.cargarProgramaciones()
   }
 
+  //carga las programaciones de la acción que se le pasa
   cargarProgramaciones(): void {
     if(this.id){
       console.log('desde cargar programaciones', this.id);
@@ -36,6 +32,11 @@ export class VerProgramacionesComponent implements OnInit {
         console.log('programaciones cargadas', this.programaciones);
       });
     }       
+  }
+
+  //metodo para cerrar el diálogo
+  close(){
+    this.dialogRef.close();
   }
 
 }

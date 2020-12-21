@@ -1,6 +1,6 @@
 //modulos
 import { NgModule } from '@angular/core';
-import { NbMenuModule, NbIconModule, } from '@nebular/theme';
+import { NbMenuModule, NbIconModule, NbAutocompleteModule, } from '@nebular/theme';
 import { NbTabsetModule, NbTooltipModule, NbCardModule} from '@nebular/theme';
 import { ComponentsModule } from '../@theme/components/components.module';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -55,6 +55,7 @@ import { VerProgramacionesComponent } from './poa/acciones/programaciones/ver-pr
     NbCardModule,
     NbIconModule,
     NbTooltipModule,
+    NbAutocompleteModule, 
     ReactiveFormsModule,
     DataTablesModule,
     ComponentsModule,

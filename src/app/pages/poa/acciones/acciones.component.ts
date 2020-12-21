@@ -93,10 +93,10 @@ export class AccionesComponent implements OnDestroy, OnInit{
   public enviarRevisionAccion(datos: any, i: any) {
     Swal.fire({
       title: '¡Advertencia!',
-      text: '¿Está seguro que desea enviarla a revision?',
+      text: 'Antes de enviar la acción a revisión, asegurese de haber realizado la programación correspondiente',
       icon: 'question',
       // showConfirmButton: true,
-      confirmButtonText: `Sí`,
+      confirmButtonText: `Enviar a revisión`,
       showCancelButton: true,
       cancelButtonText: `Cancelar`,
     }).then( resp => {

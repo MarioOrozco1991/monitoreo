@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { NbDialogService } from '@nebular/theme';
 import { Router, ActivatedRoute } from '@angular/router';
+
+//servicios
+import { NbDialogService } from '@nebular/theme';
 import { EjesService } from './../../../../services/ejes.service';
 import { ObjetivosEstrategicosService } from './../../../../services/objetivos-estrategicos.service';
 import { AccionesService } from './../../../../services/acciones.service';
@@ -13,8 +15,11 @@ import { PoliticasGobiernoService } from './../../../../services/politicas-gobie
 import { PoliticasPublicasService } from './../../../../services/politicas-publicas.service';
 import { UnidadMedidaService } from './../../../../services/unidad-medida.service';
 import { SistemasService } from './../../../../services/sistemas.service';
-import Swal from 'sweetalert2'; 
+
+//pages
 import { VerProgramacionesComponent } from '../programaciones/ver-programaciones/ver-programaciones.component';
+
+import Swal from 'sweetalert2'; 
 
 @Component({
   selector: 'ngx-crear-accion',
@@ -22,6 +27,8 @@ import { VerProgramacionesComponent } from '../programaciones/ver-programaciones
   styleUrls: ['./accion.component.scss']
 })
 export class AccionComponent implements OnInit {
+
+  @ViewChild('dialog') public dialogRef: TemplateRef<any>;
 
   ejeEstrategico: any[];
   objetivoEstrategico: any[];
@@ -43,7 +50,6 @@ export class AccionComponent implements OnInit {
   editarDetalleIndice: number = -1;
   year = new Date().getFullYear();
   campoObservaciones: boolean = false;
-  hasScroll: boolean = true;
   
   constructor(private fb:FormBuilder,
               private router: Router,
@@ -78,9 +84,6 @@ export class AccionComponent implements OnInit {
     // }
     this.cargarAccion();
     this.cargarAccionSinTareas
-    //console.log('identificador', this.params.id);
-    //this.cargarEjeEstrategico();
-    //this.cargarObjetivoEstrategico();
     this.cargarObjetivoOperativo();
     this.cargarDependencia();
     this.cargarDependencias();
@@ -89,8 +92,6 @@ export class AccionComponent implements OnInit {
     this.cargarUnidadMedida();
     this.cargarDepartamentos();
     this.cargarSistemas();
-    //console.log('form', this.form);
-    //this.form.controls['idDependencia'].disable();
   }
   
   opcionDisponible(nombre: string) {
@@ -268,7 +269,6 @@ export class AccionComponent implements OnInit {
           this.editarDetalleIndice = -1;
           this.formDetalle.reset();
           Swal.fire({
-            //position: 'top-end',
             icon: 'success',
             title: 'Tarea actualizada exitosamente',
             showConfirmButton: false,
@@ -318,6 +318,7 @@ export class AccionComponent implements OnInit {
     this.formDetalle.reset();
   }
 
+  //para cargar la acción y llenar el formulario
   cargarAccion(): void {
     if(this.params.id){
       this.accionesService.cargarAccion(this.params.id).subscribe((respuesta: any) => {
@@ -349,13 +350,12 @@ export class AccionComponent implements OnInit {
     }
   }
   
+  //metodo para crear la acción
   public crear(form: any) {
    // this.form.controls['idDependencia'].setValue(this.dependencia.id);
     this.form.get('accion.idDependencia').setValue(this.dependenciaUsuario.id);
     this.form.get('accion.idEstado').setValue(1);
-    //console.log('formulario antes de crear', form, this.dependenciaUsuario);
     this.accionesService.crear(form.value).subscribe((data) => {
-      
       Swal.fire({
         icon: 'success',
         title: 'Acción creada exitosamente',
@@ -367,6 +367,7 @@ export class AccionComponent implements OnInit {
     });
   }
 
+  //método para actualizar la acción
   public actualizar(form: any) {
     this.accionesService.actualizar(form.value).subscribe((data) => {
       Swal.fire({
@@ -379,6 +380,7 @@ export class AccionComponent implements OnInit {
     });
   }
 
+  //metódo para cambiar el estado de la acción a validado
   validarAccion() {
     this.accionesService.validarAccion(this.form.get('accion').value).subscribe((data) => {
       Swal.fire({
@@ -391,6 +393,7 @@ export class AccionComponent implements OnInit {
     });
   }
 
+  //metódo para cambiar el estado de la acción a aprobado
   aprobarAccion() {
     console.log(this.form.get('accion').value);
     this.accionesService.aprobarAccion(this.form.get('accion').value).subscribe((data) => {
@@ -404,6 +407,7 @@ export class AccionComponent implements OnInit {
     });
   }
 
+  //metódo para cambiar el estado de la acción a rechazado 
   rechazarAccion() {
     console.log(this.form.get('accion').value);
     this.accionesService.rechazarAccion(this.form.get('accion').value).subscribe((data) => {
@@ -417,6 +421,7 @@ export class AccionComponent implements OnInit {
     });
   }
 
+  //método para mostrar el campo de observaciones
   mostrarCampoObservaciones() {
     this.campoObservaciones = !this.campoObservaciones;
   }
@@ -437,37 +442,24 @@ export class AccionComponent implements OnInit {
     return this.form.get('accion').get('id').value && this.opcionDisponible('Aprobar accion');
   }
 
+  /*método para bloquear el campo de observaciones si el usuario logueado tiene el componente de crear
+  accion es decir que tiene el perfil de operador*/
   bloquearObservaciones(){
-    if(this.opcionDisponible('Crear nueva accion')) {
-      return true;
-    }
-    else {
-      return false;
-    }
+    return this.opcionDisponible('Crear nueva accion')
   }
 
   validarOAprobar() {
     return this.opcionDisponible('Aprobar accion') ? 'Aprobar' : 'Validar';
   }
-  // public cargarEjeEstrategico(): void {
-  //   this.ejesService.listado().subscribe((respuesta) => {
-  //     this.ejesEstrategicos = respuesta;
-  //   });   
-  // }
 
-  // public cargarObjetivoEstrategico(): void {
-  //   this.objetivosEstrategicosService.listado().subscribe((respuesta) => {
-  //     this.objetivosEstrategicos = respuesta;
-  //   });   
-  // }
-
+  //método que carga el objetivo operativo en el select
   public cargarObjetivoOperativo(): void {
     this.objetivosOperativosService.listado().subscribe((respuesta) => {
       this.objetivosOperativos = respuesta;
     });   
   }
 
-
+  //carga el Objetivo Estrategico segun el objetivo operativo seleccionado
   public cargarObjetivoEstrategico(idObjetivoOperativo): void {
     this.objetivosEstrategicosService.mostarObjetivoEstrategico(idObjetivoOperativo).subscribe((respuesta) => {
       this.objetivoEstrategico = respuesta;  
@@ -543,12 +535,10 @@ export class AccionComponent implements OnInit {
       this.sistemas = respuesta;  
     });   
   }
-
    
   //abre el dialogo y muestra el componente de programaciones
   mostrarProgramaciones(id: number) {
       this.dialogService.open(VerProgramacionesComponent,  {
-        //   hasScroll: this.hasScroll,
         context: { id: id }
       });
   }

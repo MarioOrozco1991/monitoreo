@@ -31,7 +31,7 @@
 							<div>
 								<label>Objetivo Estrategico</label>
 								<select class="custom-select" formControlName="objetivoEstrategico">
-									<option selected disabled value="" *ngFor="let objetivoEstrategico of objetivoEstrategico">{{objetivoEstrategico.nombre}}</option>
+								<option selected disabled value="" *ngFor="let objetivoEstrategico of objetivoEstrategico">{{objetivoEstrategico.nombre | uppercase}}</option>
 								</select>
 							</div>
 						</div>
@@ -194,7 +194,7 @@
 							<div style="margin-top: 3px;">
 								<select class="custom-select mt-4" formControlName="idPuestoSolicita">
 									<option selected disabled value="">Unidad/Depto.</option>
-									<option [value]="departamentoSolicita.id" *ngFor="let departamentoSolicita of departamentoSolicita">{{departamentoSolicita.nombre}}</option>
+									<option [value]="departamentoSolicita.id" *ngFor="let departamentoSolicita of departamentoSolicita">{{departamentoSolicita.nombre | uppercase}}</option>
 								</select>
 							</div>
 						</div>
@@ -215,7 +215,7 @@
 								<label>¿Quién recibe el resultado?</label>
 								<select (change)="listadodepartamentoRecibe($event.target.value)" class="custom-select" formControlName="idDependenciaResultado">
 									<option selected disabled value="">Dependencia</option>
-									<option [value]="dependencia.id" *ngFor="let dependencia of dependencias">{{dependencia.nombre}}</option>
+									<option [value]="dependencia.id" *ngFor="let dependencia of dependencias">{{dependencia.nombre | uppercase}}</option>
 								</select>
 							</div>
 						</div>
@@ -223,7 +223,7 @@
 							<div style="margin-top: 3px;">
 								<select class="custom-select mt-4" formControlName="idPuestoResultado">
 									<option selected disabled value="">Unidad/Depto.</option>
-									<option [value]="departamentoRecibe.id" *ngFor="let departamentoRecibe of departamentoRecibe">{{departamentoRecibe.nombre}}</option> 
+									<option [value]="departamentoRecibe.id" *ngFor="let departamentoRecibe of departamentoRecibe">{{departamentoRecibe.nombre | uppercase}}</option> 
 								</select>
 							</div>
 						</div>
@@ -313,24 +313,24 @@
 				</div>
 			</form>
 			<div class="row card-block mt-5" *ngIf="mostrarBotonVerProgramacion()">
-				<div class="col-lg-6">
-					<button (click)=mostrarProgramaciones(params.id) type="button" class="btn btn-success btn-block waves-effect">Ver Programaciones</button>
+				<div class="col-lg-4">
+					<button (click)=mostrarProgramaciones(params.id) type="button" class="btn btn-dark btn-block waves-effect"><i class="fas fa-eye"></i> Ver Programaciones</button>
 				</div>
 			</div>
 			<div class="row card-block mt-5" *ngIf="mostrarBotonesRevision()">
-				<div class="col-lg-1"> 
-					<button (click)="validarAccion()" type="button" class="btn btn-sm btn-primary">Validar</button>
+				<div class="col-lg-2"> 
+					<button (click)="validarAccion()" type="button" class="btn btn-primary"><i class="fas fa-check-circle"></i> Validar</button>
 				</div>
-				<div class="col-lg-1">
-					<button (click)="mostrarCampoObservaciones()" type="button" class="btn btn-sm btn-danger">Rechazar</button>
+				<div class="col-lg-2">
+					<button (click)="mostrarCampoObservaciones()" type="button" class="btn btn-danger"><i class="fas fa-times-circle"></i> Rechazar</button>
 				</div>
 			</div>
 			<div class="row card-block mt-5" *ngIf="mostrarBotonesAprobacion()">
-				<div class="col-lg-1"> 
-					<button (click)="aprobarAccion()" type="button" class="btn btn-sm btn-primary">Aprobar</button>
+				<div class="col-lg-2"> 
+					<button (click)="aprobarAccion()" type="button" class="btn btn-primary"><i class="fas fa-check-circle"></i> Aprobar</button>
 				</div>
-				<div class="col-lg-1">
-					<button (click)="mostrarCampoObservaciones()" type="button" class="btn btn-sm btn-danger">Rechazar</button>
+				<div class="col-lg-2">
+					<button (click)="mostrarCampoObservaciones()" type="button" class="btn btn-danger"><i class="fas fa-times-circle"></i> Rechazar</button>
 				</div>
 			</div>
 			<div class="row mt-5" [formGroup]="form" *ngIf="mostrarObservaciones()">
@@ -344,7 +344,7 @@
 			</div>
 			<div class="row card-block mt-5 mb-5" *ngIf="mostrarObservaciones() && mostrarBotonesRevision() || mostrarBotonesAprobacion()">
 				<div class="col-lg-3">
-					<button (click)="rechazarAccion()" type="button" class="btn btn-sm btn-danger">Confirmar rechazo</button>
+					<button (click)="rechazarAccion()" type="button" class="btn btn-danger"><i class="fas fa-times-circle"></i> Confirmar rechazo</button>
 				</div>
 			</div>
 		</div>
